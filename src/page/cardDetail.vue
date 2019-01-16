@@ -3,7 +3,7 @@
     <div class="cardDetail">
         <div class="f-person">
             <div class="p-img">
-                <img :src="imgUrl" alt="">
+                <img :src="imgUrl">
             </div>
             <div class="p-name">
                 <p class="name">{{name}}</p>
@@ -16,7 +16,7 @@
         <div class="f-content">
             <!-- <v-clock :item="item" v-for="( item, index ) in list" :key="index"></v-clock> -->
             <div class="c-img">
-                <img :src="item.user.imgUrl" alt="">
+                <img :src="item.user.imgUrl">
             </div>
             <p class="c-name"><span class="fc-n">{{item.user.name}}</span><span v-if="item.user.company && item.user.company!=''">-{{item.user.company}}</span></p>
             <div class="c-content">
@@ -82,7 +82,8 @@
     </div>
 </template>
 <script>
-  import { User,Friends } from '@/api/index'
+  import { User,Detail } from '@/api/index'
+  import wx from 'weixin-js-sdk'
   export default {
     name:'cardDetail',
     data () {
@@ -101,61 +102,75 @@
     watch:{
 
     },
-    updated(){
-        let obj=this.item;
-        let classic=obj.classic;
-        let str='';
-        if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
-            if(classic.indexOf(' ')>-1){
-                str='<a  target="_blank" href="'+classic.substring(0,classic.indexOf(' '))+'">'+classic.substring(0,classic.indexOf(' '))+'</a>'
-            }else{
-                str='<a  target="_blank" href="'+classic+'">'+classic+'</a>'
-            }
-        }else{
-            str='<span>'+classic+'</span>'
-        }
-        obj.classicStr=str;
-        this.$set(this.item,obj)
-    },
     methods: {
         gainUser(userid) {
             let data={
                 userId:userid
             }
+            let that=this;
             User(data).then( res => {
             // this.hideLoading();
-                this.name = res.data.name;
-                this.imgUrl = res.data.imgUrl
-                this.compang = res.data.company
-                this.pushStart = res.data.pushStart
-                this.pushEnd = res.data.pushEnd
-                this.total = res.data.total
-                this.time = res.data.pushDays
-                this.que = res.data.lostCount
+                that.name = res.data.name;
+                that.imgUrl = res.data.imgUrl
+                that.compang = res.data.company
+                that.pushStart = res.data.pushStart
+                that.pushEnd = res.data.pushEnd
+                that.total = res.data.total
+                that.time = res.data.pushDays
+                that.que = res.data.lostCount
             })
         },
-        gainList(userid) {
+        getDetail(id) {
             let that=this;
-            let data={pageNo:3,pageSize:1}
-            Friends(data).then( res => {
+            let data={pkid:id}
+            Detail(data).then( res => {
                 //  that.list = res.data.list;
                 if(res){
-                    this.item=res.data.list[0]
+                    let classic=res.data.classic;
+                    let str='';
+                    if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
+                        if(classic.indexOf(' ')>-1){
+                            str='<a  target="_blank" href="'+classic.substring(0,classic.indexOf(' '))+'">'+classic.substring(0,classic.indexOf(' '))+'</a>'
+                        }else{
+                            str='<a  target="_blank" href="'+classic+'">'+classic+'</a>'
+                        }
+                    }else{
+                        str='<span>'+classic+'</span>'
+                    }
+                    res.data.classicStr=str;
+                    that.item=res.data;
                 }
             })
         },
     },
     created () {
-        let id=this.$route.query.id,
-            userid=this.$route.query.userid;
-        this.gainUser(this.$route.query.userid);
-        this.gainList();
+        
     },
-    components: {
-
+    updated(){
+        let that=this;
+        let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=cardDetail&id='+that.$route.query.id+'userid='+that.$route.query.userid;
+        let configData={
+        	title:that.name, // 分享标题
+			desc:'日精进打卡第'+that.time, // 分享描述
+			imgUrl:'https://www.youqiyp.com/mobile/static/img/logo.png', // 分享图标
+			link:window.location.href,
+		}; 
+		let u = navigator.userAgent;
+		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+//		let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+		if(isAndroid){
+			configData.link=shareUrl
+		}
+		wx.onMenuShareAppMessage(configData);// 分享给朋友 
+    	wx.onMenuShareTimeline(configData);//朋友圈
+    	wx.onMenuShareQQ(configData);//qq
+    	wx.onMenuShareQZone(configData);//qq空间
     },
     mounted(){
-
+        let id=this.$route.query.id,
+            userid=this.$route.query.userid;
+        this.gainUser(userid);
+        this.getDetail(id);
     },
     destroyed() {
       // console.group('销毁完成状态===============》destroyed');

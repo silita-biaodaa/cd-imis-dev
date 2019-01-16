@@ -50,9 +50,20 @@ Vue.mixin({
     }
   }
 })
+//获取url参数
+const getParam=function(name){  //获取参数
+    var url=window.location.search;  //获取问号之后的字0符
+    var reg=new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    if(url!=null && url.toString().length>1){ 
+      var r=url.substr(1).match(reg);
+      if(r!=null)return unescape(r[2]); return null;
+    }
+}
 
-import { queryList,User,group } from "./api/index"
+import { queryList,User,group,getWxStr } from "./api/index"
 import util from "./util/util"
+import Wx from 'weixin-js-sdk'
+
 router.beforeEach((to, from, next) => {
   let code = util.getCode('code')
   if (!code) {
@@ -95,9 +106,54 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+const appid='wx393124fdad606b1d';//预发布
+// const appid='wx26999a53385489f9';//生产
+router.afterEach(function(to,from,next){
+    let data={
+      url:window.location.href
+    }
+    getWxStr(data).then( res => {
+        Wx.config({
+          debug:true,
+          appId: appid, // 必填，公众号的唯一标识
+          timestamp:res.data.timestamp, // 必填，生成签名的时间戳
+          nonceStr: res.data.noncestr, // 必填，生成签名的随机串
+          signature: res.data.signature,// 必填，签名，见附录1
+          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        })
+    })
+    Wx.ready(function(){
+      Wx.hideMenuItems({
+        menuList: ["menuItem:share:appMessage","menuItem:share:timeline","menuItem:share:qq","menuItem:share:weiboApp","menuItem:share:QZone"] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        // menuList:['onMenuShareAppMessage']
+      });
+
+    })
+    // let config={
+    //   title:'友旗有品',
+    //   desc: '购物，就来友旗有品', // 分享描述
+    //   imgUrl: 'https://www.youqiyp.com/mobile/static/img/logo.png', // 分享图标
+    //   link:window.location.href.split('#')[0]
+    // }
+    // /*公共*/
+    // Wx.ready(function(){
+    //   Wx.onMenuShareAppMessage(config); // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用 
+    //   Wx.onMenuShareTimeline(config);//朋友圈
+    //   Wx.onMenuShareQQ(config);//qq
+    //   Wx.onMenuShareQZone(config);//qq空间
+    // })
+});
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  beforeCreate(){
+    if(getParam('path')){
+      if(getParam('path')=='cardDetail'){
+        this.$router.push({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
+        document.title='商品详情';
+      }
+    }
+  },
 })
