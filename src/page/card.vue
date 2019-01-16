@@ -1,0 +1,463 @@
+<template>
+   <div class="card">
+       <div class="card-top card-com laca">
+           <div class="siz">
+              <img src="../assets/img/buuk (1).png" alt="">
+           </div>
+          <div class="card-size">
+              知学习
+          </div>
+       </div>
+
+        <div v-for="el in bookss" :key="el.pkid">
+            <div class="card-b">
+               <div class="card-book">
+                 《{{el.title}}》共朗读<span v-if="!first" >{{el.readCount + el.readTotal}}</span> <span v-else >{{el.readTotal}}</span>  遍
+               </div>
+            </div>
+            <div class="card-com">
+               <div class="l-pu">
+                    <div class="label label-f">今日朗读遍数</div>
+                    <van-stepper  v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
+               </div>
+            </div>
+        </div>
+
+
+        <div  v-for="(item,index) in books" :key="index">
+           <div class="card-b card-book add-book">
+             <span>书本&nbsp({{index + booklength + 1}})</span>
+             <span class="del-book" @click='cardDel(index)'  v-if="!first" >删除</span>
+            </div>
+           <div class="pdd">
+              <div class="l-put put-bot">
+               <div class="label label-f">书本名称</div> <input type="text" placeholder="请输入书本名称" v-model='item.bookName' :disabled='first' >
+              </div>
+              <div class="l-put">
+               <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
+              </div>
+           </div>
+        </div>
+        <div class="card-com card-add" v-if="!first">
+            <span class="laca" @click='cardBook' >
+               增加书本
+              <div class="laca-add"><img src="../assets/img/add (1).png" alt=""></div>
+            </span>
+        </div>
+        <div class="card-com card-share">
+            经典名句分享
+        </div>
+        <div class="card-put">
+          <textarea  rows="4" placeholder='请输入您要分享的经典名句'  v-model="classic" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
+        </div>
+
+        <div class="card-top card-com laca card-ma">
+           <div class="siz">
+              <img src="../assets/img/chess (2).png" alt="">
+           </div>
+          <div class="card-size">
+              行实践
+          </div>
+       </div>
+       <div class="card-com">
+          <div class="l-put">
+               <div class="label label-f">修身</div> <input type="text" placeholder="请输入今日您对个人的贡献" v-model="practice.character" @blur='bblur' :disabled='first' >
+          </div>
+       </div>
+       <div class="card-com">
+          <div class="l-put">
+               <div class="label label-f label-t">齐家</div> <input type="text" placeholder="请输入今日您对家庭和家人的贡献"  v-model="practice.family" @blur='bblur' :disabled='first' >
+          </div>
+       </div>
+       <div class="card-com">
+          <div class="l-put">
+               <div class="label label-f label-t">建功</div> <input type="text" placeholder="请输入今日您对工作的贡献" v-model="practice.work" @blur='bblur' :disabled='first' >
+          </div>
+       </div>
+
+        <div class="card-top card-com laca card-ma">
+           <div class="siz">
+              <img src="../assets/img/gift (2).png" alt="">
+           </div>
+          <div class="card-size">
+              积善行
+          </div>
+       </div>
+       <div class="card-b">
+          <div class="card-book">
+            发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计<span v-show="this.btnTitle == '提交' ? true : false" >{{pushCount.bonaTotal+pushCount.bonaDays}}</span><span v-show="this.btnTitle == '提交' ? false : true" >{{pushCount.bonaTotal}}</span>善。
+          </div>
+       </div>
+        <div class="card-com">
+               <div class="l-pu">
+                    <div class="label label-f">今日行善次数</div>
+                    <van-stepper  v-model="pushCount.bonaDays" class="l-mi" :min="0" :disabled='first' />
+               </div>
+       </div>
+       <div class="card-top card-com laca card-ma">
+           <div class="siz">
+              <img src="../assets/img/star (2).png" alt="">
+           </div>
+          <div class="card-size">
+              立志愿
+          </div>
+       </div>
+       <div class="card-put">
+          <textarea  rows="4" placeholder='请输入您要分享的志愿'  v-model="volunteer" class="ccc" @blur='bblur' :disabled='first' ></textarea>
+        </div>
+        <div class="card-top card-com laca card-ma">
+           <div class="siz">
+              <img src="../assets/img/awake.png" alt="">
+           </div>
+          <div class="card-size">
+              省觉悟
+          </div>
+       </div>
+       <div class="card-put">
+          <textarea  :disabled='first' rows="4" placeholder='请输入您的反省及觉悟'  v-model="introspective" class="ccc" @blur='bblur'  ></textarea>
+        </div>
+         <div class="card-top card-com laca card-ma">
+           <div class="siz">
+              <img src="../assets/img/hua.png" alt="">
+           </div>
+          <div class="card-size">
+              感谢
+          </div>
+       </div>
+       <div class="card-put">
+          <textarea  :disabled='first' rows="4" placeholder='请输入您的感谢'  v-model="thanks" class="ccc" @blur='bblur'  ></textarea>
+        </div>
+
+        <div class="card-btn" @click="maskFn">
+           <div :class="[this.btnTitle =='提交'? 'card-div' : 'card-red' ]">
+              {{btnTitle}}
+           </div>
+        </div>
+        <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="punch"></v-popup>
+   </div>
+</template>
+<script>
+import { recordPer , pushCard, groups } from '@/api/index'
+export default {
+  data () {
+    return {
+      books:[],
+      // booksss:[],
+      num:'',
+      bookss:[],
+      pushCount: {},  //积善行
+      volunteer: '', // 立志愿
+      classic: '',  // 经典名句
+      practice: { character: '' ,work: '', family: ''},  //行～实践
+      introspective: '', //省省悟
+      thanks: '', //感谢
+      btnTitle:'',
+      first:false,
+      mask:false,
+      tipTxt:'',
+      booklength:0,
+      repetition: false
+    }
+  },
+  methods: {
+    maskFn(){
+      if(this.btnTitle=='提交'){
+        this.mask=true;
+        this.tipTxt='确认提交打卡信息？'
+      }
+    },
+    gainPer() {
+       recordPer({}).then( res => {
+          if(res.code == 1 || res.code == 402 ) {
+
+               res.data.books.forEach((el,i) => {
+                if( ! el.readCount == 0 ) {
+                   this.bookss.push(el)
+               }
+              })
+
+              if(res.code == 402 ) {
+                 this.btnTitle = '今日已打卡, 请勿重复提交'
+                 this.first = true
+              } else {
+                 this.btnTitle = '提交'
+              }
+
+              this.thanks = res.data.thanks
+              this.practice = res.data.practice ? res.data.practice : {character: '', work: '', family: ''}
+              this.classic = res.data.classic
+              this.introspective = res.data.introspective
+              this.pushCount = res.data.pushCount
+              this.volunteer = res.data.volunteer
+              this.books = res.data.bookish ? res.data.bookish : []
+              this.booklength = this.bookss.length
+          }
+       })
+    },
+    punch(){
+      if(this.btnTitle == '今日已打卡, 请勿重复提交') {
+         return false
+      }
+      // if( this.repetition) {
+      //    return false
+      // }
+      // this.repetition = true
+      this.loading()
+      pushCard({thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
+           if(res.code == 1) {
+            //  this.repetition = false
+
+             localStorage.setItem('tabNum','0');
+             this.hideLoading()
+              this.$router.push({path:'/nav/friend'})
+           }
+      })
+    },
+    cardBook () {
+      let data={title:'',readCount:1,readTotal:0}
+       this.books.push(data)
+    },
+    cardDel(i) {
+       this.books.splice(i,1)
+    },
+    bblur() {
+      window.scroll(0,0);
+    },
+  },
+  created () {
+     this.gainPer()
+  },
+  components: {
+  },
+    mounted() {
+    window.addEventListener('resize', () => {
+    const activeElement = document.activeElement
+    if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+        setTimeout(() => {
+          // activeElement.scrollIntoView({block:'start'})
+          // window.scroll(0,0);
+          activeElement.scrollIntoViewIfNeeded()
+
+        }, 0)
+      }
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', () => {
+    const activeElement = document.activeElement
+    if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+        setTimeout(() => {
+          // activeElement.scrollIntoView({block:'start'})
+          // window.scroll(0,0);
+          activeElement.scrollIntoViewIfNeeded()
+
+        }, 0)
+      }
+    })
+  },
+
+}
+</script>
+<style lang="less" >
+.card{
+   background: #F5F5F5;
+
+.l-pu {
+    height: 96px;
+   font-size: 32px;
+   display: flex;
+   justify-content: space-between;
+   text-align: center;
+   .l-mi {
+      margin:  auto  0;
+      width:136px;
+      .van-stepper__minus, .van-stepper__plus {
+        width:33%;
+        height: 42px;
+      }
+      .van-stepper__minus {
+        border-radius: 18px 0 0 18px;
+      }
+      .van-stepper__plus {
+        border-radius: 0 18px 18px 0;
+      }
+      .van-stepper__input{
+        line-height: 42px;
+        width:33%;
+        height: 42px;
+        font-size: 24px;
+        box-sizing: border-box;
+        /*border-color: #ccc;*/
+      }
+      .van-stepper__minus::before, .van-stepper__plus::before {
+        width: 20px !important;
+        height: 2px !important;
+        color: #999 !important;
+      }
+      .van-stepper__minus::after, .van-stepper__plus::after {
+        height: 20px !important;
+        width:2px !important;
+        color: #999 !important;
+      }
+   }
+}
+.l-put {
+   height: 96px;
+   font-size: 32px;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   box-sizing: border-box;
+   padding: 25px 0;
+   .label {
+     padding-left: 0px;
+     color:#000;
+   }
+   input {
+      height: 46px;
+      line-height: 46px;
+      width: 100%;
+      text-align: right;
+      background:none;
+	    outline:none;
+      border:0px;
+      box-sizing: border-box;
+      caret-color:blue;
+   }
+  .label-f {
+    width: 280px;
+  }
+  .label-t {
+    width: 220px;
+  }
+}
+  .card-top {
+     img {
+       height: 100%;
+       width: auto;
+     }
+  }
+  .card-size {
+    padding-left: 53px;
+    color:#666;
+    font-size: 28px;
+  }
+  .card-com {
+    background: #fff;
+    padding: 0 36px;
+    height: 96px;
+    line-height: 96px;
+ }
+ .laca {
+    position: relative;
+ }
+ .laca-add {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   height: 26px;
+   left: -25%;
+   img {
+     height: 100%;
+   }
+ }
+ .siz {
+    position: absolute;
+    top: 50%;
+    transform:translateY(-50%);
+    height: 30px;
+    width: 33px;
+ }
+ .card-b{
+    height: 80px;
+    line-height: 80px;
+    background-color: #f5f5f5;
+    padding-left: 36px;
+ }
+ .card-book {
+   color: #999;
+   font-size: 26px;
+ }
+ .add-book {
+   display: flex;
+   justify-content: space-between;
+   padding-right: 36px;
+ }
+ .del-book {
+    color:#E62129;
+ }
+ .pdd {
+    background: #fff;
+    padding: 0 36px;
+ }
+ .put-bot{
+   border-bottom: 1px solid #F2F2f2;
+ }
+ .card-add {
+    text-align: center;
+    background: #fff;
+    font-size: 33px;
+    color:#E62129;
+    font-weight: 500;
+ }
+ .card-share {
+    font-size: 32px;
+    color:#000;
+    background: #fff;
+    font-weight: 400;
+    margin-top: 10px;
+ }
+ .card-put {
+    font-size: 32px;
+    background: #fff;
+    padding: 36px;
+    // height: ;
+ }
+ .card-ma {
+    margin-top: 10px;
+   display: flex;
+   align-items: center;
+ }
+ .weui-cell {
+   padding: 10px 36px;
+ }
+ .card-btn {
+    margin-top: 110px;
+    padding: 0 32px;
+    padding-bottom: 32px;
+    .card-div {
+      height: 96px;
+      font-size: 36px;
+      color: #fff;
+      background-color: #E62129;
+      line-height: 96px;
+      text-align: center;
+      border-radius: 10px;
+    }
+    .card-red {
+      height: 96px;
+      font-size: 36px;
+      color: #fff;
+      background-color: #BBBBBB;
+      line-height: 96px;
+      text-align: center;
+      border-radius: 10px;
+    }
+ }
+  .ccc {
+     font-size: 32px;
+     width: 100%;
+     outline:none;
+     border: none;
+     padding:20px;
+  }
+}
+textarea{
+  border-radius: 5px;
+  padding: 10px;
+}
+textarea[disabled]{
+  background: #f5f5f5;
+}
+
+</style>

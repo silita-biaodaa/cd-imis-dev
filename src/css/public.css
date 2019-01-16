@@ -1,0 +1,86 @@
+html,body {
+  width: 100%;
+  height:100%;
+  padding:0;
+  margin:0;
+  -webkit-overflow-scrolling : touch;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  /* overflow-x: hidden;
+  overflow-y: auto; */
+  font-family: "HanHei SC", "PingFang SC", "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+body>div{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+}
+ .group .van-cell {
+     line-height: 96px;
+     font-size: 32px;
+     color: #010101;
+     padding: 10px 32px;
+     margin-bottom: 16px;
+  }
+  .group .van-collapse-item__wrapper {
+    margin-top: -16px;
+  }
+  .van-collapse-item {
+    margin-bottom: 16px;
+  }
+ .van-cell__left-icon, .van-cell__right-icon {
+     line-height: 96px !important;
+     font-size: 32px !important;
+  }
+  .ld-left {
+      display: flex;
+      justify-content: flex-start;
+  }
+  .notice .van-nav-bar {
+    height: 96px;
+  }
+  .apply .van-nav-bar {
+    height: 96px;
+  }
+  .notice .van-nav-bar__title {
+    line-height: 96px;
+    font-size: 32px;
+  }
+  .apply .van-nav-bar__title {
+    line-height: 96px;
+    font-size: 32px;
+  }
+  .notice .van-nav-bar__left {
+     left: 30px;
+  }
+  .notice .van-nav-bar__left, .van-nav-bar__right {
+    bottom: 30%;
+  }
+  .notice .van-nav-bar__arrow {
+    font-size: 30px;
+  }
+  .notice .van-nav-bar .van-icon {
+    color: #000;
+  }
+
+  .apply .van-nav-bar__left {
+     left: 30px;
+  }
+  .apply .van-nav-bar__left, .van-nav-bar__right {
+    bottom: 30%;
+  }
+  .apply .van-nav-bar__arrow {
+    font-size: 30px;
+  }
+  .apply .van-nav-bar .van-icon {
+    color: #000;
+  }
+  .top {
+    margin-top: 10px;
+  }
+.bar{
+  min-height: calc(100vh + 1px);
+}
