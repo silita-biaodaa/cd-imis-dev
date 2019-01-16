@@ -101,6 +101,22 @@
     watch:{
 
     },
+    updated(){
+        let obj=this.item;
+        let classic=obj.classic;
+        let str='';
+        if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
+            if(classic.indexOf(' ')>-1){
+                str='<a  target="_blank" href="'+classic.substring(0,classic.indexOf(' '))+'">'+classic.substring(0,classic.indexOf(' '))+'</a>'
+            }else{
+                str='<a  target="_blank" href="'+classic+'">'+classic+'</a>'
+            }
+        }else{
+            str='<span>'+classic+'</span>'
+        }
+        obj.classicStr=str;
+        this.$set(this.item,obj)
+    },
     methods: {
         gainUser(userid) {
             let data={
