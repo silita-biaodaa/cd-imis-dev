@@ -87,6 +87,11 @@ export const User = params => {
 export const Friends = params => {
   return axios.post('user/push/list', params).then(res => res.data)
 }
+/*打卡详情*/
+export const Detail = params => {
+  return axios.post('user/tmp/detail', params).then(res => res.data)
+}
+
 export const Parise = params => {
   return axios.post('/parise/click', params).then(res => res.data)
 }

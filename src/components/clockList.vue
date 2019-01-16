@@ -81,10 +81,10 @@
         </template>
 
 
-        <!--<div class="c-zan">-->
-        <!--<span class="icon icon-fx"></span>-->
-        <!--<span>详情</span>-->
-        <!--</div>-->
+        <div class="c-detail" @click="jumpDetail(item.pkid,item.userId)">
+          <span class="icon icon-fx"></span>
+          <span>详情</span>
+        </div>
       </div>
       <div class="laudBox" v-if="item.praise.length!=0" >
         <span class="icon pickZan"></span>
@@ -128,6 +128,16 @@
       this.$set(this.clocklist,list)
     },
     methods: {
+      //跳转详情
+      jumpDetail(id,userid){
+        this.$router.push({
+          path:'/cardDetail',
+          query:{
+            id:id,
+            userid:userid
+          }
+        })
+      },
       // 方法 集合
       fullClick(i){
         let obj=this.clocklist[i];

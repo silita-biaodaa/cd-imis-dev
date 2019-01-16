@@ -1,6 +1,8 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
+
+
 import Home from '@/page/index'
 import Card from '@/page/Card'
 import friend from '@/page/friend'
@@ -12,6 +14,8 @@ import Record from '@/page/record'
 import Create from '@/page/create'
 import groupUser from '@/page/groupUser'
 import Sets from '@/page/set'
+import cardDetail from '@/page/cardDetail'
+
 Vue.use(Router)
 
 export default new Router({
@@ -83,6 +87,10 @@ export default new Router({
       path:'/groupUser',
       component: groupUser,
       name:'groupUser'
+    },{
+      path:'/cardDetail',
+      component: cardDetail,
+      name:'cardDetail'
     }
 
   ]
