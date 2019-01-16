@@ -81,10 +81,10 @@
         </template>
 
 
-        <!--<div class="c-zan">-->
-        <!--<span class="icon icon-fx"></span>-->
-        <!--<span>详情</span>-->
-        <!--</div>-->
+        <div class="c-detail">
+          <span class="icon icon-fx"></span>
+          <span>详情</span>
+        </div>
       </div>
       <div class="laudBox" v-if="item.praise.length!=0" >
         <span class="icon pickZan"></span>
