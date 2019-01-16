@@ -520,39 +520,39 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
-  .l-mi {
+   .l-mi {
     margin:  auto  0;
-    width:136px;
-  .van-stepper__minus, .van-stepper__plus {
-    width: 33%;
-    height: 42px;
-  }
-  .van-stepper__minus {
-    border-radius: 18px 0 0 18px;
-    box-sizing: border-box;
-  }
-  .van-stepper__plus {
-    border-radius: 0 18px 18px 0;
-    box-sizing: border-box;
-  }
-  .van-stepper__input{
-    line-height: 42px;
-    width: 33%;
-    height: 42px;
-    font-size: 24px;
-    box-sizing: border-box;
-    border-color: #ccc;
-  }
-  .van-stepper__minus::before, .van-stepper__plus::before {
-  width: 20px !important;
-  height: 2px !important;
-  color: #999 !important;
-  }
-  .van-stepper__minus::after, .van-stepper__plus::after {
-  height: 20px !important;
-  width:2px !important;
-  color: #999 !important;
-  }
+    width:180px;
+    .van-stepper__minus, .van-stepper__plus {
+      width:33%;
+      border-color: #ccc;
+      height: 61px;
+    }
+    .van-stepper__minus {
+      border-radius: 18px 0 0 18px;
+    }
+    .van-stepper__plus {
+      border-radius: 0 18px 18px 0;
+    }
+    .van-stepper__input{
+      line-height: 61px;
+      width:33%;
+      height: 61px;
+      font-size: 24px;
+      box-sizing: border-box;
+      border-color: #ccc;
+    }
+    .van-stepper__minus::before, .van-stepper__plus::before {
+      width: 20px !important;
+      height: 2px !important;
+      color: #999 !important;
+    }
+    .van-stepper__minus::after, .van-stepper__plus::after {
+      height: 20px !important;
+      width:2px !important;
+      color: #999 !important;
+    }
+
   }
   }
   .p-line {
