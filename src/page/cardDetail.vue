@@ -144,14 +144,14 @@
         },
     },
     created () {
-        
+        WeixinJSBridge.call('showOptionMenu');  
     },
     updated(){
         let that=this;
         let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=cardDetail&id='+that.$route.query.id+'&userid='+that.$route.query.userid;
         let configData={
         	title:that.name, // 分享标题
-			desc:'<div>日精进打卡始于'+that.pushStart+'</div><div>打卡第'+that.time+'天,共打卡'+that.total+'次</div>', // 分享描述
+			desc:'日精进打卡始于'+that.pushStart+'    打卡第'+that.time+'天,共打卡'+that.total+'次', // 分享描述
 			imgUrl:that.imgUrl, // 分享图标
 			link:window.location.href,
 		}; 
@@ -159,7 +159,7 @@
 		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
 //		let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
         let obj={
-            title:that.name+'日精进打卡第'+that.time+'天，共打卡'+that.total+'次', // 分享标题
+            title:that.name+'  日精进打卡第'+that.time+'天，共打卡'+that.total+'次', // 分享标题
 			imgUrl:that.imgUrl, // 分享图标
 			link:window.location.href,
         }

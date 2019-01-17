@@ -125,10 +125,6 @@
       },
     },
     created () {
-
-      User({}).then( res => {
-        localStorage.setItem('userid',res.data.userId);
-      })
       this.loading();
       if(this.$route.query.id){
         let id=this.$route.query.id;
