@@ -55,6 +55,11 @@ const getParam=function(name){  //获取参数
       if(r!=null)return unescape(r[2]); return null;
     }
 }
+//
+const onBridgeReady=function(){  
+    WeixinJSBridge.call('hideOptionMenu');  
+}
+
 
 import { queryList,User,group,getWxStr } from "./api/index"
 import util from "./util/util"
@@ -78,6 +83,9 @@ router.beforeEach((to, from, next) => {
             let arr=[];
             arr=resa.data;
             localStorage.setItem('groupList',JSON.stringify(arr));
+          })
+          User({}).then( res => {
+            localStorage.setItem('userid',res.data.userId);
           })
           if(res.data.isFirst==0){
             //进入打卡设置
@@ -114,26 +122,17 @@ router.afterEach(function(to,from,next){
           jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
     })
-    Wx.ready(function(){
-      // Wx.hideMenuItems({
-      //   menuList: ["menuItem:share:appMessage","menuItem:share:timeline","menuItem:share:qq","menuItem:share:weiboApp","menuItem:share:QZone"] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-      //   // menuList:['onMenuShareAppMessage']
-      // });
-      // Wx.hideOptionMenu();
-    })
-    // let config={
-    //   title:'友旗有品',
-    //   desc: '购物，就来友旗有品', // 分享描述
-    //   imgUrl: 'https://www.youqiyp.com/mobile/static/img/logo.png', // 分享图标
-    //   link:window.location.href.split('#')[0]
-    // }
-    // /*公共*/
-    // Wx.ready(function(){
-    //   Wx.onMenuShareAppMessage(config); // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用 
-    //   Wx.onMenuShareTimeline(config);//朋友圈
-    //   Wx.onMenuShareQQ(config);//qq
-    //   Wx.onMenuShareQZone(config);//qq空间
-    // })
+    if (typeof WeixinJSBridge == "undefined"){  
+        if( document.addEventListener ){  
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);  
+        }else if (document.attachEvent){  
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);   
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);  
+        }  
+    }else{  
+        onBridgeReady();  
+    } 
+
 });
 new Vue({
   el: '#app',

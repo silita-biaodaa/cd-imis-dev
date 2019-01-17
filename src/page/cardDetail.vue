@@ -144,25 +144,31 @@
         },
     },
     created () {
-        
+        WeixinJSBridge.call('showOptionMenu');  
     },
     updated(){
         let that=this;
         let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=cardDetail&id='+that.$route.query.id+'&userid='+that.$route.query.userid;
         let configData={
         	title:that.name, // 分享标题
-			desc:'日精进打卡始于'+that.pushStart+'<br />打卡第'+that.time+'天,共打卡'+that.total+'次', // 分享描述
+			desc:'日精进打卡始于'+that.pushStart+'    打卡第'+that.time+'天,共打卡'+that.total+'次', // 分享描述
 			imgUrl:that.imgUrl, // 分享图标
 			link:window.location.href,
 		}; 
 		let u = navigator.userAgent;
 		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
 //		let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-		if(isAndroid){
-			configData.link=shareUrl
-		}
+        let obj={
+            title:that.name+'  日精进打卡第'+that.time+'天，共打卡'+that.total+'次', // 分享标题
+			imgUrl:that.imgUrl, // 分享图标
+			link:window.location.href,
+        }
+        if(isAndroid){
+            configData.link=shareUrl;
+            obj.link=shareUrl;
+        }
 		wx.onMenuShareAppMessage(configData);// 分享给朋友 
-    	wx.onMenuShareTimeline(configData);//朋友圈
+    	wx.onMenuShareTimeline(obj);//朋友圈
     	wx.onMenuShareQQ(configData);//qq
     	wx.onMenuShareQZone(configData);//qq空间
     },
