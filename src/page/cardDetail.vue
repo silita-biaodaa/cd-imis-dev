@@ -148,10 +148,10 @@
     },
     updated(){
         let that=this;
-        let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=cardDetail&id='+that.$route.query.id+'userid='+that.$route.query.userid;
+        let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=cardDetail&id='+that.$route.query.id+'&userid='+that.$route.query.userid;
         let configData={
         	title:that.name, // 分享标题
-			desc:'日精进打卡第'+that.time+'天', // 分享描述
+			desc:'日精进打卡始于'+that.pushStart+',打卡第'+that.time+'天', // 分享描述
 			imgUrl:that.imgUrl, // 分享图标
 			link:window.location.href,
 		}; 
