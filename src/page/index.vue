@@ -248,6 +248,18 @@
       bblur () {
         window.scroll(0,0);
       },
+      lose() {
+      //   setTimeout(() => {
+      //        window.addEventListener('scroll',() => {
+      //         const activeElement = document.activeElement
+      //     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+      //       setTimeout(() => {
+      //          activeElement.blur()
+      //       }, 100)
+      //     }
+      // });
+      //   }, 500); 
+      },
       bid () {
         document.body.scrollTop= 0;
       },
@@ -376,10 +388,8 @@
       //       const activeElement = document.activeElement
       //   if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
       //     setTimeout(() => {
-      //       // activeElement.disabled = 'true'
-      //       // console.log(activeElement.tagName)
-
-      //     }, 0)
+      //        activeElement.blur()
+      //     }, 100)
       //   }
       // });
     },
@@ -397,9 +407,8 @@
       //       const activeElement = document.activeElement
       //   if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
       //     setTimeout(() => {
-      //       // activeElement.disabled = 'false'
-      //       console.log(activeElement)
-      //     }, 0)
+      //       activeElement.blur()
+      //     }, 100)
       //   }
       // });
     },
