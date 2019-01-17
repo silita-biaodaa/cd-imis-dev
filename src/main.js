@@ -106,7 +106,7 @@ const appid='wx393124fdad606b1d';//预发布
 // const appid='wx26999a53385489f9';//生产
 router.afterEach(function(to,from,next){
     let data={
-      url:window.location.href
+      'url':encodeURIComponent(location.href.split('#')[0])
     }
     getWxStr(data).then( res => {
         Wx.config({
@@ -115,15 +115,15 @@ router.afterEach(function(to,from,next){
           timestamp:res.data.timestamp, // 必填，生成签名的时间戳
           nonceStr: res.data.noncestr, // 必填，生成签名的随机串
           signature: res.data.signature,// 必填，签名，见附录1
-          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone','scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
     })
     Wx.ready(function(){
-      Wx.hideMenuItems({
-        menuList: ["menuItem:share:appMessage","menuItem:share:timeline","menuItem:share:qq","menuItem:share:weiboApp","menuItem:share:QZone"] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
-        // menuList:['onMenuShareAppMessage']
-      });
-
+      // Wx.hideMenuItems({
+      //   menuList: ["menuItem:share:appMessage","menuItem:share:timeline","menuItem:share:qq","menuItem:share:weiboApp","menuItem:share:QZone"] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+      //   // menuList:['onMenuShareAppMessage']
+      // });
+      // Wx.hideOptionMenu();
     })
     // let config={
     //   title:'友旗有品',
@@ -148,7 +148,6 @@ new Vue({
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
         this.$router.push({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
-        document.title='商品详情';
       }
     }
   },
