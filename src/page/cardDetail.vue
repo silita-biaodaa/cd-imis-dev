@@ -145,6 +145,7 @@
     },
     created () {
         WeixinJSBridge.call('showOptionMenu');  
+        wx.showOptionMenu();
     },
     updated(){
         let that=this;

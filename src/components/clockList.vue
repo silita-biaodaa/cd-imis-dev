@@ -79,9 +79,7 @@
             <span>赞</span>
           </div>
         </template>
-
-
-        <div class="c-detail" @click="ttt(item.pkid,item.userId,index)">
+        <div class="c-detail" @click="jumpDetail(item.pkid,item.userId)" v-if="item.userId==userid">
           <span class="icon icon-fx"></span>
           <span>详情</span>
         </div>
@@ -100,7 +98,8 @@
     data() {
       return {
         // 数据模型
-        name:localStorage.getItem('userName')
+        userid:localStorage.getItem('userid'),
+
       }
     },
     props: {
@@ -129,27 +128,14 @@
     },
     methods: {
       //跳转详情
-      // jumpDetail(id,userid){
-      //   this.$router.push({
-      //     path:'/cardDetail',
-      //     query:{
-      //       id:id,
-      //       userid:userid
-      //     }
-      //   })
-      // },
-      ttt(id,userid,i){
-        let configData={
-          appid:'wx393124fdad606b1d',
-        	title:this.clocklist[i].user.name, // 分享标题
-          desc:'dadas', // 分享描述
-          img_url:this.clocklist[i].user.imgUrl, // 分享图标
-          link:window.location.href.split('?')[0].split('#')[0]
-        }; 
-        // alert('1111');
-        WeixinJSBridge.invoke('sendAppMessage',configData,function(res){
-          alert(JSON.stringify(res));
-        });  
+      jumpDetail(id,userid){
+        this.$router.push({
+          path:'/cardDetail',
+          query:{
+            id:id,
+            userid:userid
+          }
+        })
       },
       // 方法 集合
       fullClick(i){
