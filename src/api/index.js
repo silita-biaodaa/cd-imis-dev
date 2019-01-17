@@ -64,6 +64,10 @@ axios.interceptors.response.use(function (response) { // ①10010 token过期（
   return Promise.reject(error)
 })
 
+export const getWxStr = params => {
+  return axios.post('authorize/fetchJsApiTicket', params).then(res => res.data)
+}
+
 export const queryList = params => {
   return axios.post('authorize/user', params).then(res => res.data)
 }
@@ -89,7 +93,7 @@ export const Friends = params => {
 }
 /*打卡详情*/
 export const Detail = params => {
-  return axios.post('user/tmp/detail', params).then(res => res.data)
+  return axios.post('log/detail', params).then(res => res.data)
 }
 
 export const Parise = params => {
