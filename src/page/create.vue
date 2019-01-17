@@ -98,7 +98,7 @@ export default {
   .create-btn {
     height: 96px;
     width: 678px;
-    border-radius: 10px;
+    border-radius: 12px;
     margin: 0;
     padding: 0;
     border: 1px solid transparent;

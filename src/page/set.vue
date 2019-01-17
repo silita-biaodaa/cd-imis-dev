@@ -481,13 +481,12 @@ export default {
     .btn {
       margin-top: 140px;
       padding-bottom: 90px;
-     
       .weui-btn_default {
         height: 96px;
         font-size: 36px;
         color: #fff;
         background-color: #E62129;
-         border-radius: 10px;
+        border-radius: 12px;
       }
     }
   }
