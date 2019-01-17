@@ -679,7 +679,7 @@
     height: 96px;
     font-size: 36px;
     color: #fff;
-    background-color: red;
+    background-color: #E62129;
     border-radius: 10px;
   }
   }

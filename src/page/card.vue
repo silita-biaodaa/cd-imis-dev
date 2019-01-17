@@ -434,7 +434,7 @@ export default {
       background-color: #E62129;
       line-height: 96px;
       text-align: center;
-      border-radius: 10px;
+      border-radius: 12px;
     }
     .card-red {
       height: 96px;
@@ -443,7 +443,7 @@ export default {
       background-color: #BBBBBB;
       line-height: 96px;
       text-align: center;
-      border-radius: 10px;
+      border-radius: 12px;
     }
  }
   .ccc {
