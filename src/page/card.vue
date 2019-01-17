@@ -412,7 +412,7 @@ export default {
  .card-put {
     font-size: 32px;
     background: #fff;
-    padding: 36px;
+    padding: 33px;
     // height: ;
  }
  .card-ma {
@@ -451,7 +451,7 @@ export default {
      width: 100%;
      outline:none;
      border: none;
-     padding:20px;
+    //  padding:20px;
   }
 }
 textarea{
