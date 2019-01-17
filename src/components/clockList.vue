@@ -79,9 +79,7 @@
             <span>赞</span>
           </div>
         </template>
-
-
-        <div class="c-detail" @click="jumpDetail(item.pkid,item.userId)">
+        <div class="c-detail" @click="jumpDetail(item.pkid,item.userId)" v-if="item.userId==userid">
           <span class="icon icon-fx"></span>
           <span>详情</span>
         </div>
@@ -100,7 +98,8 @@
     data() {
       return {
         // 数据模型
-        name:localStorage.getItem('userName')
+        userid:localStorage.getItem('userid'),
+
       }
     },
     props: {
