@@ -8,7 +8,7 @@
                 <img :src="e.imgUrl" alt="">
             </div>
             <div class="notice-t">
-               <p>{{e.type == 1 ? e.name : e.groName }}</p>
+               <p>{{e.type == 2 ? e.groName  : e.name  }}</p>
                <p class="notice-s">{{e.type == 2 ? '已将你移除群' : '申请加入' + e.groName }}</p>
             </div>
             <div class="notice-btn" v-show="e.type == 1 ? true : false" @click="joinG(e)" >
