@@ -82,10 +82,6 @@ router.beforeEach((to, from, next) => {
           if(res.data.isFirst==0){
             //进入打卡设置
             next()
-          }else{
-            User({}).then( resd => {
-              localStorage.setItem('userName',resd.data.name);
-            })
           }
           if(res.data.isFirst==1){
             //进入打卡
@@ -147,7 +143,7 @@ new Vue({
   beforeCreate(){
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
-        this.$router.push({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
+        this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
       }
     }
   },
