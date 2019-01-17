@@ -147,7 +147,7 @@
           link:window.location.href.split('?')[0].split('#')[0]
         }; 
         // alert('1111');
-        WeixinJSBridge.invoke('shareTimeline',configData,function(res){
+        WeixinJSBridge.invoke('sendAppMessage',configData,function(res){
           alert(JSON.stringify(res));
         });  
       },
