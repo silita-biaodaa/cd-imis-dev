@@ -181,7 +181,7 @@
             success:function(){
                 if(that.goto){
                     that.mask=false;
-                    // that.$router.go(-1);
+                    that.$router.go(-1);
                 }
             }
 		}; 
@@ -195,13 +195,16 @@
             success:function(){
                 if(that.goto){
                     that.mask=false;
-                    // that.$router.go(-1);
+                    that.$router.go(-1);
                 }
             }
         }
         if(isAndroid){
             configData.link=shareUrl;
             obj.link=shareUrl;
+            if(!this.goto){
+                WeixinJSBridge.call('showOptionMenu');
+            }
         }
 		wx.onMenuShareAppMessage(configData);// 分享给朋友 
     	wx.onMenuShareTimeline(obj);//朋友圈
@@ -235,12 +238,14 @@
     }
 }
 .cardDetail {
-    background: #fff;
+    -webkit-overflow-scrolling : touch;
+    height: calc(100vh + 1px);
     .f-person {
         width:100%;
         height: 409px;
         background: url("../assets/img/bg.png") no-repeat;
         background-size: cover;
+        background-color: #fff;
         padding-top: 94px;
         box-sizing: border-box;
         position: relative;

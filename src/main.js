@@ -125,28 +125,15 @@ router.afterEach(function(to,from,next){
           jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
     })
-    if(to.path=='/cardDetail'&&from.path=='/'){//二次分享
-      if (typeof WeixinJSBridge == "undefined"){  
-          if( document.addEventListener ){  
-              document.addEventListener('WeixinJSBridgeReady', offBridgeReady, false);  
-          }else if (document.attachEvent){  
-              document.attachEvent('WeixinJSBridgeReady', offBridgeReady);   
-              document.attachEvent('onWeixinJSBridgeReady', offBridgeReady);  
-          }  
-      }else{  
-          offBridgeReady();  
-      } 
-    }else{
-      if (typeof WeixinJSBridge == "undefined"){
-          if( document.addEventListener ){  
-              document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);  
-          }else if (document.attachEvent){  
-              document.attachEvent('WeixinJSBridgeReady', onBridgeReady);   
-              document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);  
-          }  
-      }else{  
-          onBridgeReady();  
-      } 
+    if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){  
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);  
+        }else if (document.attachEvent){  
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);   
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);  
+        }  
+    }else{  
+        onBridgeReady();  
     }
     
 
