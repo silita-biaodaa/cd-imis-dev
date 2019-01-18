@@ -74,10 +74,6 @@
                 </template>
                 </div>
             </div>
-            <div class="laudBox" v-if="item.praise.length!=0" >
-                <span class="icon pickZan"></span>
-                {{item.praise.join(',')}}
-            </div>
         </div>
         <div class="mask" v-if="mask" @click="maskFn">
             <img src="../assets/img/mask.png"/>
@@ -161,6 +157,13 @@
         }
         
     },
+    beforeCreate(){
+        let u = navigator.userAgent;
+		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        if(isAndroid){
+            WeixinJSBridge.call('showOptionMenu'); 
+        }
+    },
     created () {
         if(this.$route.meta.mask){
             this.mask=true;
@@ -202,9 +205,6 @@
         if(isAndroid){
             configData.link=shareUrl;
             obj.link=shareUrl;
-            if(!this.goto){
-                WeixinJSBridge.call('showOptionMenu');
-            }
         }
 		wx.onMenuShareAppMessage(configData);// 分享给朋友 
     	wx.onMenuShareTimeline(obj);//朋友圈
@@ -239,7 +239,7 @@
 }
 .cardDetail {
     -webkit-overflow-scrolling : touch;
-    height: calc(100vh + 1px);
+    min-height: calc(100vh + 1px);
     .f-person {
         width:100%;
         height: 409px;
