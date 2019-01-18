@@ -115,9 +115,6 @@ router.afterEach(function(to,from,next){
     let data={
       'url':encodeURIComponent(location.href.split('#')[0])
     }
-    if(getParam('path')&&getParam('id')&&getParam('userid')){
-      data.url=encodeURIComponent(location.href.split('#')[0].split('?')[0])
-    }
     getWxStr(data).then( res => {
         Wx.config({
           // debug:true,

@@ -221,16 +221,16 @@
         // wx.ready(function(){
         //     that.offBridgeReady()
         // })
-        if (typeof WeixinJSBridge == "undefined"){
-            if( document.addEventListener ){  
-                document.addEventListener('WeixinJSBridgeReady', that.offBridgeReady, false);  
-            }else if (document.attachEvent){  
-                document.attachEvent('WeixinJSBridgeReady', that.offBridgeReady);   
-                document.attachEvent('onWeixinJSBridgeReady', that.offBridgeReady);  
-            }  
-        }else{  
-            that.offBridgeReady();  
-        }
+        // if (typeof WeixinJSBridge == "undefined"){
+        //     if( document.addEventListener ){  
+        //         document.addEventListener('WeixinJSBridgeReady', that.offBridgeReady, false);  
+        //     }else if (document.attachEvent){  
+        //         document.attachEvent('WeixinJSBridgeReady', that.offBridgeReady);   
+        //         document.attachEvent('onWeixinJSBridgeReady', that.offBridgeReady);  
+        //     }  
+        // }else{  
+        //     that.offBridgeReady();  
+        // }
         
     },
     destroyed() {
