@@ -108,8 +108,8 @@ export default {
               this.creates = res.data.create;
               let arr=res.data.join.concat(res.data.create);
              localStorage.setItem('groupList',JSON.stringify(arr));
-              this.jointle = res.data.join.length == 0 ? '' : '(' + res.data.join.length + ')'
-              this.createstle  = res.data.create.length == 0 ? '' : '(' + res.data.create.length + ')'
+              this.jointle = res.data.join.length == 0 ? '(0)' : '(' + res.data.join.length + ')'
+              this.createstle  = res.data.create.length == 0 ? '(0)' : '(' + res.data.create.length + ')'
 
            }
         })

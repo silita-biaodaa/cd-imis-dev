@@ -268,7 +268,7 @@ export default {
    display: flex;
    justify-content: space-between;
    text-align: center;
-     .l-mi {
+  .l-mi {
     margin:  auto  0;
     width:180px;
     .van-stepper__minus, .van-stepper__plus {
