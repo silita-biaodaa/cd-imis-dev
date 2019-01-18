@@ -157,7 +157,6 @@
             next();
         }else{
             to.meta.share=true;
-            WeixinJSBridge.call('showOptionMenu');
             next();
         }
         
@@ -212,7 +211,6 @@
     mounted(){
         let id=this.$route.query.id,
             userid=this.$route.query.userid;
-            WeixinJSBridge.call('showOptionMenu');
         this.gainUser(userid);
         this.getDetail(id);
     },
