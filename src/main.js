@@ -142,6 +142,7 @@ new Vue({
   beforeCreate(){
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
+        WeixinJSBridge.call('showOptionMenu');
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
       }
     }
