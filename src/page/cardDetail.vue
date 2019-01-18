@@ -104,6 +104,14 @@
 
     },
     methods: {
+        offBridgeReady(){
+            // let u = navigator.userAgent;
+            // let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+            // if(isAndroid){
+                WeixinJSBridge.call('showOptionMenu'); 
+            // }
+
+        },
         maskFn(){
             this.mask=false;
         },
@@ -157,13 +165,6 @@
         }
         
     },
-    beforeCreate(){
-        let u = navigator.userAgent;
-		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        if(isAndroid){
-            WeixinJSBridge.call('showOptionMenu'); 
-        }
-    },
     created () {
         if(this.$route.meta.mask){
             this.mask=true;
@@ -216,6 +217,21 @@
             userid=this.$route.query.userid;
         this.gainUser(userid);
         this.getDetail(id);
+
+        wx.ready(function(){
+            offBridgeReady()
+        })
+        // if (typeof WeixinJSBridge == "undefined"){
+        //     if( document.addEventListener ){  
+        //         document.addEventListener('WeixinJSBridgeReady', offBridgeReady, false);  
+        //     }else if (document.attachEvent){  
+        //         document.attachEvent('WeixinJSBridgeReady', offBridgeReady);   
+        //         document.attachEvent('onWeixinJSBridgeReady', offBridgeReady);  
+        //     }  
+        // }else{  
+        //     offBridgeReady();  
+        // }
+        
     },
     destroyed() {
       // console.group('销毁完成状态===============》destroyed');
