@@ -24,7 +24,7 @@
           <div class="label">企业</div> <input type="text" placeholder="请输入您的企业名称" v-model='company' @blur="bblur" >
         </div>
         <div class="l-put"  >
-          <div class="label">职位</div> <input type="text" placeholder="请输入您的职位名称" v-model='post'  @blur="bblur" >
+          <div class="label">职位</div> <input type="text" placeholder="请输入您的职位名称" v-model='post' @blur='bblur' >
         </div>
       </div>
     </div>
@@ -211,6 +211,10 @@
 
     },
     methods: {
+      texte() {
+        console.log(event.type)
+        console.log(1111)
+      },
       dateConfirm(type,value){
           if (type === 'year') {
             return `${value}年`;
@@ -249,16 +253,7 @@
         window.scroll(0,0);
       },
       lose() {
-      //   setTimeout(() => {
-      //        window.addEventListener('scroll',() => {
-      //         const activeElement = document.activeElement
-      //     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-      //       setTimeout(() => {
-      //          activeElement.blur()
-      //       }, 100)
-      //     }
-      // });
-      //   }, 500); 
+
       },
       bid () {
         document.body.scrollTop= 0;
@@ -351,23 +346,7 @@
     watch:{
       pickerValue(val) {
         this.tiems = util.itcTiem(this.pickerValue)
-      },
-      // tiems(val) {
-      //   console.log(val)
-      //   var s1 = new Date(val.replace(/-/g, "/"));
-      //   var s2 = new Date();//当前日期
-      //   var days = s2.getTime() - s1.getTime();
-      //   if(days >= 0) {
-      //     this.old = parseInt(days / (1000 * 60 * 60 * 24));
-      //     this.count = parseInt(days / (1000 * 60 * 60 * 24));
-      //   } else {
-      //     this.count = 0
-      //     setTimeout(() => {
-      //       this.tiems = dateFormat(new Date(), 'YYYY-MM-DD')
-      //     }, 100);
-
-      //   }
-      // }
+      }
     },
     created () {
       this.getTime()
@@ -384,14 +363,20 @@
       //     }, 0)
       //   }
       // }),
-      // window.addEventListener('scroll',() => {
-      //       const activeElement = document.activeElement
-      //   if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-      //     setTimeout(() => {
-      //        activeElement.blur()
-      //     }, 100)
-      //   }
-      // });
+      window.addEventListener('scroll',() => {
+            const activeElement = document.activeElement
+        if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+            // alert(event.type)
+            // if(event.type == focus) {
+            //    return false 
+            // }  else {
+            //      setTimeout(() => {
+            //        activeElement.blur()
+            //     }, 100)
+            // }
+         
+        }
+      });
     },
     beforeDestroy() {
       // window.removeEventListener('resize', () => {
@@ -403,14 +388,19 @@
       //     }, 0)
       //   }
       // }),
-      //   window.addEventListener('scroll',() => {
-      //       const activeElement = document.activeElement
-      //   if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-      //     setTimeout(() => {
-      //       activeElement.blur()
-      //     }, 100)
-      //   }
-      // });
+        window.addEventListener('scroll',() => {
+            const activeElement = document.activeElement
+        if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+          // alert(event.type)
+            // if(event.type == focus) {
+            //    return false 
+            // }  else {
+            //      setTimeout(() => {
+            //        activeElement.blur()
+            //     }, 100)
+            // }
+        }
+      });
     },
 
   }
@@ -469,6 +459,7 @@
   input {
     width: 100%;
     text-align: right;
+    position: flex;
     background:none;
     outline:none;
     border:0px;

@@ -11,7 +11,7 @@
                 <p class="start s-top">打卡始于<span class="p-ye">{{pushStart}}</span>,持续打卡于<span class="p-ye">{{pushEnd}}</span>,</p>
                 <p class="start">  日精进打卡第<span class="p-ye">{{time}}</span>天,共打卡<span class="p-ye">{{total}}</span>次,缺卡<span class="p-ye" >{{que}}</span>次</p>
             </div>
-            <span v-if="$route.query.id" class="iconfont icon-fanhui" @click="$router.go(-1)"></span>
+            <span v-if="goto" class="iconfont icon-fanhui" @click="$router.go(-1)"></span>
         </div>
         <div class="f-content">
             <!-- <v-clock :item="item" v-for="( item, index ) in list" :key="index"></v-clock> -->
@@ -100,7 +100,8 @@
         time: '',
         que: '',
         item:{},
-        mask:false
+        mask:false,
+        goto:true,
       }
     },
     watch:{
@@ -154,12 +155,18 @@
         if(from.path=='/nav/friend'){
             to.meta.mask=true;
             next();
+        }else{
+            to.meta.share=true;
+            next();
         }
-        next()
+        
     },
     created () {
         if(this.$route.meta.mask){
             this.mask=true;
+        }
+        if(this.$route.meta.share){
+            this.goto=false;
         }
         WeixinJSBridge.call('showOptionMenu');
     },
@@ -170,7 +177,12 @@
         	title:that.name, // 分享标题
 			desc:'日精进打卡始于'+that.pushStart+'，     打卡第'+that.time+'天,共打卡'+that.total+'次', // 分享描述
 			imgUrl:that.imgUrl, // 分享图标
-			link:window.location.href,
+            link:window.location.href,
+            success:function(){
+                if(that.goto){
+                    that.$router.go(-1);
+                }
+            }
 		}; 
 		let u = navigator.userAgent;
 		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
@@ -178,7 +190,12 @@
         let obj={
             title:that.name+'  日精进打卡第'+that.time+'天，共打卡'+that.total+'次。', // 分享标题
 			imgUrl:that.imgUrl, // 分享图标
-			link:window.location.href,
+            link:window.location.href,
+            success:function(){
+                if(that.goto){
+                    that.$router.go(-1);
+                }
+            }
         }
         if(isAndroid){
             configData.link=shareUrl;
