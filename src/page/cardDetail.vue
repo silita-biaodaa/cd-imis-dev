@@ -217,20 +217,20 @@
             userid=this.$route.query.userid;
         this.gainUser(userid);
         this.getDetail(id);
-
-        wx.ready(function(){
-            offBridgeReady()
-        })
-        // if (typeof WeixinJSBridge == "undefined"){
-        //     if( document.addEventListener ){  
-        //         document.addEventListener('WeixinJSBridgeReady', offBridgeReady, false);  
-        //     }else if (document.attachEvent){  
-        //         document.attachEvent('WeixinJSBridgeReady', offBridgeReady);   
-        //         document.attachEvent('onWeixinJSBridgeReady', offBridgeReady);  
-        //     }  
-        // }else{  
-        //     offBridgeReady();  
-        // }
+        let that=this;
+        // wx.ready(function(){
+        //     that.offBridgeReady()
+        // })
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){  
+                document.addEventListener('WeixinJSBridgeReady', that.offBridgeReady, false);  
+            }else if (document.attachEvent){  
+                document.attachEvent('WeixinJSBridgeReady', that.offBridgeReady);   
+                document.attachEvent('onWeixinJSBridgeReady', that.offBridgeReady);  
+            }  
+        }else{  
+            that.offBridgeReady();  
+        }
         
     },
     destroyed() {
