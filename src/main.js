@@ -109,8 +109,8 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
-const appid='wx393124fdad606b1d';//预发布
-// const appid='wx26999a53385489f9';//生产
+// const appid='wx393124fdad606b1d';//预发布
+const appid='wx26999a53385489f9';//生产
 router.afterEach(function(to,from,next){
     let data={
       'url':encodeURIComponent(location.href.split('#')[0])
