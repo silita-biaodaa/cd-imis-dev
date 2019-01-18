@@ -245,7 +245,7 @@
     -webkit-line-clamp: 5;
   }
   .c-content.active{
-    -webkit-line-clamp: 100;
+    -webkit-line-clamp: 10000;
   .tit{
     line-height: 2.8
   }
