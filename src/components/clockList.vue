@@ -66,23 +66,39 @@
         <span @click="fullClick(index)">{{item.fullTxt}}</span>
       </h5>
       <div class="c-func">
-
-        <template v-if="item.isParise">
-          <div class="c-zan">
-            <span class="icon pickZ"></span>
-            <span  style="color:#E60012">赞</span>
-          </div>
+        <template v-if="item.userId==userid">
+            <template v-if="item.isParise">
+              <div class="c-zan">
+                <span class="icon pickZ"></span>
+                <span  style="color:#E60012">赞</span>
+              </div>
+            </template>
+            <template v-else>
+              <div class="c-zan" @click="isPariseFn(index)">
+                <span class="icon pickZan"></span>
+                <span>赞</span>
+              </div>
+            </template>
+            <div class="c-detail" @click="jumpDetail(item.pkid,item.userId)">
+              <span class="icon icon-fx"></span>
+              <span>分享</span>
+            </div>
         </template>
         <template v-else>
-          <div class="c-zan" @click="isPariseFn(index)">
-            <span class="icon pickZan"></span>
-            <span>赞</span>
-          </div>
+            <div style="width:163px"></div>
+            <template v-if="item.isParise">
+              <div class="c-zan">
+                <span class="icon pickZ"></span>
+                <span  style="color:#E60012">赞</span>
+              </div>
+            </template>
+            <template v-else>
+              <div class="c-zan" @click="isPariseFn(index)">
+                <span class="icon pickZan"></span>
+                <span>赞</span>
+              </div>
+            </template>
         </template>
-        <div class="c-detail" @click="jumpDetail(item.pkid,item.userId)" v-if="item.userId==userid">
-          <span class="icon icon-fx"></span>
-          <span>详情</span>
-        </div>
       </div>
       <div class="laudBox" v-if="item.praise.length!=0" >
         <span class="icon pickZan"></span>
@@ -268,7 +284,7 @@
   // margin-top: 100px;
   // margin-bottom: 39px;
     float: right;
-    width: 150px;
+    width:225px;
     color: #999;
     font-size: 28px;
     display: flex;
@@ -299,6 +315,7 @@
   .icon-fx{
     background: url("../assets/img/fx.png") no-repeat;
     background-size: cover;
+    display:inline-block;
   }
   .c-list {
     float: right;
