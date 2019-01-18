@@ -131,7 +131,7 @@
           let str='';
           if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
             if(classic.indexOf(' ')>-1){
-              str='<a  target="_blank" href="'+classic.substring(0,classic.indexOf(' '))+'">'+classic.substring(0,classic.indexOf(' '))+'</a>'
+              str='<a  target="_blank" href="'+classic.substring(classic.indexOf('http'),classic.indexOf(' '))+'">'+classic.substring(classic.indexOf('http'),classic.indexOf(' '))+'</a><span>'+classic.substring(classic.indexOf(' '),classic.length)+'</span>'
             }else{
               str='<a  target="_blank" href="'+classic+'">'+classic+'</a>'
             }
