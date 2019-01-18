@@ -144,17 +144,12 @@
         <span  class='home-size' >立志愿</span>
       </div>
       <div class="volunteer-put">
-        <textarea  rows="4" placeholder='请输入您的志愿'  v-model="values" class="ccc" @blur='bblur'  ></textarea>
+        <textarea  rows="4" placeholder='请输入您的志愿'  v-model="values" class="ccc" @blur='bblur' ></textarea>
       </div>
       <div class="btn" @click='record'>
         <x-button  >提交</x-button>
       </div>
     </div>
-    <!--<mt-datetime-picker-->
-      <!--ref="picker"-->
-      <!--type="date"-->
-      <!--v-model="pickerValue">-->
-    <!--</mt-datetime-picker>-->
     <v-popup :popup-type="'tips'" :popup-show="mask"></v-popup>
     <div class='toast' v-show='layout' >
       请输入正确的手机号码
@@ -363,20 +358,6 @@
       //     }, 0)
       //   }
       // }),
-      window.addEventListener('scroll',() => {
-            const activeElement = document.activeElement
-        if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-            // alert(event.type)
-            // if(event.type == focus) {
-            //    return false 
-            // }  else {
-            //      setTimeout(() => {
-            //        activeElement.blur()
-            //     }, 100)
-            // }
-         
-        }
-      });
     },
     beforeDestroy() {
       // window.removeEventListener('resize', () => {
@@ -388,19 +369,6 @@
       //     }, 0)
       //   }
       // }),
-        window.addEventListener('scroll',() => {
-            const activeElement = document.activeElement
-        if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-          // alert(event.type)
-            // if(event.type == focus) {
-            //    return false 
-            // }  else {
-            //      setTimeout(() => {
-            //        activeElement.blur()
-            //     }, 100)
-            // }
-        }
-      });
     },
 
   }
@@ -671,6 +639,9 @@
     font-size: 28px;
     border-bottom: 1px solid #F2F2F2;
     position: relative;
+  }
+  .volunteer-put {
+    border-bottom: 1px solid #f5f5f5;
   }
   .btn {
     margin-top: 110px;
