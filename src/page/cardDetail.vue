@@ -156,7 +156,7 @@
         },
     },
     beforeRouteEnter (to, from, next) {
-        if(from.path=='/nav/friend'){
+        if(from.path=='/nav/friend'||from.path=='/nav/record'){
             to.meta.mask=true;
             next();
         }else{
