@@ -143,7 +143,7 @@ export default {
    overflow-y: scroll;
   .g-size {
     font-size: 34px;
-    font-weight: 500px;
+    font-weight: 400;
   }
   .fold {
      height: 96px;
