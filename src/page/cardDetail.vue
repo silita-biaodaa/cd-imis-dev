@@ -79,6 +79,9 @@
                 {{item.praise.join(',')}}
             </div>
         </div>
+        <div class="mask" v-if="mask" @click="maskFn">
+            <img src="../assets/img/mask.png"/>
+        </div>
     </div>
 </template>
 <script>
@@ -96,13 +99,17 @@
         total: '',
         time: '',
         que: '',
-        item:{}
+        item:{},
+        mask:false
       }
     },
     watch:{
 
     },
     methods: {
+        maskFn(){
+            this.mask=false;
+        },
         gainUser(userid) {
             let data={
                 userId:userid
@@ -143,9 +150,18 @@
             })
         },
     },
+    beforeRouteEnter (to, from, next) {
+        if(from.path=='/nav/friend'){
+            to.meta.mask=true;
+            next();
+        }
+        next()
+    },
     created () {
-        WeixinJSBridge.call('showOptionMenu');  
-        wx.showOptionMenu();
+        if(this.$route.meta.mask){
+            this.mask=true;
+        }
+        WeixinJSBridge.call('showOptionMenu');
     },
     updated(){
         let that=this;
@@ -185,6 +201,20 @@
   }
 </script>
 <style lang='less' scoped>
+.mask{
+    position:fixed;
+    height:100vh;
+    background:rgba(0,0,0,.8);
+    top:0;
+    left:0;
+    width: 100%;
+    overflow:hidden;
+    text-align: right;
+    padding: 71px 12px 0 0;
+    img{
+        width:555px
+    }
+}
 .cardDetail {
     background: #fff;
     .f-person {
