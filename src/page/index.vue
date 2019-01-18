@@ -37,8 +37,12 @@
         <span class='home-size' >打卡时间</span>
       </div>
       <div class="time-sel" @click='datePicker' >
-         <span>打卡始于时间</span>
-         <span>{{tiems}}</span>
+         <span class="flo-l" >打卡始于时间</span>
+         <div class="flo-r cent" v-show="this.tiems"  >
+           <i class=" iconfont icon-icon i-post" >
+           </i>
+         </div>
+         <span class="flo-r" >{{tiems}}</span>         
         <van-popup v-model="dateObj.dateMask" position="bottom" :overlay="true">
               <van-datetime-picker
                 type="date"
@@ -49,9 +53,12 @@
                 @confirm='confirm'
               ></van-datetime-picker>
        </van-popup>
+      
       </div>
       <div class="l-put"  >
         <div class="label">打卡次数</div> <input type="tel" placeholder="请输入打卡次数" v-model='count' @keyup='text' @blur='bblur' >
+           <i class=" iconfont icon-icon i-iput"  >
+           </i>
       </div>
     </div>
 
@@ -71,6 +78,8 @@
           <div class="sign p-line  ">
             <div class="l-put"  >
               <div class="label">书本名称</div> <input type="text" placeholder="请输入书本名称" v-model='item.title'  @blur='bblur'  >
+              <i class=" iconfont icon-icon i-iput" v-show="item.title" >
+              </i>
             </div>
           </div>
           <div class="sign p-line">
@@ -84,6 +93,8 @@
           <div class="sign" >
             <div class="l-put"  >
               <div class="label five ">总朗读遍数</div> <input type="tel" placeholder="请输入" v-model='item.readTotal' @blur='bblur' >
+              <i class=" iconfont icon-icon i-iput"   >
+              </i>
             </div>
           </div>
         </div>
@@ -108,8 +119,12 @@
       </div>
       <div>
           <div class="time-sel" @click='datePickers' >
-           <span>积善开始时间</span>
-           <span>{{begin}}</span>
+           <span class="flo-l" >积善开始时间</span>
+           <div class="flo-r cent" >
+           <i class=" iconfont icon-icon i-post" v-show="this.begin" >
+           </i>
+         </div>
+           <span class="flo-r" >{{begin}}</span>
           <van-popup v-model="dateObj.dateMasks" position="bottom" :overlay="true">
                 <van-datetime-picker
                   type="date"
@@ -123,6 +138,8 @@
       </div>
         <div class="l-put  p-line p-l">
           <div class="label five">积善持续年数</div> <input type="tel" placeholder="请输入年份"  v-model='end'   @blur="bblur">
+          <i class=" iconfont icon-icon i-iput" v-show="this.end" >
+          </i>
         </div>
         <div class="card-com">
           <div class="l-pu">
@@ -132,6 +149,8 @@
         </div>
         <div class="l-put"  >
               <div class="label five">累计积善件数</div> <input type="tel" placeholder="请输入" v-model='alls' @blur='bblur'  >
+              <i class=" iconfont icon-icon i-iput" v-show="sever(this.alls)" >
+           </i>
         </div>
       </div>
     </div>
@@ -264,6 +283,13 @@
           return false
         } else {
           return true
+        }
+      },
+      sever (val) {
+        if( val ) {
+          return true
+        } else {
+          return false
         }
       },
       text () {
@@ -407,7 +433,6 @@
   }
   .p-l {
     padding-left: 5px;
-    padding-right: 20px;
   }
   // 自定义输入框样式
      .l-put {
@@ -433,6 +458,7 @@
     border:0px;
     caret-color:blue;
     padding: 20px 0px;
+    padding-right: 12px;
   }
   }
   .ma-top {
@@ -567,7 +593,7 @@
   .add-book {
     height: 96px;
     padding-left: 40px;
-    padding-right: 36px;
+    padding-right: 42px;
     background: #F5F5F5;
     display: flex;
     justify-content:space-between;
@@ -598,7 +624,7 @@
        box-sizing: border-box;
        margin-top: 16px;
        padding-left: 34px;
-       padding-right: 36px;
+       padding-right: 34px;
        background: #FFF;
   .time-top {
     padding-left: 11px;
@@ -673,40 +699,44 @@
      line-height: 96px;
      font-size: 32px;
      color: #000;
-     display: flex;
-     justify-content: space-between;
+     overflow: hidden;
+    //  display: flex;
+    //  align-items: center;
+     margin: auto 0;
+    //  text-align: center;
+    //  position: relative;
+    //  display: flex;
+    //  justify-content: space-between;
      border-bottom: 1px solid #f5f5f5;
      .van-popup--bottom {
        height: 42vh;
      }
    }
-
-
-
+   .cent {
+     height: 96px;
+     width: 42px;
+     text-align: right;
+     position: relative;
+     padding-left: 9px;
+   }
+   .i-post {
+     position: absolute;
+     top: 50%;
+     right: 0;
+     transform: translateY(-50%);
+     font-size: 42px;
+     color: #ccc;
+   }
+   .i-iput {
+     font-size: 42px;
+     color:#ccc;
+   }
+   .flo-l {
+     float: left;
+   }
+   .flo-r {
+     float: right;
+   }
   }
-  // .dp-content {
-  //   padding: 200px 0 !important;
-  // }
-  // .weui-dialog__title{
-  //   font-size: 32px !important;
-  // }
-  // .weui-dialog__hd {
-  //   padding: 55px 38px 36px !important;
-  // }
-  // .weui-dialog{
-  //   max-width: 540px !important;
-  // }
-  // .weui-dialog__bd {
-  //   min-height: 60px !important;
-  //   font-size: 26px !important;
-  // }
-  // .weui-dialog__ft {
-  //   line-height: 70px !important;
-  //   font-size: 25px !important;
-  // }
-  // .dp-header .dp-item{
-  //   font-size: 26px !important;
-  //   height: 55px !important;
-  //   line-height: 55px !important;
-  // }
+
 </style>
