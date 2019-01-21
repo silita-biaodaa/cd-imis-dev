@@ -21,6 +21,7 @@
     "postcss-loader": "^2.0.5",
     "postcss-px2rem": "^0.3.0",
     "prettier": "^1.12.1",
+    "qrcodejs2": "^0.0.2",
     "vant": "^1.5.0",
     "vue": "^2.2.6",
     "vue-router": "^2.3.1",
