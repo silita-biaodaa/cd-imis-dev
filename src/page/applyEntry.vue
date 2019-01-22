@@ -79,6 +79,7 @@ export default {
         // 方法 集合
         applyGroup(){
             Addgroup({groId:this.id}).then( res => {
+                alert(JSON.stringify(res));
                 if(res.code == 1 ) {
                     this.applyTxt='已申请';
                     this.mask=true;
@@ -101,6 +102,12 @@ export default {
                         this.mask = false;
                         this.showQrcode=true;
                     }, 1000);
+                }else{
+                    this.toastTxt=res,msg;
+                    this.mask=true;
+                    return setTimeout(() => {
+                        this.mask = false;
+                    }, 1500);
                 }
             })
         }
