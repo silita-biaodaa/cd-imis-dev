@@ -79,7 +79,7 @@ router.beforeEach((to, from, next) => {
     next()
   }else{
     var auth = localStorage.getItem('Authorization');
-    data={
+    let data={
       code:code,
       isApply:isApply
     }
