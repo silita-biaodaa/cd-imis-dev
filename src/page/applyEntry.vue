@@ -80,6 +80,7 @@ export default {
         applyGroup(){
             Addgroup({groId:this.id}).then( res => {
                 alert(JSON.stringify(res));
+                alert(JSON.stringify(localStorage.getItem('Authorization')))
                 if(res.code == 1 ) {
                     this.applyTxt='已申请';
                     this.mask=true;
