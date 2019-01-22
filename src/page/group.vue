@@ -82,15 +82,15 @@ export default {
     methods: {
       //跳转群成员
       jump(i,type){
-        let id,name,imgUrl;
+        let id,name;
         if(type){
           id=this.creates[i].groId;
           name=this.creates[i].groName;
-          imgUrl=this.creates[i].imgUrl;
+          // imgUrl=this.creates[i].imgUrl;
         }else{
           id=this.join[i].groId;
           name=this.join[i].groName;
-          imgUrl=this.creates[i].imgUrl;
+          // imgUrl=this.creates[i].imgUrl;
         }
 
         this.$router.push({
