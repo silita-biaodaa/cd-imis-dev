@@ -90,17 +90,23 @@ export default {
     methods: {
         // 方法 集合
         qrcode(){
+            const appid='wx393124fdad606b1d';//预发布
+            // const appid='wx26999a53385489f9';//生产
             let leng=this.$refs.qr.offsetWidth;
             let url=location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id;
+            let uri=this.weixinauth(appid,url);
             console.log(url);
             let code=new QRCode("qrcode", {
-                text: url,
+                text: uri,
                 width:leng,
                 height: leng,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
             });
-        }
+        },
+        weixinauth (appid,url) {
+            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+url+'&response_type=code&scope=snsapi_base&state=CD-IMIS#wechat_redirect'
+        },
     }
 
 }

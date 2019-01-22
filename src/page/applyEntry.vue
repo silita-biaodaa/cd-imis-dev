@@ -15,14 +15,15 @@
         </div>
         <v-toast :toastTxt="toastTxt" :mask="mask"></v-toast>
         <div class="fix-box" v-if="showQrcode">
-            <div class="qrcode" @click="showQrcode=false">
+            <div class="qrcode" @click="followFn">
                 <img src="../assets/img/bdd.jpg"/>
             </div>
         </div>
     </div>
 </template>
 <script>
-import { groupsDetail,Addgroup } from '@/api/index'
+import { groupsDetail,Addgroup,queryList } from '@/api/index'
+import util from "@/util/util"
 export default {
     name: 'applyEntry', // 结构名称
     data() {
@@ -111,7 +112,25 @@ export default {
                     }, 1500);
                 }
             })
-        }
+        },
+        followFn(){//检测是否关注
+            let code = util.getCode('code');
+            let that=this;
+            if(!code){
+                this.toastTxt='您尚未关注公众号，请先关注公众号';
+                this.mask=true;
+                return setTimeout(() => {
+                    this.mask = false;
+                }, 1000);
+            }else{
+                queryList({ code: code }).then(res => {
+                    if ( res.code == 1 ) {
+                        localStorage.setItem('Authorization', res.data.token);
+                        that.showQrcode=false
+                    }
+                })
+            }
+        }   
     }
 
 }
