@@ -114,22 +114,10 @@ export default {
             })
         },
         followFn(){//检测是否关注
-            let code = util.getCode('code');
-            let that=this;
-            if(!code){
-                this.toastTxt='您尚未关注公众号，请先关注公众号';
-                this.mask=true;
-                return setTimeout(() => {
-                    this.mask = false;
-                }, 1000);
-            }else{
-                queryList({ code: code }).then(res => {
-                    if ( res.code == 1 ) {
-                        localStorage.setItem('Authorization', res.data.token);
-                        that.showQrcode=false
-                    }
-                })
-            }
+            const appid='wx393124fdad606b1d';//预发布
+            // const appid='wx26999a53385489f9';//生产
+            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id);
+            util.weixinauth(appid,url);
         }   
     }
 
