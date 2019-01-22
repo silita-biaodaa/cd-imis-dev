@@ -15,7 +15,12 @@
         </div>
         <v-toast :toastTxt="toastTxt" :mask="mask"></v-toast>
         <div class="fix-box" v-if="showQrcode">
-            <div class="qrcode" @click="followFn">
+            <div class="qrcode">
+                <div class="txt-box">
+                    <p>请先关注公众号，再来进群哟~</p>
+                    <p>长按识别下图二维码关注公众号</p>
+                </div>
+                <van-icon name="cross"  @click="followFn"/>
                 <img src="../assets/img/bdd.jpg"/>
             </div>
         </div>
@@ -55,6 +60,9 @@ export default {
             this.imgurl=res.data.imgUrl;
             this.num=res.data.userCount;
             this.name=res.data.groName;
+            if(res.data.isConcern==1){
+                this.showQrcode=true;
+            }
         })
     },
     beforeMount() {
@@ -95,15 +103,8 @@ export default {
                     return setTimeout(() => {
                         this.mask = false;
                     }, 1500);
-                }else if(res.code==0){
-                    this.toastTxt='您尚未关注公众号，请先关注公众号';
-                    this.mask=true;
-                    return setTimeout(() => {
-                        this.mask = false;
-                        this.showQrcode=true;
-                    }, 1000);
                 }else{
-                    this.toastTxt=res,msg;
+                    this.toastTxt=res.msg;
                     this.mask=true;
                     return setTimeout(() => {
                         this.mask = false;
@@ -112,8 +113,7 @@ export default {
             })
         },
         followFn(){//检测是否关注
-            // const appid='wx393124fdad606b1d';//预发布
-            const appid='wx26999a53385489f9';//生产
+            let appid=this.appid;
             let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
             util.weixinauth(appid,url);
         }   
@@ -163,9 +163,24 @@ export default {
     align-items: center;
     justify-content: center;
     .qrcode{
+        background: #fff;
+        position: relative;
         width: 80%;
+        .txt-box{
+            padding: 40px 40px 0;
+            text-align: center;
+            p:first-of-type{
+                margin-bottom: 10px
+            }
+        }
         img{
             width: 100%;
+        }
+        .van-icon{
+            position:absolute;
+            font-size: 36px;
+            top: 20px;
+            right: 20px;
         }
     }
 }
