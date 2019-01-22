@@ -210,8 +210,6 @@ export default {
       pushCard({thanks:this.thanks,practice:this.practice,books:this.books,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
-
-             localStorage.setItem('tabNum','0');
              this.hideLoading()
               this.$router.push({path:'/nav/friend'})
            }

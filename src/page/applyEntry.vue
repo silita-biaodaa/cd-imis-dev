@@ -11,7 +11,13 @@
             <p>共{{num}}人</p>
         </div>
         <div class="bom-box">
-            <button @click="applyGroup">申请入群</button>
+            <button @click="applyGroup">{{applyTxt}}</button>
+        </div>
+        <v-toast :toastTxt="toastTxt" :mask="mask"></v-toast>
+        <div class="fix-box" v-if="showQrcode">
+            <div class="qrcode" @click="showQrcode=false">
+                <img src="../assets/img/bdd.jpg"/>
+            </div>
         </div>
     </div>
 </template>
@@ -26,6 +32,10 @@ export default {
             name:'',//群名
             imgurl:'',//群头像
             num:'',//群人数
+            applyTxt:'申请入群',
+            mask:false,
+            toastTxt:'您的申请已提交，请等待群组审批',
+            showQrcode:false
         }
     },
     watch: {
@@ -68,9 +78,29 @@ export default {
     methods: {
         // 方法 集合
         applyGroup(){
-            Addgroup({groId:val.groId}).then( res => {
+            Addgroup({groId:this.id}).then( res => {
                 if(res.code == 1 ) {
-                    val.isApply = 1
+                    this.applyTxt='已申请';
+                    this.mask=true;
+                    return setTimeout(() => {
+                        this.mask = false;
+                        this.$router.replace({
+                            path:'/nav/card'
+                        })
+                    }, 1500);
+                }else if(res.code==403){
+                    this.toastTxt=res.msg;
+                    this.mask=true;
+                    return setTimeout(() => {
+                        this.mask = false;
+                    }, 1500);
+                }else if(res.code==0){
+                    this.toastTxt='您尚未关注公众号，请先关注公众号';
+                    this.mask=true;
+                    return setTimeout(() => {
+                        this.mask = false;
+                        this.showQrcode=true;
+                    }, 1000);
                 }
             })
         }
@@ -109,5 +139,21 @@ export default {
         border-radius: 5px
     }
 }
-
+.fix-box{
+    height: 100vh;
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    .qrcode{
+        width: 80%;
+        img{
+            width: 100%;
+        }
+    }
+}
 </style>
