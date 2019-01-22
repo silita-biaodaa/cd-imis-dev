@@ -64,10 +64,6 @@
       jumpQrCode(){
         this.$router.push({
           name:'groupQrcode',
-          params:{
-            // url:window.location.href,
-            img:this.img
-          },
           query:{
             id:this.groId,
             name:this.groupName,

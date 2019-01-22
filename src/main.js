@@ -15,7 +15,7 @@ Vue.use(Vant)
 import clocklist from '@/components/clockList'
 import popup from '@/components/popup'
 import head from '@/components/headgoto'
-import { XButton,Group } from 'vux'
+import { XButton , Group } from 'vux'
 //InlineCalendar, XInput, Datetime, XTextarea, , AlertPlugin,
 // Vue.component('inline-calendar', InlineCalendar)
 // Vue.component('x-input', XInput)
@@ -77,7 +77,6 @@ router.beforeEach((to, from, next) => {
   }else{
     var auth = localStorage.getItem('Authorization');
 
-    console.log(to.fullPath);
     if(!auth||to.fullPath=='/home'){
       queryList({ code: code }).then(res => {
         if ( res.code == 1 ) {
@@ -147,6 +146,8 @@ new Vue({
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
+      }else if(getParam('path')=='applyEntry'){
+        this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
       }
     }
   },

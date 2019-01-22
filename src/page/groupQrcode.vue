@@ -19,6 +19,7 @@
 </template>
 <script>
 import QRCode from 'qrcodejs2'
+import { groupsDetail } from '@/api/index'
 export default {
     name: 'groupQrcode', // 结构名称
     data() {
@@ -42,8 +43,9 @@ export default {
         // console.group('创建完毕状态===============》created');
         this.id=this.$route.query.id;
         this.name=this.$route.query.name;
-        this.imgurl=this.$route.params.img;
-        
+        groupsDetail(this.id).then(res =>{
+            this.imgurl=res.data.imgUrl
+        })
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
@@ -71,8 +73,10 @@ export default {
         // 方法 集合
         qrcode(){
             let leng=this.$refs.qr.offsetWidth;
+            let url=location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id;
+            console.log(url);
             let code=new QRCode("qrcode", {
-                text: "http://www.baidu.com",
+                text: url,
                 width:leng,
                 height: leng,
                 colorDark : "#000000",

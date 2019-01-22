@@ -27,7 +27,7 @@
 
         <div  v-for="(item,index) in books" :key="index">
            <div class="card-b card-book add-book">
-             <span>书本&nbsp({{index + booklength + 1}})</span>
+             <span>书本 ({{index + booklength + 1}})</span>
              <span class="del-book" @click='cardDel(index)'  v-if="!first" >删除</span>
             </div>
            <div class="pdd">

@@ -101,9 +101,6 @@ export default {
             name:name,
             type:type
           },
-          params:{
-            img:imgUrl
-          }
         })
       },
       gainGroup() {
