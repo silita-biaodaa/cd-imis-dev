@@ -20,6 +20,7 @@
 <script>
 import QRCode from 'qrcodejs2'
 import { groupsDetail } from '@/api/index'
+import wx from 'weixin-js-sdk'
 export default {
     name: 'groupQrcode', // 结构名称
     data() {
@@ -77,7 +78,7 @@ export default {
             configData.link=shareUrl;
         }
 		wx.onMenuShareAppMessage(configData);// 分享给朋友 
-    	wx.onMenuShareTimeline(obj);//朋友圈
+    	wx.onMenuShareTimeline(configData);//朋友圈
     	wx.onMenuShareQQ(configData);//qq
     	wx.onMenuShareQZone(configData);//qq空间
     },
@@ -105,7 +106,8 @@ export default {
             });
         },
         weixinauth (appid,url) {
-            window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+url+'&response_type=code&scope=snsapi_base&state=CD-IMIS#wechat_redirect'
+            let str = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+url+'&response_type=code&scope=snsapi_base&state=CD-IMIS#wechat_redirect'
+            return str
         },
     }
 
