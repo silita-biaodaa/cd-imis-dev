@@ -94,7 +94,7 @@ export default {
             const appid='wx393124fdad606b1d';//预发布
             // const appid='wx26999a53385489f9';//生产
             let leng=this.$refs.qr.offsetWidth;
-            let url=location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id;
+            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id);
             let uri=this.weixinauth(appid,url);
             console.log(url);
             let code=new QRCode("qrcode", {
