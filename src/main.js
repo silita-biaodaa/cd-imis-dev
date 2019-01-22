@@ -71,16 +71,20 @@ import util from "./util/util"
 import Wx from 'weixin-js-sdk'
 
 router.beforeEach((to, from, next) => {
-  let code = util.getCode('code')
+  let code = util.getCode('code');
+  let isApply=getParam('istrue');
   if (!code) {
     //用户授权
     // util.weixinauth()
     next()
   }else{
     var auth = localStorage.getItem('Authorization');
-
+    data={
+      code:code,
+      isApply:isApply
+    }
     if(!auth||to.fullPath=='/home'){
-      queryList({ code: code }).then(res => {
+      queryList(data).then(res => {
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);
           group({}).then( resa => {
@@ -94,15 +98,16 @@ router.beforeEach((to, from, next) => {
           if(res.data.isFirst==0){
             //进入打卡设置
             next()
-          }
-          if(res.data.isFirst==1){
+          }else if(res.data.isFirst==1){
             //进入打卡
             next('nav/card')
-          }
-          if(res.data.isFirst==2){
+          }else if(res.data.isFirst==2){
             //进入打卡圈
             next('nav/friend')
+          }else{
+            next()
           }
+
         }
       })
     }else{
