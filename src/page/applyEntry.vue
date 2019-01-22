@@ -60,7 +60,7 @@ export default {
             this.imgurl=res.data.imgUrl;
             this.num=res.data.userCount;
             this.name=res.data.groName;
-            if(res.data.isConcern==1){
+            if(res.data.isConcern==0){
                 this.showQrcode=true;
             }
         })
@@ -168,6 +168,7 @@ export default {
         width: 80%;
         .txt-box{
             padding: 40px 40px 0;
+            font-size: 28px;
             text-align: center;
             p:first-of-type{
                 margin-bottom: 10px
