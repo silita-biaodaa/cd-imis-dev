@@ -112,8 +112,8 @@ export default {
             })
         },
         followFn(){//检测是否关注
-            const appid='wx393124fdad606b1d';//预发布
-            // const appid='wx26999a53385489f9';//生产
+            // const appid='wx393124fdad606b1d';//预发布
+            const appid='wx26999a53385489f9';//生产
             let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
             util.weixinauth(appid,url);
         }   

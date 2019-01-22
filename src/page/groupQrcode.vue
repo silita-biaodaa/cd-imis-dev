@@ -91,8 +91,8 @@ export default {
     methods: {
         // 方法 集合
         qrcode(){
-            const appid='wx393124fdad606b1d';//预发布
-            // const appid='wx26999a53385489f9';//生产
+            // const appid='wx393124fdad606b1d';//预发布
+            const appid='wx26999a53385489f9';//生产
             let leng=this.$refs.qr.offsetWidth;
             let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
             let uri=this.weixinauth(appid,url);
