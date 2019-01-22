@@ -73,7 +73,6 @@ import Wx from 'weixin-js-sdk'
 router.beforeEach((to, from, next) => {
   let code = util.getCode('code');
   let isApply=getParam('istrue');
-  alert(isApply);
   if (!code) {
     //用户授权
     // util.weixinauth()
@@ -86,7 +85,6 @@ router.beforeEach((to, from, next) => {
     }
     if(!auth||to.fullPath=='/home'){
       queryList(data).then(res => {
-        alert(JSON.stringify(res))
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);
           group({}).then( resa => {
