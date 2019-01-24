@@ -65,13 +65,11 @@ export default {
     },
     created() {
         // console.group('创建完毕状态===============》created');
-        // WeixinJSBridge.call('showOptionMenu');
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
     },
     mounted() {
-        
         let data=localStorage.getItem('isConcern');
         data=JSON.parse(data);
         this.imgurl=data.imgUrl;

@@ -42,6 +42,7 @@ export default {
     },
     created() {
         // console.group('创建完毕状态===============》created');
+        WeixinJSBridge.call('showOptionMenu');
         this.id=this.$route.query.id;
         this.name=this.$route.query.name;
         groupsDetail(this.id).then(res =>{
