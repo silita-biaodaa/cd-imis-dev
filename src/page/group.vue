@@ -29,7 +29,7 @@
             <div class="group-name">
               <p >{{e.groName}}</p>
               <p class="member">
-                <img src="../assets/img/person (1).png" alt="">{{e.name}}
+                <img src="../assets/img/double (1).png" alt="">{{e.userCount}}人
               </p>
             </div>
           </div>

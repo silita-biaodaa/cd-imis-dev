@@ -59,7 +59,11 @@ export default {
         this.imgurl=this.$route.query.imgurl;
         this.num=this.$route.query.num;
         this.name=this.$route.query.name;
-        if(this.$route.query.isConcern==0){
+        // if(this.$route.query.isConcern==0){
+        //     this.showQrcode=true;
+        // }
+        let auth = localStorage.getItem('Authorization');
+        if(!auth){
             this.showQrcode=true;
         }
     },
@@ -130,7 +134,8 @@ export default {
         text-align: center;
         margin-bottom: 10px;
         img{
-            border-radius: 50%
+            border-radius: 50%;
+            width: 80px;
         }
     }
     p{
@@ -139,13 +144,13 @@ export default {
     }
 }
 .bom-box{
-    margin-top: 50px;
+    margin-top: 100px;
     text-align: center;
     button{
         background: #f12c20;
         color: #fff;
-        width: calc(100% - 30px);
-        height: 35px;
+        width: calc(100% - 60px);
+        height: 70px;
         border: none;
         border-radius: 5px
     }
