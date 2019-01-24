@@ -149,7 +149,7 @@
         </div>
         <div class="l-put"  >
               <div class="label five">累计积善件数</div> <input type="tel" placeholder="请输入" v-model='alls' @blur='bblur'  >
-              <i class=" iconfont icon-icon i-iput" :v-show="sever(this.alls)" >
+              <i class=" iconfont icon-icon i-iput" v-show="sever(this.alls)" >
            </i>
         </div>
       </div>
