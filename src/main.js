@@ -110,6 +110,7 @@ router.beforeEach((to, from, next) => {
           }else{//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
                 localStorage.removeItem('isConcern');
+                alert(JSON.stringify(resData.data));
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 next();
             })
