@@ -108,9 +108,10 @@ router.beforeEach((to, from, next) => {
             //进入打卡圈
             next('nav/friend')
           }else{//如果为申请入群页面
+            alert(window.location.href);
+            alert('urlid'+getParam('id'));
             groupsDetail(getParam('id')).then(resData =>{
                 localStorage.removeItem('isConcern');
-                alert(JSON.stringify(resData.data));
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 next();
             })

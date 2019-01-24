@@ -78,16 +78,16 @@ export default {
     },
     updated() {
         // console.group('更新完成状态===============》updated');
-        this.id=this.$route.query.id;
-        let data=localStorage.getItem('isConcern');
-        alert('1?'+data);
-        data=JSON.parse(data);
-        this.imgurl=data.imgUrl;
-        this.num=data.userCount;
-        this.name=data.groName;
-        if(data.isConcern==0){
-            this.showQrcode=true;
-        }
+        // this.id=this.$route.query.id;
+        // let data=localStorage.getItem('isConcern');
+        // alert('1?'+data);
+        // data=JSON.parse(data);
+        // this.imgurl=data.imgUrl;
+        // this.num=data.userCount;
+        // this.name=data.groName;
+        // if(data.isConcern==0){
+        //     this.showQrcode=true;
+        // }
     },
     beforeDestroy() {
         // console.group('销毁前状态  ===============》beforeDestroy');
@@ -119,7 +119,8 @@ export default {
         },
         followFn(){//检测是否关注
             let appid=this.appid;
-            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
+            alert('关闭ID'+this.$route.query.id);
+            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.$route.query.id+'&istrue=1');
             util.weixinauth(appid,url);
         }   
     }
