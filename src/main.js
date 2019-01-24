@@ -86,7 +86,6 @@ router.beforeEach((to, from, next) => {
     }
     if(!auth||to.fullPath=='/home'||auth=='undefined'){
       queryList(data).then(res => {
-        alert(JSON.stringify(res));
         if ( res.code == 1 ) {
           // localStorage.removeItem('Authorization');
           localStorage.setItem('Authorization', res.data.token);

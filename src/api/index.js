@@ -38,9 +38,10 @@ axios.defaults.baseURL = baseURL
 
 axios.interceptors.request.use(function (config) {
   // 将token给到一个前后台约定好的key中，作为请求发送
-  let token = localStorage.getItem('Authorization')
+  let token = localStorage.getItem('Authorization');
+  alert(token);
   // let token = '8A252C3C1EB6DF29DBA4BB879AC4A1C8.eyJ1c2VySWQiOiI1ODU2OTZkYzY5ZTE0N2VlYjU4MTAzOTc4YzJlYzczZCJ9'
-  if (token) {
+  if (token&&token!='undefined') {
     //   // config.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
     config.headers['X-TOKEN'] = token
