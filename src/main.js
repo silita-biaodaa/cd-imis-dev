@@ -107,17 +107,12 @@ router.beforeEach((to, from, next) => {
           }else if(res.data.isFirst==2){
             //进入打卡圈
             next('nav/friend')
-          }else{//如果为申请入群页面
+          }else if(res.data.isFirst==4){//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
-                // localStorage.removeItem('isConcern');
-                // alert(JSON.stringify(resData.data));
-                localStorage.setItem('isConcern',JSON.stringify(resData.data))
-                if(resData.data.isConcern==0){
-                  to.meta.showQrcode=true;
-                }
-                if(to.path=='/applyEntry'){
-                  next();
-                }
+              // localStorage.removeItem('isConcern');
+              // alert(JSON.stringify(resData.data));
+              localStorage.setItem('isConcern',JSON.stringify(resData.data))
+              next('/applyEntry');
             })
           }
 
@@ -164,13 +159,14 @@ new Vue({
   router,
   components: { App },
   template: '<App/>',
-  beforeCreate(){
+  mounted(){
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
-      }else if(getParam('path')=='applyEntry'){
-        this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
       }
+      // else if(getParam('path')=='applyEntry'){
+      //   this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
+      // }
     }
   },
 })
