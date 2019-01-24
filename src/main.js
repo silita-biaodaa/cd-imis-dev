@@ -105,8 +105,11 @@ router.beforeEach((to, from, next) => {
           }else if(res.data.isFirst==2){
             //进入打卡圈
             next('nav/friend')
-          }else{
-            next()
+          }else{//如果为申请入群页面
+            groupsDetail(getParam('id')).then(resData =>{
+                localStorage.setItem('isConcern',JSON.stringify(resData.data))
+                next();
+            })
           }
 
         }
@@ -157,23 +160,7 @@ new Vue({
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
       }else if(getParam('path')=='applyEntry'){
-        groupsDetail(getParam('id')).then(res =>{
-            let imgurl,num,name,isConcern;
-            imgurl=res.data.imgUrl;
-            num=res.data.userCount;
-            name=res.data.groName;
-            isConcern=res.data.isConcern;
-            this.$router.replace({
-              path:getParam('path'),
-              query:{
-                id:getParam('id'),
-                isConcern:isConcern,
-                num:num,
-                name:name,
-                imgurl:imgurl
-              }
-            })
-        })
+        this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
       }
     }
   },
