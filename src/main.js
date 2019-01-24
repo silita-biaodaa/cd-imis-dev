@@ -15,7 +15,8 @@ Vue.use(Vant)
 import clocklist from '@/components/clockList'
 import popup from '@/components/popup'
 import head from '@/components/headgoto'
-import { XButton,Group } from 'vux'
+import toast from '@/components/toast'
+import { XButton , Group } from 'vux'
 //InlineCalendar, XInput, Datetime, XTextarea, , AlertPlugin,
 // Vue.component('inline-calendar', InlineCalendar)
 // Vue.component('x-input', XInput)
@@ -26,6 +27,7 @@ Vue.component('group', Group)
 Vue.component('v-clock', clocklist)
 Vue.component('v-popup', popup)
 Vue.component('v-head', head)
+Vue.component('v-toast', toast)
 // Vue.use(AlertPlugin)
 
 
@@ -69,17 +71,20 @@ import util from "./util/util"
 import Wx from 'weixin-js-sdk'
 
 router.beforeEach((to, from, next) => {
-  let code = util.getCode('code')
+  let code = util.getCode('code');
+  let isApply=getParam('istrue');
   if (!code) {
     //用户授权
     // util.weixinauth()
     next()
   }else{
     var auth = localStorage.getItem('Authorization');
-
-    console.log(to.fullPath);
+    let data={
+      code:code,
+      isApply:isApply
+    }
     if(!auth||to.fullPath=='/home'){
-      queryList({ code: code }).then(res => {
+      queryList(data).then(res => {
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);
           group({}).then( resa => {
@@ -93,15 +98,16 @@ router.beforeEach((to, from, next) => {
           if(res.data.isFirst==0){
             //进入打卡设置
             next()
-          }
-          if(res.data.isFirst==1){
+          }else if(res.data.isFirst==1){
             //进入打卡
             next('nav/card')
-          }
-          if(res.data.isFirst==2){
+          }else if(res.data.isFirst==2){
             //进入打卡圈
             next('nav/friend')
+          }else{
+            next()
           }
+
         }
       })
     }else{
@@ -109,8 +115,10 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+
 // const appid='wx393124fdad606b1d';//预发布
 const appid='wx26999a53385489f9';//生产
+Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={
       'url':encodeURIComponent(location.href.split('#')[0])
@@ -147,6 +155,8 @@ new Vue({
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
+      }else if(getParam('path')=='applyEntry'){
+        this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
       }
     }
   },

@@ -15,7 +15,8 @@ import Create from '@/page/create'
 import groupUser from '@/page/groupUser'
 import Sets from '@/page/set'
 import cardDetail from '@/page/cardDetail'
-
+import groupQrcode from '@/page/groupQrcode'
+import applyEntry from '@/page/applyEntry'
 Vue.use(Router)
 
 export default new Router({
@@ -23,46 +24,40 @@ export default new Router({
     {
       path: '/',
       redirect: '/home'
-    },
-    {
+    },{//打卡初始化
       path: '/home',
       name: 'home',
       component: Home
-    },
-    {
+    },{
       path: '/nav',
       name: 'nav',
       component: Nav,
       children: [
-        {
+        {//打卡圈
           path: 'friend',
           component: friend,
           meta:{
             tabNo:0
           }
-        },
-        {
+        },{//打卡
           path: 'card',
           component: Card,
           meta:{
             tabNo:2
           }
-        },
-        {
+        },{//群组
           path: 'group',
           component: Group,
           meta:{
             tabNo:3
           }
-        },
-        {
+        },{//记录
           path: 'record',
           component: Record,
           meta:{
             tabNo:1
           }
-        },
-        {
+        },{//设置
           path: 'set',
           component: Sets,
           meta:{
@@ -71,26 +66,31 @@ export default new Router({
         }
       ]
     },
-    {
+    {//通知
       path: '/notice',
       component: Notice
-    },
-    {
+    },{//加入群组
       path: '/apply',
       component: Apply
-    },
-    {
+    },{//创建群组
       path: '/create',
       component: Create
-    },
-    {
+    },{//群组成员
       path:'/groupUser',
       component: groupUser,
       name:'groupUser'
-    },{
+    },{//打卡详情
       path:'/cardDetail',
       component: cardDetail,
       name:'cardDetail'
+    },{//群组二维码
+      path:'/groupQrcode',
+      component: groupQrcode,
+      name:'groupQrcode'
+    },{//申请入群
+      path:'/applyEntry',
+      component: applyEntry,
+      name:'applyEntry'
     }
 
   ]

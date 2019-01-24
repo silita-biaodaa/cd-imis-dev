@@ -18,13 +18,16 @@
           <template v-if="item.bookish.length>0">
             <div v-for="(o,i) in item.bookish" :key="'i'+i">
               <p class="c-color">《{{o.bookName}}》{{o.section}}</p>
+              <p class="c-color" v-if="o.link">
+                <a :href="o.link">{{o.link}}</a>
+              </p>
             </div>
           </template>
 
           <!-- 经典名句 -->
           <template v-if="item.classic">
             <p class="tit">【经典名句分享】</p>
-            <p class="c-color" v-html="item.classicStr"></p>
+            <p class="c-color">{{item.classic}}</p>
           </template>
           <!-- 行 实践 -->
           <template v-if="item.practice!=undefined&&item.practice.character!=''&&item.practice.family!=''&&item.practice.work!=''">
@@ -62,7 +65,7 @@
           </template>
         </div>
       </div>
-      <h5 class="full" v-if="item.classic||(item.practice.character!=''&&item.practice.family!=''&&item.practice.work!='')||item.introspective||item.thanks||item.volunteer||item.books.length>1">
+      <h5 class="full" >
         <span @click="fullClick(index)">{{item.fullTxt}}</span>
       </h5>
       <div class="c-func">
@@ -123,24 +126,6 @@
       clocklist:{
         type:Array
       },
-    },
-    updated(){
-      let list=this.clocklist;
-      for(let x of list){
-          let classic=x.classic;
-          let str='';
-          if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
-            if(classic.indexOf(' ')>-1){
-              str='<a  target="_blank" href="'+classic.substring(classic.indexOf('http'),classic.indexOf(' '))+'">'+classic.substring(classic.indexOf('http'),classic.indexOf(' '))+'</a><span>'+classic.substring(classic.indexOf(' '),classic.length)+'</span>'
-            }else{
-              str='<a  target="_blank" href="'+classic+'">'+classic+'</a>'
-            }
-          }else{
-            str='<span>'+classic+'</span>'
-          }
-          x.classicStr=str;
-      }
-      this.$set(this.clocklist,list)
     },
     methods: {
       //跳转详情

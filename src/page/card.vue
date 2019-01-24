@@ -18,6 +18,7 @@
             <div class="card-com">
                <div class="l-pu">
                     <div class="label label-f">今日朗读遍数</div>
+                    <span></span>
                     <van-stepper  v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
             </div>
@@ -26,7 +27,7 @@
 
         <div  v-for="(item,index) in books" :key="index">
            <div class="card-b card-book add-book">
-             <span>书本&nbsp({{index + booklength + 1}})</span>
+             <span>书本 ({{index + booklength + 1}})</span>
              <span class="del-book" @click='cardDel(index)'  v-if="!first" >删除</span>
             </div>
            <div class="pdd">
@@ -35,6 +36,9 @@
               </div>
               <div class="l-put">
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
+              </div>
+              <div class="l-put">
+               <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" v-model='item.link' :disabled='first' >
               </div>
            </div>
         </div>
@@ -203,11 +207,9 @@ export default {
       // }
       // this.repetition = true
       this.loading()
-      pushCard({thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
+      pushCard({thanks:this.thanks,practice:this.practice,books:this.books,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
-
-             localStorage.setItem('tabNum','0');
              this.hideLoading()
               this.$router.push({path:'/nav/friend'})
            }

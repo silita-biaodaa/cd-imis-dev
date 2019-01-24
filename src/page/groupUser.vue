@@ -1,7 +1,7 @@
 
 <template>
   <div class="groupUser">
-      <v-head :head-txt="groupName"></v-head>
+      <v-head :head-txt="groupName" :head-type="'qrCode'" @jump="jumpQrCode"></v-head>
        <van-search placeholder="请输入搜索关键词" v-model="keywords" @blur="ajax('search')" />
       <ul class="listBox" v-show=" this.list.length" >
         <li v-for="(o,i) of list" :key="i" >
@@ -43,6 +43,7 @@
         type:'',
         list:[],
         groId:'',//群id
+        img:'',//群头像
         mask:false,
         thisNum:'',
         tipTxt:'',
@@ -59,6 +60,17 @@
 
     },
     methods: {
+      //跳到二维码
+      jumpQrCode(){
+        this.$router.push({
+          name:'groupQrcode',
+          query:{
+            id:this.groId,
+            name:this.groupName,
+          }
+        })
+      },
+      //跳到打卡圈
       jumpFriend(i){
         this.$router.push({
           path:'/nav/friend',
@@ -176,6 +188,7 @@
       this.groupName=this.$route.query.name;
       this.type=this.$route.query.type;
       this.groId=this.$route.query.id;
+      this.img=this.$route.params.img;
       this.ajax();
     },
     components: {

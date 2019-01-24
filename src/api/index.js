@@ -136,6 +136,9 @@ export const Personage = params => {
 export const Saveuser = params => {
   return axios.post('user/update', params).then(res => res.data)
 }
+export const groupsDetail = params => {
+  return axios.get('group/detail/'+params,{}).then(res => res.data)
+}
 //群组打卡
 export const CardRecord={
     groupsDate:params =>{//群组日历
