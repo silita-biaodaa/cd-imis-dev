@@ -108,6 +108,8 @@ router.beforeEach((to, from, next) => {
             next('nav/friend')
           }else{//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
+                alert(JSON.stringify(resData.data));
+                localStorage.removeItem('isConcern');
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 next();
             })
