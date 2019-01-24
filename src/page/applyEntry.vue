@@ -71,10 +71,11 @@ export default {
         // console.group('挂载前状态  ===============》beforeMount');
     },
     mounted() {
-        this.id=this.$route.query.id;
+        
         let data=localStorage.getItem('isConcern');
         data=JSON.parse(data);
         this.imgurl=data.imgUrl;
+        this.id=data.id;
         this.num=data.userCount;
         this.name=data.groName;
         if(data.isConcern==0){
@@ -118,7 +119,7 @@ export default {
         },
         followFn(){//检测是否关注
             let appid=this.appid;
-            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.$route.query.id+'&istrue=1');
+            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
             util.weixinauth(appid,url);
         }   
     }
