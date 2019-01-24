@@ -84,11 +84,9 @@ router.beforeEach((to, from, next) => {
       code:code,
       isApply:isApply
     }
-    alert(to.fullPath);
-    alert(auth);
-    if(!auth||to.fullPath=='/home'||auth=='undefined'){
+    // if(!auth||to.fullPath=='/home'||auth=='undefined'){
       queryList(data).then(res => {
-        alert(res.code)
+        alert(JSON.stringify(res));
         if ( res.code == 1 ) {
           // localStorage.removeItem('Authorization');
           localStorage.setItem('Authorization', res.data.token);
@@ -121,9 +119,9 @@ router.beforeEach((to, from, next) => {
 
         }
       })
-    }else{
-      next()
-    }
+    // }else{
+    //   next()
+    // }
   }
 })
 
