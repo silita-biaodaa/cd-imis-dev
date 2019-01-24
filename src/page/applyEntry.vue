@@ -55,6 +55,7 @@ export default {
     },
     created() {
         // console.group('创建完毕状态===============》created');
+        WeixinJSBridge.call('showOptionMenu');
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
@@ -66,7 +67,6 @@ export default {
         this.imgurl=data.imgUrl;
         this.num=data.userCount;
         this.name=data.groName;
-        alert(data.isConcern);
         if(data.isConcern==0){
             this.showQrcode=true;
         }
@@ -91,12 +91,6 @@ export default {
                 if(res.code == 1 ) {
                     this.applyTxt='已申请';
                     this.mask=true;
-                    return setTimeout(() => {
-                        this.mask = false;
-                        this.$router.replace({
-                            path:'/nav/card'
-                        })
-                    }, 1500);
                 }else if(res.code==403){
                     this.toastTxt=res.msg;
                     this.mask=true;

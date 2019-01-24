@@ -1,6 +1,7 @@
 <!-- 弹出框 -->
 <template>
     <div class="popup" v-if="popupShow">
+        <span class="skip" v-if="popupType=='tips'" @click="sure">跳过</span>
         <div class="content" :class="{tips:popupType=='tips'}">
             <template v-if="popupType=='tip1'">
                 <div class="top-box">{{text}}</div>
@@ -152,5 +153,13 @@ export default {
       outline: none;
       border: none;
     }
+ }
+ .skip{
+    z-index: 9999;
+    position: absolute;
+    right: 36px;
+    top: 36px;
+    font-size: 32px;
+    color: #fff
  }
 </style>

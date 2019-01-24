@@ -87,7 +87,7 @@ router.beforeEach((to, from, next) => {
     if(!auth||to.fullPath=='/home'||auth=='undefined'){
       queryList(data).then(res => {
         if ( res.code == 1 ) {
-          alert(res.data.token);
+          localStorage.removeItem('Authorization');
           localStorage.setItem('Authorization', res.data.token);
           group({}).then( resa => {
             let arr=[];
@@ -108,7 +108,6 @@ router.beforeEach((to, from, next) => {
             next('nav/friend')
           }else{//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
-                alert(JSON.stringify(resData.data));
                 localStorage.removeItem('isConcern');
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 next();

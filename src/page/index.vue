@@ -169,8 +169,8 @@
         <x-button  >提交</x-button>
       </div>
     </div>
-    <v-popup :popup-type="'tips'" :popup-show="mask"></v-popup>
-    <div class='toast' v-show='layout' >
+    <v-popup :popup-type="'tips'" :popup-show="mask" @sure="record"></v-popup>
+    <!-- <div class='toast' v-show='layout' >
       请输入正确的手机号码
     </div>
     <div class='toast' v-show='text1' >
@@ -178,7 +178,7 @@
     </div>
     <div class='toast' v-show='text2' >
       请输入手机号
-    </div>
+    </div> -->
     <div class='toast' v-show='text3' >
       请填写书本信息
     </div>
@@ -192,10 +192,10 @@
   export default {
     data () {
       return {
-        username: '',
-        company: '',
-        post: '',
-        mobile: '',
+        // username: '',
+        // company: '',
+        // post: '',
+        // mobile: '',
         tiems: '',
         count: 0,
         begin: '',
@@ -324,20 +324,20 @@
                    this.verify()
         }
 
-        if(!this.username) {
-          this.pass = false
-          this.text1 = true
-          return setTimeout(() => {
-             this.text1 = false
-          }, 1500);
-        }
-        if (!this.mobile) {
-          this.pass = false
-           this.text2 = true
-          return setTimeout(() => {
-             this.text2 = false
-          }, 1500);
-        }
+        // if(!this.username) {
+        //   this.pass = false
+        //   this.text1 = true
+        //   return setTimeout(() => {
+        //      this.text1 = false
+        //   }, 1500);
+        // }
+        // if (!this.mobile) {
+        //   this.pass = false
+        //    this.text2 = true
+        //   return setTimeout(() => {
+        //      this.text2 = false
+        //   }, 1500);
+        // }
         this.first.forEach( el => {
           var arr = Object.keys(el)
           if(  arr.length != 3 ) {
@@ -350,10 +350,10 @@
         });
           this.loading()
         if ( this.pass  ) {
-          recordBook({name: this.username, phone: this.mobile, company: this.company, post: this.post, pushStart: this.tiems,total: this.count, bonaStart: this.begin, bonaEnd: this.end, bonaCount: this.number, bonaTotal: this.alls, volunteer: this.values, books: this.first}).then( res => {
+          recordBook({pushStart: this.tiems,total: this.count, bonaStart: this.begin, bonaEnd: this.end, bonaCount: this.number, bonaTotal: this.alls, volunteer: this.values, books: this.first}).then( res => {
             if(res.code == 1) {
               this.hideLoading()
-              localStorage.setItem('userName',this.username);
+              // localStorage.setItem('userName',this.username);
               this.$router.replace({path:'/nav/card'})
             }
           })
