@@ -55,6 +55,11 @@ export default {
     },
     created() {
         // console.group('创建完毕状态===============》created');
+    },
+    beforeMount() {
+        // console.group('挂载前状态  ===============》beforeMount');
+    },
+    mounted() {
         this.id=this.$route.query.id;
         let data=localStorage.getItem('isConcern');
         data=JSON.parse(data);
@@ -64,12 +69,6 @@ export default {
         if(data.isConcern==0){
             this.showQrcode=true;
         }
-    },
-    beforeMount() {
-        // console.group('挂载前状态  ===============》beforeMount');
-    },
-    mounted() {
-       
         // console.group('挂载结束状态===============》mounted');
     },
     beforeUpdate() {

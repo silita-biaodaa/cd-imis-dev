@@ -84,7 +84,7 @@ router.beforeEach((to, from, next) => {
       code:code,
       isApply:isApply
     }
-    if(!auth||to.fullPath=='/home'){
+    if(!auth||to.fullPath=='/home'||auth=='undefined'){
       queryList(data).then(res => {
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);

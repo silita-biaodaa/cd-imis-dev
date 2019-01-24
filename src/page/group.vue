@@ -3,23 +3,23 @@
   <div class="group">
       <router-link :to="{path:'/notice'}" class="fold"  tag="div">
         <span>群通知({{this.informs}})</span>
-        <i class=" iconfont icon-jiantouyou g-size"></i>
+        <van-icon name="arrow"/>
       </router-link>
 
        <router-link :to="{path:'/create'}" class="fold"  tag="div">
         <span>创建打卡群</span>
-        <i class=" iconfont icon-jiantouyou g-size"></i>
+        <van-icon name="arrow"/>
       </router-link>
 
        <router-link :to="{path:'/apply'}" class="fold"  tag="div">
         <span>查找打卡群</span>
-        <i class=" iconfont icon-jiantouyou g-size"></i>
+        <van-icon name="arrow"/>
       </router-link>
 
       <div class="ma10">
        <div  class="fold none" @click="show(0)"  >
         <span>我创建的群{{this.createstle}}</span>
-        <i :class=" this.folds[0].showContent ? 'iconfont icon-jiantouxia g-size' : ' iconfont icon-jiantouyou g-size'"></i>
+        <van-icon :name="this.folds[0].showContent ? 'arrow-down' : 'arrow'"/>
        </div>
          <div class="group-p" v-show="this.folds[0].showContent" >
           <div class="group-list ld-left g-h" v-for="(e,i) in creates" :key='i' @click="jump(i,true)">
@@ -40,7 +40,8 @@
       <div>
        <div  class="fold none" @click="show(1)"  >
         <span>我加入的群{{this.jointle}}</span>
-        <i :class=" this.folds[1].showContent ? 'iconfont icon-jiantouxia g-size ' : 'iconfont icon-jiantouyou g-size' "></i>
+        <van-icon :name="this.folds[1].showContent ? 'arrow-down' : 'arrow'"/>
+        <!-- <i :class=" this.folds[1].showContent ? 'iconfont icon-jiantouxia g-size ' : 'iconfont icon-jiantouyou g-size' "></i> -->
        </div>
          <div class="group-p" v-show="this.folds[1].showContent" >
           <div class="group-list ld-left "  @click="jump(i,false)" v-for="(e,i) in join" :key='i' >
