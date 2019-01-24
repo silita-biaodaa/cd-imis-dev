@@ -63,6 +63,7 @@ export default {
     mounted() {
         this.id=this.$route.query.id;
         let data=localStorage.getItem('isConcern');
+        alert(data);
         data=JSON.parse(data);
         this.imgurl=data.imgUrl;
         this.num=data.userCount;

@@ -72,19 +72,55 @@ import Wx from 'weixin-js-sdk'
 import { NumberKeyboard } from 'vant';
 
 router.beforeEach((to, from, next) => {
-  next()
-  // if (!code) {
-  //   //用户授权
-  //   // util.weixinauth()
-  //   next()
-  // }else{
-  //   var auth = localStorage.getItem('Authorization');
-  //   if(!auth||to.fullPath=='/home'||auth=='undefined'){
-  //     next();
-  //   }else{
-  //     next()
-  //   }
-  // }
+  let code = util.getCode('code');
+  let isApply=getParam('istrue');
+  if (!code) {
+    //用户授权
+    // util.weixinauth()
+    next()
+  }else{
+    var auth = localStorage.getItem('Authorization');
+    let data={
+      code:code,
+      isApply:isApply
+    }
+    if(!auth||to.fullPath=='/home'||auth=='undefined'){
+      queryList(data).then(res => {
+        if ( res.code == 1 ) {
+          localStorage.setItem('Authorization', res.data.token);
+          if(res.data.token&&res.data.token!='undefined'){
+            group({}).then( resa => {
+              let arr=[];
+              arr=resa.data;
+              localStorage.setItem('groupList',JSON.stringify(arr));
+            })
+            User({}).then( res => {
+              localStorage.setItem('userid',res.data.userId);
+            })
+          }
+          if(res.data.isFirst==0){
+            //进入打卡设置
+            next()
+          }else if(res.data.isFirst==1){
+            //进入打卡
+            next('nav/card')
+          }else if(res.data.isFirst==2){
+            //进入打卡圈
+            next('nav/friend')
+          }else{//如果为申请入群页面
+            // groupsDetail(getParam('id')).then(resData =>{
+                // localStorage.removeItem('isConcern');
+                // localStorage.setItem('isConcern',JSON.stringify(resData.data))
+                next();
+            // })
+          }
+
+        }
+      })
+    }else{
+      next()
+    }
+  }
 })
 
 const appid='wx393124fdad606b1d';//预发布
@@ -123,48 +159,23 @@ new Vue({
   components: { App },
   template: '<App/>',
   beforeCreate(){
-    let code = util.getCode('code');
-    let isApply=getParam('istrue');
-    let data={
-      code:code,
-      isApply:isApply
-    }
-    queryList(data).then(res => {
-      if ( res.code == 1 ) {
-        // localStorage.removeItem('Authorization');
-        localStorage.setItem('Authorization', res.data.token);
-        if(res.data.token&&res.data.token!='undefined'){
-          group({}).then( resa => {
-            let arr=[];
-            arr=resa.data;
-            localStorage.setItem('groupList',JSON.stringify(arr));
-          })
-          User({}).then( res => {
-            localStorage.setItem('userid',res.data.userId);
-          })
-        }
-        else if(res.data.isFirst==1){
-          //进入打卡
-          this.$router.replace('nav/card');
-        }else if(res.data.isFirst==2){
-          //进入打卡圈
-          this.$router.replace('nav/card');
-        }else{//如果为申请入群页面
-          groupsDetail(getParam('id')).then(resData =>{
-              // localStorage.removeItem('isConcern');
-              localStorage.setItem('isConcern',JSON.stringify(resData.data))
-              this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
-          })
-        }
-
-      }
-    })
-  },
-  created(){
     if(getParam('path')){
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
+      }else if(getParam('path')=='applyEntry'){
+        queryList(data).then(res => {
+          if ( res.code == 1 ) {
+            localStorage.setItem('Authorization', res.data.token);
+            if(res.data.isFirst==4){//如果为申请入群页面
+              groupsDetail(getParam('id')).then(resData =>{
+                  localStorage.setItem('isConcern',JSON.stringify(resData.data))
+                  this.$router.replace({path:getParam('path')})
+              })
+            }
+          }
+        })
+        
       }
     }
-  }
+  },
 })
