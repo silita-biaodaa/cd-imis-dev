@@ -113,10 +113,11 @@ router.beforeEach((to, from, next) => {
                 // alert(JSON.stringify(resData.data));
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 if(resData.data.isConcern==0){
-                  alert(1);
                   to.meta.showQrcode=true;
                 }
-                next();
+                if(to.path=='/applyEntry'){
+                  next();
+                }
             })
           }
 
