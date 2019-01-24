@@ -1,6 +1,6 @@
 <template>
   <div class="home" :class="{mask:mask}">
-    <div class="person">
+    <!-- <div class="person">
       <div class="person-top">
         <div class="img-post img-book">
           <img src="../assets/img/book3.png" alt="">
@@ -27,7 +27,7 @@
           <div class="label">职位</div> <input type="text" placeholder="请输入您的职位名称" v-model='post' @blur='bblur' >
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="time">
       <div class="time-top">
@@ -622,7 +622,7 @@
   // 打卡时间样式
      .time{
        box-sizing: border-box;
-       margin-top: 16px;
+      //  margin-top: 16px;
        padding-left: 34px;
        padding-right: 34px;
        background: #FFF;

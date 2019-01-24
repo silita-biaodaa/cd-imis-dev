@@ -85,32 +85,32 @@ router.beforeEach((to, from, next) => {
       isApply:isApply
     }
     if(!auth||to.fullPath=='/home'){
-        queryList(data).then(res => {
-          if ( res.code == 1 ) {
-            localStorage.setItem('Authorization', res.data.token);
-            group({}).then( resa => {
-              let arr=[];
-              arr=resa.data;
-              localStorage.setItem('groupList',JSON.stringify(arr));
-            })
-            User({}).then( res => {
-              localStorage.setItem('userid',res.data.userId);
-            })
-            if(res.data.isFirst==0){
-              //进入打卡设置
-              next()
-            }else if(res.data.isFirst==1){
-              //进入打卡
-              next('nav/card')
-            }else if(res.data.isFirst==2){
-              //进入打卡圈
-              next('nav/friend')
-            }else{
-              next()
-            }
-  
+      queryList(data).then(res => {
+        if ( res.code == 1 ) {
+          localStorage.setItem('Authorization', res.data.token);
+          group({}).then( resa => {
+            let arr=[];
+            arr=resa.data;
+            localStorage.setItem('groupList',JSON.stringify(arr));
+          })
+          User({}).then( res => {
+            localStorage.setItem('userid',res.data.userId);
+          })
+          if(res.data.isFirst==0){
+            //进入打卡设置
+            next()
+          }else if(res.data.isFirst==1){
+            //进入打卡
+            next('nav/card')
+          }else if(res.data.isFirst==2){
+            //进入打卡圈
+            next('nav/friend')
+          }else{
+            next()
           }
-        })
+
+        }
+      })
     }else{
       next()
     }
@@ -157,25 +157,23 @@ new Vue({
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
       }else if(getParam('path')=='applyEntry'){
-        setTimeout(function(){
-          groupsDetail(getParam('id')).then(res =>{
-              let imgurl,num,name,isConcern;
-              imgurl=res.data.imgUrl;
-              num=res.data.userCount;
-              name=res.data.groName;
-              isConcern=res.data.isConcern;
-              this.$router.replace({
-                path:getParam('path'),
-                query:{
-                  id:getParam('id'),
-                  isConcern:isConcern,
-                  num:num,
-                  name:name,
-                  imgurl:imgurl
-                }
-              })
-          })
-        },500)
+        groupsDetail(getParam('id')).then(res =>{
+            let imgurl,num,name,isConcern;
+            imgurl=res.data.imgUrl;
+            num=res.data.userCount;
+            name=res.data.groName;
+            isConcern=res.data.isConcern;
+            this.$router.replace({
+              path:getParam('path'),
+              query:{
+                id:getParam('id'),
+                isConcern:isConcern,
+                num:num,
+                name:name,
+                imgurl:imgurl
+              }
+            })
+        })
       }
     }
   },

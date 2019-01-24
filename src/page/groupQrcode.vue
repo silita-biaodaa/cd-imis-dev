@@ -115,10 +115,12 @@ export default {
 </script>
 <!-- 增加 "scoped" 属性 限制 CSS 属于当前部分 -->
 <style scoped lang="less">
+.groupQrcode{
+    max-height: 100vh
+}
 .bigBox{
     background: #f2f2f2;
     padding: 200px 40px 0;
-    height: 100vh;
     .box{
         background: #fff;
         padding: 30px;

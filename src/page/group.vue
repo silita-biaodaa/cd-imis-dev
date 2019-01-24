@@ -19,7 +19,7 @@
       <div class="ma10">
        <div  class="fold none" @click="show(0)"  >
         <span>我创建的群{{this.createstle}}</span>
-        <i :class=" this.folds[0].showContent ? 'iconfont icon-jiantoushang g-size' : ' iconfont icon-jiantouxia g-size'"></i>
+        <i :class=" this.folds[0].showContent ? 'iconfont icon-jiantouxia g-size' : ' iconfont icon-jiantouyou g-size'"></i>
        </div>
          <div class="group-p" v-show="this.folds[0].showContent" >
           <div class="group-list ld-left g-h" v-for="(e,i) in creates" :key='i' @click="jump(i,true)">
@@ -40,7 +40,7 @@
       <div>
        <div  class="fold none" @click="show(1)"  >
         <span>我加入的群{{this.jointle}}</span>
-        <i :class=" this.folds[1].showContent ? 'iconfont icon-jiantoushang g-size ' : 'iconfont icon-jiantouxia g-size' "></i>
+        <i :class=" this.folds[1].showContent ? 'iconfont icon-jiantouxia g-size ' : 'iconfont icon-jiantouyou g-size' "></i>
        </div>
          <div class="group-p" v-show="this.folds[1].showContent" >
           <div class="group-list ld-left "  @click="jump(i,false)" v-for="(e,i) in join" :key='i' >

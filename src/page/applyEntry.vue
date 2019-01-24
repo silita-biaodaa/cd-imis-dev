@@ -52,6 +52,7 @@ export default {
     },
     beforeCreate() {
         // console.group('创建前状态  ===============》beforeCreate');
+        this.loading();
     },
     created() {
         // console.group('创建完毕状态===============》created');
@@ -59,13 +60,20 @@ export default {
         this.imgurl=this.$route.query.imgurl;
         this.num=this.$route.query.num;
         this.name=this.$route.query.name;
-        // if(this.$route.query.isConcern==0){
-        //     this.showQrcode=true;
-        // }
-        let auth = localStorage.getItem('Authorization');
-        if(!auth){
+        if(this.$route.query.isConcern==0){
             this.showQrcode=true;
         }
+        setTimeout(function(){
+            groupsDetail(this.id).then(res =>{
+                this.hideLoading();
+                this.imgurl=res.data.imgUrl;
+                this.num=res.data.userCount;
+                this.name=res.data.groName;
+                if(res.data.isConcern==0){
+                    this.showQrcode=true;
+                }
+            })
+        },500)
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');

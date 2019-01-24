@@ -1,6 +1,7 @@
 <template>
   <div class="headTitle">
-    <span class="iconfont icon-fanhui" @click="jump"></span>
+    <van-icon name="arrow-left"  @click="jump"/>
+    <!-- <span class="iconfont icon-fanhui" @click="jump"></span> -->
     <span class="nameTxt">{{headTxt}}</span>
     <template v-if="headType=='goTo'">
       <span></span>
