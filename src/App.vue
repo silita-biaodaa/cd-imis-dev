@@ -19,7 +19,8 @@ export default {
 
   },
   destroyed () {
-    localStorage.removeItem('zeno')
+    localStorage.removeItem('zeno');
+    localStorage.removeItem('Authorization');
   }
 }
 </script>
