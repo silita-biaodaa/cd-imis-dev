@@ -84,6 +84,8 @@ router.beforeEach((to, from, next) => {
       code:code,
       isApply:isApply
     }
+    alert(to.fullPath);
+    alert(auth);
     if(!auth||to.fullPath=='/home'||auth=='undefined'){
       queryList(data).then(res => {
         alert(res.code)
