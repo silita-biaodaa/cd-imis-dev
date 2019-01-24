@@ -75,7 +75,7 @@ export default {
         let data=localStorage.getItem('isConcern');
         data=JSON.parse(data);
         this.imgurl=data.imgUrl;
-        this.id=data.id;
+        this.id=data.groId;
         this.num=data.userCount;
         this.name=data.groName;
         if(data.isConcern==0){
