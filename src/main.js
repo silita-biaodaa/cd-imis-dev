@@ -66,6 +66,8 @@ const offBridgeReady=function(){
   WeixinJSBridge.call('showOptionMenu');  
 }
 
+Vue.prototype.showQrcode=false;
+
 import { queryList,User,group,getWxStr,groupsDetail } from "./api/index"
 import util from "./util/util"
 import Wx from 'weixin-js-sdk'
@@ -109,9 +111,12 @@ router.beforeEach((to, from, next) => {
             next('nav/friend')
           }else{//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
-                localStorage.removeItem('isConcern');
-                alert(JSON.stringify(resData.data));
+                // localStorage.removeItem('isConcern');
+                // alert(JSON.stringify(resData.data));
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
+                if(resData.data.isConcern==0){
+                  this.showQrcode=true;
+                }
                 next();
             })
           }

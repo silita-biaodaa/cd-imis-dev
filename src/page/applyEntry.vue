@@ -41,7 +41,7 @@ export default {
             applyTxt:'申请入群',
             mask:false,
             toastTxt:'您的申请已提交，请等待群组审批',
-            showQrcode:false
+            // showQrcode:false
         }
     },
     watch: {
@@ -63,14 +63,14 @@ export default {
     mounted() {
         this.id=this.$route.query.id;
         let data=localStorage.getItem('isConcern');
-        alert(data);
+        alert('apply===     '+data);
         data=JSON.parse(data);
         this.imgurl=data.imgUrl;
         this.num=data.userCount;
         this.name=data.groName;
-        if(data.isConcern==0){
-            this.showQrcode=true;
-        }
+        // if(data.isConcern==0){
+        //     this.showQrcode=true;
+        // }
         // console.group('挂载结束状态===============》mounted');
     },
     beforeUpdate() {
@@ -78,14 +78,14 @@ export default {
     },
     updated() {
         // console.group('更新完成状态===============》updated');
-        let data=localStorage.getItem('isConcern');
-        data=JSON.parse(data);
-        this.imgurl=data.imgUrl;
-        this.num=data.userCount;
-        this.name=data.groName;
-        if(data.isConcern==0){
-            this.showQrcode=true;
-        }
+        // let data=localStorage.getItem('isConcern');
+        // data=JSON.parse(data);
+        // this.imgurl=data.imgUrl;
+        // this.num=data.userCount;
+        // this.name=data.groName;
+        // if(data.isConcern==0){
+        //     this.showQrcode=true;
+        // }
     },
     beforeDestroy() {
         // console.group('销毁前状态  ===============》beforeDestroy');
