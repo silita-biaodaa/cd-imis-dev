@@ -66,6 +66,7 @@ export default {
         this.imgurl=data.imgUrl;
         this.num=data.userCount;
         this.name=data.groName;
+        alert(data.isConcern);
         if(data.isConcern==0){
             this.showQrcode=true;
         }

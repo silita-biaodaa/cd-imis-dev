@@ -3,7 +3,7 @@
   <div class="friends">
 
     <div class="f-person">
-      <div class="p-img">
+      <div class="p-img" @click="jumpF">
         <img :src="imgUrl" alt="">
       </div>
       <div class="p-name">
@@ -45,6 +45,14 @@
     //   'clock':clocklist
     // },
     methods: {
+      jumpF(){
+        this.$router.push({
+          path:'/nav/friend',
+          query:{
+            id:localStorage.getItem('userid')
+          }
+        })
+      },
       gainUser(userid) {
         let data={}
         if(userid){
@@ -153,7 +161,7 @@
       .f-person {
         width:100%;
         height: 409px;
-        background: url("../assets/img/bg.png") no-repeat;
+        background: url(../assets/img/bg.png) no-repeat;
         background-size: cover;
         padding-top: 94px;
         box-sizing: border-box;
