@@ -21,7 +21,7 @@
                     <p>长按识别下图二维码关注公众号</p>
                 </div>
                 <van-icon name="cross"  @click="followFn"/>
-                <img src="../assets/img/cdxs.jpg"/>
+                <img src="../assets/img/bdd.jpg"/>
             </div>
         </div>
     </div>
@@ -56,14 +56,12 @@ export default {
     created() {
         // console.group('创建完毕状态===============》created');
         this.id=this.$route.query.id;
-        groupsDetail(this.id).then(res =>{
-            this.imgurl=res.data.imgUrl;
-            this.num=res.data.userCount;
-            this.name=res.data.groName;
-            if(res.data.isConcern==0){
-                this.showQrcode=true;
-            }
-        })
+        this.imgurl=this.$route.query.imgurl;
+        this.num=this.$route.query.num;
+        this.name=this.$route.query.name;
+        if(this.$route.query.isConcern==0){
+            this.showQrcode=true;
+        }
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
@@ -126,11 +124,11 @@ export default {
 <style scoped lang="less">
 .top-box{
     background: #fff;
-    padding-top: 100px;
-    padding-bottom: 80px;
+    padding-top: 50px;
+    padding-bottom: 40px;
     div{
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         img{
             border-radius: 50%
         }
@@ -141,13 +139,13 @@ export default {
     }
 }
 .bom-box{
-    margin-top: 100px;
+    margin-top: 50px;
     text-align: center;
     button{
         background: #f12c20;
         color: #fff;
-        width: calc(100% - 60px);
-        height: 70px;
+        width: calc(100% - 30px);
+        height: 35px;
         border: none;
         border-radius: 5px
     }

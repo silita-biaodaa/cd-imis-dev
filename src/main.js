@@ -66,9 +66,10 @@ const offBridgeReady=function(){
   WeixinJSBridge.call('showOptionMenu');  
 }
 
-import { queryList,User,group,getWxStr } from "./api/index"
+import { queryList,User,group,getWxStr,groupsDetail } from "./api/index"
 import util from "./util/util"
 import Wx from 'weixin-js-sdk'
+import { NumberKeyboard } from 'vant';
 
 router.beforeEach((to, from, next) => {
   let code = util.getCode('code');
@@ -116,8 +117,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-// const appid='wx393124fdad606b1d';//预发布
-const appid='wx26999a53385489f9';//生产
+const appid='wx393124fdad606b1d';//预发布
+// const appid='wx26999a53385489f9';//生产
 Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={
@@ -156,7 +157,23 @@ new Vue({
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
       }else if(getParam('path')=='applyEntry'){
-        this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
+        groupsDetail(getParam('id')).then(res =>{
+            let imgurl,num,name,isConcern;
+            imgurl=res.data.imgUrl;
+            num=res.data.userCount;
+            name=res.data.groName;
+            isConcern=res.data.isConcern;
+            this.$router.replace({
+              path:getParam('path'),
+              query:{
+                id:getParam('id'),
+                isConcern:isConcern,
+                num:num,
+                name:name,
+                imgurl:imgurl
+              }
+            })
+        })
       }
     }
   },
