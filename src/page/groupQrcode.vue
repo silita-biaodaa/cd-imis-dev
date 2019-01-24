@@ -42,12 +42,22 @@ export default {
     },
     created() {
         // console.group('创建完毕状态===============》created');
-        WeixinJSBridge.call('showOptionMenu');
         this.id=this.$route.query.id;
-        this.name=this.$route.query.name;
+        
         groupsDetail(this.id).then(res =>{
-            this.imgurl=res.data.imgUrl
+            this.imgurl=res.data.imgUrl;
+            this.name=res.data.name;
         })
+        if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){  
+                document.addEventListener('WeixinJSBridgeReady',this.offBridgeReady, false);  
+            }else if (document.attachEvent){  
+                document.attachEvent('WeixinJSBridgeReady',this.offBridgeReady);   
+                document.attachEvent('onWeixinJSBridgeReady',this.offBridgeReady);  
+            }  
+        }else{  
+            this.offBridgeReady()
+        }
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
@@ -65,7 +75,7 @@ export default {
     updated() {
         // console.group('更新完成状态===============》updated');
         let that=this;
-        let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=groupQrcode&id='+that.id+'&name='+that.name;
+        let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=groupQrcode&id='+that.id;
         let configData={
         	title:that.name, // 分享标题
 			desc:that.name, // 分享描述
@@ -109,6 +119,9 @@ export default {
             let str = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+url+'&response_type=code&scope=snsapi_base&state=CD-IMIS#wechat_redirect'
             return str
         },
+        offBridgeReady(){  
+            WeixinJSBridge.call('showOptionMenu');  
+        }
     }
 
 }
@@ -135,9 +148,11 @@ export default {
             border-radius: 50%;
             width: 80px;
             margin-right: 30px;
+            max-height: 80px;
             img{
                 width: 100%;
                 border-radius: 50%;
+                max-height: 80px
             }
         }
         span{

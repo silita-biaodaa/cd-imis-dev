@@ -164,7 +164,7 @@ new Vue({
       if(getParam('path')=='cardDetail'){
         this.$router.replace({path:getParam('path'),query:{id:getParam('id'),userid:getParam('userid')}})
       }else if(getParam('path')=='groupQrcode'){
-        this.$router.replace({path:getParam('path'),query:{id:getParam('id'),name:getParam('name')}})
+        this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
       }
       // else if(getParam('path')=='applyEntry'){
       //   this.$router.replace({path:getParam('path'),query:{id:getParam('id')}})
