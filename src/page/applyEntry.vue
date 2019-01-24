@@ -55,7 +55,7 @@ export default {
     },
     created() {
         // console.group('创建完毕状态===============》created');
-        WeixinJSBridge.call('showOptionMenu');
+        // WeixinJSBridge.call('showOptionMenu');
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
@@ -119,7 +119,6 @@ export default {
         },
         followFn(){//检测是否关注
             let appid=this.appid;
-            alert('关闭ID'+this.$route.query.id);
             let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.$route.query.id+'&istrue=1');
             util.weixinauth(appid,url);
         }   
