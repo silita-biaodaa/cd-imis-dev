@@ -86,17 +86,20 @@ router.beforeEach((to, from, next) => {
     }
     if(!auth||to.fullPath=='/home'||auth=='undefined'){
       queryList(data).then(res => {
+        alert(res.code)
         if ( res.code == 1 ) {
-          localStorage.removeItem('Authorization');
+          // localStorage.removeItem('Authorization');
           localStorage.setItem('Authorization', res.data.token);
-          group({}).then( resa => {
-            let arr=[];
-            arr=resa.data;
-            localStorage.setItem('groupList',JSON.stringify(arr));
-          })
-          User({}).then( res => {
-            localStorage.setItem('userid',res.data.userId);
-          })
+          if(res.data.token&&res.data.token!='undefined'){
+            group({}).then( resa => {
+              let arr=[];
+              arr=resa.data;
+              localStorage.setItem('groupList',JSON.stringify(arr));
+            })
+            User({}).then( res => {
+              localStorage.setItem('userid',res.data.userId);
+            })
+          }
           if(res.data.isFirst==0){
             //进入打卡设置
             next()
@@ -108,7 +111,7 @@ router.beforeEach((to, from, next) => {
             next('nav/friend')
           }else{//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
-                localStorage.removeItem('isConcern');
+                // localStorage.removeItem('isConcern');
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 next();
             })

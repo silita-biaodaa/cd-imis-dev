@@ -19,7 +19,7 @@ export default {
       var s =v.split("#");
       queryMap[k] = s[0];
     }
-    return queryMap[code];
+    return queryMap.cove;
   },
   weixinauth (appid,url) {
     window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+url+'&response_type=code&scope=snsapi_base&state=CD-IMIS#wechat_redirect'

@@ -3,7 +3,7 @@
   <div class="friends">
 
     <div class="f-person">
-      <div class="p-img" @click="jumpF">
+      <div class="p-img">
         <img :src="imgUrl" alt="">
       </div>
       <div class="p-name">
@@ -12,7 +12,7 @@
         <p class="start s-top">打卡始于<span class="p-ye">{{pushStart}}</span>,持续打卡于<span class="p-ye">{{pushEnd}}</span>,</p>
         <p class="start">  日精进打卡第<span class="p-ye">{{time}}</span>天,共打卡<span class="p-ye">{{total}}</span>次,缺卡<span class="p-ye" >{{que}}</span>次</p>
       </div>
-      <span v-if="$route.query.id" class="iconfont icon-fanhui" @click="$router.go(-1)"></span>
+      <van-icon name="arrow-left"  v-if="$route.query.id" @click="$router.go(-1)"/>
     </div>
     <v-clock :clocklist="list"></v-clock>
   </div>
@@ -45,14 +45,14 @@
     //   'clock':clocklist
     // },
     methods: {
-      jumpF(){
-        this.$router.push({
-          path:'/nav/friend',
-          query:{
-            id:localStorage.getItem('userid')
-          }
-        })
-      },
+      // jumpF(){
+      //   this.$router.push({
+      //     path:'/nav/friend',
+      //     query:{
+      //       id:localStorage.getItem('userid')
+      //     }
+      //   })
+      // },
       gainUser(userid) {
         let data={}
         if(userid){

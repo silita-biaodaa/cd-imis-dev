@@ -3,7 +3,7 @@
   <div class="clock">
     <div class="f-content" v-for="( item, index ) in clocklist" :key="index">
       <!-- <v-clock :item="item" v-for="( item, index ) in list" :key="index"></v-clock> -->
-      <div class="c-img" @click="jumpFriend(item.pkid)">
+      <div class="c-img">
         <img :src="item.user.imgUrl" alt="">
       </div>
       <p class="c-name"><span class="fc-n">{{item.user.name}}</span><span v-if="item.user.company && item.user.company!=''">-{{item.user.company}}</span></p>
@@ -139,14 +139,14 @@
         })
       },
       //打卡圈
-      jumpFriend(id){
-        this.$router.push({
-          path:'/nav/friend',
-          query:{
-            id:id
-          }
-        })
-      },
+      // jumpFriend(id){
+      //   this.$router.push({
+      //     path:'/nav/friend',
+      //     query:{
+      //       id:id
+      //     }
+      //   })
+      // },
       // 方法 集合
       fullClick(i){
         let obj=this.clocklist[i];
