@@ -66,8 +66,6 @@ const offBridgeReady=function(){
   WeixinJSBridge.call('showOptionMenu');  
 }
 
-Vue.prototype.showQrcode=false;
-
 import { queryList,User,group,getWxStr,groupsDetail } from "./api/index"
 import util from "./util/util"
 import Wx from 'weixin-js-sdk'
@@ -115,7 +113,8 @@ router.beforeEach((to, from, next) => {
                 // alert(JSON.stringify(resData.data));
                 localStorage.setItem('isConcern',JSON.stringify(resData.data))
                 if(resData.data.isConcern==0){
-                  this.showQrcode=true;
+                  alert(1);
+                  to.meta.showQrcode=true;
                 }
                 next();
             })

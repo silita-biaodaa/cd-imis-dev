@@ -47,6 +47,17 @@ export default {
     watch: {
         // 监控集合
     },
+    computed:{
+        showQrcode(){
+            if(this.$route.meta.showQrcode){
+                alert('t');
+                return true
+            }else{
+                alert('f');
+                return false
+            }
+        }
+    },
     props: {
         // 集成父级参数
     },
@@ -63,7 +74,6 @@ export default {
     mounted() {
         this.id=this.$route.query.id;
         let data=localStorage.getItem('isConcern');
-        alert('apply===     '+data);
         data=JSON.parse(data);
         this.imgurl=data.imgUrl;
         this.num=data.userCount;
