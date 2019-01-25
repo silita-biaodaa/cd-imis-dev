@@ -201,7 +201,7 @@ export default {
               groid=picker.groId;
               groname=picker.groName;
               userid=picker.pkid;
-              username=picker.name;
+              username=picker.groName;
             }
 
             let timeStr=year+'-'+mon+'-'+da;
@@ -223,17 +223,17 @@ export default {
                 // this.userPopup();
             }else if(this.type=='user'){
                 this.loading();
-                // if(username=='全部'&&userid==''){
-                //     this.popup.mask=false;
-                //     this.popup.slots=this.groups;
-                //     this.type='groups';
-                //     //群组选择时,置空个人
-                //     this.popup.userName='选择个人';
-                //     this.popup.userid='';
-                //     this.getGroupsDate(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-01');
-                //     this.getGroupsUser(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(this.setDay));
-                //     return
-                // }
+                if(username=='全部'&&userid==''){
+                    this.popup.mask=false;
+                    this.popup.slots=this.groups;
+                    this.type='groups';
+                    //群组选择时,置空个人
+                    this.popup.userName='选择个人';
+                    this.popup.userid='';
+                    this.getGroupsDate(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-01');
+                    this.getGroupsUser(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(this.setDay));
+                    return
+                }
                 this.popup.userName=username;
                 this.popup.userid=userid;
                 //个人打卡
@@ -257,12 +257,12 @@ export default {
                     for(let x of res.data.list){
                         x.groName=x.name
                     }
-                    // let data=[{
-                    //   groName:'全部',
-                    //   id:''
-                    // }];
-                    // that.popup.slots=data.concat(res.data.list);
-                    that.popup.slots=res.data.list;
+                    let data=[{
+                      groName:'全部',
+                      pkid:''
+                    }];
+                    that.popup.slots=data.concat(res.data.list);
+                    // that.popup.slots=res.data.list;
                     that.type='user';
                     that.popup.mask=true;
                 }

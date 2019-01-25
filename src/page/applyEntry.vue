@@ -11,7 +11,7 @@
             <p>共{{num}}人</p>
         </div>
         <div class="bom-box">
-            <button @click="applyGroup">{{applyTxt}}</button>
+            <button @click="applyGroup" :class="applyTxt!='申请入群'?'noclick':''">{{applyTxt}}</button>
         </div>
         <v-toast :toastTxt="toastTxt" :mask="mask"></v-toast>
         <div class="fix-box" v-if="showQrcode">
@@ -96,11 +96,18 @@ export default {
     methods: {
         // 方法 集合
         applyGroup(){
+            if(this.applyTxt!='申请入群'){
+                return false
+            }
             Addgroup({groId:this.id}).then( res => {
                 if(res.code == 1 ) {
                     this.applyTxt='已申请';
                     this.mask=true;
+                    return setTimeout(() => {
+                        this.mask = false;
+                    }, 1500);
                 }else if(res.code==403){
+                    this.applyTxt='申请失效';
                     this.toastTxt=res.msg;
                     this.mask=true;
                     return setTimeout(() => {
@@ -155,6 +162,10 @@ export default {
         border: none;
         border-radius: 5px
     }
+    .noclick{
+        background: #999;
+        opacity: .8;
+    }
 }
 .fix-box{
     height: 100vh;
@@ -189,4 +200,5 @@ export default {
         }
     }
 }
+
 </style>

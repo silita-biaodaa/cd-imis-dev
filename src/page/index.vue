@@ -39,8 +39,7 @@
       <div class="time-sel" @click='datePicker' >
          <span class="flo-l" >打卡始于时间</span>
          <div class="flo-r cent" v-show="this.tiems"  >
-           <i class=" iconfont icon-icon i-post" >
-           </i>
+           <van-icon name="arrow" class="i-post"/>
          </div>
          <span class="flo-r" >{{tiems}}</span>         
         <van-popup v-model="dateObj.dateMask" position="bottom" :overlay="true">
@@ -57,8 +56,8 @@
       </div>
       <div class="l-put"  >
         <div class="label">打卡次数</div> <input type="tel" placeholder="请输入打卡次数" v-model='count' @keyup='text' @blur='bblur' >
-           <i class=" iconfont icon-icon i-iput"  >
-           </i>
+           <!-- <i class=" iconfont icon-icon i-iput"  ></i> -->
+           <van-icon name="arrow" class="i-iput"/>
       </div>
     </div>
 
@@ -78,8 +77,8 @@
           <div class="sign p-line  ">
             <div class="l-put"  >
               <div class="label">书本名称</div> <input type="text" placeholder="请输入书本名称" v-model='item.title'  @blur='bblur'  >
-              <i class=" iconfont icon-icon i-iput" v-show="item.title" >
-              </i>
+              <!-- <i class=" iconfont icon-icon i-iput"></i> -->
+              <van-icon name="arrow" class="i-iput" v-show="item.title" />
             </div>
           </div>
           <div class="sign p-line">
@@ -93,8 +92,8 @@
           <div class="sign" >
             <div class="l-put"  >
               <div class="label five ">总朗读遍数</div> <input type="tel" placeholder="请输入" v-model='item.readTotal' @blur='bblur' >
-              <i class=" iconfont icon-icon i-iput"   >
-              </i>
+              <!-- <i class=" iconfont icon-icon i-iput"   ></i> -->
+              <van-icon name="arrow" class="i-iput"/>
             </div>
           </div>
         </div>
@@ -121,8 +120,7 @@
           <div class="time-sel" @click='datePickers' >
            <span class="flo-l" >积善开始时间</span>
            <div class="flo-r cent" >
-           <i class=" iconfont icon-icon i-post" v-show="this.begin" >
-           </i>
+           <van-icon name="arrow" class="i-post"/>
          </div>
            <span class="flo-r" >{{begin}}</span>
           <van-popup v-model="dateObj.dateMasks" position="bottom" :overlay="true">
@@ -138,8 +136,7 @@
       </div>
         <div class="l-put  p-line p-l">
           <div class="label five">积善持续年数</div> <input type="tel" placeholder="请输入年份"  v-model='end'   @blur="bblur">
-          <i class=" iconfont icon-icon i-iput" v-show="this.end" >
-          </i>
+          <van-icon name="arrow" class="i-iput"  v-show="this.end"/>
         </div>
         <div class="card-com">
           <div class="l-pu">
@@ -149,7 +146,7 @@
         </div>
         <div class="l-put"  >
               <div class="label five">累计积善件数</div> <input type="tel" placeholder="请输入" v-model='alls' @blur='bblur'  >
-              <i class=" iconfont icon-icon i-iput" v-show="sever(this.alls)" >
+              <van-icon name="arrow" class="i-iput"  v-show="sever(this.alls)" />
            </i>
         </div>
       </div>
@@ -456,7 +453,7 @@
     background:none;
     outline:none;
     border:0px;
-    caret-color:blue;
+    color: #999;
     padding: 20px 0px;
     padding-right: 12px;
   }
@@ -725,17 +722,18 @@
      right: 0;
      transform: translateY(-50%);
      font-size: 42px;
-     color: #ccc;
+     color: #999;
    }
    .i-iput {
      font-size: 42px;
-     color:#ccc;
+     color:#999;
    }
    .flo-l {
      float: left;
    }
    .flo-r {
      float: right;
+     color: #999
    }
   }
 

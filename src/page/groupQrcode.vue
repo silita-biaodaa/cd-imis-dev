@@ -46,7 +46,7 @@ export default {
         
         groupsDetail(this.id).then(res =>{
             this.imgurl=res.data.imgUrl;
-            this.name=res.data.name;
+            this.name=res.data.groName;
         })
         if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){  

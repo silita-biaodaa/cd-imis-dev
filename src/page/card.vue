@@ -99,37 +99,44 @@
                </div>
        </div>
        <div class="card-top card-com laca card-ma">
-           <div class="siz">
-              <img src="../assets/img/star (2).png" alt="">
-           </div>
-          <div class="card-size">
-              立志愿
-          </div>
+            <div class="tit-box">
+              <div class="siz">
+                  <img src="../assets/img/star (2).png" alt="">
+              </div>
+              <div class="card-size">
+                  立志愿
+              </div>
+            </div>
        </div>
        <div class="card-put">
           <textarea  rows="4" placeholder='请输入您要分享的志愿'  v-model="volunteer" class="ccc" @blur='bblur' :disabled='first' ></textarea>
         </div>
         <div class="card-top card-com laca card-ma">
-           <div class="siz">
-              <img src="../assets/img/awake.png" alt="">
-           </div>
-          <div class="card-size">
-              省觉悟
+          <div class="tit-box">
+            <div class="siz">
+                <img src="../assets/img/awake.png" alt="">
+            </div>
+            <div class="card-size">
+                省觉悟
+            </div>
           </div>
        </div>
        <div class="card-put">
           <textarea  :disabled='first' rows="4" placeholder='请输入您的反省及觉悟'  v-model="introspective" class="ccc" @blur='bblur'  ></textarea>
         </div>
          <div class="card-top card-com laca card-ma">
-           <div class="siz">
-              <img src="../assets/img/hua.png" alt="">
+           <div class="tit-box">
+             <div class="siz">
+                  <img src="../assets/img/hua.png" alt="">
+              </div>
+              <div class="card-size">
+                  感谢
+              </div>
            </div>
-          <div class="card-size">
-              感谢
-          </div>
+           
        </div>
        <div class="card-put">
-          <textarea  :disabled='first' rows="4" placeholder='请输入您的感谢'  v-model="thanks" class="ccc" @blur='bblur'  ></textarea>
+          <textarea  :disabled='first' rows="4" placeholder='请输入您的感谢'  v-model="thanks" class="ccc tanks" @blur='bblur'  ></textarea>
         </div>
 
         <div class="card-btn" @click="maskFn">
@@ -207,7 +214,7 @@ export default {
       // }
       // this.repetition = true
       this.loading()
-      pushCard({thanks:this.thanks,practice:this.practice,books:this.books,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
+      pushCard({thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()
@@ -305,6 +312,10 @@ export default {
 
   }
 }
+.tit-box{
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+}
 .l-put {
    height: 96px;
    font-size: 32px;
@@ -312,6 +323,7 @@ export default {
    justify-content: flex-start;
    align-items: center;
    box-sizing: border-box;
+   border-top: 1px solid #F2F2F2;
    padding: 25px 0;
    .label {
      padding-left: 0px;
@@ -454,6 +466,9 @@ export default {
      outline:none;
      border: none;
     //  padding:20px;
+  }
+  .tanks{
+    border-bottom: 1px solid #f2f2f2
   }
 }
 textarea{

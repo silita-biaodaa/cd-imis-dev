@@ -17,9 +17,9 @@
           </div>
           <template v-if="item.bookish.length>0">
             <div v-for="(o,i) in item.bookish" :key="'i'+i">
-              <p class="c-color">《{{o.bookName}}》{{o.section}}</p>
-              <p class="c-color" v-if="o.link">
-                <a :href="o.link">{{o.link}}</a>
+              <p class="c-color link-box">
+                <span>《{{o.bookName}}》{{o.section}} </span>
+                <span class="c-link" v-if="o.link" @click="jumpLink(o.link)"></span>
               </p>
             </div>
           </template>
@@ -128,6 +128,10 @@
       },
     },
     methods: {
+      //跳转链接
+      jumpLink(link){
+        window.location.href=link
+      },
       //跳转详情
       jumpDetail(id,userid){
         this.$router.push({
@@ -335,6 +339,19 @@
     font-size: 28px;
   }
   }
+  .link-box{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 
+  }
+.c-link{
+  display: inline-block;
+  background: url(../assets/img/icon-lj.png);
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  margin-left: 40px
+}
 
 </style>
