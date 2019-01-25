@@ -93,5 +93,5 @@ export default new Router({
       name:'applyEntry'
     }
 
-  ]
+  ],
 })

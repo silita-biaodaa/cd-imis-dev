@@ -86,6 +86,7 @@ router.beforeEach((to, from, next) => {
     }
     if(!auth||to.fullPath=='/home'){
       queryList(data).then(res => {
+        alert(JSON.stringify(res.data));
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);
           if(res.data.token&&res.data.token!='undefined'){
@@ -114,6 +115,8 @@ router.beforeEach((to, from, next) => {
               localStorage.setItem('isConcern',JSON.stringify(resData.data))
               next('/applyEntry');
             })
+          }else if(res.data.isFirst==3){//初始
+            next('/home')
           }
 
         }

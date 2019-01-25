@@ -3,7 +3,7 @@
   <div class="friends">
 
     <div class="f-person">
-      <div class="p-img">
+      <div class="p-img" @click="jumpF">
         <img :src="imgUrl" alt="">
       </div>
       <div class="p-name">
@@ -38,28 +38,45 @@
         pageList: {total: '',pageNo:1,pageSize:2},
       }
     },
-    watch:{
+    watch: {
+    	//监控集合
+	  	'$route': function (route) {
+//	  		this.loading();
+          // this.pageList={total: '',pageNo:1,pageSize:2};
+          // this.isScroll=true;
+          // this.noGet=false;
+          // // window.scrollTo(0,0);
+          // var query = route.query;
+          // let id = query.id;
+          // this.gainUser(id);
+          // this.gainList(id);
+          this.$router.go(0)
 
+      },
     },
     // components:{
     //   'clock':clocklist
     // },
     methods: {
-      // jumpF(){
-      //   this.$router.push({
-      //     path:'/nav/friend',
-      //     query:{
-      //       id:localStorage.getItem('userid')
-      //     }
-      //   })
-      // },
+      jumpF(){
+        let id=localStorage.getItem('userid');
+        if(this.$route.query.id){
+          id=this.$route.query.id
+        }
+        this.$router.push({
+          path:'/nav/friend',
+          query:{
+            id:id
+          }
+        })
+      },
       gainUser(userid) {
         let data={}
         if(userid){
           data.userId=userid
         }
         User(data).then( res => {
-          this.hideLoading();
+          // this.hideLoading();
           this.name = res.data.name;
           this.imgUrl = res.data.imgUrl
           this.compang = res.data.company
@@ -166,7 +183,7 @@
         padding-top: 94px;
         box-sizing: border-box;
         position: relative;
-        .icon-fanhui{
+        .van-icon{
           position: absolute;
           left: 39px;
           top: 32px;

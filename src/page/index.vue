@@ -138,7 +138,7 @@
           <div class="label five">积善持续年数</div> <input type="tel" placeholder="请输入年份"  v-model='end'   @blur="bblur">
           <van-icon name="arrow" class="i-iput"  v-show="this.end"/>
         </div>
-        <div class="card-com">
+        <div class="card-com borbtm">
           <div class="l-pu">
             <div class="label ">每日积善件数</div>
             <van-stepper  v-model.number="number" class="l-mi" :min="0" />
@@ -166,7 +166,7 @@
         <x-button  >提交</x-button>
       </div>
     </div>
-    <v-popup :popup-type="'tips'" :popup-show="mask" @sure="record"></v-popup>
+    <v-popup :popup-type="'tips'" :popup-show="mask" @sure="skipFn"></v-popup>
     <!-- <div class='toast' v-show='layout' >
       请输入正确的手机号码
     </div>
@@ -222,6 +222,9 @@
 
     },
     methods: {
+      skipFn(){
+        this.record(1);
+      },
       texte() {
         console.log(event.type)
         console.log(1111)
@@ -346,8 +349,21 @@
           }
         });
           this.loading()
+        let data={
+          pushStart: this.tiems,
+          total: this.count,
+          bonaStart: this.begin,
+          bonaEnd: this.end,
+          bonaCount: this.number,
+          bonaTotal: this.alls,
+          volunteer: this.values,
+          books: this.first
+        }
+        if(arguments.length>0){
+          data.isJump=1
+        }
         if ( this.pass  ) {
-          recordBook({pushStart: this.tiems,total: this.count, bonaStart: this.begin, bonaEnd: this.end, bonaCount: this.number, bonaTotal: this.alls, volunteer: this.values, books: this.first}).then( res => {
+          recordBook(data).then( res => {
             if(res.code == 1) {
               this.hideLoading()
               // localStorage.setItem('userName',this.username);
@@ -736,5 +752,7 @@
      color: #999
    }
   }
-
+  .borbtm{
+    border-bottom: 1px solid #f2f2f2;
+  }
 </style>
