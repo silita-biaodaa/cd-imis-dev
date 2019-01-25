@@ -162,7 +162,7 @@
       <div class="volunteer-put">
         <textarea  rows="4" placeholder='请输入您的志愿'  v-model="values" class="ccc" @blur='bblur' ></textarea>
       </div>
-      <div class="btn" @click='record'>
+      <div class="btn" @click='record(false)'>
         <x-button  >提交</x-button>
       </div>
     </div>
@@ -223,7 +223,7 @@
     },
     methods: {
       skipFn(){
-        this.record(1);
+        this.record(true);
       },
       texte() {
         console.log(event.type)
@@ -316,7 +316,7 @@
           this.layout = false
         }, 1500);
       },
-      record () {
+      record (a) {
 
         this.pass = true;
         if( !this.Number ) {
@@ -359,7 +359,7 @@
           volunteer: this.values,
           books: this.first
         }
-        if(arguments.length>0){
+        if(a||a=='true'){
           data.isJump=1
         }
         if ( this.pass  ) {
