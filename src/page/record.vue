@@ -32,7 +32,7 @@
                 <p><i style="background: #0DC830;"></i><span>缺卡</span></p>
             </div>
             <div class="cardPer">
-                <template v-if="type=='groups'">
+                <template v-if="isGroup">
                     <p>
                         <span class="tit">打卡人数：{{cardStatistics.cardsPer.length}}人</span>
                         <span v-if="cardStatistics.cardsPer.length>0">({{cardStatistics.cardsPer.join(',')}})</span>
@@ -88,6 +88,7 @@ export default {
             pageList: {total: '',pageNo:1,pageSize:2},
             list:[],//打卡记录list
             type:'groups',//模式，个人or群组
+            isGroup:true,
             groupArr:[],//打卡日历list
             groupCreat:'',
             cardStatistics:{
@@ -112,6 +113,7 @@ export default {
               maxDate:new Date(),
               date:''
             },
+            nowGroupId:'',
             mask:false,
             isIOS:false,
 			noGet:false,
@@ -136,6 +138,7 @@ export default {
         this.groups=list;
         this.popup.groupName=list[0].groName;
         this.popup.groupid=list[0].groId;
+        this.nowGroupId=this.groups[0].groId;
         this.getGroupsDate(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-01');
         this.getGroupsUser(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(this.setDay))
     },
@@ -213,6 +216,8 @@ export default {
                 this.loading();
                 this.popup.groupName=groname;
                 this.popup.groupid=groid;
+                this.nowGroupId=groid;
+                this.isGroup=true;
                 //群组打卡
                 this.getGroupCard(this.popup.groupid,timeStr);
                 //群组日历
@@ -223,17 +228,21 @@ export default {
                 // this.userPopup();
             }else if(this.type=='user'){
                 this.loading();
+                this.isGroup=false;
                 if(username=='全部'&&userid==''){
+                     this.isGroup=true;
                     this.popup.mask=false;
                     this.popup.slots=this.groups;
                     this.type='groups';
                     //群组选择时,置空个人
                     this.popup.userName='选择个人';
                     this.popup.userid='';
-                    this.getGroupsDate(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-01');
-                    this.getGroupsUser(this.groups[0].groId,this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(this.setDay));
+                    this.getGroupsDate(this.nowGroupId,this.setYear+'-'+this.fillZero(this.setMonth)+'-01');
+                    this.getGroupsUser(this.nowGroupId,this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(this.setDay));
+                    this.getGroupCard(this.nowGroupId,this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(this.setDay));
                     return
                 }
+               
                 this.popup.userName=username;
                 this.popup.userid=userid;
                 //个人打卡

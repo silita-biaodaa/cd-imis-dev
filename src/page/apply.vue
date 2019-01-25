@@ -2,27 +2,31 @@
     <div class="apply">
       <v-head :head-txt="headName"></v-head>
       <van-search placeholder="请输入搜索关键词" v-model="keyWords" @blur="onSearch" />
-      <div class="apply-list" v-for="(e,i) in list" :key="i" v-show="dont" >
+      <div class="apply-list" v-for="(el,i) in list" :key="i" v-show="dont" >
           <div class="ld-left apply-g" >
               <div class="apply-img">
-                  <img :src="e.imgUrl" alt="">
+                  <img :src="el.imgUrl" alt="">
               </div>
               <div class="apply-name">
-                 <p>{{e.groName}}</p>
+                 <p>{{el.groName}}</p>
                  <div class="ld-left ">
                     <div class="apply-ye top">
                         <img src="../assets/img/double (1).png" alt="">
-                        {{e.userCount}}
+                        {{el.userCount}}
                     </div>
                     <div class="apply-ye top ddd">
                         <img src="../assets/img/person (1).png" alt="">
-                        {{e.name}}
+                        {{el.name}}
                     </div>
                  </div>
               </div>
-              <div class="apply-join" v-show="e.isExist == 0 ? true : false" @click="addGroups(e)" >
-                  {{e.isApply == 1 ? '已申请' : '申请入群'}}
-              </div>
+              <template v-if="el.isExist==1">
+                <div class="apply-join" style="opacity: .8;border-color: #999;color: #fff;background: #999;">已入群</div>
+              </template>
+              <template v-else>
+                <div class="apply-join" v-if="el.isApply == 1" style="opacity: .5;">已申请</div>
+                <div class="apply-join" @click="addGroups(el)" v-else>申请入群</div>
+              </template>
           </div>
       </div>
       <div v-show="!dont" class="hint" >
@@ -43,7 +47,8 @@ export default {
       isScroll:true,
       noGet:false,
       total:0,
-      pageNo:1
+      pageNo:1,
+      isClick:true,
     }
   },
   watch: {
@@ -107,13 +112,15 @@ export default {
       })
     },
     addGroups(val) {
-      this.loading()
+      if(!this.isClick){
+        return false
+      }
+      this.isClick=false;
       Addgroup({groId:val.groId}).then( res => {
-        this.hideLoading()
           if(res.code == 1 ) {
-              this.onSearch()
-              val.isApply = 1
-
+              this.isClick=true;
+              // this.onSearch()
+              val.isApply = 1;
           }
        })
     }

@@ -107,13 +107,14 @@ export default {
                         this.mask = false;
                     }, 1500);
                 }else if(res.code==403){
-                    this.applyTxt='申请失效';
+                    this.applyTxt='已申请';
                     this.toastTxt=res.msg;
                     this.mask=true;
                     return setTimeout(() => {
                         this.mask = false;
                     }, 1500);
                 }else{
+                    this.applyTxt='已入群';
                     this.toastTxt=res.msg;
                     this.mask=true;
                     return setTimeout(() => {
