@@ -42,15 +42,15 @@
     	//监控集合
 	  	'$route': function (route) {
 //	  		this.loading();
-          // this.pageList={total: '',pageNo:1,pageSize:2};
-          // this.isScroll=true;
-          // this.noGet=false;
-          // // window.scrollTo(0,0);
-          // var query = route.query;
-          // let id = query.id;
-          // this.gainUser(id);
-          // this.gainList(id);
-          this.$router.go(0)
+          this.pageList={total: '',pageNo:1,pageSize:2};
+          this.isScroll=true;
+          this.noGet=false;
+          window.scrollTo(0,0);
+          var query = route.query;
+          let id = query.id;
+          this.gainUser(id);
+          this.gainList(id);
+          // this.$router.go(0)
 
       },
     },

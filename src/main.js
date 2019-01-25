@@ -99,10 +99,7 @@ router.beforeEach((to, from, next) => {
               localStorage.setItem('userid',res.data.userId);
             })
           }
-          if(res.data.isFirst==0){
-            //进入打卡设置
-            next()
-          }else if(res.data.isFirst==1){
+          if(res.data.isFirst==1){
             //进入打卡
             next('nav/card')
           }else if(res.data.isFirst==2){
@@ -115,8 +112,8 @@ router.beforeEach((to, from, next) => {
               localStorage.setItem('isConcern',JSON.stringify(resData.data))
               next('/applyEntry');
             })
-          }else if(res.data.isFirst==3){//初始
-            next('/home')
+          }else{//初始化
+            next()
           }
 
         }
