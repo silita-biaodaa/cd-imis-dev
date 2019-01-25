@@ -208,6 +208,9 @@
   }
 </script>
 <style lang='less' >
+.van-icon-clear{
+  font-size: 36px
+}
 .title{
   padding: 33px;
   background: #fff;
