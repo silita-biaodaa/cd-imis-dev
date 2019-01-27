@@ -178,9 +178,9 @@ export default {
         //确认
         confirm(pick){
             //每次点击确定 重置数据
-            this.setYear=new Date().getFullYear();
-            this.setMonth=new Date().getMonth()+1;
-            this.setDay=new Date().getDate();
+            // this.setYear=new Date().getFullYear();
+            // this.setMonth=new Date().getMonth()+1;
+            // this.setDay=new Date().getDate();
             this.groupArr=[];
 
             let year=this.setYear,
