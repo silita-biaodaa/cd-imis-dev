@@ -604,6 +604,8 @@ export default {
 };
 </script>
 <style lang="less">
+
+
   .picker-slot{
     width: 80%;
   }
@@ -613,9 +615,7 @@ export default {
 .picker-item.picker-selected{
     font-size: 32px
 }
-.van-picker-column__item{
-  font-size: 32px;
-}
+
 .van-picker{
 //   .van-picker__columns{
 //     height:70% !important;
@@ -623,8 +623,9 @@ export default {
 //       height: 100% !important;
 //     }
     .van-picker-column__item{
-      width: 70%;
-      margin: 0 auto;
+        font-size: 32px;
+        width: 70%;
+        margin: 0 auto;
     }
 //   }
 }
@@ -648,21 +649,25 @@ body .mask{
 //   body  .van-popup--bottom{
 //     height:25vh;
 //   }
+.isios.groupcard{
+    -webkit-overflow-scrolling : touch;
+    position: relative;
+}
  .isios .van-popup--bottom{
-   bottom:100px;
-   .picker{
-     height: 100%;
-     .picker-items{
-       height: 100%;
-     }
-    //  .picker-item{
-    //    height: 44px !important;
-    //    line-height: 44px !important;
-    //  }
-    //   .picker-center-highlight{
-        // height: 44px !important;
-    //   }
-   }
+    bottom:100px;
+    height:25vh;
+    .van-picker__columns{
+        height:70% !important;
+        .van-picker-column{
+            height: 100% !important;
+            ul{
+                line-height: 50px !important;
+            }
+        }
+    }
+    .van-picker-column__item{
+        height: 50px !important;
+    }
  }
 
 

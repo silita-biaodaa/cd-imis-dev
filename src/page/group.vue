@@ -139,9 +139,13 @@ export default {
     }
 };
 </script>
-<style lang='less'>
+<style lang='less' scoped>
 @import '../assets/iconfont.css';
-.group {
+
+html,body {
+  -webkit-overflow-scrolling :auto;
+}
+div .group {
   background: #f5f5f5;
   height: 100%;
    overflow-y: scroll;

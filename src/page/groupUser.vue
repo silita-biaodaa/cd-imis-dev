@@ -208,6 +208,11 @@
   }
 </script>
 <style lang='less'>
+.groupUser{
+  -webkit-overflow-scrolling : touch;
+  position: relative;
+}
+
 .title{
   padding: 33px;
   background: #fff;

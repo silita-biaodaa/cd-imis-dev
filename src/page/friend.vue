@@ -164,6 +164,8 @@
 </script>
 <style lang='less' >
   .friends {
+    -webkit-overflow-scrolling : touch;
+    position: relative;
     background: #fff;
       .f-person {
         width:100%;

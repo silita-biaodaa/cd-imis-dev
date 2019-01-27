@@ -15,8 +15,13 @@ module.exports = {
             browsers: ['last 3 versions'],
             remove: false
         }),
-        require('postcss-px2rem')({
-            remUnit: 75
-        })
+        // require('postcss-plugin-px2rem')({
+        //     remUnit: 37.5,
+        //     exclude: /(node_module)/,
+        // })
+        // require('postcss-pxtorem')({
+        //     rootValue: 37.5,
+        //     propList: ['*']
+        // })
     ]
 }

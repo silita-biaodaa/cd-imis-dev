@@ -255,6 +255,8 @@ export default {
 .set {
   box-sizing: border-box;
   background: #f5f5f5;
+  -webkit-overflow-scrolling : touch;
+    position: relative;
    .person {
    box-sizing: border-box;
    padding-left: 36px;

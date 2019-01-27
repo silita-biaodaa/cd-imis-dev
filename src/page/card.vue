@@ -273,7 +273,8 @@ export default {
 <style lang="less" >
 .card{
    background: #F5F5F5;
-
+    -webkit-overflow-scrolling : touch;
+    position: relative;
 .l-pu {
     height: 96px;
    font-size: 32px;
