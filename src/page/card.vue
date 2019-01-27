@@ -140,7 +140,7 @@
         </div>
 
         <div class="card-btn" @click="maskFn">
-           <div :class="[this.btnTitle =='提交'? 'card-div' : 'card-red' ]">
+           <div class="card-div">
               {{btnTitle}}
            </div>
         </div>
@@ -175,6 +175,9 @@ export default {
       if(this.btnTitle=='提交'){
         this.mask=true;
         this.tipTxt='确认提交打卡信息？'
+      }else{
+        this.mask=true;
+        this.tipTxt='确认修改打卡信息？'
       }
     },
     gainPer() {
@@ -188,8 +191,7 @@ export default {
               })
 
               if(res.code == 402 ) {
-                 this.btnTitle = '今日已打卡, 请勿重复提交'
-                 this.first = true
+                 this.btnTitle = '修改'
               } else {
                  this.btnTitle = '提交'
               }
@@ -206,15 +208,16 @@ export default {
        })
     },
     punch(){
-      if(this.btnTitle == '今日已打卡, 请勿重复提交') {
-         return false
+      let isUpdate=0;
+      if(this.btnTitle == '修改') {
+         isUpdate=1;
       }
       // if( this.repetition) {
       //    return false
       // }
       // this.repetition = true
       this.loading()
-      pushCard({thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
+      pushCard({isUpdate:isUpdate,thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()
@@ -446,15 +449,6 @@ export default {
       font-size: 36px;
       color: #fff;
       background-color: #E62129;
-      line-height: 96px;
-      text-align: center;
-      border-radius: 12px;
-    }
-    .card-red {
-      height: 96px;
-      font-size: 36px;
-      color: #fff;
-      background-color: #BBBBBB;
       line-height: 96px;
       text-align: center;
       border-radius: 12px;

@@ -207,10 +207,7 @@
     }
   }
 </script>
-<style lang='less' >
-.van-icon-clear{
-  font-size: 36px
-}
+<style lang='less'>
 .title{
   padding: 33px;
   background: #fff;
@@ -238,15 +235,6 @@
     transform: translateX(-50%);
     color:#fff;
   }
-.serBox{
-  background: #F5F5F5;
-  padding: 20px 32px;
-  div{
-    background: #fff;
-    height: 72px;
-    border-radius:10px;
-  }
-}
 .listBox{
   background: #fff;
   padding: 0 36px;
@@ -321,10 +309,16 @@
     font-size: 36px;
     text-align: center;
   }
-  .van-cell__left-icon, .van-cell__right-icon {
-    line-height: 72px !important;
-    font-size: 40px !important;
+  .van-field__left-icon .van-icon, .van-field__right-icon .van-icon{
+    font-size: 40px
   }
+  .van-icon-clear{
+    font-size: 36px
+  }
+  // .van-cell__left-icon, .van-cell__right-icon {
+  //   line-height: 72px !important;
+  //   font-size: 40px !important;
+  // }
   .hint {
      margin-top: 200px;
      color: #666;

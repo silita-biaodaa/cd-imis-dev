@@ -66,7 +66,7 @@
           data.userId=userid
         }
         User(data).then( res => {
-          // this.hideLoading();
+          this.hideLoading();
           this.name = res.data.name;
           this.imgUrl = res.data.imgUrl
           this.compang = res.data.company
@@ -201,6 +201,9 @@
           color: #fff;
           font-size: 36px;
           margin: 12px 0 24px;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap
         }
 
         .company {

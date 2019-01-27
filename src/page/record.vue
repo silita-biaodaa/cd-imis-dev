@@ -109,7 +109,7 @@ export default {
             },
             dateObj:{
               dateMask:false,
-              minDate:new Date('2019-01'),
+              minDate:new Date('2018-01'),
               maxDate:new Date(),
               date:''
             },
@@ -187,13 +187,15 @@ export default {
                 mon=this.fillZero(this.setMonth),
                 da=this.fillZero(this.setDay),
                 groid,groname,userid,username;
-            if(this.dateObj.dateMask){
+            if(this.dateObj.dateMask){//如果是日期选择
               let y=new Date().getFullYear(),
                   m=new Date().getMonth()+1;
               if(y!=pick.getFullYear()||m!=pick.getMonth()+1){//如果不等于当前时间，则重新赋值
                 year=pick.getFullYear();
                 mon=this.fillZero(pick.getMonth()+1);
                 da='01';
+                this.setYear=year;
+                this.setMonth=mon;
               }
               groid=this.popup.groupid;
               groname=this.popup.groupName;

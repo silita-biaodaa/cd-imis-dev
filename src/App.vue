@@ -26,5 +26,5 @@ export default {
 </script>
 
 <style>
-@import "./css/public.css";
+@import "css/public.css";
 </style>
