@@ -615,16 +615,16 @@ export default {
   font-size: 32px;
 }
 .van-picker{
-  .van-picker__columns{
-    height:70% !important;
-    .van-picker-column{
-      height: 100% !important;
-    }
+//   .van-picker__columns{
+//     height:70% !important;
+//     .van-picker-column{
+//       height: 100% !important;
+//     }
     .van-picker-column__item{
       width: 70%;
       margin: 0 auto;
     }
-  }
+//   }
 }
 
 body .van-picker__cancel,body .van-picker__confirm{
@@ -640,12 +640,12 @@ body .mask{
   max-height: 100vh;
   overflow: hidden;
 }
-  body .picker-items{
-    padding:45px 0;
-  }
-  body  .van-popup--bottom{
-    height:25vh;
-  }
+//   body .picker-items{
+//     padding:45px 0;
+//   }
+//   body  .van-popup--bottom{
+//     height:25vh;
+//   }
  .isios .van-popup--bottom{
    bottom:100px;
    .picker{
@@ -653,13 +653,13 @@ body .mask{
      .picker-items{
        height: 100%;
      }
-     .picker-item{
-       height: 44px !important;
-       line-height: 44px !important;
-     }
-      .picker-center-highlight{
-        height: 44px !important;
-      }
+    //  .picker-item{
+    //    height: 44px !important;
+    //    line-height: 44px !important;
+    //  }
+    //   .picker-center-highlight{
+        // height: 44px !important;
+    //   }
    }
  }
 

@@ -3,8 +3,8 @@ import Vue from 'vue'
 
 import qs from 'qs'
 // var baseURL = 'https://imis.biaodaa.com/'
-var baseURL = '/'
-// let baseURL='http://pre-imis.biaodaa.com'
+// var baseURL = '/'
+let baseURL='http://pre-imis.biaodaa.com'
 
 
 axios.defaults.baseURL = baseURL

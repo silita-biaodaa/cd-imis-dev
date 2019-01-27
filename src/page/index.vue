@@ -146,7 +146,7 @@
         </div>
         <div class="l-put"  >
               <div class="label five">累计积善件数</div> <input type="tel" placeholder="请输入" v-model='alls' @blur='bblur'  >
-              <van-icon name="arrow" class="i-iput"  v-show="sever(this.alls)" />
+              <van-icon name="arrow" class="i-iput"/>
            </i>
         </div>
       </div>

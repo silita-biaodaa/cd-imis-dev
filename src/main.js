@@ -57,6 +57,14 @@ const getParam=function(name){  //获取参数
       if(r!=null)return unescape(r[2]); return null;
     }
 }
+
+
+function setHtmlFontSize(){
+    const htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+    const htmlDom = document.getElementsByTagName('html')[0];
+    htmlDom.style.fontSize = htmlWidth / 10 + 'px';
+};
+setHtmlFontSize();
 //
 const onBridgeReady=function(){  
     WeixinJSBridge.call('hideOptionMenu');  
