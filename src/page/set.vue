@@ -268,7 +268,7 @@ export default {
       height: 96px;
       line-height: 96px;
       font-size: 28px;
-      border-bottom: 1px solid #F2F2F2;
+      border-bottom: 1PX solid #F2F2F2;
       position: relative;
       .img-book {
          width: 30px;
@@ -283,7 +283,7 @@ export default {
    }
   }
   .p-line {
-     border-bottom: 1px solid #F2F2F2;
+     border-bottom: 1PX solid #F2F2F2;
    }
     .img-post {
       position: absolute;
@@ -382,7 +382,7 @@ export default {
     color:#E62129;
  }
  .put-bot{
-   border-bottom: 1px solid #F2F2f2;
+   border-bottom: 1PX solid #F2F2f2;
  }
   .laca-add {
    position: absolute;
@@ -466,7 +466,7 @@ export default {
         height: 96px;
         line-height: 96px;
         font-size: 28px;
-        border-bottom: 1px solid #F2F2F2;
+        border-bottom: 1PX solid #F2F2F2;
         position: relative;
         img {
           //  height: 100%;
@@ -478,7 +478,7 @@ export default {
         }
     }
     .volunteer-put {
-      border-bottom: 1px solid #f2f2f2;
+      border-bottom: 1PX solid #f2f2f2;
     }
     .btn {
       margin-top: 140px;

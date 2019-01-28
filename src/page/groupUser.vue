@@ -31,6 +31,7 @@
       <div class="toast" v-show="text2">
           转让成功
       </div>
+      <div class="fixBtn" @click="btnFn">{{btnTxt}}</div>
   </div>
 </template>
 <script>
@@ -52,7 +53,8 @@
         isScroll:true,
         noGet:true,
         text3: false,
-        text2: false
+        text2: false,
+        btnTxt:'解散群组'
       }
     },
     name:'groupUser',
@@ -109,7 +111,24 @@
               }, 1500);
             }
           })
-        }
+        }else{
+          let data={
+            groId:this.groId,
+            type:''
+          }
+          if(this.tipTxt=='确认解散该群？'){//解散
+            data.type='dissolve'
+          }else{//退出
+              data.type='exit'
+          }
+          groupUser.operateGrouper(data).then(res =>{
+            if(res.code==1){
+              this.$router.replace({
+                path:'/nav/group',
+              })
+            }
+          })
+        } 
       },
       deleteFn(i){
         this.thisNum=i;
@@ -119,6 +138,14 @@
       turnFn(i){
         this.thisNum=i;
         this.tipTxt='确认要转让该群组？';
+        this.mask=true;
+      },
+      btnFn(){
+        if(this.btnTxt=='解散该群'){
+          this.tipTxt='确认解散该群？'
+        }else{
+          this.tipTxt='确认退出该群？'
+        }
         this.mask=true;
       },
       ajax(type){
@@ -189,6 +216,11 @@
       this.type=this.$route.query.type;
       this.groId=this.$route.query.id;
       this.img=this.$route.params.img;
+      if(this.type&&this.type!='false'){
+        this.btnTxt='解散该群'
+      }else{
+        this.btnTxt='退出该群'
+      }
       this.ajax();
     },
     components: {
@@ -212,7 +244,18 @@
   -webkit-overflow-scrolling : touch;
   position: relative;
 }
-
+.fixBtn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #bbb;
+  color: #fff;
+  height: 96px;
+  font-size: 36px;
+  text-align: center;
+  line-height: 96px
+}
 .title{
   padding: 33px;
   background: #fff;
@@ -245,7 +288,7 @@
   padding: 0 36px;
   li{
     padding: 28px 0;
-    border-bottom: 1px #f2f2f2 solid;
+    border-bottom: 1PX #f2f2f2 solid;
     display: flex;
     justify-content: space-between;
     position: relative;

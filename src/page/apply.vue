@@ -181,7 +181,7 @@ export default {
     top: 38px;
     width: 122px;
     height: 48px;
-    border: 1px solid #E62129;
+    border: 1PX solid #E62129;
     border-radius: 5px;
     font-size: 28px;
     color: #E62129;
@@ -191,7 +191,7 @@ export default {
 
   .apply-g {
      height: 175px;
-     border-bottom: 1px solid #F2F2F2;
+     border-bottom: 1PX solid #F2F2F2;
      color: #000;
      font-size: 36px;
   }

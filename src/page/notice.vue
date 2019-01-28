@@ -69,7 +69,7 @@ export default {
        padding: 0 36px;
        font-size: 36px;
        background: #fff;
-       border-bottom: 1px solid #f5f5f5;
+       border-bottom: 1PX solid #f5f5f5;
        position: relative;
        color:#000;
        .notice-img {

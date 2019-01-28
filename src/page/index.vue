@@ -560,7 +560,7 @@
   }
   }
   .p-line {
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1PX solid #F2F2F2;
   }
   .img-post img {
     height: 100%;
@@ -577,7 +577,7 @@
     height: 96px;
     line-height: 96px;
     font-size: 28px;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1PX solid #F2F2F2;
     position: relative;
   .img-book {
     width: 30px;
@@ -596,7 +596,7 @@
     height: 96px;
     line-height: 96px;
     font-size: 32px;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1PX solid #F2F2F2;
     position: relative;
   }
   .add-put{
@@ -641,7 +641,7 @@
     height: 96px;
     line-height: 96px;
     font-size: 28px;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1PX solid #F2F2F2;
     position: relative;
   }
   }
@@ -658,7 +658,7 @@
     line-height: 96px;
     padding-left: 10px;
     font-size: 32px;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1PX solid #F2F2F2;
     position: relative;
   }
   }
@@ -673,11 +673,11 @@
     height: 96px;
     line-height: 96px;
     font-size: 28px;
-    border-bottom: 1px solid #F2F2F2;
+    border-bottom: 1PX solid #F2F2F2;
     position: relative;
   }
   .volunteer-put {
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1PX solid #f5f5f5;
   }
   .btn {
     margin-top: 110px;
@@ -717,7 +717,7 @@
     //  position: relative;
     //  display: flex;
     //  justify-content: space-between;
-     border-bottom: 1px solid #f5f5f5;
+     border-bottom: 1PX solid #f5f5f5;
    }
    .cent {
      height: 96px;
@@ -747,6 +747,6 @@
    }
   }
   .borbtm{
-    border-bottom: 1px solid #f2f2f2;
+    border-bottom: 1PX solid #f2f2f2;
   }
 </style>

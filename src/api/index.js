@@ -168,6 +168,9 @@ export const groupUser={
     changeGrouper:params =>{//转移群主
       return axios.post('group/change', params).then(res => res.data)
     },
+    operateGrouper:params =>{//解散or退出
+      return axios.post('group/user/operate', params).then(res => res.data)
+    },
 }
 // export const getJsonData = (url, params) => {
 //     return new Promise((resolve, reject) => {

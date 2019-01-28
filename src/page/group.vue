@@ -179,7 +179,7 @@ div .group {
     .group-list {
       height: 168px;
       box-sizing: border-box;
-      border-bottom: 1px solid #f2f2f2;
+      border-bottom: 1PX solid #f2f2f2;
       .group-img {
         height: 80px;
         width: 80px;

@@ -260,7 +260,7 @@
 }
 .cardDetail {
     -webkit-overflow-scrolling : touch;
-    min-height: calc(100vh + 1px);
+    min-height: calc(100vh + 1PX);
     .f-person {
         width:100%;
         height: 409px;

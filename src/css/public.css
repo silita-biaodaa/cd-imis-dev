@@ -23,7 +23,7 @@ body>div{
   overflow: auto;
 }
 #app{
-  min-height: calc(100vh + 1px)
+  min-height: calc(100vh + 1PX)
 }
  .group .van-cell {
      line-height: 96px;

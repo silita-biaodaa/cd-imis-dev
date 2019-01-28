@@ -123,7 +123,7 @@ export default {
   transform:  translate(-50%,0);
 }
 .top-box{
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1PX solid #F2F2F2;
   height: 211px;
   line-height: 211px;
   text-align: center;
@@ -131,7 +131,7 @@ export default {
 }
 .bottom-box{display: flex}
 .bottom-box p{width: 50%;text-align: center;line-height:96px;color: #000;font-size:36px}
-.bottom-box p:first-of-type{border-right: 1px solid #e8e8e8}
+.bottom-box p:first-of-type{border-right: 1PX solid #e8e8e8}
 
   .tipBox{
     padding: 45px;

@@ -330,7 +330,7 @@ export default {
 }
 .tit-box{
   width: 100%;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1PX solid #f2f2f2;
 }
 .l-put {
    height: 96px;
@@ -339,7 +339,7 @@ export default {
    justify-content: flex-start;
    align-items: center;
    box-sizing: border-box;
-   border-top: 1px solid #F2F2F2;
+   border-top: 1PX solid #F2F2F2;
    padding: 25px 0;
    .label {
      padding-left: 0px;
@@ -423,7 +423,7 @@ export default {
     padding: 0 36px;
  }
  .put-bot{
-   border-bottom: 1px solid #F2F2f2;
+   border-bottom: 1PX solid #F2F2f2;
  }
  .card-add {
     text-align: center;
@@ -475,7 +475,7 @@ export default {
     //  padding:20px;
   }
   .tanks{
-    border-bottom: 1px solid #f2f2f2
+    border-bottom: 1PX solid #f2f2f2
   }
 }
 textarea{

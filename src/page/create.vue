@@ -101,7 +101,7 @@ export default {
     border-radius: 12px;
     margin: 0;
     padding: 0;
-    border: 1px solid transparent;
+    border: 1PX solid transparent;
     outline: none;
     background: #E62129;
   }
