@@ -29,14 +29,15 @@
                 </div>
                 <template v-if="item.bookish.length>0">
                     <div v-for="(o,i) in item.bookish" :key="'i'+i">
-                    <p class="c-color">《{{o.bookName}}》{{o.section}}</p>
+                        <span class="c-color">《{{o.bookName}}》{{o.section}}</span>
+                        <span class="c-link" v-if="o.link" @click="jumpLink(o.link)"></span>
                     </div>
                 </template>
 
                 <!-- 经典名句 -->
                 <template v-if="item.classic">
                     <p class="tit">【经典名句分享】</p>
-                    <p class="c-color" v-html="item.classicStr"></p>
+                    <p class="c-color">{{item.classic}}</p>
                 </template>
                 <!-- 行 实践 -->
                 <template v-if="item.practice!=undefined&&item.practice.character!=''&&item.practice.family!=''&&item.practice.work!=''">
@@ -104,6 +105,10 @@
 
     },
     methods: {
+        //跳转链接
+        jumpLink(link){
+            window.location.href=link
+        },
         offBridgeReady(){
             // let u = navigator.userAgent;
             // let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
@@ -374,6 +379,7 @@
         margin-top: 34px;
         .c-color {
             color:#999;
+            overflow: hidden;
         }
     }
 }
@@ -393,5 +399,13 @@
 .pickZan{
     background: url("../assets/img/zan.png") no-repeat;
     background-size: cover;
+}
+.c-link{
+  display: inline-block;
+  background: url(../assets/img/icon-lj.png);
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  margin-left: 40px
 }
 </style>

@@ -28,8 +28,8 @@
                 </div>
             </div>
             <div class="faBox">
-                <p><i style="background: #E62129;"></i><span>已打卡</span></p>
-                <p><i style="background: #0DC830;"></i><span>缺卡</span></p>
+                <p><i style="background: #E62129;"></i><span class="font">已打卡</span></p>
+                <p><i style="background: #0DC830;"></i><span class="font">缺卡</span></p>
             </div>
             <div class="cardPer">
                 <template v-if="isGroup">
@@ -150,9 +150,7 @@ export default {
         }
     },
     updated(){
-        if(this.list.length==0){
-            this.leng0=false
-        }
+        
     },
     methods: {
         //确定跳转
@@ -457,8 +455,14 @@ export default {
                 if(this.type=='groups'){
                     //群组打卡
                     this.getGroupCard(this.popup.groupid,str);
+                    if(this.list.length==0){
+                        this.leng0=false
+                    }
                 }else{
                     this.getUserCard(this.popup.userid,str);
+                    if(this.list.length==0){
+                        this.leng0=false
+                    }
                 }
             }
         },
@@ -659,22 +663,22 @@ body .mask{
     -webkit-overflow-scrolling : touch;
     position: relative;
 }
- .isios .van-popup--bottom{
-    bottom:100px;
-    height:25vh;
-    .van-picker__columns{
-        height:70% !important;
-        .van-picker-column{
-            height: 100% !important;
-            ul{
-                line-height: 50px !important;
-            }
-        }
-    }
-    .van-picker-column__item{
-        height: 50px !important;
-    }
- }
+//  .isios .van-popup--bottom{
+    // bottom:100px;
+    // height:45vh;
+    // .van-picker__columns{
+    //     height:calc(100% - 160px) !important;
+    //     .van-picker-column{
+    //         height: 100% !important;
+    //         ul{
+    //             line-height: 50px !important;
+    //         }
+    //     }
+    // }
+    // .van-picker-column__item{
+    //     height: 50px !important;
+    // }
+//  }
 
 
 .sureBtn{
@@ -811,5 +815,7 @@ body .mask{
         }
     }
 }
-
+.font{
+    font-size: 32px
+}
 </style>

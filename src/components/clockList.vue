@@ -277,6 +277,7 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
+    font-size: 24px
   }
   .c-func {
   // margin-top: 100px;
