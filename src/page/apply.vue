@@ -139,7 +139,7 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" >
 .apply {
    .hint {
       margin-top: 200px;
@@ -147,9 +147,7 @@ export default {
       text-align: center;
       font-size: 40px;
    }
-  .van-icon-clear{
-    font-size: 36px
-  }
+
   .van-search {
     padding: 20px 36px;
   }
@@ -163,17 +161,13 @@ export default {
   .van-search .van-cell {
     border-radius: 10px;
   }
-  .van-field__left-icon .van-icon, .van-field__right-icon .van-icon{
-    font-size: 40px
+  .van-cell__left-icon, .van-cell__right-icon {
+    line-height: 72px !important;
+    font-size: 40px !important;
   }
-  // .van-cell__left-icon, .van-cell__right-icon {
-  //   line-height: 72px !important;
-  //   font-size: 72px !important;
-  // }
   .apply-list {
     padding: 0 36px;
     position: relative;
-    background: #fff;
   }
   .apply-join {
     position: absolute;

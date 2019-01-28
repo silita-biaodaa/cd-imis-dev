@@ -109,7 +109,7 @@ export default {
             },
             dateObj:{
               dateMask:false,
-              minDate:new Date('2018-01'),
+              minDate:new Date('2019-01'),
               maxDate:new Date(),
               date:''
             },
@@ -178,24 +178,22 @@ export default {
         //确认
         confirm(pick){
             //每次点击确定 重置数据
-            // this.setYear=new Date().getFullYear();
-            // this.setMonth=new Date().getMonth()+1;
-            // this.setDay=new Date().getDate();
+            this.setYear=new Date().getFullYear();
+            this.setMonth=new Date().getMonth()+1;
+            this.setDay=new Date().getDate();
             this.groupArr=[];
 
             let year=this.setYear,
                 mon=this.fillZero(this.setMonth),
                 da=this.fillZero(this.setDay),
                 groid,groname,userid,username;
-            if(this.dateObj.dateMask){//如果是日期选择
+            if(this.dateObj.dateMask){
               let y=new Date().getFullYear(),
                   m=new Date().getMonth()+1;
               if(y!=pick.getFullYear()||m!=pick.getMonth()+1){//如果不等于当前时间，则重新赋值
                 year=pick.getFullYear();
                 mon=this.fillZero(pick.getMonth()+1);
                 da='01';
-                this.setYear=year;
-                this.setMonth=mon;
               }
               groid=this.popup.groupid;
               groname=this.popup.groupName;
@@ -617,16 +615,16 @@ export default {
   font-size: 32px;
 }
 .van-picker{
-//   .van-picker__columns{
-//     height:70% !important;
-//     .van-picker-column{
-//       height: 100% !important;
-//     }
+  .van-picker__columns{
+    height:70% !important;
+    .van-picker-column{
+      height: 100% !important;
+    }
     .van-picker-column__item{
       width: 70%;
       margin: 0 auto;
     }
-//   }
+  }
 }
 
 body .van-picker__cancel,body .van-picker__confirm{
@@ -642,12 +640,12 @@ body .mask{
   max-height: 100vh;
   overflow: hidden;
 }
-//   body .picker-items{
-//     padding:45px 0;
-//   }
-//   body  .van-popup--bottom{
-//     height:25vh;
-//   }
+  body .picker-items{
+    padding:45px 0;
+  }
+  body  .van-popup--bottom{
+    height:25vh;
+  }
  .isios .van-popup--bottom{
    bottom:100px;
    .picker{
@@ -655,13 +653,13 @@ body .mask{
      .picker-items{
        height: 100%;
      }
-    //  .picker-item{
-    //    height: 44px !important;
-    //    line-height: 44px !important;
-    //  }
-    //   .picker-center-highlight{
-        // height: 44px !important;
-    //   }
+     .picker-item{
+       height: 44px !important;
+       line-height: 44px !important;
+     }
+      .picker-center-highlight{
+        height: 44px !important;
+      }
    }
  }
 

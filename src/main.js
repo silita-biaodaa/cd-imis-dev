@@ -57,14 +57,6 @@ const getParam=function(name){  //获取参数
       if(r!=null)return unescape(r[2]); return null;
     }
 }
-
-
-function setHtmlFontSize(){
-    const htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
-    const htmlDom = document.getElementsByTagName('html')[0];
-    htmlDom.style.fontSize = htmlWidth / 10 + 'px';
-};
-setHtmlFontSize();
 //
 const onBridgeReady=function(){  
     WeixinJSBridge.call('hideOptionMenu');  
@@ -108,16 +100,25 @@ router.beforeEach((to, from, next) => {
           }
           if(res.data.isFirst==1){
             //进入打卡
-            next('nav/card')
+            next({
+              name:'card',
+              replace:true
+            })
           }else if(res.data.isFirst==2){
             //进入打卡圈
-            next('nav/friend')
+            next({
+              name:'friend',
+              replace:true
+            })
           }else if(res.data.isFirst==4){//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
               // localStorage.removeItem('isConcern');
               // alert(JSON.stringify(resData.data));
               localStorage.setItem('isConcern',JSON.stringify(resData.data))
-              next('/applyEntry');
+              next({
+                name:'applyEntry',
+                replace:true
+              })
             })
           }else{//初始化
             next()
@@ -131,8 +132,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-const appid='wx393124fdad606b1d';//预发布
-// const appid='wx26999a53385489f9';//生产
+// const appid='wx393124fdad606b1d';//预发布
+const appid='wx26999a53385489f9';//生产
 Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={

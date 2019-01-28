@@ -38,13 +38,15 @@ export default new Router({
           component: friend,
           meta:{
             tabNo:0
-          }
+          },
+          name:'friend'
         },{//打卡
           path: 'card',
           component: Card,
           meta:{
             tabNo:2
-          }
+          },
+          name:'card'
         },{//群组
           path: 'group',
           component: Group,

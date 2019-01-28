@@ -89,7 +89,7 @@
        </div>
        <div class="card-b">
           <div class="card-book">
-            发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计<span>{{pushCount.bonaTotal+pushCount.bonaDays}}</span>善。
+            发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计<span v-show="this.btnTitle == '提交' ? true : false" >{{pushCount.bonaTotal+pushCount.bonaDays}}</span><span v-show="this.btnTitle == '提交' ? false : true" >{{pushCount.bonaTotal}}</span>善。
           </div>
        </div>
         <div class="card-com">
@@ -140,7 +140,7 @@
         </div>
 
         <div class="card-btn" @click="maskFn">
-           <div class="card-div">
+           <div :class="[this.btnTitle =='提交'? 'card-div' : 'card-red' ]">
               {{btnTitle}}
            </div>
         </div>
@@ -175,9 +175,6 @@ export default {
       if(this.btnTitle=='提交'){
         this.mask=true;
         this.tipTxt='确认提交打卡信息？'
-      }else{
-        this.mask=true;
-        this.tipTxt='确认修改打卡信息？'
       }
     },
     gainPer() {
@@ -191,7 +188,8 @@ export default {
               })
 
               if(res.code == 402 ) {
-                 this.btnTitle = '修改'
+                 this.btnTitle = '今日已打卡, 请勿重复提交'
+                 this.first = true
               } else {
                  this.btnTitle = '提交'
               }
@@ -208,16 +206,15 @@ export default {
        })
     },
     punch(){
-      let isUpdate=0;
-      if(this.btnTitle == '修改') {
-         isUpdate=1;
+      if(this.btnTitle == '今日已打卡, 请勿重复提交') {
+         return false
       }
       // if( this.repetition) {
       //    return false
       // }
       // this.repetition = true
       this.loading()
-      pushCard({isUpdate:isUpdate,thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
+      pushCard({thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()
@@ -449,6 +446,15 @@ export default {
       font-size: 36px;
       color: #fff;
       background-color: #E62129;
+      line-height: 96px;
+      text-align: center;
+      border-radius: 12px;
+    }
+    .card-red {
+      height: 96px;
+      font-size: 36px;
+      color: #fff;
+      background-color: #BBBBBB;
       line-height: 96px;
       text-align: center;
       border-radius: 12px;
