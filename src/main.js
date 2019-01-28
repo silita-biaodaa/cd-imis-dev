@@ -108,16 +108,25 @@ router.beforeEach((to, from, next) => {
           }
           if(res.data.isFirst==1){
             //进入打卡
-            next('nav/card')
+            next({
+              name:'card',
+              replace:true
+            })
           }else if(res.data.isFirst==2){
             //进入打卡圈
-            next('nav/friend')
+            next({
+              name:'friend',
+              replace:true
+            })
           }else if(res.data.isFirst==4){//如果为申请入群页面
             groupsDetail(getParam('id')).then(resData =>{
               // localStorage.removeItem('isConcern');
               // alert(JSON.stringify(resData.data));
               localStorage.setItem('isConcern',JSON.stringify(resData.data))
-              next('/applyEntry');
+              next({
+                name:'applyEntry',
+                replace:true
+              })
             })
           }else{//初始化
             next()
