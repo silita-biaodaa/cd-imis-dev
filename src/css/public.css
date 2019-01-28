@@ -11,6 +11,9 @@ html,body {
   font-family: "HanHei SC", "PingFang SC", "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, STHeiti, "WenQuanYi Micro Hei", SimSun, sans-serif;
   
 }
+textarea {  
+	resize:none
+}
 body>div{
   position: absolute;
   left: 0;

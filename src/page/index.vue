@@ -427,9 +427,6 @@
     box-sizing: border-box;
 
     background: #f5f5f5;
-    .van-picker-column__item {
-      font-size: 40px;
-    }
   .toast {
     position: fixed;
     left: 50%;
@@ -721,9 +718,6 @@
     //  display: flex;
     //  justify-content: space-between;
      border-bottom: 1px solid #f5f5f5;
-     .van-popup--bottom {
-       height: 42vh;
-     }
    }
    .cent {
      height: 96px;

@@ -184,13 +184,7 @@ export default {
        recordPer({}).then( res => {
           if(res.code == 1 || res.code == 402 ) {
 
-               res.data.books.forEach((el,i) => {
-                 el.num=el.readCount;
-                 el.readTotal=el.readTotal-el.num;
-                if( ! el.readCount == 0 ) {
-                   this.bookss.push(el)
-               }
-              })
+               
 
               if(res.code == 402 ) {
                  this.btnTitle = '修改'
@@ -198,12 +192,26 @@ export default {
                  this.btnTitle = '提交'
               }
 
+
+              res.data.books.forEach((el,i) => {
+                  el.num=0
+                  if(res.code == 402){
+                    el.num=el.readCount;
+                  }
+                  el.readTotal=el.readTotal-el.num;
+                  if( ! el.readCount == 0 ) {
+                    this.bookss.push(el)
+                  }
+              })
               this.thanks = res.data.thanks
               this.practice = res.data.practice ? res.data.practice : {character: '', work: '', family: ''}
               this.classic = res.data.classic
               this.introspective = res.data.introspective
               this.pushCount = res.data.pushCount
-              this.pushCount.num=this.pushCount.bonaDays
+              this.pushCount.num=0
+              if(res.code==402){
+                this.pushCount.num=this.pushCount.bonaDays
+              }
               this.pushCount.bonaTotal=this.pushCount.bonaTotal-this.pushCount.num
               this.volunteer = res.data.volunteer
               this.books = res.data.bookish ? res.data.bookish : []
