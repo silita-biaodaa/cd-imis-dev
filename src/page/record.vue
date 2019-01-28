@@ -1,5 +1,5 @@
 <template>
-    <div class="groupcard" :class="{mask:popup.mask,isios:isIOS}">
+    <div class="groupcard" :class="{mask:popup.mask,isios:isIOS,leng0:leng0}">
         <div class="calender">
             <div class="ui-datepicker-wrapper ui-datepicker-wrapper-show">
                 <div class="header">
@@ -77,6 +77,7 @@ export default {
     name: "groupcard",
     data() {
         return {
+            leng0:true,//list长度是否不为0
             ret: [],
             thisMonthDays: {},
             headYear:'',//顶部年
@@ -146,6 +147,11 @@ export default {
         window.addEventListener('scroll',this.scrollgun,true);
         if(this.groups&&this.groups.length!=0){
             this.getSignData();
+        }
+    },
+    updated(){
+        if(this.list.length==0){
+            this.leng0=false
         }
     },
     methods: {
@@ -649,7 +655,7 @@ body .mask{
 //   body  .van-popup--bottom{
 //     height:25vh;
 //   }
-.isios.groupcard{
+.isios.groupcard.leng0{
     -webkit-overflow-scrolling : touch;
     position: relative;
 }
