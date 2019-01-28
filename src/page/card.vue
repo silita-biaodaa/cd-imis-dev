@@ -12,7 +12,7 @@
         <div v-for="el in bookss" :key="el.pkid">
             <div class="card-b">
                <div class="card-book">
-                 《{{el.title}}》共朗读<span v-if="!first" >{{el.readCount + el.readTotal}}</span> <span v-else >{{el.readTotal}}</span>  遍
+                 《{{el.title}}》共朗读<span>{{el.readTotal+el.readCount}}</span>  遍
                </div>
             </div>
             <div class="card-com">
@@ -185,6 +185,8 @@ export default {
           if(res.code == 1 || res.code == 402 ) {
 
                res.data.books.forEach((el,i) => {
+                 el.num=el.readCount;
+                 el.readTotal=el.readTotal-el.num;
                 if( ! el.readCount == 0 ) {
                    this.bookss.push(el)
                }
@@ -201,6 +203,8 @@ export default {
               this.classic = res.data.classic
               this.introspective = res.data.introspective
               this.pushCount = res.data.pushCount
+              this.pushCount.num=this.pushCount.bonaDays
+              this.pushCount.bonaTotal=this.pushCount.bonaTotal-this.pushCount.num
               this.volunteer = res.data.volunteer
               this.books = res.data.bookish ? res.data.bookish : []
               this.booklength = this.bookss.length
