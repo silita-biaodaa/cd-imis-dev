@@ -30,7 +30,7 @@
                   <p>{{e.groName}}</p>
                   <p class="notice-s">你已被移出群</p>
                 </div>
-                <div class="notice-btn apply" @click="applyFn(e.groupId)">申请入群</div>
+                <!-- <div class="notice-btn apply" @click="applyFn(e.groupId)">申请入群</div> -->
             </template>
             <template v-else-if="e.type==4">
                 <!--转让-->
@@ -45,7 +45,7 @@
                   <p>{{e.groName}}</p>
                   <p class="notice-s">群主已转让，请重新申请入群</p>
                 </div>
-                <div class="notice-btn apply" @click="applyFn(e.groupId)">申请入群</div>
+                <!-- <div class="notice-btn apply" @click="applyFn(e.groupId)">申请入群</div> -->
             </template>
             <template v-else-if="e.type==6">
                 <!--用户退出群-->
@@ -94,13 +94,13 @@ export default {
          }
       })
     },
-    applyFn(id){//申请入群
-      Addgroup({groId:id}).then( res => {
-        if(res.code == 1 ) {
-          this.$router.go(0)
-        }
-      })
-    }
+    // applyFn(id){//申请入群
+    //   Addgroup({groId:id}).then( res => {
+    //     if(res.code == 1 ) {
+    //       this.$router.go(0)
+    //     }
+    //   })
+    // }
   },
   created () {
     this.gainMessage()
@@ -153,7 +153,6 @@ export default {
          margin-top: 5px;
        }
         .notice-btn {
-          // height: 60px;
           position: absolute;
           right: 36px;
           top: 50%;
@@ -161,11 +160,11 @@ export default {
           text-align: center;
           background:#f8f8f8;
           font-size:28px;
-          padding: 16px 22px;
-          width: 120px;
+          width: 122px;
+          height: 48px;
+          line-height: 48px;
           color: #E62129;
           border-radius: 5px;
-          box-sizing: content-box;
           border: 1PX solid #f8f8f8;
         }
         .apply{
