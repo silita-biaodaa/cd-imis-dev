@@ -18,7 +18,7 @@
             <div class="sign p-line">
              <img src="../assets/img/sign2.png" alt="" class="sign-img">
              <div class="l-put">
-              <div class="label">手机</div> <input type="tel" placeholder="请输入您的联系方式" v-model='user.phone' @blur='textM' ref='Moblie' >
+              <div class="label">手机</div> <input type="tel" placeholder="请输入您的联系方式" v-model='user.phone' ref='Moblie' >
              </div>
            </div>
             <div class="l-put p-line ">
@@ -115,15 +115,15 @@
         </div>
       </div>
 
-      <div class='toast' v-show='layout' >
+      <!-- <div class='toast' v-show='layout' >
           请输入正确的手机号码
-      </div>
+      </div> -->
       <div class="toast" v-show="mask">
           个人信息更新成功
       </div>
-      <div class="toast" v-show="text1">
+      <!-- <div class="toast" v-show="text1">
           请输入正确的手机号码
-      </div>
+      </div> -->
       <div class="toast" v-show="text2">
           请输入您的姓名
       </div>
@@ -138,7 +138,7 @@ import { Personage, Saveuser } from '@/api/index'
 export default {
   data () {
     return {
-       layout:false,
+      //  layout:false,
        user:[],
        bookss: [],
        books:[],
@@ -149,30 +149,30 @@ export default {
        delay:true,
        mask:false,
        newbook:[],
-       text1:false,
+      //  text1:false,
        text2:false,
        text3:false
     }
   },
   methods: {
-      textM() {
-      window.scroll(0,0)
-      var myreg= /^[1][3,4,5,6,7,8,9][0-9]{9}$/
-      if( myreg.test(this.user.phone)) {
-          this.$refs.Moblie.style.color = '#000'
-          this.Number = true
-      } else {
-          this.$refs.Moblie.style.color = 'red'
-          this.Number = false
-          this.layout = true
-          this.verify()
-      }
-    },
-    verify() {
-       setTimeout(() => {
-          this.layout = false
-       }, 1500);
-    },
+    //   textM() {
+    //   window.scroll(0,0)
+    //   var myreg= /^[1][3,4,5,6,7,8,9][0-9]{9}$/
+    //   if( myreg.test(this.user.phone)) {
+    //       this.$refs.Moblie.style.color = '#000'
+    //       this.Number = true
+    //   } else {
+    //       this.$refs.Moblie.style.color = 'red'
+    //       this.Number = false
+    //       this.layout = true
+    //       this.verify()
+    //   }
+    // },
+    // verify() {
+    //    setTimeout(() => {
+    //       this.layout = false
+    //    }, 1500);
+    // },
     bblur() {
       window.scroll(0,0);
     },
@@ -184,13 +184,13 @@ export default {
     },
     record() {
           this.pass = true
-         if (!this.user.phone && !this.Number ) {
-           this.pass = false
-           this.text1 = true
-          return setTimeout(() => {
-                 this.text1 = false
-                }, 1500);
-         }
+        //  if (!this.user.phone && !this.Number ) {
+        //    this.pass = false
+        //    this.text1 = true
+        //   return setTimeout(() => {
+        //          this.text1 = false
+        //         }, 1500);
+        //  }
          if(!this.user.name) {
           this.pass = false
           this.text2 = true
@@ -422,6 +422,7 @@ export default {
       width:33%;
       border-color: #ccc;
       height: 61px;
+      border-width: 1PX
     }
     .van-stepper__minus {
       border-radius: 18px 0 0 18px;
