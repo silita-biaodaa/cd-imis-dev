@@ -265,7 +265,7 @@ export default {
   created () {
     let local=localStorage.getItem('cardPushData');
     let isup=localStorage.getItem('isUpdate');
-    if(local&&isuo&&isup==0){
+    if(local&&isup&&isup==0){
       this.pushData=JSON.parse(local);
       return false
     }
