@@ -325,7 +325,9 @@ export default {
       width:2px !important;
       color: #999 !important;
     }
-
+    .van-stepper__minus, .van-stepper__plus{
+      border-width: 1PX
+    }
   }
 }
 .tit-box{

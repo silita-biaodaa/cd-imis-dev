@@ -5,17 +5,17 @@
        <van-search placeholder="请输入搜索关键词" v-model="keywords" @blur="ajax('search')" />
       <ul class="listBox" v-show=" this.list.length" >
         <li v-for="(o,i) of list" :key="i" >
-          <div class="left">
+          <div class="left"  @click="jumpFriend(i)">
             <img :src="o.imgUrl">
           </div>
-          <div class="right"  @click="jumpFriend(i)">
+          <div class="right">
             <h5>{{o.name}}</h5>
             <p>
               打卡第<span style="color: #E62129">{{o.pushDays}}</span>天，本月缺卡<span style="color:#0BA61D">{{o.monthLostCount}}</span>次，共缺卡<span style="color:#D8B305">{{o.lostCount}}</span>次。
             </p>
           </div>
-          <span class="delete" @click="deleteFn(i)" v-if="o.isCreate!=1&&type==true"></span>
-          <span class="turn" @click="turnFn(i)" v-if="o.isCreate!=1&&type==true"></span>
+          <span class="delete" @click="deleteFn(i)" v-if="o.isCreate!=1&&type!='false'"></span>
+          <span class="turn" @click="turnFn(i)" v-if="o.isCreate!=1&&type!='false'"></span>
         </li>
       </ul>
       <div class="hint" v-show=" !this.list.length && !this.keywords.trim()">
@@ -54,7 +54,9 @@
         noGet:true,
         text3: false,
         text2: false,
-        btnTxt:'解散群组'
+        btnTxt:'解散群组',
+        isClick1:true,
+        isClick2:true,
       }
     },
     name:'groupUser',
@@ -91,6 +93,7 @@
           }
           this.list.splice(i,1);
           groupUser.removeUser(data).then(res =>{
+            this.isClick1=true;
             if(res.code==1){
               this.text3 = true
               setTimeout(() => {
@@ -104,6 +107,7 @@
             invite:this.list[i].pkid
           }
           groupUser.changeGrouper(data).then(res =>{
+            this.isClick2=true;
             if(res.code==1){
                this.text2 = true
               setTimeout(() => {
@@ -131,11 +135,19 @@
         } 
       },
       deleteFn(i){
+        if(!this.isClick1){
+          return false
+        }
+        this.isClick1=false;
         this.thisNum=i;
         this.tipTxt='确认要删除该家人？'
         this.mask=true;
       },
       turnFn(i){
+        if(!this.isClick2){
+          return false
+        }
+        this.isClick2=false;
         this.thisNum=i;
         this.tipTxt='确认要转让该群组？';
         this.mask=true;

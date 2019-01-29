@@ -157,6 +157,11 @@
         if(obj.fullTxt=='收起'){
           obj.isFull=false;
           obj.fullTxt='全文';
+          let data={
+              behavior:"smooth",
+              block:"start",
+          }
+          document.getElementsByClassName('f-content')[i].scrollIntoView(data);
         }else{
           obj.isFull=true;
           obj.fullTxt='收起';

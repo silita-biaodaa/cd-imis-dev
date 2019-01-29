@@ -41,7 +41,8 @@
     watch: {
     	//监控集合
 	  	'$route': function (route) {
-          this.$router.go(0)
+          // this.$router.go(0);
+          location.reload();
       },
     },
     // components:{

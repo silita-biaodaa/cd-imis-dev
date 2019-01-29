@@ -157,7 +157,7 @@ export default {
     line-height: 72px;
   }
   .van-field__control {
-    font-size: 36px;
+    font-size: 32px;
     text-align: center;
   }
   .van-search .van-cell {
