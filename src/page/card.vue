@@ -245,6 +245,7 @@ export default {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()
+             localStorage.setItem('isUpdate',isUpdate);
              localStorage.removeItem('cardPushData');
               this.$router.push({path:'/nav/friend'})
            }
@@ -263,7 +264,8 @@ export default {
   },
   created () {
     let local=localStorage.getItem('cardPushData');
-    if(local){
+    let isup=localStorage.getItem('isUpdate');
+    if(local&&isuo&&isup==0){
       this.pushData=JSON.parse(local);
       return false
     }

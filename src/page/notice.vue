@@ -51,7 +51,7 @@
                 <!--用户退出群-->
                 <div class="notice-t">
                   <p>{{e.name}}</p>
-                  <p class="notice-s">已退出{{e.groName}}群</p>
+                  <p class="notice-s">已退出{{e.groName}}</p>
                 </div>
             </template>
             <template v-else-if="7">

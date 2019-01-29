@@ -25,6 +25,7 @@
           查询无结果
       </div>
       <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="maskFn"></v-popup>
+      <v-toast :toastTxt="toastTxt" :mask="maskToast"></v-toast>
       <div class="toast" v-show="text3">
           删除成功
       </div>
@@ -46,6 +47,8 @@
         groId:'',//群id
         img:'',//群头像
         mask:false,
+        maskToast:false,
+        toastTxt:'',
         thisNum:'',
         tipTxt:'',
         pageList: {total: '',pageNo:1,pageSize:8},
@@ -115,6 +118,13 @@
               this.$router.replace({
                 path:'/nav/group',
               })
+            }else{
+              this.toastTxt=res.msg;
+              this.maskToast=true;
+              setTimeout(() => {
+                this.maskToast = false;
+                location.reload();
+              }, 1000);
             }
           })
         }else{

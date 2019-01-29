@@ -200,6 +200,14 @@ export default {
                 da='01';
                 this.setYear=year;
                 this.setMonth=mon;
+                this.setDay=da;
+              }else{
+                year=pick.getFullYear();
+                mon=this.fillZero(pick.getMonth()+1);
+                this.setYear=year;
+                this.setMonth=mon;
+                this.setDay=new Date().getDate();
+                da=this.setDay;
               }
               groid=this.popup.groupid;
               groname=this.popup.groupName;
