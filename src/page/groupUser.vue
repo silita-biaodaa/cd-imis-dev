@@ -14,8 +14,8 @@
               打卡第<span style="color: #E62129">{{o.pushDays}}</span>天，本月缺卡<span style="color:#0BA61D">{{o.monthLostCount}}</span>次，共缺卡<span style="color:#D8B305">{{o.lostCount}}</span>次。
             </p>
           </div>
-          <span class="delete" @click="deleteFn(i)" v-if="o.isCreate!=1&&type!='false'"></span>
-          <span class="turn" @click="turnFn(i)" v-if="o.isCreate!=1&&type!='false'"></span>
+          <span class="delete" @click="deleteFn(i)" v-if="o.isCreate!=1&&type==0"></span>
+          <span class="turn" @click="turnFn(i)" v-if="o.isCreate!=1&&type==0"></span>
         </li>
       </ul>
       <div class="hint" v-show=" !this.list.length && !this.keywords.trim()">
@@ -114,7 +114,6 @@
               setTimeout(() => {
                 this.text2 = false
               }, 1500);
-              this.type='false';
               this.ajax();
             }
           })
@@ -231,7 +230,7 @@
       this.type=this.$route.query.type;
       this.groId=this.$route.query.id;
       this.img=this.$route.params.img;
-      if(this.type&&this.type!='false'){
+      if(this.type==0){
         this.btnTxt='解散该群'
       }else{
         this.btnTxt='退出该群'

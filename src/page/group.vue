@@ -22,7 +22,7 @@
         <van-icon :name="this.folds[0].showContent ? 'arrow-down' : 'arrow'"/>
        </div>
          <div class="group-p" v-show="this.folds[0].showContent" >
-          <div class="group-list ld-left g-h" v-for="(e,i) in creates" :key='i' @click="jump(i,true)">
+          <div class="group-list ld-left g-h" v-for="(e,i) in creates" :key='i' @click="jump(i,0)">
             <div class="group-img">
               <img :src="e.imgUrl" alt="">
             </div>
@@ -44,7 +44,7 @@
         <!-- <i :class=" this.folds[1].showContent ? 'iconfont icon-jiantouxia g-size ' : 'iconfont icon-jiantouyou g-size' "></i> -->
        </div>
          <div class="group-p" v-show="this.folds[1].showContent" >
-          <div class="group-list ld-left "  @click="jump(i,false)" v-for="(e,i) in join" :key='i' >
+          <div class="group-list ld-left "  @click="jump(i,1)" v-for="(e,i) in join" :key='i' >
             <div class="group-img">
               <img :src="e.imgUrl" alt="">
             </div>
@@ -84,7 +84,7 @@ export default {
       //跳转群成员
       jump(i,type){
         let id,name;
-        if(type){
+        if(type==0){
           id=this.creates[i].groId;
           name=this.creates[i].groName;
           // imgUrl=this.creates[i].imgUrl;
