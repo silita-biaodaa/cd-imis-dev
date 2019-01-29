@@ -224,7 +224,6 @@
     height: 83px;
     width: 83px;
     position: absolute;
-    background: red;
     border-radius: 50%;
     top: 37px;
     left: 37px;

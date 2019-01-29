@@ -9,7 +9,7 @@
           </div>
        </div>
 
-        <div v-for="el in bookss" :key="el.pkid">
+        <div v-for="el in pushData.bookss" :key="el.pkid">
             <div class="card-b">
                <div class="card-book">
                  《{{el.title}}》共朗读<span>{{el.readTotal+el.readCount}}</span>  遍
@@ -25,7 +25,7 @@
         </div>
 
 
-        <div  v-for="(item,index) in books" :key="index">
+        <div  v-for="(item,index) in pushData.books" :key="index">
            <div class="card-b card-book add-book">
              <span>书本 ({{index + booklength + 1}})</span>
              <span class="del-book" @click='cardDel(index)'  v-if="!first" >删除</span>
@@ -52,7 +52,7 @@
             经典名句分享
         </div>
         <div class="card-put">
-          <textarea  rows="4" placeholder='请输入您要分享的经典名句'  v-model="classic" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
+          <textarea  rows="4" placeholder='请输入您要分享的经典名句'  v-model="pushData.classic" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
         </div>
 
         <div class="card-top card-com laca card-ma">
@@ -65,17 +65,17 @@
        </div>
        <div class="card-com">
           <div class="l-put">
-               <div class="label label-f">修身</div> <input type="text" placeholder="请输入今日您对个人的贡献" v-model="practice.character" @blur='bblur' :disabled='first' >
+               <div class="label label-f">修身</div> <input type="text" placeholder="请输入今日您对个人的贡献" v-model="pushData.practice.character" @blur='bblur' :disabled='first' >
           </div>
        </div>
        <div class="card-com">
           <div class="l-put">
-               <div class="label label-f label-t">齐家</div> <input type="text" placeholder="请输入今日您对家庭和家人的贡献"  v-model="practice.family" @blur='bblur' :disabled='first' >
+               <div class="label label-f label-t">齐家</div> <input type="text" placeholder="请输入今日您对家庭和家人的贡献"  v-model="pushData.practice.family" @blur='bblur' :disabled='first' >
           </div>
        </div>
        <div class="card-com">
           <div class="l-put">
-               <div class="label label-f label-t">建功</div> <input type="text" placeholder="请输入今日您对工作的贡献" v-model="practice.work" @blur='bblur' :disabled='first' >
+               <div class="label label-f label-t">建功</div> <input type="text" placeholder="请输入今日您对工作的贡献" v-model="pushData.practice.work" @blur='bblur' :disabled='first' >
           </div>
        </div>
 
@@ -89,13 +89,13 @@
        </div>
        <div class="card-b">
           <div class="card-book">
-            发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计<span>{{pushCount.bonaTotal+pushCount.bonaDays}}</span>善。
+            发愿从{{pushData.pushCount.bonaStart}}起，{{pushData.pushCount.years}}年内{{pushData.pushCount.days * pushData.pushCount.bonaCount }}善事，累计<span>{{pushData.pushCount.bonaTotal+pushData.pushCount.bonaDays}}</span>善。
           </div>
        </div>
         <div class="card-com">
                <div class="l-pu">
                     <div class="label label-f">今日行善次数</div>
-                    <van-stepper  v-model="pushCount.bonaDays" class="l-mi" :min="0" :disabled='first' />
+                    <van-stepper  v-model="pushData.pushCount.bonaDays" class="l-mi" :min="0" :disabled='first' />
                </div>
        </div>
        <div class="card-top card-com laca card-ma">
@@ -109,7 +109,7 @@
             </div>
        </div>
        <div class="card-put">
-          <textarea  rows="4" placeholder='请输入您要分享的志愿'  v-model="volunteer" class="ccc" @blur='bblur' :disabled='first' ></textarea>
+          <textarea  rows="4" placeholder='请输入您要分享的志愿'  v-model="pushData.volunteer" class="ccc" @blur='bblur' :disabled='first' ></textarea>
         </div>
         <div class="card-top card-com laca card-ma">
           <div class="tit-box">
@@ -122,7 +122,7 @@
           </div>
        </div>
        <div class="card-put">
-          <textarea  :disabled='first' rows="4" placeholder='请输入您的反省及觉悟'  v-model="introspective" class="ccc" @blur='bblur'  ></textarea>
+          <textarea  :disabled='first' rows="4" placeholder='请输入您的反省及觉悟'  v-model="pushData.introspective" class="ccc" @blur='bblur'  ></textarea>
         </div>
          <div class="card-top card-com laca card-ma">
            <div class="tit-box">
@@ -136,7 +136,7 @@
            
        </div>
        <div class="card-put">
-          <textarea  :disabled='first' rows="4" placeholder='请输入您的感谢'  v-model="thanks" class="ccc tanks" @blur='bblur'  ></textarea>
+          <textarea  :disabled='first' rows="4" placeholder='请输入您的感谢'  v-model="pushData.thanks" class="ccc tanks" @blur='bblur'  ></textarea>
         </div>
 
         <div class="card-btn" @click="maskFn">
@@ -150,24 +150,35 @@
 <script>
 import { recordPer , pushCard, groups } from '@/api/index'
 export default {
+  name:'card',
   data () {
     return {
-      books:[],
       // booksss:[],
       num:'',
-      bookss:[],
-      pushCount: {},  //积善行
-      volunteer: '', // 立志愿
-      classic: '',  // 经典名句
-      practice: { character: '' ,work: '', family: ''},  //行～实践
-      introspective: '', //省省悟
-      thanks: '', //感谢
-      btnTitle:'',
+      pushData:{
+        books:[],
+        bookss:[],
+        pushCount: {},  //积善行
+        volunteer: '', // 立志愿
+        classic: '',  // 经典名句
+        practice: { character: '' ,work: '', family: ''},  //行～实践
+        introspective: '', //省省悟
+        thanks: '', //感谢
+      },
+      btnTitle:'提交',
       first:false,
       mask:false,
       tipTxt:'',
       booklength:0,
       repetition: false
+    }
+  },
+  watch:{
+    pushData:{
+      deep:true,
+      handler:function (newVal,oldVal){
+        localStorage.setItem('cardPushData',JSON.stringify(newVal));
+      }
     }
   },
   methods: {
@@ -181,6 +192,7 @@ export default {
       }
     },
     gainPer() {
+      let that=this;
        recordPer({}).then( res => {
           if(res.code == 1 || res.code == 402 ) {
 
@@ -200,22 +212,22 @@ export default {
                   }
                   el.readTotal=el.readTotal-el.num;
                   if( ! el.readCount == 0 ) {
-                    this.bookss.push(el)
+                    this.pushData.bookss.push(el)
                   }
               })
-              this.thanks = res.data.thanks
-              this.practice = res.data.practice ? res.data.practice : {character: '', work: '', family: ''}
-              this.classic = res.data.classic
-              this.introspective = res.data.introspective
-              this.pushCount = res.data.pushCount
-              this.pushCount.num=0
+              that.pushData.thanks = res.data.thanks
+              that.pushData.practice = res.data.practice ? res.data.practice : {character: '', work: '', family: ''}
+              that.pushData.classic = res.data.classic
+              that.pushData.introspective = res.data.introspective
+              that.pushData.pushCount = res.data.pushCount
+              that.pushData.pushCount.num=0
               if(res.code==402){
-                this.pushCount.num=this.pushCount.bonaDays
+                that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
               }
-              this.pushCount.bonaTotal=this.pushCount.bonaTotal-this.pushCount.num
-              this.volunteer = res.data.volunteer
-              this.books = res.data.bookish ? res.data.bookish : []
-              this.booklength = this.bookss.length
+              that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+              that.pushData.volunteer = res.data.volunteer
+              that.pushData.books = res.data.bookish ? res.data.bookish : []
+              that.pushData.booklength = that.pushData.bookss.length
           }
        })
     },
@@ -229,31 +241,37 @@ export default {
       // }
       // this.repetition = true
       this.loading()
-      pushCard({isUpdate:isUpdate,thanks:this.thanks,practice:this.practice,books:this.bookss,classic:this.classic,introspective:this.introspective,volunteer:this.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
+      pushCard({isUpdate:isUpdate,thanks:this.pushData.thanks,practice:this.pushData.practice,books:this.pushData.bookss,classic:this.pushData.classic,introspective:this.pushData.introspective,volunteer:this.pushData.volunteer,pushCount:this.pushData.pushCount,isPub:'1',bookish:this.pushData.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()
+             localStorage.removeItem('cardPushData');
               this.$router.push({path:'/nav/friend'})
            }
       })
     },
     cardBook () {
       let data={title:'',readCount:1,readTotal:0}
-       this.books.push(data)
+       this.pushData.books.push(data)
     },
     cardDel(i) {
-       this.books.splice(i,1)
+       this.pushData.books.splice(i,1)
     },
     bblur() {
       window.scroll(0,0);
     },
   },
   created () {
+    let local=localStorage.getItem('cardPushData');
+    if(local){
+      this.pushData=JSON.parse(local);
+      return false
+    }
      this.gainPer()
   },
   components: {
   },
-    mounted() {
+  mounted() {
     window.addEventListener('resize', () => {
     const activeElement = document.activeElement
     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {

@@ -147,7 +147,7 @@ html,body {
 }
 div .group {
   background: #f5f5f5;
-  height: 100%;
+  height:calc(100% - 100px);
    overflow-y: scroll;
   .g-size {
     font-size: 34px;

@@ -99,6 +99,7 @@
               setTimeout(() => {
                 this.text3 = false
               }, 1500);
+              this.ajax();
             }
           })
         }else if(this.tipTxt=='确认要转让该群组？'){
@@ -113,6 +114,8 @@
               setTimeout(() => {
                 this.text2 = false
               }, 1500);
+              this.type='false';
+              this.ajax();
             }
           })
         }else{
@@ -366,7 +369,7 @@
     border-radius: 10px;
   }
   .van-field__control {
-    font-size: 36px;
+    font-size: 32px;
     text-align: center;
   }
   .van-field__left-icon .van-icon, .van-field__right-icon .van-icon{
