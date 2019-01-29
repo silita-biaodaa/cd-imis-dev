@@ -43,7 +43,7 @@
                 <!--重新申请-->
                 <div class="notice-t">
                   <p>{{e.groName}}</p>
-                  <p class="notice-s">群主已转让，请重新申请入群</p>
+                  <p class="notice-s">群主已转让，请重新申请</p>
                 </div>
                 <!-- <div class="notice-btn apply" @click="applyFn(e.groupId)">申请入群</div> -->
             </template>

@@ -99,6 +99,7 @@
               setTimeout(() => {
                 this.text3 = false
               }, 1500);
+              this.list=[];
               this.ajax();
             }
           })
@@ -110,11 +111,10 @@
           groupUser.changeGrouper(data).then(res =>{
             this.isClick2=true;
             if(res.code==1){
-               this.text2 = true
-              setTimeout(() => {
-                this.text2 = false
-              }, 1500);
-              this.ajax();
+              this.text2 = true
+              this.$router.replace({
+                path:'/nav/group',
+              })
             }
           })
         }else{
