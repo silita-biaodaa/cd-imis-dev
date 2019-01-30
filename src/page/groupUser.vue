@@ -173,7 +173,7 @@
         this.mask=true;
       },
       ajax(type){
-        this.loading();
+        // this.loading();
         if(type=='search'){
           this.pageList.pageNo=1;
           this.noGet=false;
@@ -186,7 +186,7 @@
           keywords:this.keywords,
         }
         CardRecord.groupPerson(data).then(res =>{
-          this.hideLoading();
+          // this.hideLoading();
 		      this.isScroll=true;
           if(res){
             if(that.pageList.pageNo>1){

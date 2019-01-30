@@ -35,7 +35,7 @@
         list: [] ,
         isScroll:true,
         noGet:false,
-        pageList: {total: '',pageNo:1,pageSize:2},
+        pageList: {total: '',pageNo:1,pageSize:4},
       }
     },
     watch: {

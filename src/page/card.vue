@@ -177,7 +177,9 @@ export default {
     pushData:{
       deep:true,
       handler:function (newVal,oldVal){
-        localStorage.setItem('cardPushData',JSON.stringify(newVal));
+        if(newVal.bonaCount!=undefined&&newVal.bonaStart!=undefined&&newVal.bonaTotal!=undefined&&newVal.days!=undefined&&newVal.years!=undefined){
+            localStorage.setItem('cardPushData',JSON.stringify(newVal));
+        }
       }
     }
   },
@@ -188,7 +190,7 @@ export default {
         this.tipTxt='确认提交打卡信息？'
       }else{
         this.mask=true;
-        this.tipTxt='确认修改打卡信息？'
+        this.tipTxt='修改会覆盖今日打卡内容，是否确认修改？'
       }
     },
     gainPer() {
@@ -196,20 +198,37 @@ export default {
        recordPer({}).then( res => {
           if(res.code == 1 || res.code == 402 ) {
 
-               
 
               if(res.code == 402 ) {
                  this.btnTitle = '修改'
               } else {
                  this.btnTitle = '提交'
               }
-
+              let local=localStorage.getItem('cardPushData');
+              if(local){
+                that.pushData=JSON.parse(local);
+                let arr=[];
+                that.pushData.bookss.forEach((el,i) => {
+                    el.num=0;
+                    if(res.code == 402){
+                      el.num=el.readCount;
+                    }
+                    el.readTotal=el.readTotal-el.num;
+                    if( ! el.readCount == 0 ) {
+                      arr.push(el);
+                    }
+                })
+                that.pushData.bookss=arr;
+                that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
+                that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+                return false
+              } 
 
               res.data.books.forEach((el,i) => {
                   el.num=0
-                  if(res.code == 402){
-                    el.num=el.readCount;
-                  }
+                  // if(res.code == 402){
+                  //   el.num=el.readCount;
+                  // }
                   el.readTotal=el.readTotal-el.num;
                   if( ! el.readCount == 0 ) {
                     this.pushData.bookss.push(el)
@@ -221,13 +240,11 @@ export default {
               that.pushData.introspective = res.data.introspective
               that.pushData.pushCount = res.data.pushCount
               that.pushData.pushCount.num=0
-              if(res.code==402){
-                that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
-              }
               that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
               that.pushData.volunteer = res.data.volunteer
               that.pushData.books = res.data.bookish ? res.data.bookish : []
-              that.pushData.booklength = that.pushData.bookss.length
+              that.pushData.booklength = that.pushData.bookss.length;
+              localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
           }
        })
     },
@@ -263,12 +280,6 @@ export default {
     },
   },
   created () {
-    let local=localStorage.getItem('cardPushData');
-    let isup=localStorage.getItem('isUpdate');
-    if(local&&isup&&isup==0){
-      this.pushData=JSON.parse(local);
-      return false
-    }
      this.gainPer()
   },
   components: {
