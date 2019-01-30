@@ -176,7 +176,7 @@ export default {
     pushData:{
       deep:true,
       handler:function (newVal,oldVal){
-        if(newVal.bonaCount!=undefined&&newVal.bonaStart!=undefined&&newVal.bonaTotal!=undefined&&newVal.days!=undefined&&newVal.years!=undefined){
+        if(newVal.pushCount.bonaCount!=undefined&&newVal.pushCount.bonaStart!=undefined&&newVal.pushCount.bonaTotal!=undefined&&newVal.pushCount.days!=undefined&&newVal.pushCount.years!=undefined){
             localStorage.setItem('cardPushData',JSON.stringify(newVal));
         }
       }
