@@ -199,8 +199,10 @@ export default {
                 }, 1500);
         }
         this.books.forEach( el => {
+              el.readCount=el.readCount*1;
+              el.readTotal=0
               var arr = Object.keys(el)
-               if(  arr.length != 2 ) {
+               if(  arr.length < 2 ) {
                   this.pass = false;
                     this.text3 = true
                     return setTimeout(() => {
@@ -210,6 +212,7 @@ export default {
         });
          this.delay = true
         if( this.pass && this.delay ) {
+          let that=this;
            this.delay = false
            this.pushCount.volunteer = this.values
            this.pushCount.bonaStart = this.pushCount.bonaStart.replace('年','-')
@@ -221,6 +224,15 @@ export default {
               if(res.code ==1) {
                   //保存用户信息
                   localStorage.setItem('userName',this.user.name)
+                  let local=localStorage.getItem('cardPushData');
+                  if(local){
+                    let data=JSON.parse(local)
+                    data.pushCount=this.pushCount;
+                    console.log(this.bookss);
+                    data.bookss=this.newbook;
+                    data.volunteer=this.values;
+                    localStorage.setItem('cardPushData',JSON.stringify(data));
+                  }
                  this.delay = true
                  this.mask = true
                  this.gainUser()
