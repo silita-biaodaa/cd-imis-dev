@@ -452,12 +452,12 @@ export default {
     }
     .van-stepper__minus::before, .van-stepper__plus::before {
       width: 20px !important;
-      height: 2px !important;
+      height: 1PX !important;
       color: #999 !important;
     }
     .van-stepper__minus::after, .van-stepper__plus::after {
       height: 20px !important;
-      width:2px !important;
+      width:1PX !important;
       color: #999 !important;
     }
   }
