@@ -63,9 +63,8 @@
       text-decoration: none;
     }
     .nav {
-      // height: calc(100vh - 100px);
-      overflow: auto;
-      // padding-bottom: 100px
+      height: calc(100vh - 100px);
+      overflow: auto;       
     }
     .bar-b {
       background: #fff;

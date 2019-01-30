@@ -1,23 +1,25 @@
 
 <template>
   <div class="groupUser">
-      <v-head :head-txt="groupName" :head-type="'qrCode'" @jump="jumpQrCode"></v-head>
-       <van-search placeholder="请输入搜索关键词" v-model="keywords" @blur="ajax('search')" />
-      <ul class="listBox" v-show=" this.list.length" >
-        <li v-for="(o,i) of list" :key="i" >
-          <div class="left"  @click="jumpFriend(i)">
-            <img :src="o.imgUrl">
-          </div>
-          <div class="right">
-            <h5>{{o.name}}</h5>
-            <p>
-              打卡第<span style="color: #E62129">{{o.pushDays}}</span>天，本月缺卡<span style="color:#0BA61D">{{o.monthLostCount}}</span>次，共缺卡<span style="color:#D8B305">{{o.lostCount}}</span>次。
-            </p>
-          </div>
-          <span class="delete" @click="deleteFn(i)" v-if="o.isCreate!=1&&type==0"></span>
-          <span class="turn" @click="turnFn(i)" v-if="o.isCreate!=1&&type==0"></span>
-        </li>
-      </ul>
+      <div class="box">
+        <v-head :head-txt="groupName" :head-type="'qrCode'" @jump="jumpQrCode"></v-head>
+        <van-search placeholder="请输入搜索关键词" v-model="keywords" @blur="ajax('search')" />
+        <ul class="listBox" v-show=" this.list.length" >
+          <li v-for="(o,i) of list" :key="i" >
+            <div class="left"  @click="jumpFriend(i)">
+              <img :src="o.imgUrl">
+            </div>
+            <div class="right">
+              <h5>{{o.name}}</h5>
+              <p>
+                打卡第<span style="color: #E62129">{{o.pushDays}}</span>天，本月缺卡<span style="color:#0BA61D">{{o.monthLostCount}}</span>次，共缺卡<span style="color:#D8B305">{{o.lostCount}}</span>次。
+              </p>
+            </div>
+            <span class="delete" @click="deleteFn(i)" v-if="o.isCreate!=1&&type==0"></span>
+            <span class="turn" @click="turnFn(i)" v-if="o.isCreate!=1&&type==0"></span>
+          </li>
+        </ul>
+      </div>
       <div class="hint" v-show=" !this.list.length && !this.keywords.trim()">
           暂无群成员
       </div>
@@ -267,7 +269,10 @@
 .groupUser{
   -webkit-overflow-scrolling : touch;
   position: relative;
-  padding-bottom: 100px
+}
+.box{
+  height:calc(100% - 96px);
+  overflow: auto;
 }
 .fixBtn{
   position: fixed;
