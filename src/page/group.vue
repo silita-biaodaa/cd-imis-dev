@@ -67,6 +67,7 @@
 </template>
 <script>
 import { groups,Count } from "@/api/index";
+import { setTimeout } from 'timers';
 export default {
     data() {
       return {
@@ -129,11 +130,13 @@ export default {
       },
       show(i) {
         this.folds[i].showContent = !this.folds[i].showContent
-        let bodyH=document.documentElement.clientHeight || document.body.clientHeight,
-            boxH=document.getElementsByClassName('group-box')[0].clientHeight;
-        if(boxH>bodyH){
-          this.isLeng=true
-        }
+        setTimeout(function(){
+          let bodyH=document.documentElement.clientHeight || document.body.clientHeight,
+              boxH=document.getElementsByClassName('group-box')[0].clientHeight;
+          if(boxH>bodyH){
+            this.isLeng=true
+          }
+        },400)
       }
     },
     created () {

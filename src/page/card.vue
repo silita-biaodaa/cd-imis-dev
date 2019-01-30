@@ -8,7 +8,6 @@
               知学习
           </div>
        </div>
-
         <div v-for="el in pushData.bookss" :key="el.pkid">
             <div class="card-b">
                <div class="card-book">

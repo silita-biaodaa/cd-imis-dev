@@ -110,7 +110,7 @@ export default {
             },
             dateObj:{
               dateMask:false,
-              minDate:new Date('2018-01'),
+              minDate:new Date('2019-01'),
               maxDate:new Date(),
               date:''
             },
