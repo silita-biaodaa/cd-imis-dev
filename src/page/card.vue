@@ -190,7 +190,7 @@ export default {
         this.tipTxt='确认提交打卡信息？'
       }else{
         this.mask=true;
-        this.tipTxt='修改会覆盖今日打卡内容，是否确认修改？'
+        this.tipTxt='修改会覆盖今日打卡内容，是否继续？'
       }
     },
     gainPer() {
@@ -218,17 +218,19 @@ export default {
                       arr.push(el);
                     }
                 })
-                that.pushData.bookss=arr;
-                that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
-                that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+                  that.pushData.bookss=arr;
+                if(res.code==402){
+                  that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
+                  that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+                }
                 return false
               } 
 
               res.data.books.forEach((el,i) => {
                   el.num=0
-                  // if(res.code == 402){
-                  //   el.num=el.readCount;
-                  // }
+                  if(res.code == 402){
+                    el.num=el.readCount;
+                  }
                   el.readTotal=el.readTotal-el.num;
                   if( ! el.readCount == 0 ) {
                     this.pushData.bookss.push(el)
@@ -240,6 +242,9 @@ export default {
               that.pushData.introspective = res.data.introspective
               that.pushData.pushCount = res.data.pushCount
               that.pushData.pushCount.num=0
+              if(res.code==402){
+                that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
+              }
               that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
               that.pushData.volunteer = res.data.volunteer
               that.pushData.books = res.data.bookish ? res.data.bookish : []
@@ -262,7 +267,6 @@ export default {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()
-             localStorage.setItem('isUpdate',isUpdate);
              localStorage.removeItem('cardPushData');
               this.$router.push({path:'/nav/friend'})
            }

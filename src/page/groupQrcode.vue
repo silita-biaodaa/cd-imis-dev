@@ -3,7 +3,7 @@
     <div class="groupQrcode">
         <v-head :head-txt="'群二维码名片'"></v-head>
         <div class="bigBox">
-            <div class="box">
+            <div class="qrcode-box">
                 <div class="top-box">
                     <div class="img-box">
                         <img :src="imgurl"/>
@@ -135,7 +135,7 @@ export default {
 .bigBox{
     background: #f2f2f2;
     padding: 200px 40px 0;
-    .box{
+    .qrcode-box{
         background: #fff;
         padding: 30px;
     }

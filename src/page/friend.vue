@@ -121,7 +121,6 @@
         let getSt=document.documentElement.scrollTop || document.body.scrollTop,
           getWh=document.documentElement.clientHeight || document.body.clientHeight;
         let scrollBottom=this.sh()-(getSt+getWh),//滚动条距离底部距离
-          rem=parseInt(window.getComputedStyle(document.documentElement)["fontSize"]),
           h=100;
         if(this.noGet){
           return false
