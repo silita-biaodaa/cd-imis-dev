@@ -16,7 +16,7 @@
              </div>
            </div>
             <div class="sign p-line">
-             <img src="../assets/img/sign2.png" alt="" class="sign-img">
+             <!-- <img src="../assets/img/sign2.png" alt="" class="sign-img"> -->
              <div class="l-put">
               <div class="label">手机</div> <input type="tel" placeholder="请输入您的联系方式" v-model='user.phone' ref='Moblie' >
              </div>

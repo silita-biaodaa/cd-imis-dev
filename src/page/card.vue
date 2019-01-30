@@ -207,22 +207,19 @@ export default {
               let local=localStorage.getItem('cardPushData');
               if(local){
                 that.pushData=JSON.parse(local);
-                let arr=[];
-                that.pushData.bookss.forEach((el,i) => {
-                    el.num=0;
-                    if(res.code == 402){
-                      el.num=el.readCount;
-                    }
-                    el.readTotal=el.readTotal-el.num;
-                    if( ! el.readCount == 0 ) {
-                      arr.push(el);
-                    }
-                })
-                  that.pushData.bookss=arr;
-                if(res.code==402){
-                  that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
-                  that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
-                }
+                // let arr=[];
+                // that.pushData.bookss.forEach((el,i) => {
+                //     el.num=0;
+                //     el.readTotal=el.readTotal-el.num;
+                //     if( ! el.readCount == 0 ) {
+                //       arr.push(el);
+                //     }
+                // })
+                //   that.pushData.bookss=arr;
+                // if(res.code==402){
+                //   that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
+                //   that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+                // }
                 return false
               } 
 
