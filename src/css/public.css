@@ -14,14 +14,14 @@ html,body {
 textarea {  
 	resize:none
 }
-body>div{
+/* body>div{
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   overflow: auto;
-}
+} */
 #app{
   min-height: calc(100vh + 1PX)
 }

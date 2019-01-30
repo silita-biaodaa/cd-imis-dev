@@ -65,7 +65,7 @@
     .nav {
       // height: calc(100vh - 100px);
       overflow: auto;
-      padding-bottom: 100px
+      // padding-bottom: 100px
     }
     .bar-b {
       background: #fff;
