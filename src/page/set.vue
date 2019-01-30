@@ -219,20 +219,20 @@ export default {
            this.pushCount.bonaStart = this.pushCount.bonaStart.replace('月','-')
            this.pushCount.bonaStart = this.pushCount.bonaStart.replace('日','')
            this.newbook = this.bookss.concat(this.books)
+           //保存用户信息
+          localStorage.setItem('userName',this.user.name)
+          let local=localStorage.getItem('cardPushData');
+          if(local){
+            let data=JSON.parse(local)
+            data.pushCount=this.pushCount;
+            console.log(this.bookss);
+            data.bookss=this.newbook;
+            data.volunteer=this.values;
+            localStorage.setItem('cardPushData',JSON.stringify(data));
+          }
            delete this.pushCount.bonaTotal
            Saveuser({books:this.newbook,user:this.user,pushCount:this.pushCount}).then( res => {
               if(res.code ==1) {
-                  //保存用户信息
-                  localStorage.setItem('userName',this.user.name)
-                  let local=localStorage.getItem('cardPushData');
-                  if(local){
-                    let data=JSON.parse(local)
-                    data.pushCount=this.pushCount;
-                    console.log(this.bookss);
-                    data.bookss=this.newbook;
-                    data.volunteer=this.values;
-                    localStorage.setItem('cardPushData',JSON.stringify(data));
-                  }
                  this.delay = true
                  this.mask = true
                  this.gainUser()
