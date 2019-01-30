@@ -1,6 +1,7 @@
 <template>
 
-  <div class="group">
+  <div class="group" :class="{isLeng:isLeng}">
+    <div class="group-box">
       <router-link :to="{path:'/notice'}" class="fold"  tag="div">
         <span>群通知({{this.informs}})</span>
         <van-icon name="arrow"/>
@@ -60,7 +61,7 @@
           </div>
          </div>
       </div>
-
+    </div>
   </div>
 
 </template>
@@ -77,7 +78,8 @@ export default {
           {showContent: false},
           {showContent: false}
         ],
-        informs:0
+        informs:0,
+        isLeng:false
       };
     },
     methods: {
@@ -127,6 +129,11 @@ export default {
       },
       show(i) {
         this.folds[i].showContent = !this.folds[i].showContent
+        let bodyH=document.documentElement.clientHeight || document.body.clientHeight,
+            boxH=document.getElementsByClassName('group-box')[0].clientHeight;
+        if(boxH>bodyH){
+          this.isLeng=true
+        }
       }
     },
     created () {
@@ -142,8 +149,12 @@ export default {
 <style lang='less' scoped>
 @import '../assets/iconfont.css';
 
-html,body {
+.group {
   -webkit-overflow-scrolling :auto;
+}
+.isLeng.group {
+  -webkit-overflow-scrolling :touch;
+  position: relative;
 }
 div .group {
   background: #f5f5f5;
