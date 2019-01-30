@@ -267,6 +267,7 @@
 .groupUser{
   -webkit-overflow-scrolling : touch;
   position: relative;
+  padding-bottom: 100px
 }
 .fixBtn{
   position: fixed;
