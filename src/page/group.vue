@@ -137,7 +137,7 @@ export default {
           if(boxH>bodyH){
             that.isLeng=true
           }
-        },400)
+        },100)
       }
     },
     created () {
