@@ -23,11 +23,12 @@ export default {
     localStorage.removeItem('Authorization');
     if(localStorage.getItem('cardPushData')){
       let data=localStorage.getItem('cardPushData');
-      data=data.JSON.parent(data);
+      data=JSON.parse(data);
       if(data.bookss.length>0){
         for(let x of data.bookss){
           x.num=0
         }
+        localStorage.setItem('cardPushData',JSON.stringify(data));
       }
     }
   }

@@ -130,11 +130,12 @@ export default {
       },
       show(i) {
         this.folds[i].showContent = !this.folds[i].showContent
+        let that=this;
         setTimeout(function(){
           let bodyH=document.documentElement.clientHeight || document.body.clientHeight,
               boxH=document.getElementsByClassName('group-box')[0].clientHeight;
           if(boxH>bodyH){
-            this.isLeng=true
+            that.isLeng=true
           }
         },400)
       }
