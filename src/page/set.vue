@@ -48,7 +48,7 @@
             <div class="card-com">
                <div class="l-pu">
                     <div class="label label-f">每日朗读遍数</div>
-                    <van-stepper  v-model.number="el.readCount" class="l-mi" :min="0"   />
+                    <van-stepper  @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0"   />
                </div>
             </div>
         </div>
@@ -155,6 +155,11 @@ export default {
     }
   },
   methods: {
+    bookChang(el){
+      if(el.readCount==0){
+        el.type=0;
+      }
+    },
     //   textM() {
     //   window.scroll(0,0)
     //   var myreg= /^[1][3,4,5,6,7,8,9][0-9]{9}$/

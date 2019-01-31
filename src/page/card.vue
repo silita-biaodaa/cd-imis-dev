@@ -18,7 +18,7 @@
                <div class="l-pu">
                     <div class="label label-f">今日朗读遍数</div>
                     <span></span>
-                    <van-stepper  v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
+                    <van-stepper @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
             </div>
         </div>
@@ -183,6 +183,11 @@ export default {
     }
   },
   methods: {
+    bookChang(el){
+      if(el.readCount==0){
+        el.type=1;
+      }
+    },
     maskFn(){
       if(this.btnTitle=='提交'){
         this.mask=true;
@@ -206,15 +211,13 @@ export default {
               let local=localStorage.getItem('cardPushData');
               if(local){
                 that.pushData=JSON.parse(local);
-                // let arr=[];
-                // that.pushData.bookss.forEach((el,i) => {
-                //     el.num=0;
-                //     el.readTotal=el.readTotal-el.num;
-                //     if( ! el.readCount == 0 ) {
-                //       arr.push(el);
-                //     }
-                // })
-                //   that.pushData.bookss=arr;
+                let arr=[];
+                that.pushData.bookss.forEach((el,i) => {
+                    if( ! el.readCount == 0 ||el.type==1) {
+                      arr.push(el);
+                    }
+                })
+                that.pushData.bookss=arr;
                 // if(res.code==402){
                 //   that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
                 //   that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
@@ -228,7 +231,7 @@ export default {
                     el.num=el.readCount;
                   }
                   el.readTotal=el.readTotal-el.num;
-                  if( ! el.readCount == 0 ) {
+                  if(!el.readCount == 0 ||el.type==1) {
                     this.pushData.bookss.push(el)
                   }
               })
