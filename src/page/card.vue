@@ -8,7 +8,7 @@
               知学习
           </div>
        </div>
-        <div v-for="el in pushData.bookss" :key="el.pkid">
+        <div v-for="el in bookss" :key="el.pkid">
             <div class="card-b">
                <div class="card-book">
                  《{{el.title}}》共朗读<span>{{el.readTotal+el.readCount}}</span>  遍
@@ -24,7 +24,7 @@
         </div>
 
 
-        <div  v-for="(item,index) in pushData.books" :key="index">
+        <div  v-for="(item,index) in books" :key="index">
            <div class="card-b card-book add-book">
              <span>书本 ({{index + booklength + 1}})</span>
              <span class="del-book" @click='cardDel(index)'  v-if="!first" >删除</span>
@@ -88,13 +88,13 @@
        </div>
        <div class="card-b">
           <div class="card-book">
-            发愿从{{pushData.pushCount.bonaStart}}起，{{pushData.pushCount.years}}年内{{pushData.pushCount.days * pushData.pushCount.bonaCount }}善事，累计<span>{{pushData.pushCount.bonaTotal+pushData.pushCount.bonaDays}}</span>善。
+            发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计<span>{{pushCount.bonaTotal+pushCount.bonaDays}}</span>善。
           </div>
        </div>
         <div class="card-com">
                <div class="l-pu">
                     <div class="label label-f">今日行善次数</div>
-                    <van-stepper  v-model="pushData.pushCount.bonaDays" class="l-mi" :min="0" :disabled='first' />
+                    <van-stepper  v-model="pushCount.bonaDays" class="l-mi" :min="0" :disabled='first' />
                </div>
        </div>
        <div class="card-top card-com laca card-ma">
@@ -154,10 +154,10 @@ export default {
     return {
       // booksss:[],
       num:'',
+      books:[],
+      bookss:[],
+      pushCount: {},  //积善行
       pushData:{
-        books:[],
-        bookss:[],
-        pushCount: {},  //积善行
         volunteer: '', // 立志愿
         classic: '',  // 经典名句
         practice: { character: '' ,work: '', family: ''},  //行～实践
@@ -176,9 +176,9 @@ export default {
     pushData:{
       deep:true,
       handler:function (newVal,oldVal){
-        if(newVal.pushCount.bonaCount!=undefined&&newVal.pushCount.bonaStart!=undefined&&newVal.pushCount.bonaTotal!=undefined&&newVal.pushCount.days!=undefined&&newVal.pushCount.years!=undefined){
+        // if(newVal.bonaCount!=undefined&&newVal.pushCount.bonaStart!=undefined&&newVal.pushCount.bonaTotal!=undefined&&newVal.pushCount.days!=undefined&&newVal.pushCount.years!=undefined){
             localStorage.setItem('cardPushData',JSON.stringify(newVal));
-        }
+        // }
       }
     }
   },
@@ -208,22 +208,6 @@ export default {
               } else {
                  this.btnTitle = '提交'
               }
-              let local=localStorage.getItem('cardPushData');
-              if(local){
-                that.pushData=JSON.parse(local);
-                let arr=[];
-                that.pushData.bookss.forEach((el,i) => {
-                    if( ! el.readCount == 0 ||el.type==1) {
-                      arr.push(el);
-                    }
-                })
-                that.pushData.bookss=arr;
-                // if(res.code==402){
-                //   that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
-                //   that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
-                // }
-                return false
-              } 
 
               res.data.books.forEach((el,i) => {
                   el.num=0
@@ -232,23 +216,41 @@ export default {
                   }
                   el.readTotal=el.readTotal-el.num;
                   if(!el.readCount == 0 ||el.type==1) {
-                    this.pushData.bookss.push(el)
+                    this.bookss.push(el)
                   }
               })
               that.pushData.thanks = res.data.thanks
               that.pushData.practice = res.data.practice ? res.data.practice : {character: '', work: '', family: ''}
               that.pushData.classic = res.data.classic
               that.pushData.introspective = res.data.introspective
-              that.pushData.pushCount = res.data.pushCount
-              that.pushData.pushCount.num=0
+              that.pushCount = res.data.pushCount
+              that.pushCount.num=0
               if(res.code==402){
-                that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
+                that.pushCount.num=that.pushCount.bonaDays
               }
-              that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+              that.pushCount.bonaTotal=that.pushCount.bonaTotal-that.pushCount.num
               that.pushData.volunteer = res.data.volunteer
-              that.pushData.books = res.data.bookish ? res.data.bookish : []
-              that.pushData.booklength = that.pushData.bookss.length;
-              localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
+              that.books = res.data.bookish ? res.data.bookish : []
+              that.booklength = that.bookss.length;
+              let local=localStorage.getItem('cardPushData');
+              if(local){
+                that.pushData=JSON.parse(local);
+                // let arr=[];
+                // that.pushData.bookss.forEach((el,i) => {
+                //     if( ! el.readCount == 0 ||el.type==1) {
+                //       arr.push(el);
+                //     }
+                // })
+                // that.pushData.bookss=arr;
+                // if(res.code==402){
+                //   that.pushData.pushCount.num=that.pushData.pushCount.bonaDays
+                //   that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
+                // }
+                // return false
+              }
+              // else{
+                // localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
+              // } 
           }
        })
     },
@@ -262,7 +264,7 @@ export default {
       // }
       // this.repetition = true
       this.loading()
-      pushCard({isUpdate:isUpdate,thanks:this.pushData.thanks,practice:this.pushData.practice,books:this.pushData.bookss,classic:this.pushData.classic,introspective:this.pushData.introspective,volunteer:this.pushData.volunteer,pushCount:this.pushData.pushCount,isPub:'1',bookish:this.pushData.books}).then( res => {
+      pushCard({isUpdate:isUpdate,thanks:this.pushData.thanks,practice:this.pushData.practice,books:this.bookss,classic:this.pushData.classic,introspective:this.pushData.introspective,volunteer:this.pushData.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
              this.hideLoading()

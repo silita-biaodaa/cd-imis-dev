@@ -229,9 +229,9 @@ export default {
           let local=localStorage.getItem('cardPushData');
           if(local){
             let data=JSON.parse(local)
-            data.pushCount=this.pushCount;
-            console.log(this.bookss);
-            data.bookss=this.newbook;
+            // data.pushCount=this.pushCount;
+            // console.log(this.bookss);
+            // data.bookss=this.newbook;
             data.volunteer=this.values;
             localStorage.setItem('cardPushData',JSON.stringify(data));
           }

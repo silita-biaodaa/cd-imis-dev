@@ -19,18 +19,18 @@ export default {
 
   },
   destroyed () {
-    localStorage.removeItem('zeno');
-    localStorage.removeItem('Authorization');
-    if(localStorage.getItem('cardPushData')){
-      let data=localStorage.getItem('cardPushData');
-      data=JSON.parse(data);
-      if(data.bookss.length>0){
-        for(let x of data.bookss){
-          x.num=0
-        }
-        localStorage.setItem('cardPushData',JSON.stringify(data));
-      }
-    }
+    // localStorage.removeItem('zeno');
+    // localStorage.removeItem('Authorization');
+    // if(localStorage.getItem('cardPushData')){
+    //   let data=localStorage.getItem('cardPushData');
+    //   data=JSON.parse(data);
+    //   if(data.bookss.length>0){
+    //     for(let x of data.bookss){
+    //       x.num=0
+    //     }
+    //     localStorage.setItem('cardPushData',JSON.stringify(data));
+    //   }
+    // }
   }
 }
 </script>
