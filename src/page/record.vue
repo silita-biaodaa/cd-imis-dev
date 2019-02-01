@@ -383,24 +383,34 @@ export default {
                   if(this.setDay!=''&&showDate==this.setDay&&ifThisMonthDays&&year==this.setYear&&month==this.setMonth){
                     active=true;
                   }
-                  let sss=this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(showDate),
-                      dateTime=new Date(sss).getTime(),
-                      creatTime=new Date(this.groupCreat).getTime(),
-                      setDay=new Date().getDate();
+                    let sss=this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(showDate);
+                    if(this.isIOS){
+                        sss=this.setYear+'/'+this.fillZero(this.setMonth)+'/'+this.fillZero(showDate);
+                    } 
+                    let dateTime=new Date(sss).getTime(),
+                        creatTime=new Date(this.groupCreat).getTime(),
+                        setDay=new Date().getDate(),
+                        setY=new Date().getFullYear(),
+                        setM=new Date().getMonth()+1,
+                        dateS=setY+'-'+setM+'-'+setDay;//获取当前时间，已当前时间作为判断基准
+                    if(this.isIOS){
+                        dateS=dateS.replace(/-/g,'/');
+                    }
+                    let  nowTime=new Date(dateS+' 00:00:00');
                     if(groupArr.length>0){
                       for(let x of groupArr){
                         let days=new Date(x.date).getTime();
                         if(ifThisMonthDays&&days==dateTime){
                           cardType='0';//打卡
                           break
-                        }else if(ifThisMonthDays&&days!=dateTime&&showDate<setDay&&dateTime>=creatTime){
+                        }else if(ifThisMonthDays&&days!=dateTime&&dateTime<nowTime&&dateTime>=creatTime){
                           cardType='1'
                         }else{
                           cardType=''
                         }
                       }
                     }else{
-                      if(ifThisMonthDays&&showDate<setDay&&dateTime>=creatTime){
+                      if(ifThisMonthDays&&dateTime<nowTime&&dateTime>=creatTime){
                         cardType='1'
                       }else{
                         cardType=''
