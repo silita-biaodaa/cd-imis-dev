@@ -21,7 +21,8 @@
                     <p>长按识别下图二维码关注公众号</p>
                 </div>
                 <van-icon name="cross"  @click="followFn"/>
-                <img src="../assets/img/cdxs.jpg"/>
+                <!-- <img src="../assets/img/cdxs.jpg"/> -->
+                <img src="../assets/img/bdd.jpg"/>
             </div>
         </div>
     </div>

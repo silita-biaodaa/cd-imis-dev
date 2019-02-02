@@ -388,8 +388,8 @@ export default {
                         sss=sss.replace(/-/g,'/');
                         this.groupCreat=this.groupCreat.replace(/-/g,'/')
                     } 
-                    let dateTime=new Date(sss).getTime(),
-                        creatTime=new Date(this.groupCreat).getTime(),
+                    let dateTime=new Date(sss+' 00:00:00').getTime(),
+                        creatTime=new Date(this.groupCreat+' 00:00:00').getTime(),
                         setDay=new Date().getDate(),
                         setY=new Date().getFullYear(),
                         setM=new Date().getMonth()+1,
