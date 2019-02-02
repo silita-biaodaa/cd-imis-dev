@@ -275,10 +275,10 @@ export default {
     },
     cardBook () {
       let data={title:'',readCount:1,readTotal:0}
-       this.pushData.books.push(data)
+       this.books.push(data)
     },
     cardDel(i) {
-       this.pushData.books.splice(i,1)
+       this.books.splice(i,1)
     },
     bblur() {
       window.scroll(0,0);
