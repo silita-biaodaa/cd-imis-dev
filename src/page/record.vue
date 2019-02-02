@@ -385,7 +385,8 @@ export default {
                   }
                     let sss=this.setYear+'-'+this.fillZero(this.setMonth)+'-'+this.fillZero(showDate);
                     if(this.isIOS){
-                        sss=this.setYear+'/'+this.fillZero(this.setMonth)+'/'+this.fillZero(showDate);
+                        sss=sss.replace(/-/g,'/');
+                        this.groupCreat=this.groupCreat.replace(/-/g,'/')
                     } 
                     let dateTime=new Date(sss).getTime(),
                         creatTime=new Date(this.groupCreat).getTime(),
@@ -396,10 +397,13 @@ export default {
                     if(this.isIOS){
                         dateS=dateS.replace(/-/g,'/');
                     }
-                    let  nowTime=new Date(dateS+' 00:00:00');
+                    let  nowTime=new Date(dateS+' 00:00:00').getTime();
                     if(groupArr.length>0){
                       for(let x of groupArr){
-                        let days=new Date(x.date).getTime();
+                        if(this.isIOS){
+                            x.date=x.date.replace(/-/g,'/')
+                        }
+                        let days=new Date(x.date+' 00:00:00').getTime();
                         if(ifThisMonthDays&&days==dateTime){
                           cardType='0';//打卡
                           break
