@@ -157,8 +157,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 // 
-// const appid='wx393124fdad606b1d';//预发布
-const appid='wx26999a53385489f9';//生产
+const appid='wx393124fdad606b1d';//预发布
+// const appid='wx26999a53385489f9';//生产
 Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={
@@ -166,12 +166,12 @@ router.afterEach(function(to,from,next){
     }
     getWxStr(data).then( res => {
         Wx.config({
-          // debug:true,
+          debug:true,
           appId: appid, // 必填，公众号的唯一标识
           timestamp:res.data.timestamp, // 必填，生成签名的时间戳
           nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
           signature: res.data.signature,// 必填，签名，见附录1
-          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+          jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareQZone','startRecord','stopRecord','onVoiceRecordEnd','playVoice','pauseVoice','stopVoice','onVoicePlayEnd'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
     })
     if (typeof WeixinJSBridge == "undefined"){

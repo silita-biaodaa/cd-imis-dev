@@ -17,7 +17,7 @@ import Sets from '@/page/set'
 import cardDetail from '@/page/cardDetail'
 import groupQrcode from '@/page/groupQrcode'
 import applyEntry from '@/page/applyEntry'
-import test from '@/page/test'
+import test from '@/page/wxTest'
 Vue.use(Router)
 
 export default new Router({

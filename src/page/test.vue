@@ -1,77 +1,66 @@
 <template>
   <div class="test" >
       <div>
-          <button @click="startFn">开始</button>
+          <button @click="startRecording">开始</button>
       </div>
       <div>
-          <button @click="pauseFn">暂停</button>
+          <button @click="obtainRecord">获取</button>
       </div>
       <div>
-          <button @click="stopFn">停止</button>
+          <button @click="stopRecord">停止</button>
       </div>
       <div>
-          <button>播放</button>
+          <button @click="playRecord">播放</button>
       </div>
-      <div class="box" v-html="writeDom"></div>
+      <audio controls autoplay ref="audio"></audio>
   </div>
 </template>
 <script>
-import MSR from 'msr'
+import HZRecorder from '@/api/record'
+import wx from 'weixin-js-sdk'
   export default {
     name:'test',
     data () {
       return {
-          writeDom:'',
-          msr:{}
+          recorder:''
       }
     },
     computed: {
       
     },
     methods:{
-        ready(s){//初始化
+        startRecording() {
             let that=this;
-            that.msr=new MSR(s);
-            alert('ready:'+JSON.stringify(that.msr));
-            that.msr.mimeType='audio/wav';//设置文件格式
-            that.msr.ondataavailable =function(blob){
-                let blobUrl=URL.createObjectURL(blob);
-                that.writeDom='<a href="' + blobURL + '">' + blobURL + '</a>';
-            }
-            that.msr.start(3000);
+            HZRecorder.get(function (rec) {
+                that.recorder = rec;
+                alert(JSON.stringify(rec))
+                that.recorder.start();
+            });
         },
-        err(e){
-            alert('err:'+JSON.stringify(e));
+        obtainRecord(){
+            let that=this;
+            var record = that.recorder.getBlob();
+            debugger;
         },
-        pauseFn(){
-            that.msr.pause();
+        stopRecord(){
+            let that=this;
+            that.recorder.stop();
         },
-        stopFn(){
-            that.msr.stop();
-        },
-        startFn(){
-            alert(JSON.stringify(this.msr));
-            this.msr.startFn();
+        playRecord(){
+            let that=this;
+            let audio=this.$refs.audio;
+            that.recorder.play(audio);
         }
     },
     created(){
-        let type = { 
-            audio:true,//音频模式
-        }
-        navigator.mediaDevices.getUserMedia(type)
-        .then(function(stream){
-            let that=this;
-            that.msr=new MSR(stream);
-            alert('ready:'+JSON.stringify(that.msr));
-            that.msr.mimeType='audio/wav';//设置文件格式
-            that.msr.ondataavailable =function(blob){
-                let blobUrl=URL.createObjectURL(blob);
-                that.writeDom='<a href="' + blobURL + '">' + blobURL + '</a>';
+        wx.startRecord({
+            success:function(){
+                wx.stopRecord();
+            },
+            cancel:function(){
+                alert('您已拒绝授权录音')
             }
-            that.msr.start(3000);
-        });
-        // navigator.getUserMedia(type,this.ready,this.err);
-        
+        })
     }
   }
 </script>
