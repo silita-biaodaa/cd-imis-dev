@@ -17,6 +17,7 @@ import Sets from '@/page/set'
 import cardDetail from '@/page/cardDetail'
 import groupQrcode from '@/page/groupQrcode'
 import applyEntry from '@/page/applyEntry'
+import test from '@/page/test'
 Vue.use(Router)
 
 export default new Router({
@@ -93,6 +94,10 @@ export default new Router({
       path:'/applyEntry',
       component: applyEntry,
       name:'applyEntry'
+    },{//申请入群
+      path:'/test',
+      component: test,
+      name:'test'
     }
 
   ],
