@@ -12,7 +12,12 @@
       <div>
           <button @click="playRecord">播放</button>
       </div>
-      <audio controls autoplay ref="audio"></audio>
+      <div>
+          <button @click="uploadRecord">上传</button>
+      </div>
+      <div>
+          <textarea v-model="txt"></textarea>
+      </div>
   </div>
 </template>
 <script>
@@ -23,7 +28,10 @@ import wx from 'weixin-js-sdk'
       return {
           recordId:[],
           isRec:true,//是否正在录制
-          num:0
+          num:0,//记录第几个音频
+          serverId:[],
+          n:0,//记录第几个上传音频
+          txt:''
       }
     },
     computed: {
@@ -52,7 +60,7 @@ import wx from 'weixin-js-sdk'
             }else{
                 if(that.recordId.length==1){
                     wx.playVoice({
-                        localId: that.recordId
+                        localId: that.recordId[0]
                     });
                 }else{
                     that.play();       
@@ -66,6 +74,41 @@ import wx from 'weixin-js-sdk'
             wx.playVoice({
                 localId:that.recordId[n]
             });
+        },
+        uploadRecord(){
+            let that=this;
+            if(that.recordId.length==0){
+                alert('请录制完成后再上传')
+            }else{
+                if(that.recordId.length==1){
+                    wx.uploadVoice({
+                        localId:that.recordId[0], // 需要上传的音频的本地ID，由stopRecord接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (res) {
+                           that.serverId.push(res.serverId); // 返回音频的服务器端ID
+                        }
+                    });
+                }else{
+                    that.upload();       
+                }
+            }
+        },
+        upload(){
+            let that=this;
+            let n=that.n;
+            if(that.serverId.length==that.recordId.length){
+                //请求后台接口将serverId给后台
+                that.txt=that.serverId.join(',')
+            }
+            wx.uploadVoice({
+                localId:that.recordId[n],
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: function (res) {
+                    that.serverId.push(res.serverId);
+                    that.n++;
+                    that.upload();
+                }
+            });
         }
     },
     created(){
@@ -73,7 +116,6 @@ import wx from 'weixin-js-sdk'
         wx.onVoiceRecordEnd({//监听录音自动停止
             // 录音时间超过一分钟没有停止的时候会执行 complete 回调
             complete: function (res) {
-                alert(JSON.stringify(res));
                 that.recordId.push(res.localId);
                 wx.startRecord();//没点击开始，继续调用开始录制方法
             }
@@ -81,6 +123,7 @@ import wx from 'weixin-js-sdk'
         wx.onVoicePlayEnd({//播放完毕
             success: function (res) {
                 if(that.num==that.recordId.length){
+                    that.num=0;
                     return
                 }
                 that.num++;
@@ -91,5 +134,19 @@ import wx from 'weixin-js-sdk'
   }
 </script>
 <style lang="less" >
+.test{
+    padding: 40px;
+    div{
+        text-align: center
+    }
+    button{
+        padding: 20px;
+        margin-bottom: 20px
+    }
+    textarea{
+        width: 100%;
+        height: 20vh;
+    }
+}
 
 </style>
