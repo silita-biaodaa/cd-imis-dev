@@ -36,9 +36,9 @@
               <div class="l-put">
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
               </div>
-              <div class="l-put">
+              <!-- <div class="l-put">
                <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" @blur="repLink(index)" v-model='item.link' :disabled='first' >
-              </div>
+              </div> -->
            </div>
         </div>
         <div class="card-com card-add" v-if="!first">
