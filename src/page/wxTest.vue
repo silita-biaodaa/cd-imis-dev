@@ -38,13 +38,14 @@ import wx from 'weixin-js-sdk'
       
     },
     methods:{
-        startRecording() {//开始
+        startRecording() {//开始录音
             wx.startRecord();
         },
-        obtainRecord(){//暂停
-            
-        },
-        stopRecord(){//停止
+        obtainRecord(){//暂停录音
+            // let n=that.num;
+            // wx.pauseVoice({
+            //     localId:that.recordId[n] 
+            // });
             let that=this;
             that.isRec=false;
             wx.stopRecord({
@@ -53,7 +54,16 @@ import wx from 'weixin-js-sdk'
                 }
             });
         },
-        playRecord(){//播放
+        stopRecord(){//停止录音
+            let that=this;
+            that.isRec=false;
+            wx.stopRecord({
+                success: function (res) {
+                    that.recordId.push(res.localId);
+                }
+            });
+        },
+        playRecord(){//播放录音
             let that=this;
             if(that.recordId.length==0){
                 alert('先停止或先开始，再播放')
@@ -99,10 +109,11 @@ import wx from 'weixin-js-sdk'
             if(that.serverId.length==that.recordId.length){
                 //请求后台接口将serverId给后台
                 that.txt=that.serverId.join(',')
+                return
             }
             wx.uploadVoice({
                 localId:that.recordId[n],
-                isShowProgressTips: 1, // 默认为1，显示进度提示
+                isShowProgressTips: 0, // 默认为1，显示进度提示
                 success: function (res) {
                     that.serverId.push(res.serverId);
                     that.n++;
@@ -117,7 +128,14 @@ import wx from 'weixin-js-sdk'
             // 录音时间超过一分钟没有停止的时候会执行 complete 回调
             complete: function (res) {
                 that.recordId.push(res.localId);
-                wx.startRecord();//没点击开始，继续调用开始录制方法
+                wx.uploadVoice({
+                    localId:res.localId,
+                    isShowProgressTips: 0, // 默认为1，显示进度提示
+                    success: function (res) {
+                        that.serverId.push(res.serverId);
+                    }
+                });
+                wx.startRecord();//每超一分钟，继续调用开始录制方法
             }
         });
         wx.onVoicePlayEnd({//播放完毕
@@ -130,8 +148,20 @@ import wx from 'weixin-js-sdk'
                 that.play();
             }
         });
+        // window.addEventListener("online", function () {  
+        //     alert("online");}, true);  
+        // window.addEventListener("offline", function () {  
+        //     alert("offline");}, true);
+        window.ononline = function() {
+            alert("链接上网络了");
+        }
+        window.onoffline = function() {
+            alert("网络链接已断开");
+        }
+
+        
     }
-  }
+}
 </script>
 <style lang="less" >
 .test{

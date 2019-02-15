@@ -37,7 +37,7 @@
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
               </div>
               <div class="l-put">
-               <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" v-model='item.link' :disabled='first' >
+               <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" @blur="repLink(index)" v-model='item.link' :disabled='first' >
               </div>
            </div>
         </div>
@@ -144,6 +144,7 @@
            </div>
         </div>
         <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="punch"></v-popup>
+        <v-toast :mask='mask1' :toastTxt="'该链接格式错误'"></v-toast>
    </div>
 </template>
 <script>
@@ -167,6 +168,7 @@ export default {
       btnTitle:'提交',
       first:false,
       mask:false,
+      mask1:false,
       tipTxt:'',
       booklength:0,
       repetition: false
@@ -183,6 +185,17 @@ export default {
     }
   },
   methods: {
+    repLink(i){
+      let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
+      let that=this;
+      if(!re.test(this.books[i].link)){
+        that.mask1=true;
+        this.books[i].link=''
+        return setTimeout(() => {
+            that.mask1 = false;
+        }, 1500);
+      }
+    },
     bookChang(el){
       if(el.readCount==0){
         el.type=1;

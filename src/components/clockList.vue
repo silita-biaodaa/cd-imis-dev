@@ -27,7 +27,7 @@
           <!-- 经典名句 -->
           <template v-if="item.classic">
             <p class="tit">【经典名句分享】</p>
-            <p class="c-color">{{item.classic}}</p>
+            <p class="c-color"  v-html="item.classicStr"></p>
           </template>
           <!-- 行 实践 -->
           <template v-if="item.practice!=undefined&&(item.practice.character!=''||item.practice.family!=''||item.practice.work!='')">
@@ -51,17 +51,20 @@
           <!-- 省 觉悟 -->
           <template v-if="item.introspective">
             <p class="tit">【省～觉悟】</p>
-            <p class="c-color">{{item.introspective}}</p>
+            <!-- <p class="c-color">{{item.introspective}}</p> -->
+            <p class="c-color" v-html="item.introspectiveStr"></p>
           </template>
           <!-- 感谢 -->
           <template v-if="item.thanks">
             <p class="tit">【感谢】</p>
-            <p class="c-color">{{item.thanks}}</p>
+            <!-- <p class="c-color">{{item.thanks}}</p> -->
+            <p class="c-color" v-html="item.thanksStr"></p>
           </template>
           <!-- 祝愿 -->
           <template v-if="item.volunteer">
             <p class="tit">【志愿】</p>
-            <p class="c-color">{{item.volunteer}}</p>
+            <!-- <p class="c-color">{{item.volunteer}}</p> -->
+            <p class="c-color" v-html="item.volunteerStr"></p>
           </template>
         </div>
       </div>
@@ -126,6 +129,54 @@
       clocklist:{
         type:Array
       },
+    },
+    updated(){
+      let list=this.clocklist;
+      for(let x of list){
+          let classic=x.classic,
+              introspective=x.introspective,
+              thanks=x.thanks,
+              volunteer=x.volunteer;
+          classic='<span>'+classic+'</span>';//经典名句
+          introspective='<span>'+introspective+'</span>';//觉悟
+          thanks='<span>'+thanks+'</span>';//感谢
+          volunteer='<span>'+volunteer+'</span>';//志愿
+          // let xima='http://xima.tv/';//喜马拉雅
+          // let lizhi='https://www.lizhi.fm';//荔枝
+          // let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
+          let re=/((http[s]{0,1}|ftp):\/\/[a-zA-Z0-9.-]+.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9.-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9.-~!@#$%^&*+?:_/=<>]*)?)/;
+          classic=classic.replace(re,function(str){
+            return '<a href="'+str+'">'+str+'</a>';
+          });
+          introspective=introspective.replace(re,function(s){
+            return '<a href="'+s+'">'+s+'</a>';
+          })
+          thanks=thanks.replace(re,function(s){
+            return '<a href="'+s+'">'+s+'</a>';
+          })
+          volunteer=volunteer.replace(re,function(s){
+            return '<a href="'+s+'">'+s+'</a>';
+          })
+          // if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
+          //   let num1=classic.indexOf(lizhi),
+          //       num2=classic.indexOf(xima);
+          //   if(num1>-1){
+          //     let link=classic.substr(num1,71);
+          //     str='<span>'+classic.substr(0,num1)+'</span><a  target="_blank" href="'+link+'">'+link+'</a><span>'+classic.substr(71+num1,classic.length)+'</span>'
+          //   }else if(num2>-1){
+          //     let link=classic.substr(num2,21);
+          //     str='<span>'+classic.substr(0,num2)+'</span><a  target="_blank" href="'+link+'">'+link+'</a><span>'+classic.substr(21+num2,classic.length)+'</span>'
+          //   }
+          // }else{
+          //   str='<span>'+classic+'</span>'
+          // }
+          x.classicStr=classic;
+          x.introspectiveStr=introspective;
+          x.thanksStr=thanks;
+          x.volunteerStr=volunteer;
+
+      }
+      this.$set(this.clocklist,list)
     },
     methods: {
       //跳转链接

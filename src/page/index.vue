@@ -425,7 +425,7 @@
   }
   .home {
     box-sizing: border-box;
-
+    -webkit-overflow-scrolling :touch;
     background: #f5f5f5;
   .toast {
     position: fixed;
