@@ -295,6 +295,7 @@ export default {
             let arr=this.ret;
             let day=arr[i].showDate;
             let month=arr[i].month;
+            let ifThisMonthDays=arr[i].ifThisMonthDays;
             let ye=this.thisMonthDays.year;
             //选完日期后，讲日期回写到data
             this.setMonth=month;
@@ -309,7 +310,7 @@ export default {
             let time=new Date(str+' 00:00:00').getTime();
             let nowTime=new Date().getTime();
             let creatTime=new Date(creatStr+' 00:00:00').getTime();
-            if(nowTime>time&&time>=creatTime){
+            if(ifThisMonthDays&&nowTime>time&&time>=creatTime){
                 for(let x of arr){
                     x.active=false;
                 }
