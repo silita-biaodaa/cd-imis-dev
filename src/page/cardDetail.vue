@@ -37,7 +37,7 @@
                 <!-- 经典名句 -->
                 <template v-if="item.classic">
                     <p class="tit">【经典名句分享】</p>
-                    <p class="c-color">{{item.classic}}</p>
+                    <p class="c-color" v-html="item.classicStr"></p>
                 </template>
                 <!-- 行 实践 -->
                 <template v-if="item.practice!=undefined&&(item.practice.character!=''||item.practice.family!=''||item.practice.work!='')">
@@ -61,17 +61,17 @@
                 <!-- 省 觉悟 -->
                 <template v-if="item.introspective">
                     <p class="tit">【省～觉悟】</p>
-                    <p class="c-color">{{item.introspective}}</p>
+                    <p class="c-color" v-html="item.introspectiveStr"></p>
                 </template>
                 <!-- 感谢 -->
                 <template v-if="item.thanks">
                     <p class="tit">【感谢】</p>
-                    <p class="c-color">{{item.thanks}}</p>
+                    <p class="c-color" v-html="item.thanksStr"></p>
                 </template>
                 <!-- 祝愿 -->
                 <template v-if="item.volunteer">
                     <p class="tit">【志愿】</p>
-                    <p class="c-color">{{item.volunteer}}</p>
+                    <p class="c-color" v-html="item.volunteerStr"></p>
                 </template>
                 </div>
             </div>
@@ -143,18 +143,32 @@
             Detail(data).then( res => {
                 //  that.list = res.data.list;
                 if(res){
-                    let classic=res.data.classic;
-                    let str='';
-                    if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
-                        if(classic.indexOf(' ')>-1){
-                            str='<a  target="_blank" href="'+classic.substring(0,classic.indexOf(' '))+'">'+classic.substring(0,classic.indexOf(' '))+'</a>'
-                        }else{
-                            str='<a  target="_blank" href="'+classic+'">'+classic+'</a>'
-                        }
-                    }else{
-                        str='<span>'+classic+'</span>'
-                    }
-                    res.data.classicStr=str;
+                    let classic=res.data.classic,
+                        introspective=res.data.introspective,
+                        thanks=res.data.thanks,
+                        volunteer=res.data.volunteer;
+                    let re=/((http[s]{0,1}|ftp):\/\/[a-zA-Z0-9.-]+.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)/;
+                    classic=classic.replace(re,function(str){
+                        return '<a href="'+str+'">'+str+'</a>';
+                    });
+                    introspective=introspective.replace(re,function(s){
+                        return '<a href="'+s+'">'+s+'</a>';
+                    })
+                    thanks=thanks.replace(re,function(s){
+                        return '<a href="'+s+'">'+s+'</a>';
+                    })
+                    volunteer=volunteer.replace(re,function(s){
+                        return '<a href="'+s+'">'+s+'</a>';
+                    })
+                    classic='<span>'+classic+'</span>';//经典名句
+                    introspective='<span>'+introspective+'</span>';//觉悟
+                    thanks='<span>'+thanks+'</span>';//感谢
+                    volunteer='<span>'+volunteer+'</span>';//志愿
+
+                    res.data.classicStr=classic;
+                    res.data.introspectiveStr=introspective;
+                    res.data.thanksStr=thanks;
+                    res.data.volunteerStr=volunteer;
                     that.item=res.data;
                 }
             })

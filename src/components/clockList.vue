@@ -137,14 +137,10 @@
               introspective=x.introspective,
               thanks=x.thanks,
               volunteer=x.volunteer;
-          classic='<span>'+classic+'</span>';//经典名句
-          introspective='<span>'+introspective+'</span>';//觉悟
-          thanks='<span>'+thanks+'</span>';//感谢
-          volunteer='<span>'+volunteer+'</span>';//志愿
           // let xima='http://xima.tv/';//喜马拉雅
           // let lizhi='https://www.lizhi.fm';//荔枝
           // let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
-          let re=/((http[s]{0,1}|ftp):\/\/[a-zA-Z0-9.-]+.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9.-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9.-~!@#$%^&*+?:_/=<>]*)?)/;
+          let re=/((http[s]{0,1}|ftp):\/\/[a-zA-Z0-9.-]+.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)/;
           classic=classic.replace(re,function(str){
             return '<a href="'+str+'">'+str+'</a>';
           });
@@ -157,6 +153,10 @@
           volunteer=volunteer.replace(re,function(s){
             return '<a href="'+s+'">'+s+'</a>';
           })
+          classic='<span>'+classic+'</span>';//经典名句
+          introspective='<span>'+introspective+'</span>';//觉悟
+          thanks='<span>'+thanks+'</span>';//感谢
+          volunteer='<span>'+volunteer+'</span>';//志愿
           // if(classic&&classic.indexOf('http')>-1){//如果含有http，则判断为网页
           //   let num1=classic.indexOf(lizhi),
           //       num2=classic.indexOf(xima);
