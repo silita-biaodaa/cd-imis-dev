@@ -143,10 +143,10 @@
             Detail(data).then( res => {
                 //  that.list = res.data.list;
                 if(res){
-                    let classic=res.data.classic,
-                        introspective=res.data.introspective,
-                        thanks=res.data.thanks,
-                        volunteer=res.data.volunteer;
+                    let classic=res.data.classic||'',
+                        introspective=res.data.introspective||'',
+                        thanks=res.data.thanks||'',
+                        volunteer=res.data.volunteer||'';
                     let re=/((http[s]{0,1}|ftp):\/\/[a-zA-Z0-9.-]+.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?([a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)/;
                     classic=classic.replace(re,function(str){
                         return '<a href="'+str+'">'+str+'</a>';
