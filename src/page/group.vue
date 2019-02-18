@@ -62,7 +62,7 @@
          </div>
       </div>
     </div>
-    <!-- <button @click="$router.push('/test')">ddd</button> -->
+    <button @click="$router.push('/test')">ddd</button>
   </div>
 
 </template>

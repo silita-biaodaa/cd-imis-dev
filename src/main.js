@@ -157,8 +157,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 // 
-// const appid='wx393124fdad606b1d';//预发布
-const appid='wx26999a53385489f9';//生产
+const appid='wx393124fdad606b1d';//预发布
+// const appid='wx26999a53385489f9';//生产
 Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={
@@ -166,7 +166,7 @@ router.afterEach(function(to,from,next){
     }
     getWxStr(data).then( res => {
         Wx.config({
-          // debug:true,
+          debug:true,
           appId: appid, // 必填，公众号的唯一标识
           timestamp:res.data.timestamp, // 必填，生成签名的时间戳
           nonceStr: res.data.nonceStr, // 必填，生成签名的随机串

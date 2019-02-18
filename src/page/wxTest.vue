@@ -16,6 +16,9 @@
           <button @click="uploadRecord">上传</button>
       </div>
       <div>
+          <button @click="jump">跳</button>
+      </div>
+      <div>
           <textarea v-model="txt"></textarea>
       </div>
   </div>
@@ -120,6 +123,13 @@ import wx from 'weixin-js-sdk'
                     that.upload();
                 }
             });
+        },
+        jump(){
+            alert(1);
+            wx.miniProgram.navigateTo({
+                url: '/pages/test/test?id=dasdasda'
+            })
+            // wx.navigateToMiniProgram
         }
     },
     created(){
