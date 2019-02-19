@@ -125,14 +125,8 @@ import wx from 'weixin-js-sdk'
             });
         },
         jump(){
-            alert(1);
-            wx.navigateToMiniProgram({
-                // url: '/pages/test/test?id=dasdasda'
-                appId:'wxcf8e3f1bfd267a3e',
-                path:'/pages/test/test',
-                extraData:{
-                    userid:'dasdada'
-                }
+            wx.miniProgram.navigateTo({
+                url: '/pages/test/test?id=dasdasda'
             })
         }
     },
