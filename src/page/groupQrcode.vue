@@ -123,16 +123,29 @@ export default {
             WeixinJSBridge.call('showOptionMenu');  
         },
         jump(){
-            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
-            let appid=this.appid;
-            let uri=this.weixinauth(appid,url);
-            location.href=uri;
+            // let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
+            // let appid=this.appid;
+            // let uri=this.weixinauth(appid,url);
+            // location.href=uri;
 
-            /*let index = location.href.indexOf('?');
-            let index2=location.href.indexOf('#');
-            let uri=location.href.substring(index,index2);
-            location.href=location.href.split('?')[0].split('#')[0]+uri+'#/?path=applyEntry&id='+this.id+'&istrue=1';*/
-
+            // let index = location.href.indexOf('?');
+            // let index2=location.href.indexOf('#');
+            // let uri=location.href.substring(index,index2);
+            // location.href=location.href.split('?')[0].split('#')[0]+uri+'#/applyEntry&id='+this.id+'&istrue=1';
+            // this.$router.push({
+            //     path:'/applyEntry',
+            //     query:{
+            //         id:this.id,
+            //         istrue:1
+            //     }
+            // })
+            this.$router.replace({
+                path:'/applyEntry',
+                query:{
+                    id:this.id,
+                    istrue:1
+                }
+            })
 
             // let urlEnd = location.href.substr(index, location.href.length);
             // urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
