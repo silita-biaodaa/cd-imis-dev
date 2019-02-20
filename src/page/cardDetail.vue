@@ -197,7 +197,7 @@
         let that=this;
         wx.miniProgram.postMessage({
             data:{
-                desc:'日精进打卡始于'+that.pushStart+'，     打卡第'+that.time+'天，共打卡'+that.total+'次。',
+                desc:'打卡始于'+that.pushStart+'，打卡第'+that.time+'天，共'+that.total+'次。',
                 title:that.name,
                 imgUrl:that.imgUrl,
             }
