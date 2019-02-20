@@ -123,14 +123,24 @@ export default {
             WeixinJSBridge.call('showOptionMenu');  
         },
         jump(){
-            let index = location.href.indexOf('?');
-            let urlEnd = location.href.substr(index, location.href.length);
-            urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
-            urlEnd=urlEnd+'&istrue=1';
-            urlEnd=encodeURIComponent(urlEnd);
-            wx.miniProgram.navigateTo({
-                url: '/pages/cardDetail/cardDetail?uri='+urlEnd
-            })
+            let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
+            let appid=this.appid;
+            let uri=this.weixinauth(appid,url);
+            location.href=uri;
+
+            /*let index = location.href.indexOf('?');
+            let index2=location.href.indexOf('#');
+            let uri=location.href.substring(index,index2);
+            location.href=location.href.split('?')[0].split('#')[0]+uri+'#/?path=applyEntry&id='+this.id+'&istrue=1';*/
+
+
+            // let urlEnd = location.href.substr(index, location.href.length);
+            // urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
+            // urlEnd=urlEnd+'&istrue=1';
+            // urlEnd=encodeURIComponent(urlEnd);
+            // wx.miniProgram.navigateTo({
+            //     url: '/pages/cardDetail/cardDetail?uri='+urlEnd
+            // })
         }
     }
 

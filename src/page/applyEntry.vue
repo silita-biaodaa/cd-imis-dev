@@ -71,28 +71,17 @@ export default {
         // console.group('挂载前状态  ===============》beforeMount');
     },
     mounted() {
-        let data=localStorage.getItem('isConcern');
-        if(data!=''&&data!=undefined&&data!=null){
-            data=JSON.parse(data);
-            this.imgurl=data.imgUrl;
-            this.id=data.groId;
-            this.num=data.userCount;
-            this.name=data.groName;
-            if(data.isConcern==0){
-                this.showQrcode=true;
+        let that=this;
+        this.id=this.$route.query.id;
+        groupsDetail(this.id).then(res =>{
+            that.imgurl=res.data.imgUrl;
+            that.name=res.data.groName;
+            that.num=res.data.userCount;
+            if(res.data.isConcern==0){
+                that.showQrcode=true;
             }
-        }else{
-            let that=this;
-            this.id=this.$route.query.id;
-            groupsDetail(this.id).then(res =>{
-                that.imgurl=res.data.imgUrl;
-                that.name=res.data.groName;
-                that.num=res.data.userCount;
-                if(res.data.isConcern==0){
-                    that.showQrcode=true;
-                }
-            })
-        }
+        })
+        
         
         // console.group('挂载结束状态===============》mounted');
     },
