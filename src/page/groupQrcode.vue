@@ -124,10 +124,16 @@ export default {
         },
         jump(){
             // let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
-            // let appid=this.appid;
+            let appid=this.appid;
+            let index = location.href.indexOf('?');
+            let index2 = location.href.indexOf('#');
+            let url1=location.href.substring(0,index);
+            let url2=location.href.substring(index2,location.href.length);
             // let uri=this.weixinauth(appid,url);
-            // location.href=uri;
-
+            let urlEnd=url1+url2;
+            urlEnd=encodeURIComponent(urlEnd);
+            let uri=this.weixinauth(appid,urlEnd);
+            location.href=uri;
             // let index = location.href.indexOf('?');
             // let index2=location.href.indexOf('#');
             // let uri=location.href.substring(index,index2);
@@ -139,14 +145,14 @@ export default {
             //         istrue:1
             //     }
             // })
-            this.$router.replace({
-                path:'/applyEntry',
-                query:{
-                    id:this.id,
-                    istrue:1
-                }
-            })
-
+            // this.$router.replace({
+            //     path:'/applyEntry',
+            //     query:{
+            //         id:this.id,
+            //         istrue:1
+            //     }
+            // })
+   
             // let urlEnd = location.href.substr(index, location.href.length);
             // urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
             // urlEnd=urlEnd+'&istrue=1';
