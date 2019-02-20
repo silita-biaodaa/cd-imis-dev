@@ -28,7 +28,7 @@
     </div>
 </template>
 <script>
-import { groupsDetail,Addgroup,queryList } from '@/api/index'
+import { groupsDetail,Addgroup } from '@/api/index'
 import util from "@/util/util"
 export default {
     name: 'applyEntry', // 结构名称
@@ -72,14 +72,28 @@ export default {
     },
     mounted() {
         let data=localStorage.getItem('isConcern');
-        data=JSON.parse(data);
-        this.imgurl=data.imgUrl;
-        this.id=data.groId;
-        this.num=data.userCount;
-        this.name=data.groName;
-        if(data.isConcern==0){
-            this.showQrcode=true;
+        if(data!=''&&data!=undefined&&data!=null){
+            data=JSON.parse(data);
+            this.imgurl=data.imgUrl;
+            this.id=data.groId;
+            this.num=data.userCount;
+            this.name=data.groName;
+            if(data.isConcern==0){
+                this.showQrcode=true;
+            }
+        }else{
+            let that=this;
+            this.id=this.$route.query.id;
+            groupsDetail(this.id).then(res =>{
+                that.imgurl=res.data.imgUrl;
+                that.name=res.data.groName;
+                that.num=res.data.userCount;
+                if(res.data.isConcern==0){
+                    that.showQrcode=true;
+                }
+            })
         }
+        
         // console.group('挂载结束状态===============》mounted');
     },
     beforeUpdate() {
