@@ -196,9 +196,11 @@
     updated(){
         let that=this;
         wx.miniProgram.postMessage({
-            desc:'日精进打卡始于'+that.pushStart+'，     打卡第'+that.time+'天，共打卡'+that.total+'次。',
-            title:that.name,
-            imgUrl:that.imgUrl,
+            data:{
+                desc:'日精进打卡始于'+that.pushStart+'，     打卡第'+that.time+'天，共打卡'+that.total+'次。',
+                title:that.name,
+                imgUrl:that.imgUrl,
+            }
         })
 //         let that=this;
 //         let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=cardDetail&id='+that.$route.query.id+'&userid='+that.$route.query.userid;
