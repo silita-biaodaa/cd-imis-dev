@@ -11,7 +11,7 @@
                     <span>{{name}}</span>
                 </div>
                 <div class="center-box">
-                    <div id="qrcode" class="qrcode" ref="qr"></div>
+                    <div id="qrcode" class="qrcode" ref="qr" @click="jump"></div>
                 </div>
             </div>
         </div>
@@ -121,6 +121,16 @@ export default {
         },
         offBridgeReady(){  
             WeixinJSBridge.call('showOptionMenu');  
+        },
+        jump(){
+            let index = location.href.indexOf('?');
+            let urlEnd = location.href.substr(index, location.href.length);
+            urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
+            urlEnd=urlEnd+'&istrue=1';
+            urlEnd=encodeURIComponent(urlEnd);
+            wx.miniProgram.navigateTo({
+                url: '/pages/cardDetail/cardDetail?uri='+urlEnd
+            })
         }
     }
 
