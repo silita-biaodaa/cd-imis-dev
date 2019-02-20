@@ -136,15 +136,24 @@ router.beforeEach((to, from, next) => {
               replace:true
             })
           }else if(res.data.isFirst==4){//如果为申请入群页面
-            groupsDetail(getParam('id')).then(resData =>{
-              // localStorage.removeItem('isConcern');
-              // alert(JSON.stringify(resData.data));
-              localStorage.setItem('isConcern',JSON.stringify(resData.data))
+            let paths=getParam('path');
+            if(paths=='applyEntry'){
+              groupsDetail(getParam('id')).then(resData =>{
+                // localStorage.removeItem('isConcern');
+                // alert(JSON.stringify(resData.data));
+                localStorage.setItem('isConcern',JSON.stringify(resData.data))
+                next({
+                  name:'applyEntry',
+                  replace:true
+                })
+              })
+            }else{
               next({
-                name:'applyEntry',
+                name:paths,
                 replace:true
               })
-            })
+            }
+            
           }else{//初始化
             next()
           }
