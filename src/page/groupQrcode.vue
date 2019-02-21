@@ -131,9 +131,9 @@ export default {
             let urlEnd=url1+url2;
             urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
             urlEnd=urlEnd+'&istrue=1';
-            alert(urlEnd);
             urlEnd=encodeURIComponent(urlEnd);
             let uri=this.weixinauth(appid,urlEnd);
+            alert(urlEnd);
             location.href=uri;
 
             // wx.miniProgram.navigateTo({

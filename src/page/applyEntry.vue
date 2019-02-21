@@ -72,16 +72,15 @@ export default {
     },
     mounted() {
         let that=this;
+        alert(localStorage.getItem('Authorization'));
         this.id=this.$route.query.id;
         groupsDetail(this.id).then(res =>{
             that.imgurl=res.data.imgUrl;
             that.name=res.data.groName;
             that.num=res.data.userCount;
-            alert(res.data.isConcern)
             if(res.data.isConcern==0){
                 that.showQrcode=true;
             }
-            alert(that.showQrcode)
         })
         
         
