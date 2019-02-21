@@ -99,6 +99,7 @@ import { NumberKeyboard } from 'vant';
 router.beforeEach((to, from, next) => {
   let code = util.getCode('code');
   let isApply=getParam('istrue');
+  alert('code:'+code);
   if (!code) {
     //用户授权
     // util.weixinauth()
@@ -109,8 +110,10 @@ router.beforeEach((to, from, next) => {
       code:code,
       isApply:isApply
     }
+    
     if(!auth||to.fullPath=='/home'){
       queryList(data).then(res => {
+        alert('token:'+JSON.stringify(res.data));
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);
           if(res.data.token&&res.data.token!='undefined'){

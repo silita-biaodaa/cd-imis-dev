@@ -133,7 +133,7 @@ export default {
             urlEnd=urlEnd+'&istrue=1';
             urlEnd=encodeURIComponent(urlEnd);
             let uri=this.weixinauth(appid,urlEnd);
-            alert(urlEnd);
+            alert(uri);
             location.href=uri;
 
             // wx.miniProgram.navigateTo({

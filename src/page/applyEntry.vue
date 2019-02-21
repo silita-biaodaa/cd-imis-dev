@@ -144,6 +144,7 @@ export default {
     background: #fff;
     padding-top: 50px;
     padding-bottom: 40px;
+    font-size: 28px;
     div{
         text-align: center;
         margin-bottom: 10px;
@@ -166,7 +167,8 @@ export default {
         width: calc(100% - 60px);
         height: 70px;
         border: none;
-        border-radius: 5px
+        border-radius: 5px;
+        font-size: 28px;
     }
     .noclick{
         background: #999;
