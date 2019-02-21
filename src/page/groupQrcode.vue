@@ -136,7 +136,7 @@ export default {
             // location.href=uri;
             alert(this.id)
             wx.miniProgram.navigateTo({
-                url: 'pages/follow/follow?id='+this.id
+                url: 'pages/follow/follow?id=ghduaigadd'
             })
             
         }
