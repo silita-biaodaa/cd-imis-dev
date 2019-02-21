@@ -131,6 +131,8 @@ export default {
             let url2=location.href.substring(index2,location.href.length);
             // let uri=this.weixinauth(appid,url);
             let urlEnd=url1+url2;
+            urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
+            urlEnd=urlEnd+'&istrue=1';
             alert(urlEnd);
             urlEnd=encodeURIComponent(urlEnd);
             let uri=this.weixinauth(appid,urlEnd);
