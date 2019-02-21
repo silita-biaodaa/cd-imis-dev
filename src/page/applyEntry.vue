@@ -77,9 +77,11 @@ export default {
             that.imgurl=res.data.imgUrl;
             that.name=res.data.groName;
             that.num=res.data.userCount;
+            alert(res.data.isConcern)
             if(res.data.isConcern==0){
                 that.showQrcode=true;
             }
+            alert(that.showQrcode)
         })
         
         
