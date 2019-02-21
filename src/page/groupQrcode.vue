@@ -123,21 +123,28 @@ export default {
             WeixinJSBridge.call('showOptionMenu');  
         },
         jump(){
-            // let appid=this.appid;
-            // let index = location.href.indexOf('?');
-            // let index2 = location.href.indexOf('#');
-            // let url1=location.href.substring(0,index);
-            // let url2=location.href.substring(index2,location.href.length);
-            // let urlEnd=url1+url2;
-            // urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
-            // urlEnd=urlEnd+'&istrue=1';
-            // urlEnd=encodeURIComponent(urlEnd);
-            // let uri=this.weixinauth(appid,urlEnd);
-            // location.href=uri;
-            wx.miniProgram.navigateTo({
-                url: '/pages/follow/follow?id='+this.id
-            })
-            
+            let appid=this.appid;
+            let index = location.href.indexOf('?');
+            let index2 = location.href.indexOf('#');
+            let url1=location.href.substring(0,index);
+            let url2=location.href.substring(index2,location.href.length);
+            let urlEnd=url1+url2;
+            urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
+            urlEnd=urlEnd+'&istrue=1';
+            urlEnd=encodeURIComponent(urlEnd);
+            let uri=this.weixinauth(appid,urlEnd);
+            location.href=uri;
+
+            // wx.miniProgram.navigateTo({
+            //     url: '/pages/follow/follow?id='+this.id
+            // })
+
+            // this.$router.replace({
+            //     path:'/applyEntry',
+            //     query:{
+            //         id:this.id,
+            //     }
+            // });
         }
     }
 
