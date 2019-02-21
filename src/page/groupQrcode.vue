@@ -123,47 +123,22 @@ export default {
             WeixinJSBridge.call('showOptionMenu');  
         },
         jump(){
-            // let url=encodeURIComponent(location.href.split('?')[0].split('#')[0]+'?path=applyEntry&id='+this.id+'&istrue=1');
-            let appid=this.appid;
-            let index = location.href.indexOf('?');
-            let index2 = location.href.indexOf('#');
-            let url1=location.href.substring(0,index);
-            let url2=location.href.substring(index2,location.href.length);
-            // let uri=this.weixinauth(appid,url);
-            let urlEnd=url1+url2;
-            urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
-            urlEnd=urlEnd+'&istrue=1';
-            alert(urlEnd);
-            urlEnd=encodeURIComponent(urlEnd);
-            let uri=this.weixinauth(appid,urlEnd);
-            alert(uri);
-            location.href=uri;
+            // let appid=this.appid;
             // let index = location.href.indexOf('?');
-            // let index2=location.href.indexOf('#');
-            // let uri=location.href.substring(index,index2);
-            // location.href=location.href.split('?')[0].split('#')[0]+uri+'#/applyEntry&id='+this.id+'&istrue=1';
-            // this.$router.push({
-            //     path:'/applyEntry',
-            //     query:{
-            //         id:this.id,
-            //         istrue:1
-            //     }
-            // })
-            // this.$router.replace({
-            //     path:'/applyEntry',
-            //     query:{
-            //         id:this.id,
-            //         istrue:1
-            //     }
-            // })
-   
-            // let urlEnd = location.href.substr(index, location.href.length);
+            // let index2 = location.href.indexOf('#');
+            // let url1=location.href.substring(0,index);
+            // let url2=location.href.substring(index2,location.href.length);
+            // let urlEnd=url1+url2;
             // urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
             // urlEnd=urlEnd+'&istrue=1';
             // urlEnd=encodeURIComponent(urlEnd);
-            // wx.miniProgram.navigateTo({
-            //     url: '/pages/cardDetail/cardDetail?uri='+urlEnd
-            // })
+            // let uri=this.weixinauth(appid,urlEnd);
+            // location.href=uri;
+            alert(this.id)
+            wx.miniProgram.navigateTo({
+                url: 'pages/follow/follow?id='+this.id
+            })
+            
         }
     }
 
