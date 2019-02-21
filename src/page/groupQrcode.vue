@@ -11,7 +11,7 @@
                     <span>{{name}}</span>
                 </div>
                 <div class="center-box">
-                    <div id="qrcode" class="qrcode" ref="qr" @click="jump"></div>
+                    <div id="qrcode" class="qrcode" ref="qr"></div>
                 </div>
             </div>
         </div>
@@ -75,23 +75,30 @@ export default {
     updated() {
         // console.group('更新完成状态===============》updated');
         let that=this;
-        let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=groupQrcode&id='+that.id;
-        let configData={
-        	title:that.name, // 分享标题
-			desc:that.name, // 分享描述
-			imgUrl:that.imgurl, // 分享图标
-            link:window.location.href,
-		}; 
-		let u = navigator.userAgent;
-		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-//		let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        if(isAndroid){
-            configData.link=shareUrl;
-        }
-		wx.onMenuShareAppMessage(configData);// 分享给朋友 
-    	wx.onMenuShareTimeline(configData);//朋友圈
-    	wx.onMenuShareQQ(configData);//qq
-    	wx.onMenuShareQZone(configData);//qq空间
+        let userName=localStorage.getItem('userName');
+        wx.miniProgram.postMessage({
+            data:{
+                title:userName+'邀请你加入群'+that.name,
+                imgUrl:that.imgUrl,
+            }
+        })
+//         let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=groupQrcode&id='+that.id;
+//         let configData={
+//         	title:that.name, // 分享标题
+// 			desc:that.name, // 分享描述
+// 			imgUrl:that.imgurl, // 分享图标
+//             link:window.location.href,
+// 		}; 
+// 		let u = navigator.userAgent;
+// 		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+// //		let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+//         if(isAndroid){
+//             configData.link=shareUrl;
+//         }
+// 		wx.onMenuShareAppMessage(configData);// 分享给朋友 
+//     	wx.onMenuShareTimeline(configData);//朋友圈
+//     	wx.onMenuShareQQ(configData);//qq
+//     	wx.onMenuShareQZone(configData);//qq空间
     },
     beforeDestroy() {
         // console.group('销毁前状态  ===============》beforeDestroy');
@@ -133,7 +140,6 @@ export default {
             urlEnd=urlEnd+'&istrue=1';
             urlEnd=encodeURIComponent(urlEnd);
             let uri=this.weixinauth(appid,urlEnd);
-            alert(uri);
             location.href=uri;
 
             // wx.miniProgram.navigateTo({

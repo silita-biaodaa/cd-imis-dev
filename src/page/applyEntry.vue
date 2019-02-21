@@ -72,7 +72,6 @@ export default {
     },
     mounted() {
         let that=this;
-        alert(localStorage.getItem('Authorization'));
         this.id=this.$route.query.id;
         groupsDetail(this.id).then(res =>{
             that.imgurl=res.data.imgUrl;
