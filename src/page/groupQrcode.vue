@@ -131,8 +131,10 @@ export default {
             let url2=location.href.substring(index2,location.href.length);
             // let uri=this.weixinauth(appid,url);
             let urlEnd=url1+url2;
+            alert(urlEnd);
             urlEnd=encodeURIComponent(urlEnd);
             let uri=this.weixinauth(appid,urlEnd);
+            alert(uri);
             location.href=uri;
             // let index = location.href.indexOf('?');
             // let index2=location.href.indexOf('#');
