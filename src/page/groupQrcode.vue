@@ -134,9 +134,8 @@ export default {
             // urlEnd=encodeURIComponent(urlEnd);
             // let uri=this.weixinauth(appid,urlEnd);
             // location.href=uri;
-            alert(this.id)
             wx.miniProgram.navigateTo({
-                url: 'pages/follow/follow?id=ghduaigadd'
+                url: '/pages/follow/follow?id='+this.id
             })
             
         }
