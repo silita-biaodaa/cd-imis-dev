@@ -8,12 +8,12 @@
               知学习
           </div>
        </div>
-        <div v-for="el in bookss" :key="el.pkid">
+        <div v-for="(el,i) in bookss">
             <div class="card-b">
                <div class="card-book">
                  《{{el.title}}》共朗读<span>{{el.readTotal+el.readCount}}</span>  遍
                </div>
-               <div class="right-box icon-mk" @click="jumpMini('book',el.pkid)"></div>
+               <div class="right-box icon-mk" @click="jumpMini('book',i)"></div>
             </div>
             <div class="card-com">
                <div class="l-pu">
@@ -21,6 +21,9 @@
                     <span></span>
                     <van-stepper @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
+            </div>
+            <div class="card-play" v-if="el.audioPath">
+              <audio :src="el.audioPath" controls></audio>
             </div>
         </div>
 
@@ -40,6 +43,9 @@
               </div>
               <div class="l-put">
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
+              </div>
+              <div class="card-play"  v-if="item.audioPath">
+                <audio :src="item.audioPath" controls></audio>
               </div>
               <!-- <div class="l-put">
                <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" @blur="repLink(index)" v-model='item.link' :disabled='first' >
@@ -320,8 +326,16 @@ export default {
   },
   created () {
       this.gainPer();
-      alert(JSON.stringify(this.$route.query));
-      alert(this.getParam('path'));
+      let obj=this.$route.query,
+          that=this;
+      if(JSON.stringify(obj)!='{}'){
+        let arr=[]
+        if(obj.type=='book'){
+          that.bookss[obj.id].audioPath=obj.path
+        }else if(obj.type=='addbook'){
+          that.books[obj.id].audioPath=obj.path
+        }
+      }
   },
   components: {
   },
