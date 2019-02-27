@@ -267,6 +267,23 @@ export default {
               let local=localStorage.getItem('cardPushData');
               if(local){
                 that.pushData=JSON.parse(local);
+                let obj=this.$route.query;
+                if(JSON.stringify(obj)!='{}'){
+                  // let arr=[];
+                  // alert(obj.id);
+                  // alert(obj.path);
+                  // alert(obj.type);
+                  // that.bookss[0].audioPath='fsfsfa'
+                  if(obj.type=='book'){
+                    let data=that.bookss[obj.id];
+                    data.audioPath=obj.path;
+                    that.$set(that.bookss,obj.id,data);
+                  }else if(obj.type=='addbook'){
+                    let data=that.books[obj.id];
+                    data.audioPath=obj.path;
+                    that.$set(that.books,obj.id,data);
+                  }
+                }
                 // let arr=[];
                 // that.pushData.bookss.forEach((el,i) => {
                 //     if( ! el.readCount == 0 ||el.type==1) {
@@ -279,6 +296,23 @@ export default {
                 //   that.pushData.pushCount.bonaTotal=that.pushData.pushCount.bonaTotal-that.pushData.pushCount.num
                 // }
                 // return false
+              }
+              let obj=this.$route.query;
+              if(JSON.stringify(obj)!='{}'){
+                // let arr=[];
+                // alert(obj.id);
+                // alert(obj.path);
+                // alert(obj.type);
+                // that.bookss[0].audioPath='fsfsfa'
+                if(obj.type=='book'){
+                  let data=that.bookss[obj.id];
+                  data.audioPath=obj.path;
+                  that.$set(that.bookss,obj.id,data);
+                }else if(obj.type=='addbook'){
+                  let data=that.books[obj.id];
+                  data.audioPath=obj.path;
+                  that.$set(that.books,obj.id,data);
+                }
               }
               // else{
                 // localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
@@ -326,22 +360,6 @@ export default {
   },
   created () {
       this.gainPer();
-      let obj=this.$route.query,
-          that=this;
-      if(JSON.stringify(obj)!='{}'){
-        let arr=[];
-        alert(obj.id);
-        alert(obj.path);
-        if(obj.type=='book'){
-          let data=that.bookss[obj.id];
-          data.audioPath=obj.path;
-          that.$set(that.bookss,obj.id,data);
-        }else if(obj.type=='addbook'){
-          let data=that.books[obj.id];
-          data.audioPath=obj.path;
-          that.$set(that.books,obj.id,data);
-        }
-      }
   },
   components: {
   },
