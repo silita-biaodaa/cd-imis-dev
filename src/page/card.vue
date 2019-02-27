@@ -329,11 +329,17 @@ export default {
       let obj=this.$route.query,
           that=this;
       if(JSON.stringify(obj)!='{}'){
-        let arr=[]
+        let arr=[];
+        alert(obj.id);
+        alert(obj.path);
         if(obj.type=='book'){
-          that.bookss[obj.id].audioPath=obj.path
+          let data=that.bookss[obj.id];
+          data.audioPath=obj.path;
+          that.$set(that.bookss,obj.id,data);
         }else if(obj.type=='addbook'){
-          that.books[obj.id].audioPath=obj.path
+          let data=that.books[obj.id];
+          data.audioPath=obj.path;
+          that.$set(that.books,obj.id,data);
         }
       }
   },
