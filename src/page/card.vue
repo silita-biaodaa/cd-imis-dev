@@ -193,8 +193,9 @@ export default {
   methods: {
     jumpMini(type,id){//跳转至小程序
       let token=localStorage.getItem('Authorization');
+      let uri=location.href;
       wx.miniProgram.navigateTo({
-          url: '/pages/test/test?token='+token+'&type='+type+'&id='+id
+          url: '/pages/test/test?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
     },
     repLink(i){
