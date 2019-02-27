@@ -13,6 +13,7 @@
                <div class="card-book">
                  《{{el.title}}》共朗读<span>{{el.readTotal+el.readCount}}</span>  遍
                </div>
+               <div class="right-box icon-mk" @click="jumpMini('book',el.pkid)"></div>
             </div>
             <div class="card-com">
                <div class="l-pu">
@@ -27,7 +28,11 @@
         <div  v-for="(item,index) in books" :key="index">
            <div class="card-b card-book add-book">
              <span>书本 ({{index + booklength + 1}})</span>
-             <span class="del-book" @click='cardDel(index)'  v-if="!first" >删除</span>
+             <div class="addBook-box">
+                <div class="icon-mk" @click="jumpMini('addbook',index)"></div>
+                <div class="del-book" @click='cardDel(index)'  v-if="!first" ></div>
+             </div>
+             
             </div>
            <div class="pdd">
               <div class="l-put put-bot">
@@ -149,6 +154,7 @@
 </template>
 <script>
 import { recordPer , pushCard, groups } from '@/api/index'
+import wx from 'weixin-js-sdk'
 export default {
   name:'card',
   data () {
@@ -185,6 +191,12 @@ export default {
     }
   },
   methods: {
+    jumpMini(type,id){//跳转至小程序
+      let token=localStorage.getItem('Authorization');
+      wx.miniProgram.navigateTo({
+          url: '/pages/test/test?token='+token+'&type='+type+'&id='+id
+      })
+    },
     repLink(i){
       let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
       let that=this;
@@ -455,19 +467,38 @@ export default {
     height: 80px;
     line-height: 80px;
     background-color: #f5f5f5;
-    padding-left: 36px;
+    padding:0 36px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
  }
  .card-book {
    color: #999;
    font-size: 26px;
  }
+ .icon-mk{
+   background:url("../assets/img/icon-mk.png");
+   background-size:cover;
+   width:40px;
+   height:40px;
+ }
+  .addBook-box{
+    display:flex;
+    .icon-mk{
+      margin-right:50px
+    }
+  }
  .add-book {
    display: flex;
    justify-content: space-between;
    padding-right: 36px;
  }
  .del-book {
-    color:#E62129;
+    background:url("../assets/img/sc.png");
+    background-size:cover;
+    width:40px;
+    height:40px;
+    
  }
  .pdd {
     background: #fff;
