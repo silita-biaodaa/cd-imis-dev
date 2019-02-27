@@ -309,9 +309,19 @@ export default {
     bblur() {
       window.scroll(0,0);
     },
+    getParam(name){
+      var url=window.location.search;  //获取问号之后的字0符
+      var reg=new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+      if(url!=null && url.toString().length>1){ 
+        var r=url.substr(1).match(reg);
+        if(r!=null)return unescape(r[2]); return null;
+      }
+    }
   },
   created () {
-     this.gainPer()
+      this.gainPer();
+      alert(JSON.stringify(this.$route.query));
+      alert(this.getParam('path'));
   },
   components: {
   },
