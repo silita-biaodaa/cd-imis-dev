@@ -168,10 +168,8 @@ export default {
     return {
       // booksss:[],
       num:'',
-      bookData:{
-        books:[],
-        bookss:[],
-      },
+      books:[],
+      bookss:[],
       pushCount: {},  //积善行
       pushData:{
         volunteer: '', // 立志愿
@@ -201,7 +199,7 @@ export default {
     books:{
       deep:true,
       handler(newVal,oldVal){
-        for (let i = 0; i < newValue.length; i++) {
+        for (let i = 0; i < newVal.length; i++) {
             if(newVal[i].audioPath){
               localStorage.setItem('cardAddBook',JSON.stringify(newVal))
             }
@@ -211,7 +209,7 @@ export default {
     bookss:{
       deep:true,
       handler(newVal,oldVal){
-        for (let i = 0; i < newValue.length; i++) {
+        for (let i = 0; i < newVal.length; i++) {
 　　　　　 if(newVal[i].audioPath){
             localStorage.setItem('cardBook',JSON.stringify(newVal))
           }     
