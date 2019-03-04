@@ -16,6 +16,7 @@ import clocklist from '@/components/clockList'
 import popup from '@/components/popup'
 import head from '@/components/headgoto'
 import toast from '@/components/toast'
+import audioPlay from '@/components/audioPlay'
 import { XButton , Group } from 'vux'
 //InlineCalendar, XInput, Datetime, XTextarea, , AlertPlugin,
 // Vue.component('inline-calendar', InlineCalendar)
@@ -28,6 +29,7 @@ Vue.component('v-clock', clocklist)
 Vue.component('v-popup', popup)
 Vue.component('v-head', head)
 Vue.component('v-toast', toast)
+Vue.component('v-audio', audioPlay)
 // Vue.use(AlertPlugin)
 
 

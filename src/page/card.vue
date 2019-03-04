@@ -8,7 +8,7 @@
               知学习
           </div>
        </div>
-        <div v-for="(el,i) in bookss">
+        <div v-for="(el,i) in bookss" :key="i">
             <div class="card-b">
                <div class="card-book">
                  《{{el.title}}》共朗读<span>{{el.readTotal+el.readCount}}</span>  遍
@@ -22,7 +22,8 @@
                     <van-stepper @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
             </div>
-            <div class="card-play" v-if="el.audioPath">
+            <div class="card-play">
+              <div class="zindex-box"></div>
               <audio :src="el.audioPath" controls></audio>
             </div>
         </div>
@@ -201,7 +202,7 @@ export default {
       let token=localStorage.getItem('Authorization');
       let uri=encodeURIComponent(location.href);
       wx.miniProgram.navigateTo({
-          url: '/pages/test/test?token='+token+'&type='+type+'&id='+id+'&uri='+uri
+          url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
     },
     repLink(i){
@@ -393,6 +394,26 @@ export default {
 }
 </script>
 <style lang="less" >
+
+// .card-play{
+//   padding:16px;
+//   box-sizing: content-box;
+//   position: relative;
+//   height: 116px;
+//   .zindex-box{
+//     width: calc(100% - 32px);
+//     height: calc(100% - 32px);
+//     position: absolute;
+//     background: red;
+//     z-index: 999;
+//     opacity: .3;
+//     border-radius: 5px;
+//   }
+// }
+audio{
+  width:100%;
+  // height: 100%;
+}
 .card{
    background: #F5F5F5;
     -webkit-overflow-scrolling : touch;
