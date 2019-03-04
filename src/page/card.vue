@@ -22,7 +22,7 @@
                     <van-stepper @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
             </div>
-            <div class="card-play">
+            <div class="card-play" v-if="el.audioPath">
               <div class="zindex-box"></div>
               <audio :src="el.audioPath" controls></audio>
             </div>
@@ -168,8 +168,10 @@ export default {
     return {
       // booksss:[],
       num:'',
-      books:[],
-      bookss:[],
+      bookData:{
+        books:[],
+        bookss:[],
+      },
       pushCount: {},  //积善行
       pushData:{
         volunteer: '', // 立志愿
@@ -194,6 +196,26 @@ export default {
         // if(newVal.bonaCount!=undefined&&newVal.pushCount.bonaStart!=undefined&&newVal.pushCount.bonaTotal!=undefined&&newVal.pushCount.days!=undefined&&newVal.pushCount.years!=undefined){
             localStorage.setItem('cardPushData',JSON.stringify(newVal));
         // }
+      }
+    },
+    books:{
+      deep:true,
+      handler(newVal,oldVal){
+        for (let i = 0; i < newValue.length; i++) {
+            if(newVal[i].audioPath){
+              localStorage.setItem('cardAddBook',JSON.stringify(newVal))
+            }
+        }
+      }
+    },
+    bookss:{
+      deep:true,
+      handler(newVal,oldVal){
+        for (let i = 0; i < newValue.length; i++) {
+　　　　　 if(newVal[i].audioPath){
+            localStorage.setItem('cardBook',JSON.stringify(newVal))
+          }     
+        }
       }
     }
   },
@@ -315,6 +337,15 @@ export default {
                   that.$set(that.books,obj.id,data);
                 }
               }
+
+              let locBook=localStorage.getItem('cardBook'),
+                  locAddBook=localStorage.getItem('cardAddBook');
+              if(locAddBook){
+                that.books=JSON.parse(locAddBook)
+              }
+              if(locBook){
+                that.bookss=JSON.parse(locBook)
+              }
               // else{
                 // localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
               // } 
@@ -336,6 +367,8 @@ export default {
             //  this.repetition = false
              this.hideLoading()
              localStorage.removeItem('cardPushData');
+             localStorage.removeItem('cardBook');
+             localStorage.removeItem('cardAddBook');
               this.$router.push({path:'/nav/friend'})
            }
       })
@@ -378,6 +411,7 @@ export default {
     })
   },
   beforeDestroy() {
+    alert('test')
     window.removeEventListener('resize', () => {
     const activeElement = document.activeElement
     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
