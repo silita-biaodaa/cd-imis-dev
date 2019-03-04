@@ -199,6 +199,7 @@ export default {
     books:{
       deep:true,
       handler(newVal,oldVal){
+        alert('addn:'+JSON.stringify(newVal));
         for (let i = 0; i < newVal.length; i++) {
             if(newVal[i].audioPath){
               localStorage.setItem('cardAddBook',JSON.stringify(newVal))
@@ -209,6 +210,7 @@ export default {
     bookss:{
       deep:true,
       handler(newVal,oldVal){
+        alert('n:'+JSON.stringify(newVal));
         for (let i = 0; i < newVal.length; i++) {
 　　　　　 if(newVal[i].audioPath){
             localStorage.setItem('cardBook',JSON.stringify(newVal))
@@ -225,17 +227,17 @@ export default {
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
     },
-    repLink(i){
-      let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
-      let that=this;
-      if(!re.test(this.books[i].link)){
-        that.mask1=true;
-        this.books[i].link=''
-        return setTimeout(() => {
-            that.mask1 = false;
-        }, 1500);
-      }
-    },
+    // repLink(i){
+    //   let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
+    //   let that=this;
+    //   if(!re.test(this.books[i].link)){
+    //     that.mask1=true;
+    //     this.books[i].link=''
+    //     return setTimeout(() => {
+    //         that.mask1 = false;
+    //     }, 1500);
+    //   }
+    // },
     bookChang(el){
       if(el.readCount==0){
         el.type=1;
@@ -335,9 +337,10 @@ export default {
                   that.$set(that.books,obj.id,data);
                 }
               }
-
               let locBook=localStorage.getItem('cardBook'),
                   locAddBook=localStorage.getItem('cardAddBook');
+              alert('book'+locBook);
+              alert('addbook'+locAddBook);
               if(locAddBook){
                 that.books=JSON.parse(locAddBook)
               }
@@ -365,8 +368,6 @@ export default {
             //  this.repetition = false
              this.hideLoading()
              localStorage.removeItem('cardPushData');
-             localStorage.removeItem('cardBook');
-             localStorage.removeItem('cardAddBook');
               this.$router.push({path:'/nav/friend'})
            }
       })
@@ -409,7 +410,8 @@ export default {
     })
   },
   beforeDestroy() {
-    alert('test')
+    localStorage.removeItem('cardBook');
+    localStorage.removeItem('cardAddBook');
     window.removeEventListener('resize', () => {
     const activeElement = document.activeElement
     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
