@@ -222,7 +222,7 @@ export default {
   methods: {
     jumpMini(type,id){//跳转至小程序
       let token=localStorage.getItem('Authorization');
-      let uri=encodeURIComponent(location.href);
+      let uri=encodeURIComponent(location.href.split('?type')[0]);
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
