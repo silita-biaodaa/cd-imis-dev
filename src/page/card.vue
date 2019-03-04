@@ -196,28 +196,28 @@ export default {
         // }
       }
     },
-    books:{
-      deep:true,
-      handler(newVal,oldVal){
-        alert('addn:'+JSON.stringify(newVal));
-        for (let i = 0; i < newVal.length; i++) {
-            if(newVal[i].audioPath){
-              localStorage.setItem('cardAddBook',JSON.stringify(newVal))
-            }
-        }
-      }
-    },
-    bookss:{
-      deep:true,
-      handler(newVal,oldVal){
-        alert('n:'+JSON.stringify(newVal));
-        for (let i = 0; i < newVal.length; i++) {
-　　　　　 if(newVal[i].audioPath){
-            localStorage.setItem('cardBook',JSON.stringify(newVal))
-          }     
-        }
-      }
-    }
+//     books:{
+//       deep:true,
+//       handler(newVal,oldVal){
+//         alert('addn:'+JSON.stringify(newVal));
+//         for (let i = 0; i < newVal.length; i++) {
+//             if(newVal[i].audioPath){
+//               localStorage.setItem('cardAddBook',JSON.stringify(newVal))
+//             }
+//         }
+//       }
+//     },
+//     bookss:{
+//       deep:true,
+//       handler(newVal,oldVal){
+//         alert('n:'+JSON.stringify(newVal));
+//         for (let i = 0; i < newVal.length; i++) {
+// 　　　　　 if(newVal[i].audioPath){
+//             localStorage.setItem('cardBook',JSON.stringify(newVal))
+//           }     
+//         }
+//       }
+//     }
   },
   methods: {
     jumpMini(type,id){//跳转至小程序
@@ -322,31 +322,40 @@ export default {
               }
               let obj=this.$route.query;
               if(JSON.stringify(obj)!='{}'){
+                
+                  
                 // let arr=[];
                 // alert(obj.id);
                 // alert(obj.path);
                 // alert(obj.type);
                 // that.bookss[0].audioPath='fsfsfa'
+               
                 if(obj.type=='book'){
-                  let data=that.bookss[obj.id];
+                  let bookData=that.bookss;
+                  if(localStorage.getItem('cardBook')){
+                    let locBook=localStorage.getItem('cardBook');
+                    alert(locBook);
+                    bookData=JSON.parse(locBook)
+                  }
+                  let data=bookData[obj.id];
                   data.audioPath=obj.path;
-                  that.$set(that.bookss,obj.id,data);
+                  localStorage.setItem('cardBook',JSON.stringify(bookData));
+                  that.$set(that.bookss,bookData);
                 }else if(obj.type=='addbook'){
-                  let data=that.books[obj.id];
+                  let bookData=that.books;
+                  if(localStorage.getItem('cardAddBook')){
+                    let locAddBook=localStorage.getItem('cardAddBook');
+                    alert(locAddBook);
+                    bookData=JSON.parse(locAddBook)
+                  }
+                  let data=bookData[obj.id];
                   data.audioPath=obj.path;
-                  that.$set(that.books,obj.id,data);
+                  localStorage.setItem('cardAddBook',JSON.stringify(bookData));
+                  that.$set(that.books,bookData);
                 }
               }
-              let locBook=localStorage.getItem('cardBook'),
-                  locAddBook=localStorage.getItem('cardAddBook');
-              alert('book'+locBook);
-              alert('addbook'+locAddBook);
-              if(locAddBook){
-                that.books=JSON.parse(locAddBook)
-              }
-              if(locBook){
-                that.bookss=JSON.parse(locBook)
-              }
+              
+              
               // else{
                 // localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
               // } 
