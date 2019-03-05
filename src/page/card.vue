@@ -22,7 +22,7 @@
                     <van-stepper @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
             </div>
-            <div class="card-play" v-if="el.audioPath">
+            <div class="card-play" v-show="el.audioPath">
               <div class="zindex-box"></div>
               <audio :src="el.audioPath" controls></audio>
             </div>
@@ -156,7 +156,7 @@
            </div>
         </div>
         <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="punch"></v-popup>
-        <v-toast :mask='mask1' :toastTxt="'该链接格式错误'"></v-toast>
+        <!-- <v-toast :mask='mask1' :toastTxt="'该链接格式错误'"></v-toast> -->
    </div>
 </template>
 <script>
@@ -298,13 +298,26 @@ export default {
                   // alert(obj.type);
                   // that.bookss[0].audioPath='fsfsfa'
                   if(obj.type=='book'){
-                    let data=that.bookss[obj.id];
+                  let bookData=that.bookss;
+                    if(localStorage.getItem('cardBook')){
+                      let locBook=localStorage.getItem('cardBook');
+                      bookData=JSON.parse(locBook)
+                    }
+                    let data=bookData[obj.id];
                     data.audioPath=obj.path;
-                    that.$set(that.bookss,obj.id,data);
+                    localStorage.setItem('cardBook',JSON.stringify(bookData));
+                    that.$set(that.bookss,bookData);
                   }else if(obj.type=='addbook'){
-                    let data=that.books[obj.id];
+                    let bookData=that.books;
+                    if(localStorage.getItem('cardAddBook')){
+                      let locAddBook=localStorage.getItem('cardAddBook');
+                      bookData=JSON.parse(locAddBook)
+                    }
+                    let data=bookData[obj.id];
                     data.audioPath=obj.path;
-                    that.$set(that.books,obj.id,data);
+                    localStorage.setItem('cardAddBook',JSON.stringify(bookData));
+                    that.$set(that.books,bookData);
+                    // that.books=bookData;
                   }
                 }
                 // let arr=[];
@@ -334,7 +347,6 @@ export default {
                   let bookData=that.bookss;
                   if(localStorage.getItem('cardBook')){
                     let locBook=localStorage.getItem('cardBook');
-                    alert(locBook);
                     bookData=JSON.parse(locBook)
                   }
                   let data=bookData[obj.id];
@@ -345,13 +357,13 @@ export default {
                   let bookData=that.books;
                   if(localStorage.getItem('cardAddBook')){
                     let locAddBook=localStorage.getItem('cardAddBook');
-                    alert(locAddBook);
                     bookData=JSON.parse(locAddBook)
                   }
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardAddBook',JSON.stringify(bookData));
                   that.$set(that.books,bookData);
+                  // that.books=bookData;
                 }
               }
               
