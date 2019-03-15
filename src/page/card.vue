@@ -334,6 +334,7 @@ export default {
                 // return false
               }
               let obj=this.$route.query;
+
               if(JSON.stringify(obj)!='{}'){
                 
                   
@@ -413,6 +414,7 @@ export default {
     }
   },
   created () {
+      alert(location.href.split);
       this.gainPer();
   },
   components: {
