@@ -196,28 +196,28 @@ export default {
         // }
       }
     },
-//     books:{
-//       deep:true,
-//       handler(newVal,oldVal){
-//         alert('addn:'+JSON.stringify(newVal));
-//         for (let i = 0; i < newVal.length; i++) {
-//             if(newVal[i].audioPath){
-//               localStorage.setItem('cardAddBook',JSON.stringify(newVal))
-//             }
-//         }
-//       }
-//     },
-//     bookss:{
-//       deep:true,
-//       handler(newVal,oldVal){
-//         alert('n:'+JSON.stringify(newVal));
-//         for (let i = 0; i < newVal.length; i++) {
+    books:{
+      deep:true,
+      handler(newVal,oldVal){
+        // alert('addn:'+JSON.stringify(newVal));
+        // for (let i = 0; i < newVal.length; i++) {
+            // if(newVal[i].audioPath){
+              localStorage.setItem('cardAddBook',JSON.stringify(newVal))
+            // }
+        // }
+      }
+    },
+    bookss:{
+      deep:true,
+      handler(newVal,oldVal){
+        // alert('n:'+JSON.stringify(newVal));
+        // for (let i = 0; i < newVal.length; i++) {
 // 　　　　　 if(newVal[i].audioPath){
-//             localStorage.setItem('cardBook',JSON.stringify(newVal))
-//           }     
-//         }
-//       }
-//     }
+            localStorage.setItem('cardBook',JSON.stringify(newVal))
+          // }     
+        // }
+      }
+    }
   },
   methods: {
     jumpMini(type,id){//跳转至小程序
@@ -355,6 +355,7 @@ export default {
                   localStorage.setItem('cardBook',JSON.stringify(bookData));
                   alert(JSON.stringify(bookData));
                   that.$set(that.bookss,bookData);
+
                 }else if(obj.type=='addbook'){
                   let bookData=that.books;
                   if(localStorage.getItem('cardAddBook')){
@@ -364,6 +365,7 @@ export default {
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardAddBook',JSON.stringify(bookData));
+                  alert(JSON.stringify(bookData));
                   that.$set(that.books,bookData);
                   // that.books=bookData;
                 }
