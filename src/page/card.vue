@@ -363,7 +363,6 @@ export default {
                   for(let x of bookData){
                     that.books.push(x);
                   }
-                  // that.books=bookData;
                 }
               }
               
@@ -387,8 +386,10 @@ export default {
       pushCard({isUpdate:isUpdate,thanks:this.pushData.thanks,practice:this.pushData.practice,books:this.bookss,classic:this.pushData.classic,introspective:this.pushData.introspective,volunteer:this.pushData.volunteer,pushCount:this.pushCount,isPub:'1',bookish:this.books}).then( res => {
            if(res.code == 1) {
             //  this.repetition = false
-             this.hideLoading()
-             localStorage.removeItem('cardPushData');
+            this.hideLoading()
+            localStorage.removeItem('cardPushData');
+            localStorage.removeItem('cardBook');
+            localStorage.removeItem('cardAddBook');
               this.$router.push({path:'/nav/friend'})
            }
       })
@@ -431,8 +432,8 @@ export default {
     })
   },
   beforeDestroy() {
-    localStorage.removeItem('cardBook');
-    localStorage.removeItem('cardAddBook');
+    // localStorage.removeItem('cardBook');
+    // localStorage.removeItem('cardAddBook');
     window.removeEventListener('resize', () => {
     const activeElement = document.activeElement
     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
