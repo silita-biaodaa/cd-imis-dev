@@ -222,7 +222,6 @@ export default {
   methods: {
     jumpMini(type,id){//跳转至小程序
       let token=localStorage.getItem('Authorization');
-      alert(location.href.split('?type')[0]);
       let uri=encodeURIComponent(location.href.split('?type')[0]);
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
@@ -290,6 +289,7 @@ export default {
               that.booklength = that.bookss.length;
               let local=localStorage.getItem('cardPushData');
               if(local){
+                alert(localStorage.getItem('cardBook'));
                 that.pushData=JSON.parse(local);
                 let obj=this.$route.query;
                 if(JSON.stringify(obj)!='{}'){
@@ -344,7 +344,7 @@ export default {
                 // alert(obj.path);
                 // alert(obj.type);
                 // that.bookss[0].audioPath='fsfsfa'
-               
+                alert(localStorage.getItem('cardBook'));
                 if(obj.type=='book'){
                   let bookData=that.bookss;
                   if(localStorage.getItem('cardBook')){
@@ -415,7 +415,6 @@ export default {
     }
   },
   created () {
-      alert(location.href);
       this.gainPer();
   },
   components: {
