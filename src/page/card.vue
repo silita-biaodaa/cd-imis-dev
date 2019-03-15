@@ -337,13 +337,6 @@ export default {
               let obj=this.$route.query;
 
               if(JSON.stringify(obj)!='{}'){
-                
-                  
-                // let arr=[];
-                // alert(obj.id);
-                // alert(obj.path);
-                // alert(obj.type);
-                // that.bookss[0].audioPath='fsfsfa'
                 if(obj.type=='book'){
                   let bookData=that.bookss;
                   if(localStorage.getItem('cardBook')){
@@ -353,9 +346,8 @@ export default {
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardBook',JSON.stringify(bookData));
-                  alert(JSON.stringify(bookData));
+                  that.bookss=bookData;
                   that.$set(that.bookss,bookData);
-
                 }else if(obj.type=='addbook'){
                   let bookData=that.books;
                   if(localStorage.getItem('cardAddBook')){
@@ -365,8 +357,10 @@ export default {
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardAddBook',JSON.stringify(bookData));
-                  alert(JSON.stringify(bookData));
-                  that.$set(that.books,bookData);
+                  that.books=[];
+                  for(let x of bookData){
+                    that.books.push(x);
+                  }
                   // that.books=bookData;
                 }
               }
