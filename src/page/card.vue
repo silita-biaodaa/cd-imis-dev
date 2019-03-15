@@ -222,6 +222,7 @@ export default {
   methods: {
     jumpMini(type,id){//跳转至小程序
       let token=localStorage.getItem('Authorization');
+      alert(location.href.split('?type')[0]);
       let uri=encodeURIComponent(location.href.split('?type')[0]);
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
@@ -414,7 +415,7 @@ export default {
     }
   },
   created () {
-      alert(location.href.split);
+      alert(location.href);
       this.gainPer();
   },
   components: {
