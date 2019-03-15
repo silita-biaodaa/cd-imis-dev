@@ -346,8 +346,10 @@ export default {
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardBook',JSON.stringify(bookData));
-                  that.bookss=bookData;
-                  that.$set(that.bookss,bookData);
+                  that.bookss=[];
+                  for(let x of bookData){
+                    that.bookss.push(x);
+                  }
                 }else if(obj.type=='addbook'){
                   let bookData=that.books;
                   if(localStorage.getItem('cardAddBook')){
@@ -463,6 +465,9 @@ export default {
 //     border-radius: 5px;
 //   }
 // }
+.card-play{
+  margin-bottom: 20px;
+}
 audio{
   width:100%;
   // height: 100%;
