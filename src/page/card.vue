@@ -608,8 +608,8 @@ audio{
  .icon-mk{
    background:url("../assets/img/icon-mk.png");
    background-size:cover;
-   width:40px;
-   height:40px;
+   width:23px;
+   height:35px;
  }
   .addBook-box{
     display:flex;
