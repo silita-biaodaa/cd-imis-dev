@@ -74,9 +74,27 @@
               行实践
           </div>
        </div>
-       <div class="card-com">
+       <div class="card-com card-share tit-box">
+            修身
+        </div>
+        <div class="card-put">
+          <textarea  rows="4" placeholder='请输入今日您对个人的贡献'  v-model="pushData.practice.character" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
+        </div>
+        <div class="card-com card-share tit-box">
+            齐家
+        </div>
+        <div class="card-put">
+          <textarea  rows="4" placeholder='请输入今日您对家庭和家人的贡献'  v-model="pushData.practice.family" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
+        </div>
+        <div class="card-com card-share tit-box">
+            建功
+        </div>
+        <div class="card-put">
+          <textarea  rows="4" placeholder='请输入今日您对工作的贡献'  v-model="pushData.practice.work" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
+        </div>
+       <!-- <div class="card-com">
           <div class="l-put">
-               <div class="label label-f">修身</div> <input type="text" placeholder="请输入今日您对个人的贡献" v-model="pushData.practice.character" @blur='bblur' :disabled='first' >
+               <div class="label label-f">修身</div><input type="text" placeholder="请输入今日您对个人的贡献" v-model="pushData.practice.character" @blur='bblur' :disabled='first' >
           </div>
        </div>
        <div class="card-com">
@@ -88,7 +106,7 @@
           <div class="l-put">
                <div class="label label-f label-t">建功</div> <input type="text" placeholder="请输入今日您对工作的贡献" v-model="pushData.practice.work" @blur='bblur' :disabled='first' >
           </div>
-       </div>
+       </div> -->
 
         <div class="card-top card-com laca card-ma">
            <div class="siz">
@@ -489,7 +507,7 @@ audio{
     .van-stepper__minus, .van-stepper__plus {
       width:33%;
       border-color: #ccc;
-      height: 61px;
+      height: 60px;
     }
     .van-stepper__minus {
       border-radius: 18px 0 0 18px;
@@ -498,12 +516,13 @@ audio{
       border-radius: 0 18px 18px 0;
     }
     .van-stepper__input{
-      line-height: 61px;
+      line-height: 60px;
       width:33%;
-      height: 61px;
+      height: 60px;
       font-size: 24px;
       box-sizing: border-box;
       border-color: #ccc;
+      padding: 0;
     }
     .van-stepper__minus::before, .van-stepper__plus::before {
       width: 20px !important;
