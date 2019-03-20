@@ -3,21 +3,22 @@
         <div class="audioBox">
             <!--播放按钮-->
             <div class="playBtn">
-                <p :class="isClick?'pause-btn':'play-btn'"></p>
+                <p :class="isClick?'pause-btn':'play-btn'" @click="playFn"></p>
             </div>
             <!--计数条-->
             <div class="countsBar">
                 <p class="counter">{{counts.m}}:{{counts.s}}</p>
-                <van-slider inactive-color="rgb(149, 136, 124,.3)" :max="maxTime" active-color="#95887C" v-model="counts.s"></van-slider>
+                <van-slider inactive-color="rgb(149, 136, 124,.3)" :max="maxTime" active-color="#95887C" v-model="slider"></van-slider>
                 <p class="counter">{{num.m}}:{{num.s}}</p>
             </div>
             <!--删除-->
             <div class="deleteBtn">删除</div>
         </div>
-        <audio @canplay="readPlay" v-show="false" ref="test" src="http://m10.music.126.net/20190228155216/629bf8e3644fc674a42bceec504f8972/ymusic/e47f/9bc5/2695/b74c4b8332994ffcb34a6f2c0080b9e6.mp3"></audio>
+        <audio @loadedmetadata="readPlay" v-show="false" ref="test" src="https://imis-online.oss-cn-shenzhen.aliyuncs.com/pre/3c6d038ca4d14a5f821fbe2b4a7755be.mp3"></audio>
     </div>
 </template>
 <script>
+import { setInterval } from 'timers';
   export default {
     name:'audioPlay',
     data () {
@@ -33,6 +34,8 @@
             },
             maxTime:0,
             nowTime:0,
+            slider:0,
+            t:null
         }
     },
     computed: {
@@ -40,10 +43,12 @@
     },
     methods:{
         timer() {
-            const that = this
-            let second = that.counts.s
-            let minute = that.counts.m
+            const that = this;
+            let second = that.counts.s;
+            let minute = that.counts.m;
+            this.nowTime++
             second++
+            this.slider=parseInt((this.nowTime/this.maxTime)*100);
             if (second >= 60) {
                 second = 0  //  大于等于60秒归零
                 minute++
@@ -80,6 +85,15 @@
                 this.num.s='0'+this.num.s
             }
             
+        },
+        playFn(){
+            let audio=this.$refs.test;
+            if(this.isClick){//暂停
+                audio.pause();
+            }else{
+                audio.play();
+                this.t=setInterval(this.timer,1000);
+            }
         }
     },
     created(){

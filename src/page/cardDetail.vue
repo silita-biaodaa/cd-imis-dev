@@ -26,11 +26,17 @@
                 <p class="tit">【知～学习】</p>
                 <div v-for="(el,bs) in item.books" :key="bs">
                     <p class="c-color" v-if="el.readCount!=0">《{{el.title}}》{{el.readCount}}遍 共{{el.readTotal}}遍</p>
+                    <div class="card-play" v-show="el.audioPath">
+                        <audio :src="el.audioPath" controls></audio>
+                    </div>
                 </div>
                 <template v-if="item.bookish.length>0">
                     <div v-for="(o,i) in item.bookish" :key="'i'+i">
                         <span class="c-color">《{{o.bookName}}》{{o.section}}</span>
-                        <span class="c-link" v-if="o.link" @click="jumpLink(o.link)"></span>
+                        <!-- <span class="c-link" v-if="o.link" @click="jumpLink(o.link)"></span> -->
+                        <div class="card-play" v-show="o.audioPath">
+                            <audio :src="o.audioPath" controls></audio>
+                        </div>
                     </div>
                 </template>
 
