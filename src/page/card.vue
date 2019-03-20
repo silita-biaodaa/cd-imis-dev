@@ -668,6 +668,7 @@ audio{
     background: #fff;
     font-weight: 400;
     margin-top: 10px;
+    box-sizing: border-box
  }
  .card-put {
     font-size: 32px;
