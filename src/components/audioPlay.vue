@@ -132,6 +132,14 @@ import { setInterval, clearInterval } from 'timers';
         },
         audioEnd(){//播放完毕停止计时
             clearInterval(this.t);
+            this.counts={
+                m:'00',
+                s:'00'
+            };
+            this.t=null;
+            this.nowTime=0;
+            this.slider=0;
+            this.isClick=false;
         }
     },
     created(){
