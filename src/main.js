@@ -113,7 +113,6 @@ router.beforeEach((to, from, next) => {
     }
     if(!auth||to.fullPath=='/home'){
       queryList(data).then(res => {
-        alert(res.data.isFirst);
         if ( res.code == 1 ) {
           localStorage.setItem('Authorization', res.data.token);
           if(res.data.token&&res.data.token!='undefined'){
@@ -150,18 +149,17 @@ router.beforeEach((to, from, next) => {
                   replace:true
                 })
               })
-            }else if(res.data.isFirst==5){
-              next({
-                name:'close',
-                replace:true
-              })
             }else{
               next({
                 name:paths,
                 replace:true
               })
             }
-            
+          }else if(res.data.isFirst==5){
+            next({
+              name:'close',
+              replace:true
+            })
           }else{//初始化
             next()
           }
