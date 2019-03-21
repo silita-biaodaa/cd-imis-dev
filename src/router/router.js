@@ -18,6 +18,7 @@ import cardDetail from '@/page/cardDetail'
 import groupQrcode from '@/page/groupQrcode'
 import applyEntry from '@/page/applyEntry'
 import test from '@/page/wxTest'
+import close from '@/page/close'
 Vue.use(Router)
 
 export default new Router({
@@ -98,6 +99,10 @@ export default new Router({
       path:'/test',
       component: test,
       name:'test'
+    },{
+      path:'/close',
+      component:close,
+      name:'close'
     }
 
   ],

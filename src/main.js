@@ -149,6 +149,11 @@ router.beforeEach((to, from, next) => {
                   replace:true
                 })
               })
+            }else if(res.data.isFirst==5){
+              next({
+                name:'close',
+                replace:true
+              })
             }else{
               next({
                 name:paths,
