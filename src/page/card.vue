@@ -358,29 +358,47 @@ export default {
               if(JSON.stringify(obj)!='{}'){
                 if(obj.type=='book'){
                   let bookData=that.bookss;
+                  let addbook;
                   if(localStorage.getItem('cardBook')){
                     let locBook=localStorage.getItem('cardBook');
                     bookData=JSON.parse(locBook)
+                  }
+                  if(localStorage.getItem('cardAddBook')){
+                    let locAddBook=localStorage.getItem('cardAddBook');
+                    addbook=JSON.parse(locAddBook)
                   }
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardBook',JSON.stringify(bookData));
                   that.bookss=[];
-                  for(let x of bookData){
+                  that.books=[];
+                  for(let x of bookData){//普通书本
                     that.bookss.push(x);
+                  }
+                  for(let x of addbook){//添加书本
+                    that.books.push(x);
                   }
                 }else if(obj.type=='addbook'){
                   let bookData=that.books;
+                  let bookss;
                   if(localStorage.getItem('cardAddBook')){
                     let locAddBook=localStorage.getItem('cardAddBook');
                     bookData=JSON.parse(locAddBook)
+                  }
+                  if(localStorage.getItem('cardBook')){
+                    let locBook=localStorage.getItem('cardBook');
+                    bookss=JSON.parse(locBook);
                   }
                   let data=bookData[obj.id];
                   data.audioPath=obj.path;
                   localStorage.setItem('cardAddBook',JSON.stringify(bookData));
                   that.books=[];
-                  for(let x of bookData){
+                  that.bookss=[];
+                  for(let x of bookData){//加新增书本
                     that.books.push(x);
+                  }
+                  for(let x of bookss){//加普通书本
+                    that.bookss.push(x)
                   }
                 }
               }
