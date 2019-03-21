@@ -6,15 +6,16 @@
                 <p :class="isClick?'pause-btn':'play-btn'" @click="playFn"></p>
             </div>
             <!--计数条-->
-            <div class="countsBar" :class="{isCard:'isCard'}">
+            <div class="countsBar" :class="isCard==1?'isCard':''">
                 <p class="counter">{{counts.m}}:{{counts.s}}</p>
-                <van-slider inactive-color="rgb(149, 136, 124,.3)" :max="maxTime" active-color="#95887C" @change="sliderChange" v-model="slider"></van-slider>
+                <van-slider inactive-color="rgb(149, 136, 124,.3)" active-color="#95887C" @change="sliderChange" v-model="slider"></van-slider>
                 <p class="counter">{{num.m}}:{{num.s}}</p>
             </div>
             <!--删除-->
-            <div class="deleteBtn" @click="deleteAudio" v-if="isCard">删除</div>
+            <div class="deleteBtn" @click="tapDel" v-if="isCard==1">删除</div>
         </div>
-        <audio @loadedmetadata="readPlay" v-show="false" ref="test" :src="audioPath"></audio>
+        <audio @loadedmetadata="readPlay" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
+        <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="deleteAudio"></v-popup>
     </div>
 </template>
 <script>
@@ -35,7 +36,9 @@ import { setInterval, clearInterval } from 'timers';
             maxTime:0,
             nowTime:0,
             slider:0,
-            t:null
+            t:null,
+            mask:false,
+            tipTxt:'确认删除该录音吗?'
         }
     },
     props:{
@@ -43,7 +46,7 @@ import { setInterval, clearInterval } from 'timers';
             default:''
         },
         isCard:{
-            default:false
+            default:0
         }
     },
     methods:{
@@ -120,6 +123,12 @@ import { setInterval, clearInterval } from 'timers';
         },
         deleteAudio(){
             this.$emit('deAudio');
+        },
+        tapDel(){
+            this.mask=true;
+        },
+        audioEnd(){
+            clearInterval(this.t);
         }
     },
     created(){
@@ -176,8 +185,7 @@ import { setInterval, clearInterval } from 'timers';
 }
 /*计数条*/
 .countsBar{
-    
-    width: calc(100% - 262px);
+    width: calc(100% - 110px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -190,7 +198,7 @@ import { setInterval, clearInterval } from 'timers';
     }
 }
 .isCard.countsBar{
-    width: calc(100% - 110px);
+    width: calc(100% - 262px);
 }
 /*删除键*/
 .deleteBtn{

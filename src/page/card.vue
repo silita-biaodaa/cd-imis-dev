@@ -23,7 +23,7 @@
                </div>
             </div>
             <div class="card-play" v-show="el.audioPath">
-              <v-audio :audioPath="el.audioPath" @deAudio="deBookPathFn(i)" :isCard="true"></v-audio>
+              <v-audio :audioPath="el.audioPath" @deAudio="deBookPathFn(i)" :isCard="1"></v-audio>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
               </div>
               <div class="card-play"  v-if="item.audioPath">
-                <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="true"></v-audio>
+                <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="1"></v-audio>
               </div>
               <!-- <div class="l-put">
                <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" @blur="repLink(index)" v-model='item.link' :disabled='first' >
@@ -173,6 +173,7 @@
            </div>
         </div>
         <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="punch"></v-popup>
+        <!-- <v-popup :popupShow="delmask" :popupType="'tip1'" :tip-text="'确认删除该书本吗?'" @sure="delBook"></v-popup> -->
         <!-- <v-toast :mask='mask1' :toastTxt="'该链接格式错误'"></v-toast> -->
    </div>
 </template>
@@ -184,6 +185,7 @@ export default {
   data () {
     return {
       // booksss:[],
+      // delmask:false,
       num:'',
       books:[],
       bookss:[],
@@ -416,8 +418,19 @@ export default {
        this.books.push(data)
     },
     cardDel(i) {
-       this.books.splice(i,1)
+      // let that=this;
+      // this.$dialog.confirm({
+      //     title: '删除书本',
+      //     message: '确认删除该书本吗？'
+      // }).then(() => {
+          this.books.splice(i,1)
+      // }).catch(() => {
+      // // on cancel
+      // })
     },
+    // delBook(){
+
+    // },
     bblur() {
       window.scroll(0,0);
     },

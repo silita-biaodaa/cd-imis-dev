@@ -4,7 +4,7 @@
         <span class="skip" v-if="popupType=='tips'" @click="sure">跳过</span>
         <div class="content" :class="{tips:popupType=='tips'}">
             <template v-if="popupType=='tip1'">
-                <div class="top-box">{{text}}</div>
+                <div class="top-box">{{txt}}</div>
                 <div class="bottom-box">
                     <p @click="cancelFn">{{cancelTxt}}</p>
                     <p @click="sure" style="color: #E62129">{{sureTxt}}</p>
@@ -31,7 +31,7 @@
             <template v-if="popupType=='closeTips'">
               <div class="tipBox">
                 <div class="txt-box">检测到您还未关注公众号，请先退出，关注公众号‘标大大云数据’</div>
-                <button @click="cancelFn">确定</button>
+                <!-- <button @click="cancelFn">确定</button> -->
               </div>
             </template>
         </div>
@@ -72,7 +72,7 @@ export default {
     },
     computed:{
       txt(){
-        return this.tip1Text
+        return this.tipText
       }
     },
     beforeCreate() {
