@@ -15,7 +15,8 @@
           <div v-for="(el,bs) in item.books" :key="bs">
             <p class="c-color" v-if="el.readCount!=0">《{{el.title}}》{{el.readCount}}遍 共{{el.readTotal}}遍</p>
             <div class="card-play" v-show="el.audioPath">
-              <audio :src="el.audioPath" controls></audio>
+              <!-- <audio :src="el.audioPath" controls></audio> -->
+              <v-audio :audioPath="el.audioPath"></v-audio>
             </div>
           </div>
           <template v-if="item.bookish.length>0">
@@ -25,7 +26,8 @@
                 <!-- <span class="c-link" v-if="o.link" @click="jumpLink(o.link)"></span> -->
               </p>
               <div class="card-play" v-show="o.audioPath">
-                <audio :src="o.audioPath" controls></audio>
+                <v-audio :audioPath="o.audioPath"></v-audio>
+                <!-- <audio :src="o.audioPath" controls></audio> -->
               </div>
             </div>
           </template>

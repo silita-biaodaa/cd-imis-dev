@@ -6,19 +6,19 @@
                 <p :class="isClick?'pause-btn':'play-btn'" @click="playFn"></p>
             </div>
             <!--计数条-->
-            <div class="countsBar">
+            <div class="countsBar" :class="{isCard:'isCard'}">
                 <p class="counter">{{counts.m}}:{{counts.s}}</p>
-                <van-slider inactive-color="rgb(149, 136, 124,.3)" :max="maxTime" active-color="#95887C" v-model="slider"></van-slider>
+                <van-slider inactive-color="rgb(149, 136, 124,.3)" :max="maxTime" active-color="#95887C" @change="sliderChange" v-model="slider"></van-slider>
                 <p class="counter">{{num.m}}:{{num.s}}</p>
             </div>
             <!--删除-->
-            <div class="deleteBtn">删除</div>
+            <div class="deleteBtn" @click="deleteAudio" v-if="isCard">删除</div>
         </div>
-        <audio @loadedmetadata="readPlay" v-show="false" ref="test" src="https://imis-online.oss-cn-shenzhen.aliyuncs.com/pre/3c6d038ca4d14a5f821fbe2b4a7755be.mp3"></audio>
+        <audio @loadedmetadata="readPlay" v-show="false" ref="test" :src="audioPath"></audio>
     </div>
 </template>
 <script>
-import { setInterval } from 'timers';
+import { setInterval, clearInterval } from 'timers';
   export default {
     name:'audioPlay',
     data () {
@@ -38,8 +38,13 @@ import { setInterval } from 'timers';
             t:null
         }
     },
-    computed: {
-      
+    props:{
+        audioPath:{
+            default:''
+        },
+        isCard:{
+            default:false
+        }
     },
     methods:{
         timer() {
@@ -90,10 +95,31 @@ import { setInterval } from 'timers';
             let audio=this.$refs.test;
             if(this.isClick){//暂停
                 audio.pause();
+                clearInterval(this.t);
             }else{
                 audio.play();
                 this.t=setInterval(this.timer,1000);
             }
+            this.isClick=!this.isClick
+        },
+        sliderChange(value){
+            clearInterval(this.t);
+            let audio=this.$refs.test;
+            this.slider=value;
+            this.nowTime=parseInt((this.maxTime*value)/100);
+            this.counts.m=parseInt(this.nowTime/60);
+            this.counts.s=this.nowTime%60;
+            if(this.counts.m<10){
+                this.counts.m='0'+this.counts.m
+            }
+            if(this.counts.s<10){
+                this.counts.s='0'+this.counts.s
+            }
+            audio.currentTime = this.nowTime;
+            this.t=setInterval(this.timer,1000);
+        },
+        deleteAudio(){
+            this.$emit('deAudio');
         }
     },
     created(){
@@ -150,6 +176,7 @@ import { setInterval } from 'timers';
 }
 /*计数条*/
 .countsBar{
+    
     width: calc(100% - 262px);
     display: flex;
     justify-content: space-between;
@@ -161,6 +188,9 @@ import { setInterval } from 'timers';
     .van-slider{
         width: calc(100% - 188px);
     }
+}
+.isCard.countsBar{
+    width: calc(100% - 110px);
 }
 /*删除键*/
 .deleteBtn{

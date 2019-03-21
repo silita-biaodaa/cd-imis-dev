@@ -23,13 +23,12 @@
                </div>
             </div>
             <div class="card-play" v-show="el.audioPath">
-              <div class="zindex-box"></div>
-              <audio :src="el.audioPath" controls></audio>
+              <v-audio :audioPath="el.audioPath" @deAudio="deBookPathFn(i)" :isCard="true"></v-audio>
             </div>
         </div>
 
 
-        <div  v-for="(item,index) in books" :key="index">
+        <div  v-for="(item,index) in books" :key="'add'+index">
            <div class="card-b card-book add-book">
              <span>书本 ({{index + booklength + 1}})</span>
              <div class="addBook-box">
@@ -46,7 +45,7 @@
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
               </div>
               <div class="card-play"  v-if="item.audioPath">
-                <audio :src="item.audioPath" controls></audio>
+                <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="true"></v-audio>
               </div>
               <!-- <div class="l-put">
                <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" @blur="repLink(index)" v-model='item.link' :disabled='first' >
@@ -422,6 +421,12 @@ export default {
     bblur() {
       window.scroll(0,0);
     },
+    deBookPathFn(i){
+      this.bookss[i].audioPath=''
+    },
+    deBooksPathFn(i){
+      this.books[i].audioPath=''
+    },
     getParam(name){
       var url=window.location.search;  //获取问号之后的字0符
       var reg=new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -651,6 +656,10 @@ audio{
  .pdd {
     background: #fff;
     padding: 0 36px;
+    .audioPlay{
+      padding-left:0;
+      padding-right: 0 
+    }
  }
  .put-bot{
    border-bottom: 1PX solid #F2F2f2;
