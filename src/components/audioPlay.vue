@@ -55,6 +55,9 @@ import { setInterval, clearInterval } from 'timers';
             let second = that.counts.s;
             let minute = that.counts.m;
             this.nowTime++
+            if(this.nowTime>this.maxTime){//双保险
+                return false
+            }
             second++
             this.slider=parseInt((this.nowTime/this.maxTime)*100);
             if (second >= 60) {
@@ -105,7 +108,7 @@ import { setInterval, clearInterval } from 'timers';
             }
             this.isClick=!this.isClick
         },
-        sliderChange(value){
+        sliderChange(value){//进度条change
             clearInterval(this.t);
             let audio=this.$refs.test;
             this.slider=value;
@@ -127,7 +130,7 @@ import { setInterval, clearInterval } from 'timers';
         tapDel(){
             this.mask=true;
         },
-        audioEnd(){
+        audioEnd(){//播放完毕停止计时
             clearInterval(this.t);
         }
     },
