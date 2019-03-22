@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import { setInterval, clearInterval } from 'timers';
+import { setInterval, clearInterval, setTimeout } from 'timers';
   export default {
     name:'audioPlay',
     data () {
@@ -171,8 +171,9 @@ import { setInterval, clearInterval } from 'timers';
         let audio=this.$refs.test;
         if(isiOS){//IOS不会自动触发canplay事件。
             audio.play();
-            audio.pause();
-            // this.isRead=true;
+            setTimeout(function(){
+                audio.pause();
+            },100)
         }
     }
   }
