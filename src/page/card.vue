@@ -250,6 +250,12 @@ export default {
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
     },
+    audioPlay(){
+      let that=this;
+      for(let x in that.$refs){
+        that.$refs[x][0].pause();
+      }
+    },
     // repLink(i){
     //   let re=new RegExp('((http[s]{0,1}|ftp)://[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)|(www.[a-zA-Z0-9\.\-]+\.([a-zA-Z]{2,4})(:\d+)?(/[a-zA-Z0-9\.\-~!@#$%^&*+?:_/=<>]*)?)');
     //   let that=this;
