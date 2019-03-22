@@ -3,7 +3,12 @@
         <div class="audioBox">
             <!--播放按钮-->
             <div class="playBtn">
-                <p :class="isClick?'pause-btn':'play-btn'" @click="playFn"></p>
+                <template v-if="isRead">
+                    <p :class="isClick?'pause-btn':'play-btn'" @click="playFn"></p>
+                </template>
+                <template v-else>
+                    <van-loading size="25px" color="white"></van-loading>
+                </template>
             </div>
             <!--计数条-->
             <div class="countsBar" :class="isCard==1?'isCard':''">
@@ -38,7 +43,8 @@ import { setInterval, clearInterval } from 'timers';
             slider:0,
             t:null,
             mask:false,
-            tipTxt:'确认删除该录音吗?'
+            tipTxt:'确认删除该录音吗?',
+            isRead:false,
         }
     },
     props:{
@@ -95,6 +101,7 @@ import { setInterval, clearInterval } from 'timers';
             if(this.num.s<10){
                 this.num.s='0'+this.num.s
             }
+            this.isRead=true;
             
         },
         stop(){//模拟停止
