@@ -19,7 +19,7 @@
             <!--删除-->
             <div class="deleteBtn" @click="tapDel" v-if="isCard==1">删除</div>
         </div>
-        <audio @loadedmetadata="readPlay" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
+        <audio @loadedmetadata="readPlay" @progress="readPlay" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
         <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="deleteAudio"></v-popup>
     </div>
 </template>
