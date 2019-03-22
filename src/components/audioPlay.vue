@@ -163,14 +163,16 @@ import { setInterval, clearInterval } from 'timers';
         }
     },
     created(){
-        let u = navigator.userAgent;
-        let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        if(isiOS){//IOS不会自动触发canplay事件。
-          this.isRead=true;
-        }
+        
     },
     mounted(){
-
+        let u = navigator.userAgent;
+        let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        let audio=this.$refs.test;
+        if(isiOS){//IOS不会自动触发canplay事件。
+          audio.play();
+          audio.pause();
+        }
     }
   }
 </script>
