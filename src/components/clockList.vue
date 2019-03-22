@@ -16,7 +16,7 @@
             <p class="c-color" v-if="el.readCount!=0">《{{el.title}}》{{el.readCount}}遍 共{{el.readTotal}}遍</p>
             <div class="card-play" v-show="el.audioPath">
               <!-- <audio :src="el.audioPath" controls></audio> -->
-              <v-audio :audioPath="el.audioPath"></v-audio>
+              <v-audio :audioPath="el.audioPath" :ref="index+'book'+bs" @audioPlay="audioPlay"></v-audio>
             </div>
           </div>
           <template v-if="item.bookish.length>0">
@@ -26,7 +26,7 @@
                 <!-- <span class="c-link" v-if="o.link" @click="jumpLink(o.link)"></span> -->
               </p>
               <div class="card-play" v-show="o.audioPath">
-                <v-audio :audioPath="o.audioPath"></v-audio>
+                <v-audio :audioPath="o.audioPath" :ref="index+'bookish'+i" @audioPlay="audioPlay"></v-audio>
                 <!-- <audio :src="o.audioPath" controls></audio> -->
               </div>
             </div>
@@ -187,6 +187,12 @@
       this.$set(this.clocklist,list)
     },
     methods: {
+      audioPlay(){
+        let that=this;
+        for(let x in that.$refs){
+          that.$refs[x][0].pause();
+        }
+      },
       //跳转链接
       jumpLink(link){
         window.location.href=link

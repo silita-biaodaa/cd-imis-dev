@@ -23,7 +23,7 @@
                </div>
             </div>
             <div class="card-play" v-show="el.audioPath">
-              <v-audio :audioPath="el.audioPath" @deAudio="deBookPathFn(i)" :isCard="1"></v-audio>
+              <v-audio :audioPath="el.audioPath" @deAudio="deBookPathFn(i)" @audioPlay="audioPlay" :isCard="1" :ref="'book'+i"></v-audio>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
                <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
               </div>
               <div class="card-play"  v-if="item.audioPath">
-                <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="1"></v-audio>
+                <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="1" @audioPlay="audioPlay" :ref="'addbook'+index"></v-audio>
               </div>
               <!-- <div class="l-put">
                <div class="label label-f">链接</div> <input type="text" placeholder="请输入链接" @blur="repLink(index)" v-model='item.link' :disabled='first' >
@@ -240,6 +240,10 @@ export default {
   },
   methods: {
     jumpMini(type,id){//跳转至小程序
+      let that=this;
+      for(let x in that.$refs){
+        that.$refs[x][0].stop();
+      }
       let token=localStorage.getItem('Authorization');
       let uri=encodeURIComponent(location.href.split('?type')[0]);
       wx.miniProgram.navigateTo({

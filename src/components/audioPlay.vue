@@ -97,12 +97,25 @@ import { setInterval, clearInterval } from 'timers';
             }
             
         },
+        stop(){//模拟停止
+           let audio=this.$refs.test;
+           audio.pause();
+           audio.currentTime=0; 
+           this.audioEnd();
+        },
+        pause(){//暂停
+            let audio=this.$refs.test;
+            audio.pause();
+            clearInterval(this.t);
+            this.isClick=false;
+        },
         playFn(){
             let audio=this.$refs.test;
             if(this.isClick){//暂停
                 audio.pause();
                 clearInterval(this.t);
             }else{
+                this.$emit('audioPlay');
                 audio.play();
                 this.t=setInterval(this.timer,1000);
             }
