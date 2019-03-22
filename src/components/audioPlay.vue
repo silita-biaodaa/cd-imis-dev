@@ -92,6 +92,7 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
         },
         readPlay(){//准备播放
             const maxTime=parseInt(this.$refs.test.duration);
+            alert(this.$refs.test.duration);
             this.maxTime=maxTime;
             this.num.m=parseInt(maxTime/60);
             this.num.s=maxTime%60;
@@ -171,9 +172,9 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
         let audio=this.$refs.test;
         if(isiOS){//IOS不会自动触发canplay事件。
             audio.play();
-            setTimeout(function(){
-                audio.pause();
-            },100)
+            // setTimeout(function(){
+            //     audio.pause();
+            // },100)
         }
     }
   }
