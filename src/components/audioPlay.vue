@@ -19,7 +19,7 @@
             <!--删除-->
             <div class="deleteBtn" @click="tapDel" v-if="isCard==1">删除</div>
         </div>
-        <audio @canplay="readPlay" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
+        <audio @canplay="readPlay" @loadeddata="readPlay" @loadedmetadata="readPlay" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
         <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="deleteAudio"></v-popup>
     </div>
 </template>
@@ -166,13 +166,11 @@ import { setInterval, clearInterval } from 'timers';
         
     },
     mounted(){
-        let u = navigator.userAgent;
-        let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        let audio=this.$refs.test;
-        if(isiOS){//IOS不会自动触发canplay事件。
-          audio.play();
-          audio.pause();
-        }
+        // let u = navigator.userAgent;
+        // let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        // if(isiOS){//IOS不会自动触发canplay事件。
+        //     this.isRead=true;
+        // }
     }
   }
 </script>
