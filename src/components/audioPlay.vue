@@ -19,7 +19,7 @@
             <!--删除-->
             <div class="deleteBtn" @click="tapDel" v-if="isCard==1">删除</div>
         </div>
-        <audio @canplay="readPlay" @loadedmetadata="readPlay" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
+        <audio @canplay="readPlay" @loadedmetadata="readPlay" @play="playingFn" v-show="false" ref="test" :src="audioPath" @ended="audioEnd"></audio>
         <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="deleteAudio"></v-popup>
     </div>
 </template>
@@ -92,7 +92,6 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
         },
         readPlay(){//准备播放
             const maxTime=parseInt(this.$refs.test.duration);
-            alert(this.$refs.test.duration);
             this.maxTime=maxTime;
             this.num.m=parseInt(maxTime/60);
             this.num.s=maxTime%60;
@@ -104,6 +103,9 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
             }
             this.isRead=true;
             
+        },
+        playingFn(){//开始播放的时候
+            this.t=setInterval(this.timer,1000);
         },
         stop(){//模拟停止
            let audio=this.$refs.test;
@@ -125,7 +127,6 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
             }else{
                 this.$emit('audioPlay');
                 audio.play();
-                this.t=setInterval(this.timer,1000);
             }
             this.isClick=!this.isClick
         },
@@ -169,12 +170,8 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
     mounted(){
         let u = navigator.userAgent;
         let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        let audio=this.$refs.test;
         if(isiOS){//IOS不会自动触发canplay事件。
-            audio.play();
-            // setTimeout(function(){
-            //     audio.pause();
-            // },100)
+            this.isRead=true;
         }
     }
   }
