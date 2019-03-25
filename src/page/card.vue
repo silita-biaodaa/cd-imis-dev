@@ -17,7 +17,7 @@
             </div>
             <div class="card-com">
                <div class="l-pu">
-                    <div class="label label-f">今日朗读遍数</div>
+                    <div class="label label-f font-bold">今日朗读遍数</div>
                     <span></span>
                     <van-stepper @change="bookChang(el)" v-model.number="el.readCount" class="l-mi" :min="0" :disabled='first'  />
                </div>
@@ -39,10 +39,10 @@
             </div>
            <div class="pdd">
               <div class="l-put put-bot">
-               <div class="label label-f">书本名称</div> <input type="text" placeholder="请输入书本名称" v-model='item.bookName' :disabled='first' >
+               <div class="label label-f font-bold">书本名称</div> <input type="text" placeholder="请输入书本名称" v-model='item.bookName' :disabled='first' >
               </div>
               <div class="l-put">
-               <div class="label label-f">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
+               <div class="label label-f font-bold">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
               </div>
               <div class="card-play"  v-if="item.audioPath">
                 <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="1" @audioPlay="audioPlay" :ref="'addbook'+index"></v-audio>
@@ -58,7 +58,7 @@
               <div class="laca-add"><img src="../assets/img/add (1).png" alt=""></div>
             </span>
         </div>
-        <div class="card-com card-share">
+        <div class="card-com card-share font-bold">
             经典名句分享
         </div>
         <div class="card-put">
@@ -73,19 +73,19 @@
               行实践
           </div>
        </div>
-       <div class="card-com card-share tit-box">
+       <div class="card-com card-share tit-box font-bold">
             修身
         </div>
         <div class="card-put">
           <textarea  rows="4" placeholder='请输入今日您对个人的贡献'  v-model="pushData.practice.character" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
         </div>
-        <div class="card-com card-share tit-box">
+        <div class="card-com card-share tit-box font-bold">
             齐家
         </div>
         <div class="card-put">
           <textarea  rows="4" placeholder='请输入今日您对家庭和家人的贡献'  v-model="pushData.practice.family" class="ccc" @blur='bblur'  :disabled='first' ></textarea>
         </div>
-        <div class="card-com card-share tit-box">
+        <div class="card-com card-share tit-box font-bold">
             建功
         </div>
         <div class="card-put">
@@ -122,7 +122,7 @@
        </div>
         <div class="card-com">
                <div class="l-pu">
-                    <div class="label label-f">今日行善次数</div>
+                    <div class="label label-f font-bold">今日行善次数</div>
                     <van-stepper  v-model="pushCount.bonaDays" class="l-mi" :min="0" :disabled='first' />
                </div>
        </div>
@@ -533,6 +533,9 @@ export default {
 .card-play{
   margin-bottom: 20px;
 }
+.font-bold{
+  font-weight: bold
+}
 audio{
   width:100%;
   // height: 100%;
@@ -716,7 +719,6 @@ audio{
     font-size: 32px;
     color:#000;
     background: #fff;
-    font-weight: 400;
     margin-top: 10px;
     box-sizing: border-box
  }

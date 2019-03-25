@@ -180,6 +180,7 @@ import { setInterval, clearInterval, setTimeout } from 'timers';
 .audioPlay{
     padding: 24px 32px;
     font-size: 24px;
+    background: #fff;
     .audioBox{
         box-sizing: border-box;
         width: 100%;
