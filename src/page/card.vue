@@ -549,10 +549,11 @@ audio{
    font-size: 32px;
    display: flex;
    justify-content: space-between;
-   text-align: center;
+   align-items: center;
   .l-mi {
-    margin:  auto  0;
     width:180px;
+    display: flex;
+    align-items: center;
     .van-stepper__minus, .van-stepper__plus {
       width:33%;
       border-color: #ccc;
@@ -570,7 +571,8 @@ audio{
       height: 60px;
       font-size: 24px;
       box-sizing: border-box;
-      border-color: #ccc;
+      border:1PX solid #ccc;
+      border-width:1PX 0;
       padding: 0;
     }
     .van-stepper__minus::before, .van-stepper__plus::before {
