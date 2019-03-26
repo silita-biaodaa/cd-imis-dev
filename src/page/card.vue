@@ -203,7 +203,8 @@ export default {
       mask1:false,
       tipTxt:'',
       booklength:0,
-      repetition: false
+      repetition: false,
+      isTap:false,
     }
   },
   watch:{
@@ -241,11 +242,16 @@ export default {
   methods: {
     jumpMini(type,id){//跳转至小程序
       let that=this;
+      if(this.isTap){
+        return false
+      }
+      this.isTap=true;
       for(let x in that.$refs){
         that.$refs[x][0].stop();
       }
       let token=localStorage.getItem('Authorization');
       let uri=encodeURIComponent(location.href.split('?type')[0]);
+      this.isTap=false;
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })

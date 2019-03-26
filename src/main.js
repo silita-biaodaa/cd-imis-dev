@@ -101,6 +101,7 @@ import { NumberKeyboard } from 'vant';
 router.beforeEach((to, from, next) => {
   let code = util.getCode('code');
   let isApply=getParam('istrue');
+  let isShare=getParam('isShare');
   if (!code) {
     //用户授权
     // util.weixinauth()
@@ -109,7 +110,8 @@ router.beforeEach((to, from, next) => {
     var auth = localStorage.getItem('Authorization');
     let data={
       code:code,
-      isApply:isApply
+      isApply:isApply,
+      isShare:isShare
     }
     if(!auth||to.fullPath=='/home'){
       queryList(data).then(res => {
