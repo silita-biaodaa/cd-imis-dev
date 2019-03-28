@@ -251,7 +251,6 @@ export default {
       }
       let token=localStorage.getItem('Authorization');
       let uri=encodeURIComponent(location.href.split('?type')[0]);
-      this.isTap=false;
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
@@ -370,7 +369,9 @@ export default {
                 // return false
               }
               let obj=this.$route.query;
-
+              // if(obj.istap==1){
+              //   this.isTap=false;
+              // }
               if(JSON.stringify(obj)!='{}'){
                 if(obj.type=='book'){
                   let bookData=that.bookss;
