@@ -254,6 +254,7 @@ export default {
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
+      this.isTap=false;
     },
     audioPlay(){
       let that=this;
