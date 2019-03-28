@@ -180,6 +180,7 @@
 <script>
 import { recordPer , pushCard, groups } from '@/api/index'
 import wx from 'weixin-js-sdk'
+import { setTimeout } from 'timers';
 export default {
   name:'card',
   data () {
@@ -254,7 +255,9 @@ export default {
       wx.miniProgram.navigateTo({
           url: '/pages/record/record?token='+token+'&type='+type+'&id='+id+'&uri='+uri
       })
-      this.isTap=false;
+      setTimeout(function(){
+        that.isTap=false;
+      },1000)
     },
     audioPlay(){
       let that=this;
