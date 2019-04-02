@@ -1,38 +1,41 @@
 <template>
     <div class="apply">
-      <v-head :head-txt="headName"></v-head>
-      <van-search placeholder="请输入搜索关键词" v-model="keyWords" @blur="onSearch" />
-      <div class="apply-list" v-for="(el,i) in list" :key="i" v-show="dont" >
-          <div class="ld-left apply-g" >
-              <div class="apply-img">
-                  <img :src="el.imgUrl" alt="">
-              </div>
-              <div class="apply-name">
-                 <p>{{el.groName}}</p>
-                 <div class="ld-left ">
-                    <div class="apply-ye top">
-                        <img src="../assets/img/double (1).png" alt="">
-                        {{el.userCount}}
-                    </div>
-                    <div class="apply-ye top ddd">
-                        <img src="../assets/img/person (1).png" alt="">
-                        {{el.name}}
-                    </div>
-                 </div>
-              </div>
-              <template v-if="el.isExist==1">
-                <div class="apply-join" style="opacity: .8;border-color: #999;color: #fff;background: #999;">已入群</div>
-              </template>
-              <template v-else>
-                <div class="apply-join" v-if="el.isApply == 1" style="opacity: .5;">已申请</div>
-                <div class="apply-join" @click="addGroups(el)" v-else>申请入群</div>
-              </template>
-          </div>
+      <div class="top-box">
+        <v-head :head-txt="headName"></v-head>
+        <van-search placeholder="请输入搜索关键词" v-model="keyWords" @blur="onSearch" />
       </div>
-      <div v-show="!dont" class="hint" >
-          暂无群数据, 请先创建群
+      <div class="apply-box">
+        <div class="apply-list" v-for="(el,i) in list" :key="i" v-show="dont" >
+            <div class="ld-left apply-g" >
+                <div class="apply-img">
+                    <img :src="el.imgUrl" alt="">
+                </div>
+                <div class="apply-name">
+                    <p>{{el.groName}}</p>
+                    <div class="ld-left ">
+                      <div class="apply-ye top">
+                          <img src="../assets/img/double (1).png" alt="">
+                          {{el.userCount}}
+                      </div>
+                      <div class="apply-ye top ddd">
+                          <img src="../assets/img/person (1).png" alt="">
+                          {{el.name}}
+                      </div>
+                    </div>
+                </div>
+                <template v-if="el.isExist==1">
+                  <div class="apply-join" style="opacity: .8;border-color: #999;color: #fff;background: #999;">已入群</div>
+                </template>
+                <template v-else>
+                  <div class="apply-join" v-if="el.isApply == 1" style="opacity: .5;">已申请</div>
+                  <div class="apply-join" @click="addGroups(el)" v-else>申请入群</div>
+                </template>
+            </div>
+        </div>
+        <div v-show="!dont" class="hint" >
+            暂无群数据, 请先创建群
+        </div>
       </div>
-
     </div>
 </template>
 <script>
@@ -140,6 +143,15 @@ export default {
 }
 </script>
 <style lang="less">
+.top-box{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+.apply-box{
+  padding-top: 220px
+}
 .apply {
    .hint {
       margin-top: 200px;
