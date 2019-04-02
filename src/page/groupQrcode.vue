@@ -4,7 +4,7 @@
         <v-head :head-txt="'群二维码名片'"></v-head>
         <div class="bigBox">
             <div class="qrcode-box">
-                <div class="top-box">
+                <div class="tops-box">
                     <div class="img-box">
                         <img :src="imgurl"/>
                     </div>
@@ -126,7 +126,7 @@ export default {
         background: #fff;
         padding: 30px;
     }
-    .top-box{
+    .tops-box{
         display: flex;
         align-items: center;
         justify-content: flex-start;

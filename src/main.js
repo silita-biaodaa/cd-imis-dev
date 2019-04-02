@@ -125,6 +125,7 @@ router.beforeEach((to, from, next) => {
             })
             User({}).then( res => {
               localStorage.setItem('userid',res.data.userId);
+              localStorage.setItem('userName',res.data.name);
             })
           }
           if(res.data.isFirst==1){
