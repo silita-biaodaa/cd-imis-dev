@@ -48,16 +48,16 @@ export default {
             this.imgurl=res.data.imgUrl;
             this.name=res.data.groName;
         })
-        if (typeof WeixinJSBridge == "undefined"){
-            if( document.addEventListener ){  
-                document.addEventListener('WeixinJSBridgeReady',this.offBridgeReady, false);  
-            }else if (document.attachEvent){  
-                document.attachEvent('WeixinJSBridgeReady',this.offBridgeReady);   
-                document.attachEvent('onWeixinJSBridgeReady',this.offBridgeReady);  
-            }  
-        }else{  
-            this.offBridgeReady()
-        }
+        // if (typeof WeixinJSBridge == "undefined"){
+        //     if( document.addEventListener ){  
+        //         document.addEventListener('WeixinJSBridgeReady',this.offBridgeReady, false);  
+        //     }else if (document.attachEvent){  
+        //         document.attachEvent('WeixinJSBridgeReady',this.offBridgeReady);   
+        //         document.attachEvent('onWeixinJSBridgeReady',this.offBridgeReady);  
+        //     }  
+        // }else{  
+        //     this.offBridgeReady()
+        // }
     },
     beforeMount() {
         // console.group('挂载前状态  ===============》beforeMount');
@@ -82,23 +82,6 @@ export default {
                 imgUrl:that.imgUrl,
             }
         })
-//         let shareUrl=window.location.href.split('?')[0].split('#')[0]+'?path=groupQrcode&id='+that.id;
-//         let configData={
-//         	title:that.name, // 分享标题
-// 			desc:that.name, // 分享描述
-// 			imgUrl:that.imgurl, // 分享图标
-//             link:window.location.href,
-// 		}; 
-// 		let u = navigator.userAgent;
-// 		let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-// //		let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-//         if(isAndroid){
-//             configData.link=shareUrl;
-//         }
-// 		wx.onMenuShareAppMessage(configData);// 分享给朋友 
-//     	wx.onMenuShareTimeline(configData);//朋友圈
-//     	wx.onMenuShareQQ(configData);//qq
-//     	wx.onMenuShareQZone(configData);//qq空间
     },
     beforeDestroy() {
         // console.group('销毁前状态  ===============》beforeDestroy');
@@ -126,33 +109,6 @@ export default {
             let str = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+appid+'&redirect_uri='+url+'&response_type=code&scope=snsapi_base&state=CD-IMIS#wechat_redirect'
             return str
         },
-        offBridgeReady(){  
-            WeixinJSBridge.call('showOptionMenu');  
-        },
-        jump(){
-            let appid=this.appid;
-            let index = location.href.indexOf('?');
-            let index2 = location.href.indexOf('#');
-            let url1=location.href.substring(0,index);
-            let url2=location.href.substring(index2,location.href.length);
-            let urlEnd=url1+url2;
-            urlEnd=urlEnd.replace(/groupQrcode/,'applyEntry');
-            urlEnd=urlEnd+'&istrue=1';
-            urlEnd=encodeURIComponent(urlEnd);
-            let uri=this.weixinauth(appid,urlEnd);
-            location.href=uri;
-
-            // wx.miniProgram.navigateTo({
-            //     url: '/pages/follow/follow?id='+this.id
-            // })
-
-            // this.$router.replace({
-            //     path:'/applyEntry',
-            //     query:{
-            //         id:this.id,
-            //     }
-            // });
-        }
     }
 
 }
