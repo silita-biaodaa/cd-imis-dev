@@ -78,7 +78,7 @@ export default {
         let userName=localStorage.getItem('userName');
         wx.miniProgram.postMessage({
             data:{
-                title:userName+'邀请你加入群'+that.name,
+                title:userName+'邀请你加入'+that.name,
                 imgUrl:that.imgUrl,
             }
         })
