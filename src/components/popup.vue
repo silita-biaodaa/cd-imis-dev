@@ -4,7 +4,7 @@
         <span class="skip" v-if="popupType=='tips'" @click="sure">跳过</span>
         <div class="content" :class="{tips:popupType=='tips'}">
             <template v-if="popupType=='tip1'">
-                <div class="top-box">{{txt}}</div>
+                <div class="topsBox">{{txt}}</div>
                 <div class="bottom-box">
                     <p @click="cancelFn">{{cancelTxt}}</p>
                     <p @click="sure" style="color: #E62129">{{sureTxt}}</p>
@@ -128,7 +128,7 @@ export default {
   top: 320px;
   transform:  translate(-50%,0);
 }
-.top-box{
+.topsBox{
   border-bottom: 1PX solid #F2F2F2;
   height: 211px;
   line-height: 211px;
