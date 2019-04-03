@@ -1,7 +1,7 @@
 <!-- 模型： DOM 结构 -->
 <template>
     <div class="applyEntry">
-        <div class="top-box">
+        <div class="top-boxs">
             <div>
                 <img :src="imgurl"/>
             </div>
@@ -139,7 +139,7 @@ export default {
 </script>
 <!-- 增加 "scoped" 属性 限制 CSS 属于当前部分 -->
 <style scoped lang="less">
-.top-box{
+.top-boxs{
     background: #fff;
     padding-top: 50px;
     padding-bottom: 40px;
