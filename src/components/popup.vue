@@ -30,7 +30,7 @@
             </template>
             <template v-if="popupType=='closeTips'">
               <div class="tipBox">
-                <div class="txt-box">检测到您还未关注公众号，请先退出，关注公众号“标大大云数据”</div>
+                <div class="txt-box">检测到您还未关注公众号，请先退出，关注公众号“日精进定课”</div>
                 <!-- <button @click="cancelFn">确定</button> -->
               </div>
             </template>
