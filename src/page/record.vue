@@ -28,8 +28,8 @@
                 </div>
             </div>
             <div class="faBox">
-                <p><i style="background: #E62129;"></i><span class="font">已打卡</span></p>
-                <p><i style="background: #0DC830;"></i><span class="font">缺卡</span></p>
+                <p><i style="background: #E62129;"></i><span class="font">缺卡</span></p>
+                <p><i style="background: #0DC830;"></i><span class="font">已打卡</span></p>
             </div>
             <div class="cardPer">
                 <template v-if="isGroup">
@@ -292,7 +292,7 @@ export default {
             })
         },
         dateClick(i){//选中日期
-            let arr=this.ret;
+            let arr=this.thisMonthDays.days;
             let day=arr[i].showDate;
             let month=arr[i].month;
             let ifThisMonthDays=arr[i].ifThisMonthDays;
@@ -341,8 +341,7 @@ export default {
         //日历初始化
         getMonthData(year,month,first){
             let groupArr=this.groupArr;
-            // groupArr=['01','02'];
-            var firstDay = new Date(year,month - 1, 1);
+            var firstDay = new Date(year,month-1,1);
             var firstDayWeekDay = firstDay.getDay();
             if(firstDayWeekDay === 0) firstDayWeekDay = 7;
 
@@ -351,19 +350,16 @@ export default {
 
             var lastDayOfLastMonth = new Date(year,month-1,0);
             var lastDateOfLastMonth = lastDayOfLastMonth.getDate();
-
             var preMonthDayCount = firstDayWeekDay - 1;
-
             var lastDay = new Date(year,month,0);
             var lastDate = lastDay.getDate();
             this.ret = [];
             // let that=this;
-            for (var i = 0; i < 35; i++) {
+            for (var i = 0; i < 42; i++) {
                 var date = i - preMonthDayCount;
                 var showDate = date;
                 var thisMonth = month;
                 var ifThisMonthDays = true;
-
                 if (date <= 0) {
                     //上一月
                     thisMonth = month - 1;
@@ -422,10 +418,6 @@ export default {
                       }
                     }
                 }
-
-
-
-
                 this.ret.push({
                     month: thisMonth,
                     date:date,
@@ -776,7 +768,7 @@ body .mask{
             padding: 0 7px;
             margin: 0 auto;
             background: #fafafa;
-            color:#999;
+            color:#aaa;
             li {
                 background: #fff;
                 text-align: center;
@@ -790,16 +782,16 @@ body .mask{
                 box-sizing: border-box;
             }
             .ifDiabled {
-                color: #fff;
+                color: #ddd;
             }
             .active{
-                border-color: #E62129
+                border-color: #0DC830;
             }
             .card0{
-                color: #E62129
+                color: #0DC830;
             }
             .card1{
-                color: #0DC830
+                color: #E62129;
             }
         }
     }

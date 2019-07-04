@@ -294,14 +294,11 @@ export default {
       let that=this;
        recordPer({}).then( res => {
           if(res.code == 1 || res.code == 402 ) {
-
-
               if(res.code == 402 ) {
                  this.btnTitle = '修改'
               } else {
                  this.btnTitle = '提交'
               }
-
               res.data.books.forEach((el,i) => {
                   el.num=0
                   if(res.code == 402){
@@ -422,9 +419,7 @@ export default {
                     that.bookss.push(x)
                   }
                 }
-              }
-              
-              
+              } 
               // else{
                 // localStorage.setItem('cardPushData',JSON.stringify(that.pushData));
               // } 
@@ -516,12 +511,10 @@ export default {
           // activeElement.scrollIntoView({block:'start'})
           // window.scroll(0,0);
           activeElement.scrollIntoViewIfNeeded()
-
         }, 0)
       }
     })
   },
-
 }
 </script>
 <style lang="less" >

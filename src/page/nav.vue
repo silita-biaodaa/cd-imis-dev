@@ -44,7 +44,6 @@
     },
     computed: {
       tabNo(){
-        console.log(this.$route.path)
         let t=this.$route.meta.tabNo;
         return t
       }

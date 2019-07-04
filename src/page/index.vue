@@ -70,7 +70,7 @@
       </div>
       <div class="add-put" v-for="(item,index) in first" :key="index">
         <div class="add-book p-line ">
-          <span>书本&nbsp({{index + 1}})</span>
+          <span>书本&nbsp;({{index + 1}})</span>
           <span class="del" @click='delbook(index)' v-show='func(index)'>删除</span>
         </div>
         <div class="left">
@@ -92,7 +92,7 @@
           <div class="sign" >
             <div class="l-put"  >
               <div class="label five ">总朗读遍数</div> <input type="tel" placeholder="请输入" v-model='item.readTotal' @blur='bblur' >
-              <!-- <i class=" iconfont icon-icon i-iput"   ></i> -->
+              <!-- <i class=" iconfont icon-icon i-iput"></i> -->
               <van-icon name="arrow" class="i-iput"/>
             </div>
           </div>
@@ -104,7 +104,6 @@
            <x-button class="sign" >增加书本</x-button>
            <span class="add-img"><img src="../assets/img/add (2).png" alt=""></span>
         </div>
-
       </div>
     </div>
 
@@ -114,7 +113,7 @@
           <img src="../assets/img/gift (2).png" alt="">
 
         </div>
-        <span  class='home-size' >积善行</span>
+        <span class='home-size' >积善行</span>
       </div>
       <div>
           <div class="time-sel" @click='datePickers' >
@@ -166,7 +165,7 @@
         <x-button  >提交</x-button>
       </div>
     </div>
-    <v-popup :popup-type="'tips'" :popup-show="mask" @sure="skipFn"></v-popup>
+    <v-popup :popup-type="'tips'" :popup-show="mask" @sure="skipFn" message='123123'></v-popup>
     <!-- <div class='toast' v-show='layout' >
       请输入正确的手机号码
     </div>
@@ -227,7 +226,6 @@
       },
       texte() {
         console.log(event.type)
-        console.log(1111)
       },
       dateConfirm(type,value){
           if (type === 'year') {
@@ -445,7 +443,7 @@
     padding-left: 5px;
   }
   // 自定义输入框样式
-     .l-put {
+     .l-putput {
        height: 96px;
        font-size: 32px;
        display: flex;

@@ -23,6 +23,7 @@ import { XButton , Group } from 'vux'
 // Vue.component('x-input', XInput)
 // Vue.component('datetime', Datetime)
 // Vue.component('x-textarea', XTextarea)
+//全局组件
 Vue.component('x-button', XButton)
 Vue.component('group', Group)
 Vue.component('v-clock', clocklist)
@@ -35,7 +36,7 @@ Vue.component('v-audio', audioPlay)
 
 //load层
 var tpl=null;
-Vue.prototype.loading =() =>{
+Vue.prototype.loading =() => {
   var loading = Vue.extend(require('@/components/loading.vue'));
   tpl = new loading().$mount().$el;  // 创建实例，挂载到文档以后的地方
   document.body.appendChild(tpl);
