@@ -1,18 +1,31 @@
 <template>
   <div id="app" class="app-bg">
-    <router-view>
+    <router-view v-if="isRouterAlive">
 
     </router-view>
   </div>
 </template>
 
 <script>
-  // import { group } from '@/api/index'
 export default {
-
   name: 'app',
-  beforeCreate(){
-    
+  provide () {
+    return{
+      reload:this.reload
+    };
+  },
+  data () {
+    return {
+      isRouterAlive:true
+    };
+  },
+  methods: {
+     reload (){
+       this.isRouterAlive = false
+       this.$nextTick(function(){
+          this.isRouterAlive = true
+       })
+    },
   },
   created(){
     // this.loading();

@@ -64,8 +64,14 @@
         </div>
         <div class="l-put">
           <div class="label label-f no-f">每日朗读遍数</div>
-          <input type="number" placeholder="请输入数字" v-model="item.readCount" onkeyup="value=value.replace(/[^\d]/g,'')"  
-       onblur="value=value.replace(/[^\d]/g,'')" @blur="bblur" />
+          <input
+            type="number"
+            placeholder="请输入数字"
+            v-model="item.readCount"
+            onkeyup="value=value.replace(/[^\d]/g,'')"
+            onblur="value=value.replace(/[^\d]/g,'')"
+            @blur="bblur"
+          />
         </div>
       </div>
     </div>
@@ -115,13 +121,8 @@
       </div>
     </div>
 
-    <!-- <div class='toast' v-show='layout' >
-          请输入正确的手机号码
-    </div>-->
     <div class="toast" v-show="mask">个人信息更新成功</div>
-    <!-- <div class="toast" v-show="text1">
-          请输入正确的手机号码
-    </div>-->
+    <div class="toast" v-show="readNum">请输入朗读书本数量</div>
     <div class="toast" v-show="text2">请输入您的姓名</div>
     <div class="toast" v-show="text3">请填写书本信息</div>
   </div>
@@ -129,7 +130,9 @@
 <script>
 import { Personage, Saveuser } from "@/api/index";
 import { dateFormat } from "vux";
+import { setTimeout } from "timers";
 export default {
+  inject: ["reload"],
   data() {
     return {
       //  layout:false,
@@ -142,6 +145,7 @@ export default {
       Number: true,
       delay: true,
       mask: false,
+      readNum: false,
       newbook: [],
       //  text1:false,
       text2: false,
@@ -154,24 +158,6 @@ export default {
         el.type = 0;
       }
     },
-    //   textM() {
-    //   window.scroll(0,0)
-    //   var myreg= /^[1][3,4,5,6,7,8,9][0-9]{9}$/
-    //   if( myreg.test(this.user.phone)) {
-    //       this.$refs.Moblie.style.color = '#000'
-    //       this.Number = true
-    //   } else {
-    //       this.$refs.Moblie.style.color = 'red'
-    //       this.Number = false
-    //       this.layout = true
-    //       this.verify()
-    //   }
-    // },
-    // verify() {
-    //    setTimeout(() => {
-    //       this.layout = false
-    //    }, 1500);
-    // },
     bblur() {
       window.scroll(0, 0);
     },
@@ -183,13 +169,6 @@ export default {
     },
     record() {
       this.pass = true;
-      //  if (!this.user.phone && !this.Number ) {
-      //    this.pass = false
-      //    this.text1 = true
-      //   return setTimeout(() => {
-      //          this.text1 = false
-      //         }, 1500);
-      //  }
       if (!this.user.name) {
         this.pass = false;
         this.text2 = true;
@@ -223,9 +202,6 @@ export default {
         let local = localStorage.getItem("cardPushData");
         if (local) {
           let data = JSON.parse(local);
-          // data.pushCount=this.pushCount;
-          // console.log(this.bookss);
-          // data.bookss=this.newbook;
           data.volunteer = this.values;
           localStorage.setItem("cardPushData", JSON.stringify(data));
         }
@@ -236,6 +212,7 @@ export default {
           pushCount: this.pushCount
         }).then(res => {
           if (res.code == 1) {
+            this.reload();
             this.delay = true;
             this.mask = true;
             this.gainUser();

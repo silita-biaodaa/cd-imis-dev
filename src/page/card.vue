@@ -42,7 +42,7 @@
                <div class="label label-f font-bold">书本名称</div> <input type="text" placeholder="请输入书本名称" v-model='item.bookName' :disabled='first' >
               </div>
               <div class="l-put">
-               <div class="label label-f font-bold">朗读章节</div> <input type="text" placeholder="请输入" v-model='item.section' :disabled='first' >
+               <div class="label label-f font-bold">朗读章节</div> <input type="text" placeholder="请输入数字" v-model='item.section' :disabled='first' oninput = "value=value.replace(/[^\d]/g,'')" >
               </div>
               <div class="card-play"  v-if="item.audioPath">
                 <v-audio :audioPath="item.audioPath" @deAudio="deBooksPathFn(index)" :isCard="1" @audioPlay="audioPlay" :ref="'addbook'+index"></v-audio>
@@ -449,7 +449,7 @@ export default {
     },
     cardBook () {
       let data={title:'',readCount:1,readTotal:0}
-       this.books.push(data)
+       this.books.push(data);
     },
     cardDel(i) {
       // let that=this;

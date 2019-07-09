@@ -104,6 +104,5 @@ export default new Router({
       component:close,
       name:'close'
     }
-
   ],
 })
