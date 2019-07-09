@@ -277,8 +277,8 @@
   width: 100%;
   z-index: 2;
 }
-.group-list-box{
-  padding-top: 220px
+.group-list-box {
+  margin-top: 220px;
 }
 .groupUser{
   -webkit-overflow-scrolling : touch;
@@ -298,7 +298,8 @@
   height: 96px;
   font-size: 36px;
   text-align: center;
-  line-height: 96px
+  line-height: 96px;
+  z-index: 20;
 }
 .title{
   padding: 33px;
