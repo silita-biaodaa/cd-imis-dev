@@ -135,7 +135,6 @@ export default {
   inject: ["reload"],
   data() {
     return {
-      //  layout:false,
       user: [],
       bookss: [],
       books: [],
@@ -147,7 +146,6 @@ export default {
       mask: false,
       readNum: false,
       newbook: [],
-      //  text1:false,
       text2: false,
       text3: false
     };
@@ -190,6 +188,7 @@ export default {
       // });
       this.delay = true;
       for (let i in this.books) {
+        debugger;
         if (!this.books[i].title) {
           this.text3 = true;
           return setTimeout(() => {
