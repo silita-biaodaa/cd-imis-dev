@@ -191,6 +191,7 @@ export default {
       this.delay = true;
       console.info(this.books);
       if (!this.books[0].title) {
+        debugger;
         this.text3 = true;
         return setTimeout(() => {
           this.text3 = false;
