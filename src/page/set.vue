@@ -121,7 +121,7 @@
       </div>
     </div>
 
-    <div class="toast" v-show="mask">个人信息更新成功</div>
+    <div class="toast" v-show="success">个人信息更新成功</div>
     <div class="toast" v-show="readNum">请输入朗读书本数量</div>
     <div class="toast" v-show="text2">请输入您的姓名</div>
     <div class="toast" v-show="text3">请填写书本信息</div>
@@ -143,7 +143,7 @@ export default {
       pushCount: [],
       Number: true,
       delay: true,
-      mask: false,
+      success: false,
       readNum: false,
       newbook: [],
       text2: false,
@@ -189,12 +189,12 @@ export default {
           pushCount: this.pushCount
         }).then(res => {
           if (res.code == 1) {
-            this.reload();
+            this.success = true;
             this.delay = true;
-            this.mask = true;
             this.gainUser();
             return setTimeout(() => {
-              this.mask = false;
+              this.success = false;
+              this.reload();
             }, 1500);
           }
         });
@@ -211,19 +211,22 @@ export default {
       }
       this.delay = true;
       if (this.books[0]) {
-        if (!this.books[0].title) {
-          this.text3 = true;
-          return setTimeout(() => {
-            this.text3 = false;
-          }, 1500);
-        } else if (!this.books[0].readCount) {
-          this.readNum = true;
-          return setTimeout(() => {
-            this.readNum = false;
-          }, 1500);
-        } else {
-          this.keeping();
+        for (let i in this.books) {
+          if (!this.books[i].title) {
+            this.text3 = true;
+            return setTimeout(() => {
+              this.text3 = false;
+            }, 1500);
+            break;
+          } else if (!this.books[i].readCount) {
+            this.readNum = true;
+            return setTimeout(() => {
+              this.readNum = false;
+            }, 1500);
+            break;
+          }
         }
+        this.keeping();
       } else {
         this.keeping();
       }
@@ -429,9 +432,9 @@ export default {
         border-radius: 0 18px 18px 0;
       }
       .van-stepper__input {
-        line-height: 61px;
+        line-height: 60px;
         width: 33%;
-        height: 61px;
+        height: 60px;
         font-size: 24px;
         box-sizing: border-box;
         border-color: #ccc;
