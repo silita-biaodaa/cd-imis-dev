@@ -571,52 +571,47 @@ audio {
   .l-pu {
     height: 96px;
     font-size: 32px;
+    padding: 0 6px;
+    box-sizing: border-box;
+    line-height: 96px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    .l-mi {
-      width: 180px;
-      display: flex;
-      align-items: center;
-      .van-stepper__minus,
-      .van-stepper__plus {
-        width: 33%;
-        border-color: #ccc;
-        height: 60px;
-      }
-      .van-stepper__minus {
-        border-radius: 18px 0 0 18px;
-      }
-      .van-stepper__plus {
-        border-radius: 0 18px 18px 0;
-      }
-      .van-stepper__input {
-        line-height: 60px;
-        width: 33%;
-        height: 60px;
-        font-size: 24px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-width: 1px 0;
-        padding: 0;
-      }
-      .van-stepper__minus::before,
-      .van-stepper__plus::before {
-        width: 20px !important;
-        height: 1px !important;
-        color: #999 !important;
-      }
-      .van-stepper__minus::after,
-      .van-stepper__plus::after {
-        height: 20px !important;
-        width: 1px !important;
-        color: #999 !important;
-      }
-      .van-stepper__minus,
-      .van-stepper__plus {
-        border-width: 1px;
-      }
+    text-align: center;
+  .l-mi {
+    margin:  auto  0;
+    width:180px;
+    display: flex;
+    .van-stepper__minus, .van-stepper__plus {
+      width:33%;
+      border-color: #ccc;
+      height: 61px;
+      border-width: 1PX
     }
+    .van-stepper__minus {
+      border-radius: 18px 0 0 18px;
+    }
+    .van-stepper__plus {
+      border-radius: 0 18px 18px 0;
+    }
+    .van-stepper__input{
+      line-height: 61px;
+      width:33%;
+      height: 61px;
+      font-size: 24px;
+      box-sizing: border-box;
+      border-color: #ccc;
+    }
+    .van-stepper__minus::before, .van-stepper__plus::before {
+      width: 20px !important;
+      height: 1PX !important;
+      color: #999 !important;
+    }
+    .van-stepper__minus::after, .van-stepper__plus::after {
+      height: 20px !important;
+      width:1PX !important;
+      color: #999 !important;
+    }
+  }
   }
   .tit-box {
     width: 100%;
