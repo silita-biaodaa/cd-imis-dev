@@ -131,6 +131,7 @@
 import { Personage, Saveuser } from "@/api/index";
 import { dateFormat } from "vux";
 import { setTimeout } from "timers";
+import { Stepper } from 'vant';
 export default {
   inject: ["reload"],
   data() {
@@ -253,54 +254,54 @@ export default {
 .set {
   box-sizing: border-box;
   background: #f5f5f5;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  .person {
-    box-sizing: border-box;
-    padding-left: 36px;
-    padding-right: 36px;
-    background: #fff;
+  -webkit-overflow-scrolling : touch;
+    position: relative;
+   .person {
+   box-sizing: border-box;
+   padding-left: 36px;
+   padding-right: 36px;
+   background: #FFF;
 
-    .person-top {
+   .person-top {
       padding-left: 10px;
       height: 96px;
       line-height: 96px;
       font-size: 28px;
-      border-bottom: 1px solid #f2f2f2;
+      border-bottom: 1PX solid #F2F2F2;
       position: relative;
       .img-book {
-        width: 30px;
-        height: 30px;
+         width: 30px;
+         height: 30px;
       }
       img {
         height: 100%;
       }
-      span {
+      span{
         padding-left: 35px;
       }
-    }
+   }
   }
   .p-line {
-    border-bottom: 1px solid #f2f2f2;
-  }
-  .img-post {
-    position: absolute;
-    transform: translateY(-50%);
-    vertical-align: middle;
-    top: 50%;
-  }
-  .sign {
-    position: relative;
-    .sign-img {
+     border-bottom: 1PX solid #F2F2F2;
+   }
+    .img-post {
       position: absolute;
-      transform: translateY(-50%);
+      transform:translateY(-50%);
+      vertical-align: middle;
+      top: 50%;
+   }
+    .sign {
+   position: relative;
+   .sign-img {
+      position: absolute;
+      transform:translateY(-50%);
       height: 16px;
       width: 16px;
       top: 50%;
       left: -15px;
     }
-  }
-  .toast {
+ }
+   .toast {
     position: fixed;
     left: 50%;
     top: 50%;
@@ -309,97 +310,97 @@ export default {
     font-size: 26px;
     border-radius: 10px;
     transform: translateX(-50%);
-    color: #fff;
+    color:#fff;
   }
-  .l-put {
-    height: 96px;
-    font-size: 32px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    .label {
-      width: 290px;
-      padding-left: 10px;
-      color: #000;
+   .l-put {
+      height: 96px;
+      font-size: 32px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .label {
+        width: 290px;
+        padding-left: 10px;
+        color:#000;
+      }
+      input {
+         width: 100%;
+         text-align: right;
+         background:none;
+	       outline:none;
+         border:0px;
+         caret-color:blue;
+         padding: 20px 0px;
+      }
     }
-    input {
-      width: 100%;
-      text-align: right;
-      background: none;
-      outline: none;
-      border: 0px;
-      caret-color: blue;
-      padding: 20px 0px;
+    .card-top {
+     img {
+        width: 100%;
+        padding-left: 11px;
+     }
     }
-  }
-  .card-top {
-    img {
-      width: 100%;
-      padding-left: 11px;
-    }
-  }
-  .card-com {
-    background: #fff;
-    padding: 0 36px;
-    height: 96px;
-    line-height: 96px;
-  }
-  .laca {
+     .card-com {
+      background: #fff;
+      padding: 0 36px;
+      height: 96px;
+      line-height: 96px;
+      }
+    .laca {
     position: relative;
     margin-top: 16px;
-  }
-  .siz {
+    }
+   .siz {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform:translateY(-50%);
     height: 30px;
     width: 33px;
   }
   .card-size {
     padding-left: 53px;
-    color: #666;
+    color:#666;
     font-size: 28px;
   }
-  .card-b {
+  .card-b{
     height: 80px;
     line-height: 80px;
     background-color: #f5f5f5;
     padding-left: 36px;
   }
-  .card-book {
-    color: #999;
-    font-size: 26px;
-  }
-  .add-book {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 36px;
-    padding-left: 46px;
-  }
-  .del-book {
-    color: #e62129;
-  }
-  .put-bot {
-    border-bottom: 1px solid #f2f2f2;
-  }
+   .card-book {
+   color: #999;
+   font-size: 26px;
+ }
+ .add-book {
+   display: flex;
+   justify-content: space-between;
+   padding-right: 36px;
+   padding-left: 46px;
+ }
+ .del-book {
+    color:#E62129;
+ }
+ .put-bot{
+   border-bottom: 1PX solid #F2F2f2;
+ }
   .laca-add {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 26px;
-    left: -25%;
-    img {
-      height: 100%;
-    }
-  }
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   height: 26px;
+   left: -25%;
+   img {
+     height: 100%;
+   }
+ }
   .card-add {
     text-align: center;
     background: #fff;
     font-size: 33px;
-    color: #e62129;
+    color:#E62129;
     font-weight: 500;
-  }
-  .label-f {
+ }
+   .label-f {
     width: 280px;
     padding-left: 8px;
     text-align: left;
@@ -413,45 +414,41 @@ export default {
     display: flex;
     justify-content: space-between;
     text-align: center;
-    .l-mi {
-      margin: auto 0;
-      width: 180px;
-      display: flex;
-      flex-direction: row;
-      .van-stepper__minus,
-      .van-stepper__plus {
-        width: 33%;
-        border-color: #ccc;
-        height: 60px;
-        border-width: 1px;
-      }
-      .van-stepper__minus {
-        border-radius: 18px 0 0 18px;
-      }
-      .van-stepper__plus {
-        border-radius: 0 18px 18px 0;
-      }
-      .van-stepper__input {
-        line-height: 60px;
-        width: 33%;
-        height: 60px;
-        font-size: 24px;
-        box-sizing: border-box;
-        border-color: #ccc;
-      }
-      .van-stepper__minus::before,
-      .van-stepper__plus::before {
-        width: 20px !important;
-        height: 1px !important;
-        color: #999 !important;
-      }
-      .van-stepper__minus::after,
-      .van-stepper__plus::after {
-        height: 20px !important;
-        width: 1px !important;
-        color: #999 !important;
-      }
+  .l-mi {
+    margin:  auto  0;
+    width:180px;
+    display: flex;
+    .van-stepper__minus, .van-stepper__plus {
+      width:33%;
+      border-color: #ccc;
+      height: 61px;
+      border-width: 1PX
     }
+    .van-stepper__minus {
+      border-radius: 18px 0 0 18px;
+    }
+    .van-stepper__plus {
+      border-radius: 0 18px 18px 0;
+    }
+    .van-stepper__input{
+      line-height: 61px;
+      width:33%;
+      height: 61px;
+      font-size: 24px;
+      box-sizing: border-box;
+      border-color: #ccc;
+    }
+    .van-stepper__minus::before, .van-stepper__plus::before {
+      width: 20px !important;
+      height: 1PX !important;
+      color: #999 !important;
+    }
+    .van-stepper__minus::after, .van-stepper__plus::after {
+      height: 20px !important;
+      width:1PX !important;
+      color: #999 !important;
+    }
+  }
   }
   .pdd {
     background: #fff;
@@ -460,29 +457,29 @@ export default {
   .no-f {
     padding-left: 0 !important;
   }
-  .volunteer {
+  .volunteer{
     box-sizing: border-box;
     margin-top: 16px;
     padding-left: 46px;
     padding-right: 36px;
-    background: #fff;
+    background: #FFF;
     .volunteer-top {
-      height: 96px;
-      line-height: 96px;
-      font-size: 28px;
-      border-bottom: 1px solid #f2f2f2;
-      position: relative;
-      img {
-        //  height: 100%;
-        height: 34px;
-        width: 34px;
-      }
-      span {
-        padding-left: 38px;
-      }
+        height: 96px;
+        line-height: 96px;
+        font-size: 28px;
+        border-bottom: 1PX solid #F2F2F2;
+        position: relative;
+        img {
+          //  height: 100%;
+          height: 34px;
+          width: 34px;
+        }
+        span{
+          padding-left: 38px;
+        }
     }
     .volunteer-put {
-      border-bottom: 1px solid #f2f2f2;
+      border-bottom: 1PX solid #f2f2f2;
     }
     .btn {
       margin-top: 140px;
@@ -491,19 +488,20 @@ export default {
         height: 96px;
         font-size: 36px;
         color: #fff;
-        background-color: #e62129;
+        background-color: #E62129;
         border-radius: 12px;
       }
     }
   }
-  .ccc {
-    font-size: 32px;
-    width: 100%;
-    outline: none;
-    border: none;
+    .ccc {
+     font-size: 32px;
+     width: 100%;
+     outline:none;
+     border: none;
   }
   .l-fire {
     padding-left: 10px;
   }
+
 }
 </style>

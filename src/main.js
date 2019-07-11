@@ -8,10 +8,10 @@ Vue.prototype.$axios = axios
 import './assets/js/flexible_css.js'
 import './assets/js/makegrid.js'
 
-import Vant from 'vant'
+import Vant, { Stepper } from 'vant'
 import 'vant/lib/index.css'
 Vue.use(Vant)
-
+Vue.use(Stepper)
 import clocklist from '@/components/clockList'
 import popup from '@/components/popup'
 import head from '@/components/headgoto'
@@ -32,7 +32,6 @@ Vue.component('v-head', head)
 Vue.component('v-toast', toast)
 Vue.component('v-audio', audioPlay)
 // Vue.use(AlertPlugin)
-
 
 //load层
 var tpl=null;
