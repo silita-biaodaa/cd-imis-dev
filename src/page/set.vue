@@ -165,6 +165,41 @@ export default {
     cardBook() {
       this.books.push({});
     },
+    keeping() {
+      if (this.pass && this.delay) {
+        let that = this;
+        this.delay = false;
+        this.pushCount.volunteer = this.values;
+        this.pushCount.bonaStart = this.pushCount.bonaStart.replace("年", "-");
+        this.pushCount.bonaStart = this.pushCount.bonaStart.replace("月", "-");
+        this.pushCount.bonaStart = this.pushCount.bonaStart.replace("日", "");
+        this.newbook = this.bookss.concat(this.books);
+        //保存用户信息
+        localStorage.setItem("userName", this.user.name);
+        let local = localStorage.getItem("cardPushData");
+        if (local) {
+          let data = JSON.parse(local);
+          data.volunteer = this.values;
+          localStorage.setItem("cardPushData", JSON.stringify(data));
+        }
+        delete this.pushCount.bonaTotal;
+        Saveuser({
+          books: this.newbook,
+          user: this.user,
+          pushCount: this.pushCount
+        }).then(res => {
+          if (res.code == 1) {
+            this.reload();
+            this.delay = true;
+            this.mask = true;
+            this.gainUser();
+            return setTimeout(() => {
+              this.mask = false;
+            }, 1500);
+          }
+        });
+      }
+    },
     record() {
       this.pass = true;
       if (!this.user.name) {
@@ -174,75 +209,23 @@ export default {
           this.text2 = false;
         }, 1500);
       }
-      // this.books.forEach(el => {
-      //   el.readCount = el.readCount * 1;
-      //   el.readTotal = 0;
-      //   var arr = Object.keys(el);
-      //   if (arr.length < 2) {
-      //     this.pass = false;
-      //     this.text3 = true;
-      //     return setTimeout(() => {
-      //       this.text3 = false;
-      //     }, 1500);
-      //   }
-      // });
       this.delay = true;
-      for (let i in this.books) {
-        debugger;
-        if (!this.books[i].title) {
+      if (this.books[0]) {
+        if (!this.books[0].title) {
           this.text3 = true;
           return setTimeout(() => {
             this.text3 = false;
           }, 1500);
-        } else if (!this.books[i].readCount) {
+        } else if (!this.books[0].readCount) {
           this.readNum = true;
           return setTimeout(() => {
             this.readNum = false;
           }, 1500);
         } else {
-          if (this.pass && this.delay) {
-            let that = this;
-            this.delay = false;
-            this.pushCount.volunteer = this.values;
-            this.pushCount.bonaStart = this.pushCount.bonaStart.replace(
-              "年",
-              "-"
-            );
-            this.pushCount.bonaStart = this.pushCount.bonaStart.replace(
-              "月",
-              "-"
-            );
-            this.pushCount.bonaStart = this.pushCount.bonaStart.replace(
-              "日",
-              ""
-            );
-            this.newbook = this.bookss.concat(this.books);
-            //保存用户信息
-            localStorage.setItem("userName", this.user.name);
-            let local = localStorage.getItem("cardPushData");
-            if (local) {
-              let data = JSON.parse(local);
-              data.volunteer = this.values;
-              localStorage.setItem("cardPushData", JSON.stringify(data));
-            }
-            delete this.pushCount.bonaTotal;
-            Saveuser({
-              books: this.newbook,
-              user: this.user,
-              pushCount: this.pushCount
-            }).then(res => {
-              if (res.code == 1) {
-                this.reload();
-                this.delay = true;
-                this.mask = true;
-                this.gainUser();
-                return setTimeout(() => {
-                  this.mask = false;
-                }, 1500);
-              }
-            });
-          }
+          this.keeping();
         }
+      } else {
+        this.keeping();
       }
     },
     gainUser() {
@@ -436,7 +419,7 @@ export default {
       .van-stepper__plus {
         width: 33%;
         border-color: #ccc;
-        height: 61px;
+        height: 60px;
         border-width: 1px;
       }
       .van-stepper__minus {

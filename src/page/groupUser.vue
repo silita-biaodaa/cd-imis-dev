@@ -275,7 +275,8 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 10;
+  overflow: hidden;
 }
 .group-list-box {
   margin-top: 220px;

@@ -36,8 +36,6 @@
           </div>
          </div>
       </div>
-
-
       <div>
        <div  class="fold none" @click="show(1)"  >
         <span>我加入的群{{this.jointle}}</span>
