@@ -55,10 +55,9 @@
           <div class="label label-f font-bold">朗读章节</div>
           <input
             type="text"
-            placeholder="请输入数字"
+            placeholder="请输入"
             v-model="item.section"
             :disabled="first"
-            oninput="value=value.replace(/[^\d]/g,'')"
           />
         </div>
         <div class="card-play" v-if="item.audioPath">
