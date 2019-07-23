@@ -113,16 +113,15 @@ export default {
               this.creates = res.data.create;
               let arr=res.data.join.concat(res.data.create);
              localStorage.setItem('groupList',JSON.stringify(arr));
-              this.jointle = res.data.join.length == 0 ? '(0)' : '(' + res.data.join.length + ')'
-              this.createstle  = res.data.create.length == 0 ? '(0)' : '(' + res.data.create.length + ')'
-
+              this.jointle = res.data.join.length == 0 ? '(0)' : '(' + res.data.join.length + ')';
+              this.createstle  = res.data.create.length == 0 ? '(0)' : '(' + res.data.create.length + ')';
            }
         })
       },
       gainInform()  {
         Count({}).then( res =>{
            if(res.code == 1) {
-              this.informs = res.data
+              this.informs = res.data;
            }
         })
       },
@@ -150,7 +149,6 @@ export default {
 </script>
 <style lang='less' scoped>
 @import '../assets/iconfont.css';
-
 .group {
   -webkit-overflow-scrolling :auto;
 }
@@ -230,7 +228,6 @@ div .group {
     .g-h {
       height: 126px;
     }
-
   }
 }
 </style>

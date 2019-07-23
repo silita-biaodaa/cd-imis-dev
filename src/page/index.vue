@@ -97,7 +97,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="add-b">
          <div  @click='addbook'>
@@ -165,7 +164,7 @@
         <x-button  >提交</x-button>
       </div>
     </div>
-    <v-popup :popup-type="'tips'" :popup-show="mask" @sure="skipFn" message='123123'></v-popup>
+    <!-- <v-popup :popup-type="'tips'" :popup-show="mask" @sure="skipFn" message='123123'></v-popup> -->
     <!-- <div class='toast' v-show='layout' >
       请输入正确的手机号码
     </div>
@@ -235,10 +234,10 @@
           } else {
             return `${value}日`
           }
-          return value;
+          return value; 
         },
       datePicker () {
-          this.dateObj.dateMask = !this.dateObj.dateMask
+        this.dateObj.dateMask = !this.dateObj.dateMask
       },
       datePickers() {
         this.dateObj.dateMasks = !this.dateObj.dateMasks
@@ -315,11 +314,10 @@
         }, 1500);
       },
       record (a) {
-
         this.pass = true;
         if( !this.Number ) {
            return  this.layout = true
-                   this.verify()
+            this.verify()
         }
 
         // if(!this.username) {

@@ -90,7 +90,7 @@ const onBridgeReady=function(){
 }
 
 const offBridgeReady=function(){  
-  WeixinJSBridge.call('showOptionMenu');  
+  WeixinJSBridge.call('showOptionMenu');
 }
 
 import { queryList,User,group,getWxStr,groupsDetail } from "./api/index"
@@ -178,8 +178,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 // 
-// const appid='wx393124fdad606b1d';//预发布
-const appid='wx26999a53385489f9';//生产
+const appid='wx393124fdad606b1d';//预发布
+// const appid='wx26999a53385489f9';//生产
 Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={

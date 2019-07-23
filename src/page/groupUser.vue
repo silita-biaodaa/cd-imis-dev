@@ -26,10 +26,9 @@
             暂无群成员
           </div>
           <div class="hint" v-show=" !this.list.length && this.keywords.trim()">
-              查询无结果
+            查询无结果
           </div>
-        </div>
-        
+        </div>  
       </div>
       <v-popup :popupShow="mask" :popupType="'tip1'" :tip-text="tipTxt" @sure="maskFn"></v-popup>
       <v-toast :toastTxt="toastTxt" :mask="maskToast"></v-toast>
@@ -43,8 +42,8 @@
   </div>
 </template>
 <script>
-  import { CardRecord,groupUser,groups } from '@/api/index'
-  import { Toast } from 'mint-ui'
+  import { CardRecord,groupUser,groups } from '@/api/index';
+  import { Toast } from 'mint-ui';
   export default {
     data () {
       return {
@@ -275,13 +274,14 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 999;
   overflow: hidden;
 }
 .group-list-box {
   margin-top: 220px;
 }
 .groupUser{
+  //处理苹果手机滑动不流畅；
   -webkit-overflow-scrolling : touch;
   position: relative;
 }

@@ -66,11 +66,10 @@
           <div class="label label-f no-f">每日朗读遍数</div>
           <input
             type="number"
-            placeholder="请输入数字"
+            placeholder="请输入"
             v-model="item.readCount"
-            onkeyup="value=value.replace(/[^\d]/g,'')"
-            onblur="value=value.replace(/[^\d]/g,'')"
             @blur="bblur"
+            oninput="value=value.replace(/[^\d]/g,'')"
           />
         </div>
       </div>

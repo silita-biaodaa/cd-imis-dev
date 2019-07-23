@@ -55,10 +55,9 @@
           <div class="label label-f font-bold">朗读章节</div>
           <input
             type="text"
-            placeholder="请输入数字"
+            placeholder="请输入"
             v-model="item.section"
             :disabled="first"
-            oninput="value=value.replace(/[^\d]/g,'')"
           />
         </div>
         <div class="card-play" v-if="item.audioPath">
@@ -146,7 +145,6 @@
                <div class="label label-f label-t">建功</div> <input type="text" placeholder="请输入今日您对工作的贡献" v-model="pushData.practice.work" @blur='bblur' :disabled='first' >
           </div>
     </div>-->
-
     <div class="card-top card-com laca card-ma">
       <div class="siz">
         <img src="../assets/img/gift (2).png" alt />

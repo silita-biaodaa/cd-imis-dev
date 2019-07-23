@@ -743,7 +743,7 @@ export default {
 }
 
 .van-picker {
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch; //苹果手机滑动卡顿解决办法；
   .van-picker-column__item {
     font-size: 32px;
     width: 70%;
