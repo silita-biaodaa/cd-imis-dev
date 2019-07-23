@@ -10,12 +10,12 @@
       <div class="c-content" :class="{'active': item.fullTxt=='收起'}" style="-webkit-box-orient: vertical;">
         <p class="c-time"><span>{{item.pushd}}</span>打卡第{{item.pushCount.putCount}}次</p>
         <div class="c-text" >
-          <!-- 知 学习 -->
+          <!-- 知学习 -->
           <p class="tit">【知～学习】</p>
           <div v-for="(el,bs) in item.books" :key="bs">
             <p class="c-color" v-if="el.readCount!=0">《{{el.title}}》{{el.readCount}}遍 共{{el.readTotal}}遍</p>
             <div class="card-play" v-show="el.audioPath">
-              <!-- <audio :src="el.audioPath" controls></audio> -->
+              <!-- <audio  :src="el.audioPath" controls></audio> -->
               <v-audio :audioPath="el.audioPath" :ref="index+'book'+bs" @audioPlay="audioPlay"></v-audio>
             </div>
           </div>
@@ -122,7 +122,7 @@
   </div>
 </template>
 <script>
-  import { Parise } from '@/api/index'
+  import { Parise } from '@/api/index';
   export default {
     name: 'clock', // 结构名称
     data() {

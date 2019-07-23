@@ -348,7 +348,7 @@ export default {
           that.pushData.introspective = res.data.introspective;
           that.pushCount = res.data.pushCount;
           that.pushCount.num = 0;
-          if (res.code == 402) {+
+          if (res.code == 402) {
             that.pushCount.num = that.pushCount.bonaDays;
           }
           that.pushCount.bonaTotal =
