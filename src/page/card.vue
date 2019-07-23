@@ -156,7 +156,7 @@
         发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计
         <span>{{pushCount.bonaTotal+pushCount.bonaDays}}</span>善。
       </div>
-    </div>
+    </div>```````````````
     <div class="card-com">
       <div class="l-pu">
         <div class="label label-f font-bold">今日行善次数</div>
@@ -348,11 +348,11 @@ export default {
           that.pushData.introspective = res.data.introspective;
           that.pushCount = res.data.pushCount;
           that.pushCount.num = 0;
-          if (res.code == 402) {
+          if (res.code == 402) {+
             that.pushCount.num = that.pushCount.bonaDays;
           }
           that.pushCount.bonaTotal =
-            that.pushCount.bonaTotal - that.pushCount.num;
+          that.pushCount.bonaTotal - that.pushCount.num;
           that.pushData.volunteer = res.data.volunteer;
           that.books = res.data.bookish ? res.data.bookish : [];
           that.booklength = that.bookss.length;
@@ -463,7 +463,7 @@ export default {
     },
     punch() {
       let obj = this.$route.query;
-      console.info('obj',obj)
+      alert('obj',obj);
       let isUpdate = 0;
       if (this.btnTitle == "修改") {
         isUpdate = 1;
