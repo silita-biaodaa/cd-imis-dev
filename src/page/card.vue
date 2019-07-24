@@ -156,7 +156,7 @@
         发愿从{{pushCount.bonaStart}}起，{{pushCount.years}}年内{{pushCount.days * pushCount.bonaCount }}善事，累计
         <span>{{pushCount.bonaTotal+pushCount.bonaDays}}</span>善。
       </div>
-    </div>```````````````
+    </div>
     <div class="card-com">
       <div class="l-pu">
         <div class="label label-f font-bold">今日行善次数</div>
@@ -463,7 +463,7 @@ export default {
     },
     punch() {
       let obj = this.$route.query;
-      alert('obj',obj);
+      console.info('this.$route.query',this.$route.query);
       let isUpdate = 0;
       if (this.btnTitle == "修改") {
         isUpdate = 1;
@@ -480,7 +480,6 @@ export default {
         pushCount: this.pushCount,
         isPub: "1",
         bookish: this.books,
-        recordTime: obj.recordTime,
       }).then(res => {
         if (res.code == 1) {
           this.hideLoading();
