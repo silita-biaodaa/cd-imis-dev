@@ -94,6 +94,7 @@
 </template>
 <script>
 import { groups, CardRecord } from "@/api/index";
+import { constants } from 'crypto';
 export default {
   name: "groupcard",
   data() {
@@ -414,9 +415,15 @@ export default {
       var preMonthDayCount = firstDayWeekDay - 1;
       var lastDay = new Date(year, month, 0);
       var lastDate = lastDay.getDate();
+      var dateShow = parseInt(firstDayWeekDay + lastDate);
       this.ret = [];
+      if(dateShow > 35) {
+        dateShow = 42;
+      }else {
+        dateShow = 35;
+      }
       // let that=this;
-      for (var i = 0; i < 42; i++) {
+      for (var i = 0; i < dateShow; i++) {
         var date = i - preMonthDayCount;
         var showDate = date;
         var thisMonth = month;
@@ -473,14 +480,14 @@ export default {
                 x.date = x.date.replace(/-/g, "/");
               }
               let days = new Date(x.date + " 00:00:00").getTime();
-              if (ifThisMonthDays && days == dateTime) {
+              if (ifThisMonthDays && days == dateTime && this.thisMonthDays.days[0].showDate > setDay) {
                 cardType = "0"; //打卡
                 break;
               } else if (
                 ifThisMonthDays &&
                 days != dateTime &&
                 dateTime < nowTime &&
-                dateTime >= creatTime
+                dateTime >= creatTime 
               ) {
                 cardType = "1";
               } else {
@@ -877,7 +884,7 @@ body .mask {
         box-sizing: border-box;
       }
       .ifDiabled {
-        color: #ddd;
+        color: #ffffff;
       }
       .active {
         border-color: #0dc830;

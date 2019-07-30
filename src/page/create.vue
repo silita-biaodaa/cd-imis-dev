@@ -31,7 +31,7 @@ export default {
     return {
       crowd: '',
       headName:'创建群组',
-      show:false,
+      show:false, 
       mask:false,
       busy:false
     }

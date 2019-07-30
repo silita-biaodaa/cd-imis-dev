@@ -6,6 +6,7 @@
           <v-head :head-txt="groupName" :head-type="'qrCode'" @jump="jumpQrCode"></v-head>
           <van-search placeholder="请输入搜索关键词" v-model="keywords" @blur="ajax('search')" />
         </div>
+        <div class="pull_down"></div>
         <div class="group-list-box">
           <ul class="listBox" v-show=" this.list.length" >
             <li v-for="(o,i) of list" :key="i" >
@@ -274,11 +275,12 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 999;
-  overflow: hidden;
+  z-index: 20;
+  overflow-x:hidden;
 }
-.group-list-box {
-  margin-top: 220px;
+.pull_down {
+  height: 220px;
+  width: 100%;
 }
 .groupUser{
   //处理苹果手机滑动不流畅；
