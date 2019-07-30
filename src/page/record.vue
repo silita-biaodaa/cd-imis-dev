@@ -480,7 +480,7 @@ export default {
                 x.date = x.date.replace(/-/g, "/");
               }
               let days = new Date(x.date + " 00:00:00").getTime();
-              if (ifThisMonthDays && days == dateTime && this.thisMonthDays.days[0].showDate > setDay) {
+              if (ifThisMonthDays && days == dateTime && setDay > this.thisMonthDays.days[0].showDate) {
                 cardType = "0"; //打卡
                 break;
               } else if (
