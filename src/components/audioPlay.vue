@@ -192,7 +192,7 @@ export default {
   },
   created() {
     console.info('this.$parent',this.$parent)
-    alert('this.$parent.recordTime',this.$parent.recordTime)
+    // alert('this.$parent.recordTime',this.$parent.recordTime)
   },
   mounted() {
     let u = navigator.userAgent;

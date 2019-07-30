@@ -34,7 +34,7 @@
           @audioPlay="audioPlay"
           :isCard="1"
           :ref="'book'+i"
-          :recordTime="recordTime"
+          :time="recordTime"
         ></v-audio>
       </div>
     </div>
@@ -68,7 +68,7 @@
             :isCard="1"
             @audioPlay="audioPlay"
             :ref="'addbook'+index"
-            :recordTime="recordTime"
+            :time="recordTime"
           ></v-audio>
         </div>
       </div>
@@ -522,7 +522,7 @@ export default {
   },
   created() {
     this.gainPer();
-    console.info('this.$route.query',this.$route.query)
+    alert('this.$route.query',this.$route.query)
     if(this.$route.query.recordTime) {
       this.recordTime = this.$route.query.recordTime;
     }
