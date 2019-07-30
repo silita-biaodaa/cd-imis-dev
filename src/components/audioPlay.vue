@@ -66,6 +66,9 @@ export default {
     },
     isCard: {
       default: 0
+    },
+    time: {
+      type: String
     }
   },
   methods: {
@@ -107,6 +110,7 @@ export default {
     readPlay() {
       //准备播放
       if (this.$refs.test.duration) {
+        alert('this.$refs.test.duration',this.$refs.test.duration);
         const maxTime = parseInt(this.$refs.test.duration);
         this.maxTime = maxTime;
         this.num.m = parseInt(maxTime / 60);
@@ -186,7 +190,10 @@ export default {
       this.isClick = false;
     }
   },
-  created() {},
+  created() {
+    console.info('this.$parent',this.$parent)
+    alert('this.$parent.recordTime',this.$parent.recordTime)
+  },
   mounted() {
     let u = navigator.userAgent;
     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端

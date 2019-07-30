@@ -6,7 +6,6 @@
           <v-head :head-txt="groupName" :head-type="'qrCode'" @jump="jumpQrCode"></v-head>
           <van-search placeholder="请输入搜索关键词" v-model="keywords" @blur="ajax('search')" />
         </div>
-        <div class="pull_down"></div>
         <div class="group-list-box">
           <ul class="listBox" v-show=" this.list.length" >
             <li v-for="(o,i) of list" :key="i" >
@@ -272,14 +271,15 @@
 </script>
 <style lang='less'>
 .top-box{
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 20;
-  overflow-x:hidden;
+  // position: fixed;
+  // top: 0;
+  // width: 100%;
+  // z-index: 100;
+  // overflow-x:hidden;
+  // overflow-y:hidden;
 }
-.pull_down {
-  height: 220px;
+.group-list-box {
+  margin-top: 220px;
   width: 100%;
 }
 .groupUser{
@@ -288,7 +288,7 @@
   position: relative;
 }
 .box{
-  height:calc(100% - 96px);
+  height: calc(100% - 96px);
   overflow: auto;
 }
 .fixBtn{

@@ -34,6 +34,7 @@
           @audioPlay="audioPlay"
           :isCard="1"
           :ref="'book'+i"
+          :recordTime="recordTime"
         ></v-audio>
       </div>
     </div>
@@ -67,6 +68,7 @@
             :isCard="1"
             @audioPlay="audioPlay"
             :ref="'addbook'+index"
+            :recordTime="recordTime"
           ></v-audio>
         </div>
       </div>
@@ -228,6 +230,7 @@
 import { recordPer, pushCard, groups } from "@/api/index";
 import wx from "weixin-js-sdk";
 import { setTimeout } from "timers";
+import { constants } from 'crypto';
 export default {
   name: "card",
   data() {
@@ -250,7 +253,8 @@ export default {
       tipTxt: "",
       booklength: 0,
       repetition: false,
-      isTap: false
+      isTap: false,
+      recordTime: '', //录音时长；
     };
   },
   watch: {
@@ -518,6 +522,10 @@ export default {
   },
   created() {
     this.gainPer();
+    console.info('this.$route.query',this.$route.query)
+    if(this.$route.query.recordTime) {
+      this.recordTime = this.$route.query.recordTime;
+    }
   },
   components: {},
   mounted() {
