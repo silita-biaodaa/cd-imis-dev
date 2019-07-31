@@ -474,7 +474,6 @@ export default {
             dateS = dateS.replace(/-/g, "/");
           }
           let nowTime = new Date(dateS + " 00:00:00").getTime();
-          console.info("this.groups", this.groups);
           if (groupArr.length > 0) {
             for (let i = 0; i < groupArr.length; i++) {
               if (this.isIOS) {

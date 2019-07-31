@@ -191,8 +191,7 @@ export default {
     }
   },
   created() {
-    console.info('this.$parent',this.$parent);
-    if(this.$parent.recordTime !== ''){
+    if(!this.$parent.recordTime == ''){
       alert('this.$parent.recordTime',this.$parent.recordTime);
     }
   },
