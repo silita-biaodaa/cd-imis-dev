@@ -271,12 +271,12 @@
 </script>
 <style lang='less'>
 .top-box{
-  // position: fixed;
-  // top: 0;
-  // width: 100%;
-  // z-index: 100;
-  // overflow-x:hidden;
-  // overflow-y:hidden;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 100 !important;
+  overflow-x:hidden;
+  overflow-y:hidden;
 }
 .group-list-box {
   margin-top: 220px;
@@ -290,6 +290,7 @@
 .box{
   height: calc(100% - 96px);
   overflow: auto;
+  min-height: 101%;
 }
 .fixBtn{
   position: fixed;

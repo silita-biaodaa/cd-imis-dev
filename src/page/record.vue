@@ -94,7 +94,7 @@
 </template>
 <script>
 import { groups, CardRecord } from "@/api/index";
-import { constants } from 'crypto';
+import { constants } from "crypto";
 export default {
   name: "groupcard",
   data() {
@@ -142,7 +142,7 @@ export default {
       mask: false,
       isIOS: false,
       noGet: false,
-      isScroll: true
+      isScroll: true,
     };
   },
   created() {
@@ -417,9 +417,9 @@ export default {
       var lastDate = lastDay.getDate();
       var dateShow = parseInt(firstDayWeekDay + lastDate);
       this.ret = [];
-      if(dateShow > 35) {
+      if (dateShow > 35) {
         dateShow = 42;
-      }else {
+      } else {
         dateShow = 35;
       }
       // let that=this;
@@ -474,21 +474,21 @@ export default {
             dateS = dateS.replace(/-/g, "/");
           }
           let nowTime = new Date(dateS + " 00:00:00").getTime();
+          console.info("this.groups", this.groups);
           if (groupArr.length > 0) {
-            for (let x of groupArr) {
+            for (let i = 0; i < groupArr.length; i++) {
               if (this.isIOS) {
-                x.date = x.date.replace(/-/g, "/");
+                groupArr[i].date = groupArr[i].date.replace(/-/g, "/");
               }
-              let days = new Date(x.date + " 00:00:00").getTime();
-              if (ifThisMonthDays && days == dateTime && setM == this.thisMonthDays.month && setDay > this.thisMonthDays.days[0].showDate) {
-                console.info(' && this.thisMonthDays',this.thisMonthDays.days[0].showDate)
+              let days = new Date(groupArr[i].date + " 00:00:00").getTime();
+              if (ifThisMonthDays && days == dateTime) {
                 cardType = "0"; //打卡
                 break;
               } else if (
                 ifThisMonthDays &&
                 days != dateTime &&
                 dateTime < nowTime &&
-                dateTime >= creatTime 
+                dateTime >= creatTime
               ) {
                 cardType = "1";
               } else {
@@ -603,7 +603,7 @@ export default {
       };
       CardRecord.groupsDate(data).then(res => {
         if (res.data.list.length > 0) {
-          for (let x of res.data.list) {
+          for (let x in res.data.list) {
             if (x.lostCount == 0) {
               let data = {
                 date: x.days
