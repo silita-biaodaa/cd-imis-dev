@@ -20,6 +20,7 @@ export default {
     };
   },
   methods: {
+    //全局刷新；
      reload (){
        this.isRouterAlive = false
        this.$nextTick(function(){
