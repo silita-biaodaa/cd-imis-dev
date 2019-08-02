@@ -34,7 +34,6 @@
           @audioPlay="audioPlay"
           :isCard="1"
           :ref="'book'+i"
-          :time="recordTime"
         ></v-audio>
       </div>
     </div>
@@ -68,7 +67,6 @@
             :isCard="1"
             @audioPlay="audioPlay"
             :ref="'addbook'+index"
-            :time="recordTime"
           ></v-audio>
         </div>
       </div>
@@ -147,6 +145,7 @@
                <div class="label label-f label-t">建功</div> <input type="text" placeholder="请输入今日您对工作的贡献" v-model="pushData.practice.work" @blur='bblur' :disabled='first' >
           </div>
     </div>-->
+
     <div class="card-top card-com laca card-ma">
       <div class="siz">
         <img src="../assets/img/gift (2).png" alt />
@@ -230,7 +229,6 @@
 import { recordPer, pushCard, groups } from "@/api/index";
 import wx from "weixin-js-sdk";
 import { setTimeout } from "timers";
-import { constants } from 'crypto';
 export default {
   name: "card",
   data() {
@@ -253,8 +251,7 @@ export default {
       tipTxt: "",
       booklength: 0,
       repetition: false,
-      isTap: false,
-      recordTime: '', //录音时长；
+      isTap: false
     };
   },
   watch: {
@@ -356,7 +353,7 @@ export default {
             that.pushCount.num = that.pushCount.bonaDays;
           }
           that.pushCount.bonaTotal =
-          that.pushCount.bonaTotal - that.pushCount.num;
+            that.pushCount.bonaTotal - that.pushCount.num;
           that.pushData.volunteer = res.data.volunteer;
           that.books = res.data.bookish ? res.data.bookish : [];
           that.booklength = that.bookss.length;
@@ -467,7 +464,7 @@ export default {
     },
     punch() {
       let obj = this.$route.query;
-      console.info('this.$route.query',this.$route.query);
+      console.info('obj',obj)
       let isUpdate = 0;
       if (this.btnTitle == "修改") {
         isUpdate = 1;
@@ -484,6 +481,7 @@ export default {
         pushCount: this.pushCount,
         isPub: "1",
         bookish: this.books,
+        recordTime: obj.recordTime,
       }).then(res => {
         if (res.code == 1) {
           this.hideLoading();
