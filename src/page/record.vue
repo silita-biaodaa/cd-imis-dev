@@ -94,7 +94,6 @@
 </template>
 <script>
 import { groups, CardRecord } from "@/api/index";
-import { constants } from "crypto";
 export default {
   name: "groupcard",
   data() {
@@ -142,7 +141,7 @@ export default {
       mask: false,
       isIOS: false,
       noGet: false,
-      isScroll: true,
+      isScroll: true
     };
   },
   created() {
@@ -332,7 +331,7 @@ export default {
       let data = {
         pageNo: 1,
         pageSize: 100,
-        groId: this.popup.groupid //
+        groId: this.popup.groupid
       };
       let that = this;
       CardRecord.groupPerson(data).then(res => {
@@ -415,14 +414,16 @@ export default {
       var preMonthDayCount = firstDayWeekDay - 1;
       var lastDay = new Date(year, month, 0);
       var lastDate = lastDay.getDate();
-      var dateShow = parseInt(firstDayWeekDay + lastDate);
       this.ret = [];
+      //temp为获取某年某月的天数
+      var temp=new Date(year,month,0);
+      var dateShow = parseInt(firstDayWeekDay + temp.getDate());
+      //dateShow为展示日历行数判断；
       if (dateShow > 35) {
         dateShow = 42;
       } else {
         dateShow = 35;
       }
-      // let that=this;
       for (var i = 0; i < dateShow; i++) {
         var date = i - preMonthDayCount;
         var showDate = date;
@@ -475,11 +476,11 @@ export default {
           }
           let nowTime = new Date(dateS + " 00:00:00").getTime();
           if (groupArr.length > 0) {
-            for (let i = 0; i < groupArr.length; i++) {
+            for (let x of groupArr) {
               if (this.isIOS) {
-                groupArr[i].date = groupArr[i].date.replace(/-/g, "/");
+                x.date = x.date.replace(/-/g, "/");
               }
-              let days = new Date(groupArr[i].date + " 00:00:00").getTime();
+              let days = new Date(x.date + " 00:00:00").getTime();
               if (ifThisMonthDays && days == dateTime) {
                 cardType = "0"; //打卡
                 break;
@@ -602,7 +603,7 @@ export default {
       };
       CardRecord.groupsDate(data).then(res => {
         if (res.data.list.length > 0) {
-          for (let x in res.data.list) {
+          for (let x of res.data.list) {
             if (x.lostCount == 0) {
               let data = {
                 date: x.days
@@ -723,7 +724,6 @@ export default {
             arr.push(data);
           }
         }
-
         this.groupArr = arr;
         this.cardStatistics.userCard = res.data.pushCount;
         this.cardStatistics.noUserCard = res.data.lostCount;
@@ -750,7 +750,7 @@ export default {
 }
 
 .van-picker {
-  -webkit-overflow-scrolling: touch; //苹果手机滑动卡顿解决办法；
+  -webkit-overflow-scrolling: touch;
   .van-picker-column__item {
     font-size: 32px;
     width: 70%;
@@ -884,7 +884,7 @@ body .mask {
         box-sizing: border-box;
       }
       .ifDiabled {
-        color: #ffffff;
+        color: #fff;
       }
       .active {
         border-color: #0dc830;

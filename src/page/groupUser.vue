@@ -274,14 +274,12 @@
   position: fixed !important;
   top: 0;
   width: 100%;
-  z-index: 20 !important;
+  z-index: 100 !important;
   overflow-x:hidden;
   overflow-y:hidden;
 }
 .group-list-box {
-  position: fixed;
-  top: 220px;
-  z-index: 10;
+  margin-top: 220px;
   width: 100%;
 }
 .groupUser{
