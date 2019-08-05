@@ -110,7 +110,6 @@ export default {
     readPlay() {
       //准备播放
       if (this.$refs.test.duration) {
-        alert('this.$refs.test.duration',this.$refs.test.duration);
         const maxTime = parseInt(this.$refs.test.duration);
         this.maxTime = maxTime;
         this.num.m = parseInt(maxTime / 60);
@@ -191,9 +190,6 @@ export default {
     }
   },
   created() {
-    if(!this.$parent.recordTime == ''){
-      alert('this.$parent.recordTime',this.$parent.recordTime);
-    }
   },
   mounted() {
     let u = navigator.userAgent;
