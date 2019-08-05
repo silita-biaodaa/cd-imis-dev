@@ -280,6 +280,13 @@
 }
 .group-list-box {
   margin-top: 220px;
+  z-index: 100 !important;
+  overflow-x:hidden;
+  overflow-y:hidden;
+}
+.group-list-box {
+  margin-top: 220px;
+  width: 100%;
 }
 .groupUser{
   -webkit-overflow-scrolling : touch;

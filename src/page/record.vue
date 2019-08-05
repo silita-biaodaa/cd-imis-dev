@@ -331,7 +331,7 @@ export default {
       let data = {
         pageNo: 1,
         pageSize: 100,
-        groId: this.popup.groupid //
+        groId: this.popup.groupid
       };
       let that = this;
       CardRecord.groupPerson(data).then(res => {
@@ -414,15 +414,16 @@ export default {
       var preMonthDayCount = firstDayWeekDay - 1;
       var lastDay = new Date(year, month, 0);
       var lastDate = lastDay.getDate();
-      //判断展示日历行数；
-      var dateShow = parseInt(lastDate + firstDayWeekDay);
-      if(dateShow > 35) {
-        dateShow = 42
-      }else {
-        dateShow = 35
-      }
       this.ret = [];
-      // let that=this;
+      //temp为获取某年某月的天数
+      var temp=new Date(year,month,0);
+      var dateShow = parseInt(firstDayWeekDay + temp.getDate());
+      //dateShow为展示日历行数判断；
+      if (dateShow > 35) {
+        dateShow = 42;
+      } else {
+        dateShow = 35;
+      }
       for (var i = 0; i < dateShow; i++) {
         var date = i - preMonthDayCount;
         var showDate = date;
@@ -723,7 +724,6 @@ export default {
             arr.push(data);
           }
         }
-
         this.groupArr = arr;
         this.cardStatistics.userCard = res.data.pushCount;
         this.cardStatistics.noUserCard = res.data.lostCount;
