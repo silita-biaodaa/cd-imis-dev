@@ -520,7 +520,6 @@ export default {
   },
   created() {
     this.gainPer();
-    alert('this.$route.query',this.$route.query);
     if(this.$route.query.recordTime) {
       this.recordTime = this.$route.query.recordTime;
     }
