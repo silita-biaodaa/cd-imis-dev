@@ -141,7 +141,8 @@ export default {
       mask: false,
       isIOS: false,
       noGet: false,
-      isScroll: true
+      isScroll: true,
+      userColor: false
     };
   },
   created() {
@@ -151,7 +152,7 @@ export default {
       this.isIOS = true;
     }
     //首次加载静态日历
-    this.getMonthData(this.setYear, this.setMonth, true);
+    this.getMonthData(this.setYear, this.setMonth, true, "");
     var list = localStorage.getItem("groupList");
     list = JSON.parse(list);
     if (list == "undefined" || list.length == 0) {
@@ -416,7 +417,7 @@ export default {
       var lastDate = lastDay.getDate();
       this.ret = [];
       //temp为获取某年某月的天数
-      var temp=new Date(year,month,0);
+      var temp = new Date(year, month, 0);
       var dateShow = parseInt(firstDayWeekDay + temp.getDate());
       //dateShow为展示日历行数判断；
       if (dateShow > 35) {
@@ -475,35 +476,75 @@ export default {
             dateS = dateS.replace(/-/g, "/");
           }
           let nowTime = new Date(dateS + " 00:00:00").getTime();
-          if (groupArr.length > 0) {
-            for (let x of groupArr) {
-              if (this.isIOS) {
-                x.date = x.date.replace(/-/g, "/");
+          if (this.userColor) {
+            if (groupArr.length > 0) {
+              for (let x of groupArr) {
+                if (this.isIOS) {
+                  x.date = x.date.replace(/-/g, "/");
+                }
+                let days = new Date(x.date + " 00:00:00").getTime();
+                if (ifThisMonthDays && days == dateTime) {
+                  cardType = "0"; //打卡
+                  break;
+                } else if (
+                  ifThisMonthDays &&
+                  days != dateTime &&
+                  dateTime < nowTime &&
+                  dateTime >= creatTime &&
+                  this.userColor > 0
+                ) {
+                  cardType = "1";
+                } else if(!this.userColor > 0){
+                  cardType = "";
+                } else if(lastDate == this.userColor) {
+                  cardType = "1";
+                }
               }
-              let days = new Date(x.date + " 00:00:00").getTime();
-              if (ifThisMonthDays && days == dateTime) {
-                cardType = "0"; //打卡
-                break;
-              } else if (
+            } else {
+              if (
                 ifThisMonthDays &&
-                days != dateTime &&
+                dateTime < nowTime &&
+                dateTime >= creatTime &&
+                this.userColor > 0
+              ) {
+                cardType = "1";
+              } else if(!this.userColor > 0){
+                cardType = "";
+              }else if(lastDate == this.userColor) {
+                cardType = "1";
+              }
+            }
+          } else {
+            if (groupArr.length > 0) {
+              for (let x of groupArr) {
+                if (this.isIOS) {
+                  x.date = x.date.replace(/-/g, "/");
+                }
+                let days = new Date(x.date + " 00:00:00").getTime();
+                if (ifThisMonthDays && days == dateTime) {
+                  cardType = "0"; //打卡
+                  break;
+                } else if (
+                  ifThisMonthDays &&
+                  days != dateTime &&
+                  dateTime < nowTime &&
+                  dateTime >= creatTime
+                ) {
+                  cardType = "1";
+                } else if (!this.userColor > 0) {
+                  cardType = "";
+                }
+              }
+            } else {
+              if (
+                ifThisMonthDays &&
                 dateTime < nowTime &&
                 dateTime >= creatTime
               ) {
                 cardType = "1";
-              } else {
+              } else if (!this.userColor > 0) {
                 cardType = "";
               }
-            }
-          } else {
-            if (
-              ifThisMonthDays &&
-              dateTime < nowTime &&
-              dateTime >= creatTime
-            ) {
-              cardType = "1";
-            } else {
-              cardType = "";
             }
           }
         }
@@ -616,7 +657,7 @@ export default {
         this.groupCreat = res.data.created;
         this.hideLoading();
         //日历初始化
-        this.getMonthData(this.setYear, this.setMonth);
+        this.getMonthData(this.setYear, this.setMonth, "");
       });
     },
     //群组打卡
@@ -715,6 +756,7 @@ export default {
       };
       CardRecord.usersDate(data).then(res => {
         this.hideLoading();
+        this.userColor = res.data.lostCount;
         if (res.data.list.length > 0) {
           for (let x of res.data.list) {
             let data = {
@@ -728,7 +770,7 @@ export default {
         this.cardStatistics.userCard = res.data.pushCount;
         this.cardStatistics.noUserCard = res.data.lostCount;
         //日历初始化
-        this.getMonthData(this.setYear, this.setMonth);
+        this.getMonthData(this.setYear, this.setMonth, "");
       });
     }
   },
@@ -884,7 +926,7 @@ body .mask {
         box-sizing: border-box;
       }
       .ifDiabled {
-        color: #fff;
+        color: #fff !important;
       }
       .active {
         border-color: #0dc830;

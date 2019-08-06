@@ -9,7 +9,7 @@
       <p class="c-name"><span class="fc-n">{{item.user.name}}</span><span v-if="item.user.company && item.user.company!=''">-{{item.user.company}}</span></p>
       <div class="c-content" :class="{'active': item.fullTxt=='收起'}" style="-webkit-box-orient: vertical;">
         <p class="c-time"><span>{{item.pushd}}</span>打卡第{{item.pushCount.putCount}}次</p>
-        <div class="c-text" >
+        <div class="c-text">
           <!-- 知学习 -->
           <p class="tit">【知～学习】</p>
           <div v-for="(el,bs) in item.books" :key="bs">
@@ -31,7 +31,6 @@
               </div>
             </div>
           </template>
-
           <!-- 经典名句 -->
           <template v-if="item.classic">
             <p class="tit">【经典名句分享】</p>
