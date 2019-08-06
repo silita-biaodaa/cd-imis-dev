@@ -37,7 +37,6 @@
         ></v-audio>
       </div>
     </div>
-
     <div v-for="(item,index) in books" :key="'add'+index">
       <div class="card-b card-book add-book">
         <span>书本 ({{index + booklength + 1}})</span>

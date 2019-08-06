@@ -2,9 +2,9 @@ import axios from 'axios'
 import Vue from 'vue'
 
 import qs from 'qs'
-// var baseURL = 'https://imis.biaodaa.com/'
+var baseURL = 'https://imis.biaodaa.com/'
 // var baseURL = '/'
-let baseURL='https://pre-imis.biaodaa.com'
+// let baseURL='https://pre-imis.biaodaa.com'
 
 
 axios.defaults.baseURL = baseURL
