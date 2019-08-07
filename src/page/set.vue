@@ -104,7 +104,6 @@
         <van-stepper v-model="pushCount.bonaCount" class="l-mi" :min="0" @blur="bblur" />
       </div>
     </div>
-
     <div class="volunteer">
       <div class="volunteer-top">
         <div class="img-post img-time">
