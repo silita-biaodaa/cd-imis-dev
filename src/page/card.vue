@@ -12,7 +12,7 @@
           《{{el.title}}》共朗读
           <span>{{el.readTotal+el.readCount}}</span> 遍
         </div>
-        <div class="right-box icon-mk" @click="jumpMini('book',i)"></div>
+        <div class="right-box icon-mk" @click="jumpMini('book',i)" v-show="el.audioPath"></div>
       </div>
       <div class="card-com">
         <div class="l-pu">

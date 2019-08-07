@@ -189,6 +189,7 @@
       audioPlay(){
         let that=this;
         for(let x in that.$refs){
+          console.info('that.$refs',that.$refs);
           that.$refs[x][0].pause();
         }
       },
