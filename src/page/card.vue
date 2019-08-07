@@ -41,7 +41,7 @@
       <div class="card-b card-book add-book">
         <span>书本 ({{index + booklength + 1}})</span>
         <div class="addBook-box">
-          <div class="icon-mk" @click="jumpMini('addbook',index)"></div>
+          <div class="icon-mk" @click="jumpMini('addbook',index)" v-if="!item.audioPath"></div>
           <div class="del-book" @click="cardDel(index)" v-if="!first"></div>
         </div>
       </div>
