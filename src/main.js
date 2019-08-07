@@ -201,7 +201,7 @@ router.afterEach(function(to,from,next){
         }else if (document.attachEvent){  
             document.attachEvent('WeixinJSBridgeReady', onBridgeReady);   
             document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);  
-        }  
+        }
     }else{  
         onBridgeReady();  
     }
