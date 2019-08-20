@@ -105,7 +105,7 @@ router.beforeEach((to, from, next) => {
   alert('code',code);
   if (!code) {
     //用户授权
-    // util.weixinauth()
+    util.weixinauth()
     next()
   }else{
     debugger;

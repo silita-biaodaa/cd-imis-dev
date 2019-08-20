@@ -3,6 +3,7 @@
 export default {
 
   getCode(code) {
+    alert('code',code);
     var locations = location + ""; 
     // if (locations.indexOf('/?#/') > 0) {//处理在支付页面授权时，获取code失败
     // 	locations = locations.replace('/?#/', '/#/')
@@ -13,6 +14,9 @@ export default {
     var params = locations.split("?");
     var queryArr = params[1].split("&");
     var queryMap = {};
+    alert('params',params);
+    alert('queryArr',queryArr);
+    alert('locations',locations);
     for (var index in queryArr) {
       var k = queryArr[index].split("=")[0];
       var v = queryArr[index].split("=")[1];
