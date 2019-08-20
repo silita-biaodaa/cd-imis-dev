@@ -810,7 +810,7 @@ body .van-picker__toolbar {
   height: 80px;
   line-height: 80px;
 }
-body .mask {
+body .groupcard .mask {
   max-height: 100vh;
   overflow: hidden;
 }

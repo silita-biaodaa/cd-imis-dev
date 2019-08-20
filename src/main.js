@@ -104,7 +104,7 @@ router.beforeEach((to, from, next) => {
   let isShare=getParam('isShare');
   if (!code) {
     //用户授权
-    util.weixinauth()
+    // util.weixinauth()
     next()
   }else{
     var auth = localStorage.getItem('Authorization');

@@ -407,10 +407,6 @@
   body .scroller-item{
     font-size:26px;
   }
-  body .mask{
-    max-height: 100vh;
-    overflow: hidden;
-  }
   .van-picker__frame, .van-picker__loading .van-loading {
     display: none;
   }
