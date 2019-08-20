@@ -579,6 +579,7 @@ audio {
     justify-content: space-between;
     text-align: center;
   .l-mi {
+    -webkit-overflow-scrolling: touch;
     margin:  auto  0;
     width:180px;
     display: flex;
