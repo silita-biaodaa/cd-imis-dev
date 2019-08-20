@@ -441,7 +441,7 @@
     padding-left: 5px;
   }
   // 自定义输入框样式
-     .l-putput {
+     .l-put {
        height: 96px;
        font-size: 32px;
        display: flex;
@@ -511,7 +511,7 @@
     height: 30px;
     width: 30px;
   }
-.l-pu {
+  .l-pu {
     height: 96px;
     font-size: 32px;
     padding: 0 14px;
@@ -582,7 +582,7 @@
   }
   }
   // 知学习样式
-  .add {
+     .add {
        box-sizing: border-box;
        margin-top: 16px;
        background: #FFF;
