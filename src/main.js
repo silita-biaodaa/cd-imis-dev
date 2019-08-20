@@ -102,12 +102,13 @@ router.beforeEach((to, from, next) => {
   let code = util.getCode('code');
   let isApply=getParam('istrue');
   let isShare=getParam('isShare');
-  console.info('code', code);
+  alert('code',code);
   if (!code) {
     //用户授权
     // util.weixinauth()
     next()
   }else{
+    debugger;
     var auth = localStorage.getItem('Authorization');
     let data={
       code:code,
