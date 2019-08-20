@@ -107,7 +107,6 @@ router.beforeEach((to, from, next) => {
     util.weixinauth()
     next()
   }else{
-    debugger;
     var auth = localStorage.getItem('Authorization');
     let data={
       code:code,
@@ -179,8 +178,8 @@ router.beforeEach((to, from, next) => {
   }
 })
 // 
-// const appid='wx393124fdad606b1d';//预发布
-const appid='wx26999a53385489f9';//生产
+const appid='wx393124fdad606b1d';//预发布
+// const appid='wx26999a53385489f9';//生产
 Vue.prototype.appid=appid;
 router.afterEach(function(to,from,next){
     let data={
