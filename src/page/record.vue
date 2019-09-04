@@ -419,6 +419,7 @@ export default {
       //temp为获取某年某月的天数
       var temp = new Date(year, month, 0);
       var dateShow = parseInt(firstDayWeekDay + temp.getDate());
+      if(firstDayWeekDay === 7) firstDayWeekDay = 0;
       //dateShow为展示日历行数判断；
       if (dateShow > 35) {
         dateShow = 42;
